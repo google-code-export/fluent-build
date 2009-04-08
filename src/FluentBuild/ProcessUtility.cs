@@ -12,6 +12,7 @@ namespace FluentBuild
 
         public static void StartProcess(string fileName, string args, string workingDirectory)
         {
+            MessageLogger.Write("exec", String.Format("Running '{0} {1}", fileName, args));
             var startInfo = new ProcessStartInfo(fileName);
             startInfo.UseShellExecute = false;
             startInfo.Arguments = args;

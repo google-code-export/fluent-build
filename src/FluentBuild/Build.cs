@@ -53,12 +53,13 @@ namespace FluentBuild
 
         public Build AddRefences(params string[] fileNames)
         {
-            ((List<String>)_references).AddRange(fileNames);
+            _references.AddRange(fileNames);
             return this;
         }
 
         public void Execute()
         {
+            MessageLogger.Write(compiler, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
             var sources = new StringBuilder();
             foreach (string source in _sources)
             {
@@ -74,7 +75,6 @@ namespace FluentBuild
 
             string args = String.Format("/out:{1} /target:{2} {3} {0}", sources, _outputFileLocation, "library", references);
             ProcessUtility.StartProcess(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler, args);
-            Console.WriteLine("Done");
         }
 
         public Build AddSources(FileSet fileset)

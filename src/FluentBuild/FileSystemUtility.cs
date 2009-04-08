@@ -33,7 +33,6 @@ namespace FluentBuild
 
         private IList<String> GetAllFilesMatching(string directory, string filter, bool recursive)
         {
-            Console.WriteLine(directory + " " + filter);
             string[] files = Directory.GetFiles(directory, filter);
             List<string> matching = files.ToList();
             if (recursive)
