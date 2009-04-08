@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FluentBuild.Sample")]
+[assembly: AssemblyTitle("Build")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FluentBuild.Sample")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Build")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b5e67341-8ece-4562-bd5a-0a8b7cc778b4")]
+[assembly: Guid("fbda4c2b-f6e8-4c7c-955b-4e079ed3a5c5")]
 
 // Version information for an assembly consists of the following four values:
 //
