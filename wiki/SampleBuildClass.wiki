@@ -2,7 +2,7 @@
 
 = Sample =
 {{{
-  private string directory_base;
+        private string directory_base;
         private string directory_compile;
         private string assembly_FluentBuild;
         private string assembly_FluentBuild_Tests;
