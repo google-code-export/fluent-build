@@ -1,4 +1,6 @@
-﻿namespace Build
+﻿using FluentBuild.BuildFile;
+
+namespace Build
 {
     internal class Program
     {

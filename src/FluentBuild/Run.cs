@@ -40,7 +40,7 @@ namespace FluentBuild
             return sb.ToString();
         }
 
-        private Executeable InWorkingDirectory(string directory)
+        public Executeable InWorkingDirectory(string directory)
         {
             _workingDirectory = directory;
             return this;
