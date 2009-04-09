@@ -53,12 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfoTests.cs" />
-    <Compile Include="CombineExtenstionMethodTests.cs" />
-    <Compile Include="FileSetTests.cs" />
     <Compile Include="Functional\FileSystemUtilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchPatternParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FluentBuild\FluentBuild.csproj">

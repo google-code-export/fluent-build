@@ -84,7 +84,7 @@ namespace FluentBuild
             return this;
         }
 
-        //TODO implement other language supports
+        //TODO implement other language support + have this external
         public void OutputTo(string filePath)
         {
             var sb = new StringBuilder();

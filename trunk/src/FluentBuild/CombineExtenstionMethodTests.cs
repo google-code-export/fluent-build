@@ -22,7 +22,7 @@ namespace FluentBuild.Tests
         [Test]
         public void ShouldAddRecursor()
         {
-            Assert.That(@"c:\temp".AllSubFolders().FileName("test.cs"), Is.EqualTo(@"c:\temp\**\test.cs"));
+            Assert.That(@"c:\temp".RecurseAllSubFolders().FileName("test.cs"), Is.EqualTo(@"c:\temp\**\test.cs"));
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace FluentBuild.Tests
         [Test]
         public void ShouldAddRecursorWithNoDoubleSlash()
         {
-            Assert.That(@"c:\temp\".AllSubFolders().FileName("test.cs"), Is.EqualTo(@"c:\temp\**\test.cs"));
+            Assert.That(@"c:\temp\".RecurseAllSubFolders().FileName("test.cs"), Is.EqualTo(@"c:\temp\**\test.cs"));
         }
 
 
