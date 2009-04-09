@@ -76,7 +76,7 @@ namespace FluentBuild
             string args = String.Format("/out:{1} /target:{2} {3} {0}", sources, _outputFileLocation, "library", references);
             if (_includeDebugSymbols)
                 args += " /debug";
-            ProcessUtility.StartProcess(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler, args);
+            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler).WithArguments(args).Execute();
         }
 
         public Build AddSources(FileSet fileset)

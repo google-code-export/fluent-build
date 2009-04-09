@@ -55,20 +55,23 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="AssemblyInfoTests.cs" />
-    <Compile Include="Build.cs" />
-    <Compile Include="CombineExtension.cs" />
-    <Compile Include="CombineExtenstionTests.cs" />
-    <Compile Include="CreateBuildTask.cs" />
-    <Compile Include="DirectoryUtility.cs" />
-    <Compile Include="FileSet.cs" />
-    <Compile Include="FileSetTests.cs" />
-    <Compile Include="FileSystemUtility.cs" />
-    <Compile Include="FileSystemUtilityTests.cs" />
-    <Compile Include="ProcessUtility.cs" />
+    <Compile Include="Compilation\Build.cs" />
+    <Compile Include="FilesAndDirectories\CombineExtension.cs" />
+    <Compile Include="FilesAndDirectories\CombineExtenstionTests.cs" />
+    <Compile Include="Compilation\CreateBuildTask.cs" />
+    <Compile Include="FilesAndDirectories\Copy\CopyFileSetFrom.cs" />
+    <Compile Include="FilesAndDirectories\Copy\CopyFrom.cs" />
+    <Compile Include="FilesAndDirectories\Copy\Copy.cs" />
+    <Compile Include="FilesAndDirectories\DirectoryUtility.cs" />
+    <Compile Include="FilesAndDirectories\FileSet.cs" />
+    <Compile Include="FilesAndDirectories\FileSetTests.cs" />
+    <Compile Include="FilesAndDirectories\FileSystemUtility.cs" />
+    <Compile Include="FilesAndDirectories\FileSystemUtilityTests.cs" />
+    <Compile Include="Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchPatternParser.cs" />
-    <Compile Include="SearchPatternParserTests.cs" />
-    <Compile Include="Target.cs" />
+    <Compile Include="FilesAndDirectories\SearchPatternParser.cs" />
+    <Compile Include="FilesAndDirectories\SearchPatternParserTests.cs" />
+    <Compile Include="Compilation\Target.cs" />
     <Compile Include="MessageLogger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
