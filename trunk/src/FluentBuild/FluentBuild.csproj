@@ -53,12 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="AssemblyInfoTests.cs" />
-    <Compile Include="Compilation\Build.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoTests.cs" />
+    <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="FilesAndDirectories\CombineExtension.cs" />
     <Compile Include="FilesAndDirectories\CombineExtenstionTests.cs" />
-    <Compile Include="Compilation\CreateBuildTask.cs" />
+    <Compile Include="Compilation\Build.cs" />
     <Compile Include="FilesAndDirectories\Copy\CopyFileSetFrom.cs" />
     <Compile Include="FilesAndDirectories\Copy\CopyFrom.cs" />
     <Compile Include="FilesAndDirectories\Copy\Copy.cs" />

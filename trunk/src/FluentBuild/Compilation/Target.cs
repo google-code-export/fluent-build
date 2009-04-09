@@ -2,46 +2,46 @@ namespace FluentBuild
 {
     public class Target
     {
-        private readonly Build build;
+        private readonly BuildTask buildTask;
 
-        protected internal Target(Build build)
+        protected internal Target(BuildTask buildTask)
         {
-            this.build = build;
+            this.buildTask = buildTask;
         }
         
-        public Build Library
+        public BuildTask Library
         {
             get
             {
-                build.TargetType = "Library";
-                return build;
+                buildTask.TargetType = "Library";
+                return buildTask;
             }
         }
 
-        public Build WindowsExecutable
+        public BuildTask WindowsExecutable
         {
             get
             {
-                build.TargetType = "winexe";
-                return build;
+                buildTask.TargetType = "winexe";
+                return buildTask;
             }
         }
 
-        public Build Executable
+        public BuildTask Executable
         {
             get
             {
-                build.TargetType = "exe";
-                return build;
+                buildTask.TargetType = "exe";
+                return buildTask;
             }
         }
 
-        public Build Module
+        public BuildTask Module
         {
             get
             {
-                build.TargetType = "module";
-                return build;
+                buildTask.TargetType = "module";
+                return buildTask;
             }
         }
     }
