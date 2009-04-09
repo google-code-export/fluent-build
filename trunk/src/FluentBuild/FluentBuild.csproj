@@ -59,6 +59,8 @@
     <Compile Include="Compilation\BuildTests.cs" />
     <Compile Include="Compilation\Build.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
+    <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
+    <Compile Include="FilesAndDirectories\BuildFolderTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSet.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtility.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="FilesAndDirectories\FileSet\SearchPatternParserTests.cs" />
     <Compile Include="Compilation\Target.cs" />
     <Compile Include="MessageLogger.cs" />
+    <Compile Include="RunTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
