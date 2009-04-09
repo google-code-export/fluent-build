@@ -50,19 +50,4 @@ namespace FluentBuild
             return new BuildArtifact(Path.Combine(_path, name));
         }
     }
-
-    public class BuildArtifact
-    {
-        private readonly string path;
-
-        public BuildArtifact(string path)
-        {
-            this.path = path;
-        }
-
-        public override string ToString()
-        {
-            return path;
-        }
-    }
 }

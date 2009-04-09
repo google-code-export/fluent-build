@@ -4,12 +4,12 @@ namespace FluentBuild.BuildFile
 {
     public class SampleBuildTask
     {
-        private BuildArtifact assembly_FluentBuild;
-        private BuildArtifact assembly_FluentBuild_Tests;
         private BuildFolder directory_base;
         private BuildFolder directory_compile;
         private BuildFolder directory_tools;
-
+        
+        private BuildArtifact assembly_FluentBuild;
+        private BuildArtifact assembly_FluentBuild_Tests;
         private BuildArtifact thirdparty_nunit;
         private BuildArtifact thirdparty_rhino;
 
@@ -23,7 +23,8 @@ namespace FluentBuild.BuildFile
             thirdparty_nunit = directory_compile.FileName("nunit.framework.dll");
             thirdparty_rhino = directory_compile.FileName("rhino.mocks.dll");
 
-            directory_compile.Delete().Create(); //recreate the compile directory
+            directory_compile.Delete().Create();
+
             CompileSources();
             CompileTests();
             RunTests();
