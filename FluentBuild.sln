@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build", "Build\Build.csproj", "{5F8AAFBC-C135-4647-9433-A05A6F47D493}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.Build", "FluentBuild.Build\FluentBuild.Build.csproj", "{5F8AAFBC-C135-4647-9433-A05A6F47D493}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
