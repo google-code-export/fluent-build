@@ -37,7 +37,8 @@ namespace Build
             DirectoryUtility.CopyAllFiles(tools, directory_compile);
 
             FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().FileName("*.cs"));
-            CreateBuildTask.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo(assembly_FluentBuild).Execute();
+            FluentBuild.Build build = CreateBuildTask.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo(assembly_FluentBuild);
+            build.Target.Library.Execute();
         }
 
         private void CompileFunctionalTests()

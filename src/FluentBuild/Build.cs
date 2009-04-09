@@ -13,13 +13,13 @@ namespace FluentBuild
         private readonly List<string> _sources = new List<string>();
         private Target _target;
 
-        public Build()
+        public Build() : this("")
         {
-            _target = new Target(this);
         }
 
         protected internal Build(string compiler)
         {
+            _target = new Target(this);
             this.compiler = compiler;
         }
 
