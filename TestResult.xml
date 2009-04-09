@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\Kudos\Desktop\fluent-build\compile\FluentBuild.dll" total="18" failures="0" not-run="0" date="2009-04-09" time="08:39:29">
+<test-results name="C:\Users\Kudos\Desktop\fluent-build\compile\FluentBuild.dll" total="18" failures="0" not-run="0" date="2009-04-09" time="09:14:02">
   <environment nunit-version="2.4.3.0" clr-version="2.0.50727.3053" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="C:\Users\Kudos\Desktop\fluent-build" machine-name="KUDOS-PC" user="Kudos" user-domain="Kudos-PC" />
   <culture-info current-culture="en-CA" current-uiculture="en-US" />
-  <test-suite name="C:\Users\Kudos\Desktop\fluent-build\compile\FluentBuild.dll" success="True" time="0.871" asserts="0">
+  <test-suite name="C:\Users\Kudos\Desktop\fluent-build\compile\FluentBuild.dll" success="True" time="0.857" asserts="0">
     <results>
-      <test-suite name="FluentBuild" success="True" time="0.863" asserts="0">
+      <test-suite name="FluentBuild" success="True" time="0.845" asserts="0">
         <results>
-          <test-suite name="AssemblyInfoTests" success="True" time="0.043" asserts="0">
+          <test-suite name="AssemblyInfoTests" success="True" time="0.041" asserts="0">
             <results>
-              <test-case name="FluentBuild.AssemblyInfoTests.Build_ShouldCreateAssemblyInfoFile" executed="True" success="True" time="0.021" asserts="0" />
+              <test-case name="FluentBuild.AssemblyInfoTests.Build_ShouldCreateAssemblyInfoFile" executed="True" success="True" time="0.018" asserts="0" />
             </results>
           </test-suite>
-          <test-suite name="CombineExtenstionMethodTests" success="True" time="0.020" asserts="0">
+          <test-suite name="CombineExtenstionMethodTests" success="True" time="0.019" asserts="0">
             <results>
-              <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldAddRecursor" executed="True" success="True" time="0.014" asserts="1" />
+              <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldAddRecursor" executed="True" success="True" time="0.013" asserts="1" />
               <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldAddRecursor_Without_Using_Explicit_Extension" executed="True" success="True" time="0.001" asserts="1" />
-              <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldAddRecursorWithNoDoubleSlash" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldAddRecursorWithNoDoubleSlash" executed="True" success="True" time="0.001" asserts="1" />
               <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldCombinePaths" executed="True" success="True" time="0.001" asserts="1" />
               <test-case name="FluentBuild.CombineExtenstionMethodTests.ShouldCombinePathsWithWildcardFilename" executed="True" success="True" time="0.001" asserts="1" />
             </results>
           </test-suite>
-          <test-suite name="FileSetTests" success="True" time="0.410" asserts="0">
+          <test-suite name="FileSetTests" success="True" time="0.388" asserts="0">
             <results>
-              <test-case name="FluentBuild.FileSetTests.AddAllCsFiles" executed="True" success="True" time="0.381" asserts="2" />
-              <test-case name="FluentBuild.FileSetTests.AddAllCsFilesAndExcludeGenericFileName" executed="True" success="True" time="0.021" asserts="0" />
-              <test-case name="FluentBuild.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="FluentBuild.FileSetTests.AddAllCsFiles" executed="True" success="True" time="0.357" asserts="2" />
+              <test-case name="FluentBuild.FileSetTests.AddAllCsFilesAndExcludeGenericFileName" executed="True" success="True" time="0.023" asserts="0" />
+              <test-case name="FluentBuild.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName" executed="True" success="True" time="0.002" asserts="1" />
               <test-case name="FluentBuild.FileSetTests.BuildFileSet" executed="True" success="True" time="0.004" asserts="2" />
             </results>
           </test-suite>
-          <test-suite name="FileSystemUtilityTests" success="True" time="0.064" asserts="0">
+          <test-suite name="FileSystemUtilityTests" success="True" time="0.059" asserts="0">
             <results>
-              <test-case name="FluentBuild.FileSystemUtilityTests.Should_Call_Parser_For_Path_Containing_Wildcard" executed="True" success="True" time="0.060" asserts="0" />
+              <test-case name="FluentBuild.FileSystemUtilityTests.Should_Call_Parser_For_Path_Containing_Wildcard" executed="True" success="True" time="0.054" asserts="0" />
               <test-case name="FluentBuild.FileSystemUtilityTests.Should_Not_Call_Parser_For_Path_Containing_No_Wildcards" executed="True" success="True" time="0.004" asserts="0" />
             </results>
           </test-suite>
-          <test-suite name="SearchPatternParserTests" success="True" time="0.226" asserts="0">
+          <test-suite name="SearchPatternParserTests" success="True" time="0.242" asserts="0">
             <results>
               <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_JustDirectory" executed="True" success="True" time="0.005" asserts="3" />
-              <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Name_And_WildCard" executed="True" success="True" time="0.215" asserts="3" />
+              <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Name_And_WildCard" executed="True" success="True" time="0.231" asserts="3" />
               <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Recursive_Name_And_WildCard" executed="True" success="True" time="0.001" asserts="3" />
               <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Recursive_Start_Dot_CS_Filter" executed="True" success="True" time="0.001" asserts="3" />
               <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_CS_Filter" executed="True" success="True" time="0.001" asserts="3" />
-              <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_Start_Filter" executed="True" success="True" time="0.000" asserts="3" />
+              <test-case name="FluentBuild.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_Start_Filter" executed="True" success="True" time="0.001" asserts="3" />
             </results>
           </test-suite>
         </results>
