@@ -8,7 +8,7 @@
     <ProjectGuid>{5F8AAFBC-C135-4647-9433-A05A6F47D493}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluentBuild.Build</RootNamespace>
+    <RootNamespace>FluentBuild.BuildFile</RootNamespace>
     <AssemblyName>FluentBuild.Build</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
