@@ -46,6 +46,11 @@ namespace FluentBuild
             return this;
         }
 
+        public BuildTask OutputFileTo(BuildArtifact artifact)
+        {
+            return OutputFileTo(artifact.ToString());
+        }
+
         public void ExcludeSource(string s)
         {
             throw new NotImplementedException();
@@ -54,6 +59,15 @@ namespace FluentBuild
         public BuildTask AddRefences(params string[] fileNames)
         {
             _references.AddRange(fileNames);
+            return this;
+        }
+
+        public BuildTask AddRefences(params BuildArtifact[] artifact)
+        {
+            foreach (var buildArtifact in artifact)
+            {
+                _references.Add(buildArtifact.ToString());
+            }
             return this;
         }
 
@@ -84,5 +98,7 @@ namespace FluentBuild
             _sources.AddRange(fileset.Files);
             return this;
         }
+
+    
     }
 }

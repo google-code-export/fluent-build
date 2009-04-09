@@ -48,6 +48,7 @@
     <Compile Include="MainBuildTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleBuildTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\FluentBuild\FluentBuild.csproj">

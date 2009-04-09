@@ -11,6 +11,11 @@ namespace FluentBuild
         {
             return new Executeable(executeablePath);
         }
+
+        public static Executeable Executeable(BuildArtifact executeablePath)
+        {
+            return new Executeable(executeablePath.ToString());
+        }
     }
 
     public class Executeable
