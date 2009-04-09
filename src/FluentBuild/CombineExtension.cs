@@ -14,7 +14,7 @@ namespace FluentBuild
             return Path.Combine(s1, s2);
         }
 
-        public static string AllSubFolders(this string s1)
+        public static string RecurseAllSubFolders(this string s1)
         {
             //pull off the trailing slash
             if (s1.Substring(s1.Length - 1, 1) == "\\")

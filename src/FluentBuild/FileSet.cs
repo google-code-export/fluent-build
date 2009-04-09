@@ -5,8 +5,8 @@ namespace FluentBuild
     public class FileSet
     {
         private readonly IFileSystemUtility utility;
-        private List<string> files = new List<string>();
-        private List<string> exclusions = new List<string>();
+        private readonly List<string> files = new List<string>();
+        private readonly List<string> exclusions = new List<string>();
 
         public FileSet() : this(new FileSystemUtility())
         {

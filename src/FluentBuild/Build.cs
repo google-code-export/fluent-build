@@ -9,8 +9,8 @@ namespace FluentBuild
         private readonly string compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
-        private List<string> _references = new List<string>();
-        private List<string> _sources = new List<string>();
+        private readonly List<string> _references = new List<string>();
+        private readonly List<string> _sources = new List<string>();
         private Target _target;
 
         public Build()
@@ -18,7 +18,7 @@ namespace FluentBuild
             _target = new Target(this);
         }
 
-        public Build(string compiler)
+        protected internal Build(string compiler)
         {
             this.compiler = compiler;
         }
@@ -29,7 +29,7 @@ namespace FluentBuild
             set { _target = value; }
         }
 
-        public string TargetType { get; set; }
+        protected internal string TargetType { get; set; }
 
         public Build IncludeDebugSymbols
         {
@@ -74,6 +74,8 @@ namespace FluentBuild
             }
 
             string args = String.Format("/out:{1} /target:{2} {3} {0}", sources, _outputFileLocation, "library", references);
+            if (_includeDebugSymbols)
+                args += " /debug";
             ProcessUtility.StartProcess(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler, args);
         }
 

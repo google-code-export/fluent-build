@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\nunit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\rhino\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -46,16 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfoTests.cs" />
     <Compile Include="Build.cs" />
-    <Compile Include="BuildTask.cs" />
     <Compile Include="CombineExtension.cs" />
+    <Compile Include="CombineExtenstionMethodTests.cs" />
     <Compile Include="CreateBuildTask.cs" />
     <Compile Include="DirectoryUtility.cs" />
     <Compile Include="FileSet.cs" />
+    <Compile Include="FileSetTests.cs" />
     <Compile Include="FileSystemUtility.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchPatternParser.cs" />
+    <Compile Include="SearchPatternParserTests.cs" />
     <Compile Include="Target.cs" />
     <Compile Include="MessageLogger.cs" />
   </ItemGroup>
