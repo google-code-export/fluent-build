@@ -47,7 +47,7 @@
 
         private void RunTests()
         {
-            ProcessUtility.StartProcess(directory_tools.SubFolder("nunit").FileName("nunit-console.exe"), assembly_FluentBuild_Tests);
+             Run.Executeable(directory_tools.SubFolder("nunit").FileName("nunit-console.exe")).WithArguments(assembly_FluentBuild).Execute();
         }
 
       
