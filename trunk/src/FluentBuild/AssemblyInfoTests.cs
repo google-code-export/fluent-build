@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace FluentBuild.Tests
+namespace FluentBuild
 {
     [TestFixture]
     public class AssemblyInfoTests

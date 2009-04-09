@@ -57,12 +57,13 @@
     <Compile Include="AssemblyInfoTests.cs" />
     <Compile Include="Build.cs" />
     <Compile Include="CombineExtension.cs" />
-    <Compile Include="CombineExtenstionMethodTests.cs" />
+    <Compile Include="CombineExtenstionTests.cs" />
     <Compile Include="CreateBuildTask.cs" />
     <Compile Include="DirectoryUtility.cs" />
     <Compile Include="FileSet.cs" />
     <Compile Include="FileSetTests.cs" />
     <Compile Include="FileSystemUtility.cs" />
+    <Compile Include="FileSystemUtilityTests.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchPatternParser.cs" />
