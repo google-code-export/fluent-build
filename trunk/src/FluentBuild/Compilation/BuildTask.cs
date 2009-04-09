@@ -6,7 +6,7 @@ namespace FluentBuild
 {
     public class BuildTask
     {
-        private readonly string compiler;
+        internal readonly string compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
         private readonly List<string> _references = new List<string>();
