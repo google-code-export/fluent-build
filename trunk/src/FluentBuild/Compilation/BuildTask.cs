@@ -6,11 +6,11 @@ namespace FluentBuild
 {
     public class BuildTask
     {
+        private readonly List<string> _references = new List<string>();
+        private readonly List<string> _sources = new List<string>();
         internal readonly string compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
-        private readonly List<string> _references = new List<string>();
-        private readonly List<string> _sources = new List<string>();
         private Target _target;
 
         public BuildTask() : this("")
@@ -51,11 +51,6 @@ namespace FluentBuild
             return OutputFileTo(artifact.ToString());
         }
 
-        public void ExcludeSource(string s)
-        {
-            throw new NotImplementedException();
-        }
-
         public BuildTask AddRefences(params string[] fileNames)
         {
             _references.AddRange(fileNames);
@@ -64,7 +59,7 @@ namespace FluentBuild
 
         public BuildTask AddRefences(params BuildArtifact[] artifact)
         {
-            foreach (var buildArtifact in artifact)
+            foreach (BuildArtifact buildArtifact in artifact)
             {
                 _references.Add(buildArtifact.ToString());
             }
@@ -74,23 +69,31 @@ namespace FluentBuild
         public void Execute()
         {
             MessageLogger.Write(compiler, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            var sources = new StringBuilder();
-            foreach (string source in _sources)
-            {
-                sources.Append(" " + source);
-            }
+            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler).WithArguments(Args).Execute();
+        }
 
-            var references = new StringBuilder();
-            foreach (string reference in _references)
+        internal string Args
+        {
+            get
             {
-                references.Append(" /reference:");
-                references.Append(reference);
-            }
+                var sources = new StringBuilder();
+                foreach (string source in _sources)
+                {
+                    sources.Append(" " + source);
+                }
 
-            string args = String.Format("/out:{1} /target:{2} {3} {0}", sources, _outputFileLocation, "library", references);
-            if (_includeDebugSymbols)
-                args += " /debug";
-            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler).WithArguments(args).Execute();
+                var references = new StringBuilder();
+                foreach (string reference in _references)
+                {
+                    references.Append(" /reference:");
+                    references.Append(reference);
+                }
+
+                string args = String.Format("/out:{1} /target:{2} {3} {0}", sources, _outputFileLocation, "library", references);
+                if (_includeDebugSymbols)
+                    args += " /debug";
+                return args;
+            }
         }
 
         public BuildTask AddSources(FileSet fileset)
@@ -98,7 +101,5 @@ namespace FluentBuild
             _sources.AddRange(fileset.Files);
             return this;
         }
-
-    
     }
 }

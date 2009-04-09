@@ -56,6 +56,7 @@
     <Compile Include="AssemblyInfo\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfoTests.cs" />
     <Compile Include="Compilation\BuildTask.cs" />
+    <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Compilation\BuildTests.cs" />
     <Compile Include="Compilation\Build.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
