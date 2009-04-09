@@ -10,8 +10,19 @@ namespace FluentBuild
         IList<string> GetAllFilesMatching(string filter);
     }
 
-    public class FileSystemUtility : IFileSystemUtility
+    internal class FileSystemUtility : IFileSystemUtility
     {
+        private readonly ISearchPatternParser parser;
+
+        public FileSystemUtility(ISearchPatternParser parser)
+        {
+            this.parser = parser;
+        }
+
+        public FileSystemUtility() : this(new SearchPatternParser())
+        {
+        }
+
         #region IFileSystemUtility Members
 
         public IList<string> GetAllFilesMatching(string filter)
@@ -24,8 +35,7 @@ namespace FluentBuild
                     list.Add(filter);
                 return list;
             }
-            //TODO: remove this coupling
-            var parser = new SearchPatternParser(filter);
+            parser.Parse(filter);
             return GetAllFilesMatching(parser.Folder, parser.SearchPattern, parser.Recursive);
         }
 

@@ -3,10 +3,19 @@ using System.Text.RegularExpressions;
 
 namespace FluentBuild
 {
-    public class SearchPatternParser
+    public interface ISearchPatternParser
+    {
+        void Parse(string pattern);
+        string SearchPattern { get; set; }
+        string Folder { get; set; }
+        bool Recursive { get; set; }
+    }
+
+    public class SearchPatternParser : ISearchPatternParser
     {
         private string searchPattern = "*.*";
-        public SearchPatternParser(string pattern)
+
+        public void Parse(string pattern)
         {
             //no wildcards so just a folder i.e. c:\temp
             if (pattern.IndexOf("*") == -1)

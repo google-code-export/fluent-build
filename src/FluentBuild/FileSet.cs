@@ -12,7 +12,7 @@ namespace FluentBuild
         {
         }
 
-        public FileSet(IFileSystemUtility utility)
+        internal FileSet(IFileSystemUtility utility)
         {
             this.utility = utility;
         }

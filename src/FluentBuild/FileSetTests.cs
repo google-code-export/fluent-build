@@ -6,7 +6,7 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
-namespace FluentBuild.Tests
+namespace FluentBuild
 {
     [TestFixture]
     public class FileSetTests
