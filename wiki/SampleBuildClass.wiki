@@ -14,7 +14,6 @@
 
         public void Execute()
         {
-
             directory_base = Environment.CurrentDirectory;
             directory_compile = directory_base.SubFolder("compile");
             directory_tools = directory_base.SubFolder("tools");
