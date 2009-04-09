@@ -22,7 +22,7 @@
             thirdparty_nunit = directory_compile.FileName("nunit.framework.dll");
             thirdparty_rhino = directory_compile.FileName("rhino.mocks.dll");
             
-            DirectoryUtility.RecreateDirectory(directory_compile);
+             directory_compile.Delete().MakeDirectory();
             CompileSources();
             CompileTests();
             RunTests();
