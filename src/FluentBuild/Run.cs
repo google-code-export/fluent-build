@@ -20,7 +20,7 @@ namespace FluentBuild
 
     public class Executeable
     {
-        private readonly string _executeablePath;
+        internal readonly string _executeablePath;
         private readonly List<String> _args = new List<string>();
         private string _workingDirectory;
 

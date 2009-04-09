@@ -17,15 +17,17 @@ namespace FluentBuild
             return new BuildFolder(Path.Combine(_path, path));
         }
 
+        public BuildFolder RecurseAllSubFolders()
+        {
+            return new BuildFolder(_path + "\\**\\");
+        }
+
         public BuildFolder Delete()
         {
             MessageLogger.Write("delete", _path);
             if (Directory.Exists(_path))
-            {
                 Directory.Delete(_path, true);
-                return this;
-            }
-            throw new DirectoryNotFoundException("Directory not found (" + _path + ")");
+            return this;
         }
 
         public BuildFolder Create()
@@ -33,11 +35,6 @@ namespace FluentBuild
             MessageLogger.Write("Make Directory", _path);
             Directory.CreateDirectory(_path);
             return this;
-        }
-
-        public BuildFolder RecurseAllSubFolders()
-        {
-            return new BuildFolder(_path + "\\**\\");
         }
 
         public override string ToString()
