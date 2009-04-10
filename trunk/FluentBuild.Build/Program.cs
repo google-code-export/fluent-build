@@ -7,8 +7,9 @@ namespace Build
     {
         private static void Main(string[] args)
         {
+            Environment.ExitCode = 0;
             Console.WriteLine("args");
-            foreach (var arg in args)
+            foreach (string arg in args)
             {
                 Console.WriteLine(arg);
             }
