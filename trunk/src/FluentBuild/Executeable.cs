@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace FluentBuild
 {
     public class Executeable
     {
-        internal readonly string _executeablePath;
         private readonly List<String> _args = new List<string>();
+        internal readonly string _executeablePath;
         private string _workingDirectory;
 
         public Executeable(string executeablePath)
@@ -25,7 +26,7 @@ namespace FluentBuild
         private string CreateArgumentString()
         {
             var sb = new StringBuilder();
-            foreach (var argument in _args)
+            foreach (string argument in _args)
             {
                 sb.AppendFormat(" {0}", argument);
             }
@@ -38,22 +39,60 @@ namespace FluentBuild
             return this;
         }
 
-        public void Execute()
+        internal void Execute(string prefix)
         {
-            MessageLogger.Write("exec", String.Format("Running '{0} {1}", _executeablePath, CreateArgumentString()));
             var startInfo = new ProcessStartInfo(_executeablePath);
             startInfo.UseShellExecute = false;
             startInfo.Arguments = CreateArgumentString();
+
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
 
             if (!String.IsNullOrEmpty(_workingDirectory))
                 startInfo.WorkingDirectory = _workingDirectory;
 
             Process process = Process.Start(startInfo);
-            if (process != null)
-            {
-                process.WaitForExit();
-                Environment.ExitCode += process.ExitCode;
-            }
+            if (process == null)
+                throw new ApplicationException("process did not start?");
+
+            using (StreamReader output = process.StandardOutput)
+                using (StreamReader error = process.StandardError)
+                {
+                    process.WaitForExit();
+                    Environment.ExitCode += process.ExitCode;
+                    var textColor = ConsoleColor.BuildColor.Default;
+                    
+                    if (process.ExitCode != 0)
+                    {
+                      textColor = ConsoleColor.BuildColor.Red;
+                    }
+
+                    foreach (var line in output.ReadToEnd().Split(Environment.NewLine.ToCharArray()))
+                    {
+                        if (line.Trim().Length > 0)
+                        {
+                            ConsoleColor.SetColor(textColor);
+                            if (line.Contains("warning") || line.Contains("Warning"))
+                                ConsoleColor.SetColor(ConsoleColor.BuildColor.Yellow);
+                            MessageLogger.Write(prefix, line);
+                        }
+                    }
+
+                    ConsoleColor.SetColor(textColor);
+                    foreach (var line in error.ReadToEnd().Split(Environment.NewLine.ToCharArray()))
+                    {
+                        if (line.Trim().Length > 0)
+                            MessageLogger.Write(prefix, line);
+                    }
+                   
+                }
+
+            ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
+        }
+
+        public void Execute()
+        {
+           Execute("exec");
         }
     }
 }

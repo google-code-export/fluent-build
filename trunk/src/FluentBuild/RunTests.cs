@@ -20,6 +20,7 @@ namespace FluentBuild
             var exe = new BuildArtifact("temp.exe");
             var executeable = Run.Executeable(exe);
             Assert.That(executeable._executeablePath, Is.EqualTo(exe.ToString()));
+            Assert.Fail();
         }
     }
 }
