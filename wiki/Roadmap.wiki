@@ -1,8 +1,8 @@
 #summary Project Roadmap and vision
 
 = Introduction =
-  # Get the basics down solid (directories, compilation, etc.)
-  # File Tokenization
+  # Get the basics down solid (directories, compilation, etc.) <--Done
+  # File Tokenization <-- Done
   # Get it to work with build servers
   # Look at implementing some conventions to make writing builds more repeatable
   # Look at other tools and add some nice helpers (unit test runners, zip support, etc.)
