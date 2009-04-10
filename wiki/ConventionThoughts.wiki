@@ -4,8 +4,7 @@
 
 I do want to add some convention support in once we have the baseline interface built and functioning. Once people start to use it then patterns should emerge.
 
-
-For Tokenization it would be nice to have:
+==Tokenization==
 {{{
 file.ReplaceTokens.OutputFileTo(finalFile);
 
@@ -15,3 +14,15 @@ file.Copy.ReplaceTokens.To(finalFile);
 
 }}}
 This may use reflection to map all parameters to variables in the code.
+
+==Build Templates==
+{{{
+inherit Conventions.BaseDirContainsSeperateSrcAndTestFolder
+
+}}}
+
+{{{
+
+Build.SourceLocatedIn("").UnitTestsLocatedIn("").IntegrationTestsLocatedIn("").Execute;
+
+}}}
