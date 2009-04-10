@@ -25,6 +25,8 @@ namespace FluentBuild
         public BuildFolder Delete()
         {
             MessageLogger.Write("delete", _path);
+            MessageLogger.BlankLine();
+
             if (Directory.Exists(_path))
                 Directory.Delete(_path, true);
             return this;
@@ -32,7 +34,8 @@ namespace FluentBuild
 
         public BuildFolder Create()
         {
-            MessageLogger.Write("Make Directory", _path);
+            MessageLogger.Write("mkdir", _path);
+            MessageLogger.BlankLine();
             Directory.CreateDirectory(_path);
             return this;
         }
