@@ -1,4 +1,5 @@
-﻿using FluentBuild.BuildFile;
+﻿using System;
+using FluentBuild.BuildFile;
 
 namespace Build
 {
@@ -6,6 +7,10 @@ namespace Build
     {
         private static void Main(string[] args)
         {
+            foreach (var arg in args)
+            {
+                Console.WriteLine(arg);
+            }
             var build = new MainBuildTask();
             build.Execute();
         }
