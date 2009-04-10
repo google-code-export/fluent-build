@@ -69,6 +69,7 @@
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtility.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtilityTests.cs" />
     <Compile Include="FilesAndDirectories\BuildFolder.cs" />
+    <Compile Include="ConsoleColor.cs" />
     <Compile Include="Tokenization\TokenWith.cs" />
     <Compile Include="Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

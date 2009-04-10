@@ -69,7 +69,7 @@ namespace FluentBuild
         public void Execute()
         {
             MessageLogger.Write(compiler, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler).WithArguments(Args).Execute();
+            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler).WithArguments(Args).Execute(compiler.Substring(0, compiler.IndexOf(".")));
         }
 
         internal string Args
