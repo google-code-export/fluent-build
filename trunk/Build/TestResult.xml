@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Users\Kudos\Desktop\fluent-build\Build\..\compile\functional\FluentBuild_Functional_Tests.dll" total="3" failures="0" not-run="0" date="2009-04-10" time="09:30:00">
+  <environment nunit-version="2.4.3.0" clr-version="2.0.50727.3053" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="C:\Users\Kudos\Desktop\fluent-build\Build" machine-name="KUDOS-PC" user="Kudos" user-domain="Kudos-PC" />
+  <culture-info current-culture="en-CA" current-uiculture="en-US" />
+  <test-suite name="C:\Users\Kudos\Desktop\fluent-build\Build\..\compile\functional\FluentBuild_Functional_Tests.dll" success="True" time="0.168" asserts="0">
+    <results>
+      <test-suite name="FluentBuild" success="True" time="0.160" asserts="0">
+        <results>
+          <test-suite name="Tests" success="True" time="0.153" asserts="0">
+            <results>
+              <test-suite name="BuildArtifactTests" success="True" time="0.082" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ReplaceToken_Should_Copy_To_New_Directory_And_Change_File_Name" executed="True" success="True" time="0.055" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ReplaceToken_Should_Copy_To_New_Directory_And_Perserve_File_Name" executed="True" success="True" time="0.003" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ReplaceToken_Should_Copy_To_New_File" executed="True" success="True" time="0.003" asserts="1" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
