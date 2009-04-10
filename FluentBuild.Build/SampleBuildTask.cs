@@ -22,7 +22,6 @@ namespace FluentBuild.BuildFile
             assembly_FluentBuild_Tests = directory_compile.FileName("FluentBuild.Tests.dll");
             thirdparty_nunit = directory_compile.FileName("nunit.framework.dll");
             thirdparty_rhino = directory_compile.FileName("rhino.mocks.dll");
-
             directory_compile.Delete().Create();
 
             CompileSources();
