@@ -59,9 +59,11 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Compilation\BuildTests.cs" />
     <Compile Include="Compilation\Build.cs" />
+    <Compile Include="Executeable.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\BuildFolderTests.cs" />
+    <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSet.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtility.cs" />
