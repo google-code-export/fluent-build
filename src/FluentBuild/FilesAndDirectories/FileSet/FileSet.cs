@@ -57,6 +57,7 @@ namespace FluentBuild
         public FileSet CopyTo(BuildFolder destination)
         {
             MessageLogger.Write("copy", String.Format("Copying {0} files to '{1}'", Files.Count, destination.ToString()));
+            MessageLogger.BlankLine();
             foreach (string file in Files)
             {
                 File.Copy(file, Path.Combine(destination.ToString(), Path.GetFileName(file)));

@@ -27,5 +27,10 @@ namespace FluentBuild
                 outputMessage = outputMessage.Substring(length);
             } while (outputMessage.Trim().Length > 0);
         }
+
+        public static void BlankLine()
+        {
+            Console.WriteLine();
+        }
     }
 }

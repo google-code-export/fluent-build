@@ -89,7 +89,7 @@ namespace FluentBuild
                         MessageLogger.Write(prefix, line);
                 }
             }
-
+            Console.WriteLine();
             ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
         }
 
