@@ -6,5 +6,12 @@ I do want to add some convention support in once we have the baseline interface 
 
 
 For Tokenization it would be nice to have:
+{{{
 file.ReplaceTokens.OutputFileTo(finalFile);
+
+or
+
+file.Copy.ReplaceTokens.To(finalFile);
+
+}}}
 This may use reflection to map all parameters to variables in the code.
