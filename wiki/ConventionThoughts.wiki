@@ -30,6 +30,7 @@ Build.SourceLocatedIn("").UnitTestsLocatedIn("").IntegrationTestsLocatedIn("").E
 ==Build Factory==
 {{{
 FluentBuild.BuildFactory.Create()
-                        .Application.SourceLocation("").AddDependancy("").OutputTo("");
-                        .Tests.TestFilesIn("").AddDependancy("").UnitTestRunner.NUnit;
+                        .Application.SourceLocation("").AddDependancy("").OutputTo("")
+                        .Tests.TestFilesIn("").AddDependancy("").UnitTestRunner.NUnit
+                        .Execute();
 }}}
