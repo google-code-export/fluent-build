@@ -26,3 +26,8 @@ inherit Conventions.BaseDirContainsSeperateSrcAndTestFolder
 Build.SourceLocatedIn("").UnitTestsLocatedIn("").IntegrationTestsLocatedIn("").Execute;
 
 }}}
+
+==Build Factory==
+FluentBuild.BuildFactory.Create()
+                        .Application.SourceLocation("").AddDependancy("").OutputTo("");
+                        .Tests.TestFilesIn("").AddDependancy("").UnitTestRunner.NUnit;
