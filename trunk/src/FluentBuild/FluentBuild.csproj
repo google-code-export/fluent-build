@@ -58,8 +58,11 @@
     <Compile Include="AssemblyInfo\AssemblyInfoLanguage.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfoLanguageTests.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfoTests.cs" />
+    <Compile Include="AssemblyInfo\VisualBasicAssemblyInfoBuilderTests.cs" />
     <Compile Include="AssemblyInfo\CSharpAssemblyInfoBuilder.cs" />
     <Compile Include="AssemblyInfo\CSharpAssemblyInfoBuilderTests.cs" />
+    <Compile Include="AssemblyInfo\IAssemblyInfoBuilder.cs" />
+    <Compile Include="AssemblyInfo\VisualBasicAssemblyInfoBuilder.cs" />
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Compilation\BuildTests.cs" />

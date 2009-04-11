@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace FluentBuild
 {
     public class AssemblyInfoDetails
     {
-        internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
         internal readonly List<String> _imports = new List<string>();
+        internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
 
         internal string _assemblyCopyright;
         internal string _assemblyDescription;
@@ -18,9 +18,9 @@ namespace FluentBuild
         internal bool _comVisible;
         internal bool _comVisibleSet;
 
-       // internal string _applicationName;
-       // internal string _company;
-       // internal string _productName;
+        // internal string _applicationName;
+        // internal string _company;
+        // internal string _productName;
         //public AssemblyInfoDetails AssemblyProduct(string productName)
         //{
         //    _productName = productName;
@@ -46,7 +46,7 @@ namespace FluentBuild
 
         public AssemblyInfoDetails Import(params string[] files)
         {
-            foreach (var import in files)
+            foreach (string import in files)
                 ImportDropIfDuplicate(import);
             return this;
         }
@@ -57,7 +57,7 @@ namespace FluentBuild
                 _imports.Add(file.Trim());
         }
 
-        
+
         public AssemblyInfoDetails ComVisible(bool visible)
         {
             ImportDropIfDuplicate("System.Runtime.InteropServices");
@@ -106,7 +106,11 @@ namespace FluentBuild
 
         public void OutputTo(string filePath)
         {
-            Console.WriteLine(AssemblyInfoBuilder.Build(this));
+            using (var fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
+            using (var sw = new StreamWriter(fs))
+            {
+                sw.Write(AssemblyInfoBuilder.Build(this));
+            }
         }
     }
 }

@@ -5,19 +5,6 @@ using System.Text;
 
 namespace FluentBuild
 {
-    internal interface IAssemblyInfoBuilder
-    {
-        string Build(AssemblyInfoDetails details);
-    }
-
-    internal class VisualBasicAssemblyInfoBuilder : IAssemblyInfoBuilder
-    {
-        public string Build(AssemblyInfoDetails details)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     internal class CSharpAssemblyInfoBuilder : IAssemblyInfoBuilder
     {
        public string Build(AssemblyInfoDetails details)
