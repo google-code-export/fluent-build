@@ -1,6 +1,4 @@
--timings
--specify framework version
--AssemblyInfo: auto-reference what is needed i.e. if I use an attribute that is in System.Reflection, auto import System.Reflection
--AssemblyInfo: language support (and whatever else can go into the file)
--run.Nunit.Against(assembly_name).OutputTo("")
+-Timings
+-Specify framework version
+-Run.Nunit.Against(assembly_name).OutputTo("")
 -Tokenization of filesets
