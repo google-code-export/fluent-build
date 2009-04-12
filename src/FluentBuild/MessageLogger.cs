@@ -2,8 +2,13 @@
 
 namespace FluentBuild
 {
-    internal class MessageLogger
+    public class MessageLogger
     {
+        public static void WriteHeader(string header)
+        {
+            Console.WriteLine(header);
+        }
+
         public static void Write(string type, string message)
         {
             string outputMessage = String.Format("[{0}] {1}", type, message);

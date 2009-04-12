@@ -11,7 +11,6 @@ namespace FluentBuild.Compilation
         [Test]
         public void Args_ShouldCreateProperArgs()
         {
-            string reference = "external.dll";
             string outputAssembly = "myapp.dll";
             BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library;
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:{0} /target:{1}", outputAssembly, "library")));

@@ -1,4 +1,3 @@
 -Timings
--Specify framework version
 -Run.Nunit.Against(assembly_name).OutputTo("")
 -Tokenization of filesets

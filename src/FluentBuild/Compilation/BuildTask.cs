@@ -70,7 +70,7 @@ namespace FluentBuild
         {
             string compilerWithoutExtentions = compiler.Substring(0, compiler.IndexOf("."));
             MessageLogger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\v3.5\" + compiler).WithArguments(Args).Execute(compilerWithoutExtentions);
+            Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler).WithArguments(Args).Execute(compilerWithoutExtentions);
         }
 
         internal string Args
