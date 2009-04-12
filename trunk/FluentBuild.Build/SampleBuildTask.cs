@@ -15,6 +15,8 @@ namespace FluentBuild.BuildFile
 
         public void Execute()
         {
+            FrameworkVersion.NET2_0();
+
             directory_base = new BuildFolder(Environment.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_tools = directory_base.SubFolder("tools");

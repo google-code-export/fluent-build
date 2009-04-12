@@ -103,7 +103,7 @@ namespace FluentBuild
             _assemblyCopyright = value;
             return this;
         }
-
+           
         public void OutputTo(string filePath)
         {
             using (var fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))

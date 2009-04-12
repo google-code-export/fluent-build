@@ -16,6 +16,7 @@ namespace FluentBuild.BuildFile
 
         public void Execute()
         {
+            MessageLogger.WriteHeader("Execute");
             directory_base = new BuildFolder(Environment.CurrentDirectory).SubFolder("..\\");
             directory_compile = directory_base.SubFolder("compile");
             directory_tools = directory_base.SubFolder("tools");
@@ -27,12 +28,17 @@ namespace FluentBuild.BuildFile
             thirdparty_nunit = directory_compile.FileName("nunit.framework.dll");
             thirdparty_rhino = directory_compile.FileName("rhino.mocks.dll");
 
+            MessageLogger.WriteHeader("Setup Directories");
             directory_compile.Delete().Create();
             directory_functional_tests.Delete().Create();
 
+            MessageLogger.WriteHeader("Compile Sources");
             CompileSources();
+            MessageLogger.WriteHeader("Run Tests");
             RunTests();
+            MessageLogger.WriteHeader("Compile Functional Tests");
             CompileFunctionalTests();
+            MessageLogger.WriteHeader("Run Functional Tests");
             RunFunctionalTests();
 
         }

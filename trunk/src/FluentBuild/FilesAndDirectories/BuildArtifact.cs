@@ -3,7 +3,6 @@ namespace FluentBuild
     public class BuildArtifact
     {
         private readonly string path;
-        private object copy;
 
         public BuildArtifact(string path)
         {
