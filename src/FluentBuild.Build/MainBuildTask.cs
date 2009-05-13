@@ -2,7 +2,7 @@
 
 namespace FluentBuild.BuildFile
 {
-    internal class MainBuildTask
+    public class MainBuildTask : IBuild
     {
         private BuildFolder directory_base;
         private BuildFolder directory_compile;
@@ -16,7 +16,6 @@ namespace FluentBuild.BuildFile
 
         public void Execute()
         {
-            MessageLogger.WriteHeader("Execute");
             directory_base = new BuildFolder(Environment.CurrentDirectory).SubFolder("..\\");
             directory_compile = directory_base.SubFolder("compile");
             directory_tools = directory_base.SubFolder("tools");
