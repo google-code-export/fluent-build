@@ -92,7 +92,7 @@ namespace FluentBuild
                     references.Append("\"" + reference + "\"");
                 }
 
-                string args = String.Format("/out:\"{1}\" /target:{2} {3} {0}", sources, _outputFileLocation, "library", references);
+                string args = String.Format("/out:\"{1}\" /target:{2} {3} {0}", sources, _outputFileLocation, TargetType, references);
                 if (_includeDebugSymbols)
                     args += " /debug";
                 return args;
