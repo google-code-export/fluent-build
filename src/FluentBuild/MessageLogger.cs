@@ -4,9 +4,17 @@ namespace FluentBuild
 {
     public class MessageLogger
     {
+        public static bool ShowDebugMessages;
+
         public static void WriteHeader(string header)
         {
             Console.WriteLine(header);
+        }
+
+        public static void WriteDebugMessage(string message)
+        {
+            if (ShowDebugMessages)
+                Write("DEBUG", message);
         }
 
         public static void Write(string type, string message)

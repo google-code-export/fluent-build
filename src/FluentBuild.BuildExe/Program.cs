@@ -7,6 +7,7 @@ namespace FluentBuild.BuildExe
 {
     internal class Program
     {
+
         private static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -16,30 +17,38 @@ namespace FluentBuild.BuildExe
                 Console.WriteLine("fb.exe PathToSources");
                 return;
             }
-            Console.WriteLine("Press any key to start");
-            Console.ReadKey();
 
-            string pathToAssembly=Path.Combine(Environment.CurrentDirectory, args[0]);
-            if (System.IO.Path.GetExtension(args[0]).ToLower() != "dll")
+            MessageLogger.ShowDebugMessages = true;
+    
+            string pathToAssembly = Path.Combine(Environment.CurrentDirectory, args[0]);
+            if (Path.GetExtension(args[0]).ToLower() != "dll")
             {
                 Console.WriteLine("building task from sources");
-                pathToAssembly = BuildAssemblyFromSources(args[0]);
+                pathToAssembly = BuildAssemblyFromSources(pathToAssembly);
             }
 
             ExecuteBuildTask(pathToAssembly);
-
         }
 
         private static string BuildAssemblyFromSources(string path)
         {
+            MessageLogger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();
             fileset.Include(path + "/**/*.cs");
-            FluentBuild.Build.UsingCsc.AddSources(fileset).AddRefences(Path.Combine(Environment.CurrentDirectory, "FluentBuild.Build.dll")).OutputFileTo("build.dll").Target.Library.Execute();
-            return System.IO.Path.Combine(path, "build.dll");
+
+            string startPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
+
+            string dllReference = Path.Combine(startPath, "FluentBuild.dll");
+            MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
+            string outputAssembly = Path.Combine(path, "build.dll");
+            MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
+            Build.UsingCsc.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).Target.Library.Execute();
+            return outputAssembly;
         }
 
         private static void ExecuteBuildTask(string path)
         {
+            MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
             Assembly assemblyInstance = Assembly.LoadFile(path);
             Type[] types = assemblyInstance.GetTypes();
             foreach (Type t in types)
@@ -47,15 +56,14 @@ namespace FluentBuild.BuildExe
                 Type[] interfaces = t.GetInterfaces();
                 foreach (Type i in interfaces)
                 {
-                    if (i.FullName == typeof(IBuild).FullName)
+                    if (i.FullName == typeof (IBuild).FullName)
                     {
-                        var build = (IBuild)assemblyInstance.CreateInstance(t.FullName);
+                        var build = (IBuild) assemblyInstance.CreateInstance(t.FullName);
                         MessageLogger.WriteHeader("Execute");
                         build.Execute();
                     }
                 }
             }
-
         }
     }
 }
