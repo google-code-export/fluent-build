@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Build\</OutputPath>
+    <OutputPath>..\..\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,7 +52,7 @@
     <Compile Include="SampleBuildTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\FluentBuild\FluentBuild.csproj">
+    <ProjectReference Include="..\FluentBuild\FluentBuild.csproj">
       <Project>{71965190-338E-42CD-9D48-47955DB750E2}</Project>
       <Name>FluentBuild</Name>
     </ProjectReference>
