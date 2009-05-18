@@ -13,7 +13,7 @@ namespace FluentBuild
         {
             get
             {
-                buildTask.TargetType = "Library";
+                buildTask.TargetType = "library";
                 return buildTask;
             }
         }
