@@ -67,6 +67,8 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Compilation\BuildTests.cs" />
     <Compile Include="Compilation\Build.cs" />
+    <Compile Include="Compilation\ResGen\Resgen.cs" />
+    <Compile Include="Compilation\Resource.cs" />
     <Compile Include="Executeable.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="RunTests.cs" />
     <Compile Include="Tokenization\TokenReplacerTests.cs" />
     <Compile Include="Tokenization\TokenReplacer.cs" />
+    <Compile Include="WindowsSDKFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

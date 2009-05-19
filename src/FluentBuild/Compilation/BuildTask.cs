@@ -12,6 +12,7 @@ namespace FluentBuild
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
         private Target _target;
+        private readonly List<Resource> _resources = new List<Resource>();
 
         public BuildTask() : this("")
         {
@@ -66,11 +67,27 @@ namespace FluentBuild
             return this;
         }
 
+        public BuildTask AddResource(string value, string resourceName)
+        {
+            _resources.Add(new Resource(value, resourceName));
+            return this;
+        }
+
+        public BuildTask AddResources(FileSet fileSet)
+        {
+            foreach (var file in fileSet.Files)
+            {
+                _resources.Add(new Resource(file)); 
+            }
+            return this;
+        }
+
         public void Execute()
         {
             string compilerWithoutExtentions = compiler.Substring(0, compiler.IndexOf("."));
             MessageLogger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            MessageLogger.WriteDebugMessage("Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler + " " + Args);
+            string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler + " " + Args.Replace("/", Environment.NewLine + "/");
+            MessageLogger.WriteDebugMessage(compileMessage);
             Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler).WithArguments(Args).Execute(compilerWithoutExtentions);
             MessageLogger.WriteDebugMessage("Done Compiling");
         }
@@ -92,9 +109,16 @@ namespace FluentBuild
                     references.Append("\"" + reference + "\"");
                 }
 
-                string args = String.Format("/out:\"{1}\" /target:{2} {3} {0}", sources, _outputFileLocation, TargetType, references);
+                var resources = new StringBuilder();
+                foreach (Resource res in _resources)
+                {
+                    resources.AppendFormat(" /resource:{0}", res.ToString());
+                } 
+
+                string args = String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources, TargetType, references, sources);
                 if (_includeDebugSymbols)
                     args += " /debug";
+
                 return args;
             }
         }
