@@ -41,6 +41,7 @@ namespace FluentBuild
 
         internal void Execute(string prefix)
         {
+            MessageLogger.WriteDebugMessage("executing " + _executeablePath + CreateArgumentString());
             var startInfo = new ProcessStartInfo(_executeablePath);
             startInfo.UseShellExecute = false;
             startInfo.Arguments = CreateArgumentString();
