@@ -67,7 +67,7 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Compilation\BuildTests.cs" />
     <Compile Include="Compilation\Build.cs" />
-    <Compile Include="Compilation\ResGen\Resgen.cs" />
+    <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\Resource.cs" />
     <Compile Include="Executeable.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
