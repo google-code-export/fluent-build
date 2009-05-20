@@ -8,6 +8,8 @@ FluentBuild.Database.MsSqlDatabase.CreateOrUpgradeDatabase()
                 .ConnectionString("server=.\\sqlExpress;initial catalog=dispatch;Integrated Security=SSPI;")
                 .CreateScript(@"C:\project\database\create\CreateScript.sql")
                 .UpdateScripts(@"C:\project\database\update\")
+}}}
+{{{
                 .Execute();
 }}}
 
