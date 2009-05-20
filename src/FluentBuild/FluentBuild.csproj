@@ -69,6 +69,7 @@
     <Compile Include="Compilation\Build.cs" />
     <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\Resource.cs" />
+    <Compile Include="Database\MsSqlDatabase.cs" />
     <Compile Include="Executeable.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
