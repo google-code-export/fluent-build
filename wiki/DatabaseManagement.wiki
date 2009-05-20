@@ -1,4 +1,3 @@
-#labels database,mssql
 Managing databases and database versioning can be a pain to do manually. In fluent-build there is some rudimentary support for automating a lot of this work.
 
 {{{
