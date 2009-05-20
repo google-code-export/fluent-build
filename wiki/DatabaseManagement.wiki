@@ -6,8 +6,8 @@ Managing databases and database versioning can be a pain to do manually. In flue
 {{{
 FluentBuild.Database.MsSqlDatabase.CreateOrUpgradeDatabase()
                 .ConnectionString("server=.\\sqlExpress;initial catalog=dispatch;Integrated Security=SSPI;")
-                .CreateScript("C:\project\database\create\CreateScript.sql")
-                .UpdateScripts("C:\project\database\update\").Execute();
+                .CreateScript(@"C:\project\database\create\CreateScript.sql")
+                .UpdateScripts(@"C:\project\database\update\").Execute();
 }}}
 
 The above code will check if the "dispatch" database exists and attempt to create it if it does not exist (NOTE: you will need permissions to create the database). Once it has created the database it will run the CreateScript specified and then create a version table so that subsequent runs know the current version of the database.
