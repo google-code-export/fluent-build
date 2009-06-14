@@ -8,10 +8,12 @@ namespace FluentBuild.Database
 {
     public class MsSqlDatabase
     {
+        //TODO: input validation on variables for potential SQL / Filesystem injection
+
         private readonly SqlConnectionStringBuilder _connectionString = new SqlConnectionStringBuilder();
-        SqlConnectionStringBuilder _masterDatabaseConnectionString;
-            
+
         private string _createScriptPath;
+        private SqlConnectionStringBuilder _masterDatabaseConnectionString;
         private string _upgradScriptPath;
         private string _versionTableName = "Version";
 
@@ -65,27 +67,49 @@ namespace FluentBuild.Database
             }
         }
 
-        private void ExecuteNonQueryCommandAgainstDatabase(SqlConnectionStringBuilder connection, string commandText, NameValueCollection parameters)
+        private void ExecuteNonQueryCommandAgainstDatabase(SqlConnectionStringBuilder connection, string commandText, NameValueCollection parameters, bool useTransactions)
         {
+            IDbTransaction transaction = null;
             using (IDbConnection con = new SqlConnection(connection.ConnectionString))
             {
                 con.Open();
-                string separator = "GO" + Environment.NewLine;
-                string[] commands = commandText.Split(new[] {separator}, StringSplitOptions.RemoveEmptyEntries);
-               
-                if (commands.Length == 0) //it is only one statement that does not have a "GO" at the end
-                    commands = new[] {commandText};
+                if (useTransactions)
+                    transaction = con.BeginTransaction();
 
-                //execute each command in the array
-                foreach (var individualCommand in commands)
+                string separator = "GO" + Environment.NewLine;
+                string seperator2 = "Go" + Environment.NewLine;
+                string seperator3 = "go" + Environment.NewLine;
+                string seperator4 = "gO" + Environment.NewLine;
+
+                try
                 {
-                    using (IDbCommand command = CreateTextCommand(con, individualCommand, parameters))
+                    commandText = commandText + Environment.NewLine; //adds a newline so the last line will always be GO\r\n
+                    string[] commands = commandText.Split(new[] {separator, seperator2, seperator3, seperator4}, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (commands.Length == 0) //it is only one statement that does not have a "GO" at the end
+                        commands = new[] {commandText};
+
+                    //execute each command in the array
+                    foreach (string individualCommand in commands)
                     {
-                        MessageLogger.WriteDebugMessage("Executing:" + command.CommandText);
-                        command.ExecuteNonQuery();
-                    }    
+                        using (IDbCommand command = CreateTextCommand(con, individualCommand, parameters))
+                        {
+                            if (useTransactions)
+                                command.Transaction = transaction;
+                            MessageLogger.WriteDebugMessage("Executing:" + command.CommandText);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    if (useTransactions)
+                        transaction.Commit();
                 }
-                
+                catch (Exception)
+                {
+                    if (useTransactions)
+                        transaction.Rollback();
+                    throw;
+                }
             }
         }
 
@@ -94,16 +118,16 @@ namespace FluentBuild.Database
             IDbCommand command = connection.CreateCommand();
             command.CommandType = CommandType.Text;
             command.CommandText = commandText;
-            
-            if(parameters == null)
+
+            if (parameters == null)
                 return command;
 
-            foreach (var key in parameters.Keys)
+            foreach (object key in parameters.Keys)
             {
                 IDbDataParameter tableNameParameter = command.CreateParameter();
                 tableNameParameter.ParameterName = key.ToString();
                 tableNameParameter.Value = parameters[key.ToString()];
-                command.Parameters.Add(tableNameParameter);    
+                command.Parameters.Add(tableNameParameter);
             }
             return command;
         }
@@ -122,33 +146,30 @@ namespace FluentBuild.Database
         {
             MessageLogger.WriteDebugMessage("Executing database updates");
             //determine current version
-            int currentVersion=0;
-                 using (IDbConnection con = new SqlConnection(_connectionString.ConnectionString))
-                 {
-                     con.Open();
-                     IDbCommand command = CreateTextCommand(con, "select version from " + _versionTableName, null);
-                     currentVersion = (int)command.ExecuteScalar();
-                 }
+            int currentVersion = 0;
+            using (IDbConnection con = new SqlConnection(_connectionString.ConnectionString))
+            {
+                con.Open();
+                IDbCommand command = CreateTextCommand(con, "select version from " + _versionTableName, null);
+                currentVersion = (int) command.ExecuteScalar();
+            }
 
             //execute updates higher than that version
-            foreach (var upgradeFile in Directory.GetFiles(_upgradScriptPath))
+            foreach (string upgradeFile in Directory.GetFiles(_upgradScriptPath))
             {
                 string fileName = Path.GetFileName(upgradeFile);
-                var fileVersion = int.Parse(fileName.Substring(0, fileName.IndexOf("_")));
+                int fileVersion = int.Parse(fileName.Substring(0, fileName.IndexOf("_")));
                 if (fileVersion > currentVersion)
                 {
                     MessageLogger.WriteDebugMessage("Changes found. Updating to version " + fileVersion);
-                    using(var x = new StreamReader(upgradeFile))
+                    using (var x = new StreamReader(upgradeFile))
                     {
-                        ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null);
+                        ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null, true);
                     }
 
-                    ExecuteNonQueryCommandAgainstDatabase(_connectionString, "update " + _versionTableName + " set version=" + fileVersion, null);
-                    
+                    ExecuteNonQueryCommandAgainstDatabase(_connectionString, "update " + _versionTableName + " set version=" + fileVersion, null, true);
                 }
             }
-            
-            
         }
 
         private void CreateDatabase()
@@ -156,21 +177,21 @@ namespace FluentBuild.Database
             MessageLogger.WriteDebugMessage("Database does not exist, creating it");
             //create database
             MessageLogger.WriteDebugMessage("creating database " + _connectionString.InitialCatalog);
-            ExecuteNonQueryCommandAgainstDatabase(_masterDatabaseConnectionString, "CREATE DATABASE " + _connectionString.InitialCatalog, null);
-                
+            ExecuteNonQueryCommandAgainstDatabase(_masterDatabaseConnectionString, "CREATE DATABASE " + _connectionString.InitialCatalog, null, false);
+
             //execute create script
             MessageLogger.WriteDebugMessage("Executing create script");
             using (var x = new StreamReader(_createScriptPath))
             {
-                ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null);
+                ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null, true);
             }
 
             //create version table
             MessageLogger.WriteDebugMessage("Creating version table");
-            ExecuteNonQueryCommandAgainstDatabase(_connectionString, "create table " + _versionTableName + " (version int)", null);
+            ExecuteNonQueryCommandAgainstDatabase(_connectionString, "create table " + _versionTableName + " (version int)", null, true);
 
             //insert version 0
-            ExecuteNonQueryCommandAgainstDatabase(_connectionString, "insert into " + _versionTableName + " values (0)", null);
+            ExecuteNonQueryCommandAgainstDatabase(_connectionString, "insert into " + _versionTableName + " values (0)", null, true);
         }
     }
 }
