@@ -32,6 +32,8 @@ namespace FluentBuild.BuildExe
 
         private static string BuildAssemblyFromSources(string path)
         {
+            Console.WriteLine("Press enter key to start");
+            Console.ReadLine();
             MessageLogger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();
             fileset.Include(path + "/**/*.cs");

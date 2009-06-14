@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace FluentBuild
 {
@@ -42,37 +43,69 @@ namespace FluentBuild
         internal void Execute(string prefix)
         {
             MessageLogger.WriteDebugMessage("executing " + _executeablePath + CreateArgumentString());
-            var startInfo = new ProcessStartInfo(_executeablePath);
-            startInfo.UseShellExecute = false;
-            startInfo.Arguments = CreateArgumentString();
+            var process = new Process();
+            process.StartInfo.FileName = _executeablePath;
+            process.StartInfo.Arguments = CreateArgumentString();
+
             //redirect to a stream so we can parse it and display it
-            startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.ErrorDialog = false;
+
             if (!String.IsNullOrEmpty(_workingDirectory))
-                startInfo.WorkingDirectory = _workingDirectory;
+                process.StartInfo.WorkingDirectory = _workingDirectory;
 
-            Process process = Process.Start(startInfo);
-            if (process == null)
-                throw new ApplicationException("process did not start?");
-        
 
-            process.WaitForExit();
-            Environment.ExitCode += process.ExitCode;
-           
-            DisplayOutput(process, prefix);
+            process.ErrorDataReceived += process_ErrorDataReceived;
+            process.OutputDataReceived += process_OutputDataReceived;
+
+            process.Start();
+            process.PriorityClass = ProcessPriorityClass.Idle;
+            process.BeginOutputReadLine();
+            if (!process.WaitForExit(5000))
+            {
+                MessageLogger.WriteDebugMessage("TIMEOUT!");
+                process.Kill();
+                Thread.Sleep(1000);
+                Environment.ExitCode = 1;
+            }
+            else
+            {
+                Environment.ExitCode += process.ExitCode;
+            }
+            DisplayOutput(prefix, process.ExitCode);
+            process.Dispose();
         }
 
-        private void DisplayOutput(Process process, string prefix)
+        //lock objects in case events fire out of order
+        private object OutputLock = new object();
+        private object ErrorLock = new object();
+        private readonly StringBuilder output = new StringBuilder();
+        private readonly StringBuilder error = new StringBuilder();
+
+
+        private void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            lock(OutputLock)
+                output.AppendLine(e.Data);
+        }
+
+        private void process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            lock (ErrorLock)
+            output.AppendLine(e.Data);
+        }
+
+        private void DisplayOutput(string prefix, int exitCode)
         {
             ConsoleColor.BuildColor textColor = ConsoleColor.BuildColor.Default;
-           
-            using (StreamReader output = process.StandardOutput)
-            using (StreamReader error = process.StandardError)
-            {
-                if (process.ExitCode != 0)
+
+            if (exitCode != 0)
                     textColor = ConsoleColor.BuildColor.Red;
 
-                foreach (string line in output.ReadToEnd().Split(Environment.NewLine.ToCharArray()))
+                foreach (string line in  output.ToString().Split(Environment.NewLine.ToCharArray()))
                 {
                     if (line.Trim().Length > 0)
                     {
@@ -84,16 +117,14 @@ namespace FluentBuild
                 }
 
                 ConsoleColor.SetColor(textColor);
-                foreach (string line in error.ReadToEnd().Split(Environment.NewLine.ToCharArray()))
+                foreach (string line in error.ToString().Split(Environment.NewLine.ToCharArray()))
                 {
                     if (line.Trim().Length > 0)
                         MessageLogger.Write(prefix, line);
                 }
-            }
-            Console.WriteLine();
-            ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
+             ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
         }
-
+        
         public void Execute()
         {
             Execute("exec");
