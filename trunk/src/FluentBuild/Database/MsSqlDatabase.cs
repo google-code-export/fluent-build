@@ -134,12 +134,23 @@ namespace FluentBuild.Database
 
         public void Execute()
         {
-            if (!DoesDatabaseAlreadyExist())
-            {
-                CreateDatabase();
-            }
+            if (Environment.ExitCode != 0)
+                return;
 
-            UpdateDatabase();
+            try
+            {
+                if (!DoesDatabaseAlreadyExist())
+                {
+                    CreateDatabase();
+                }
+
+                UpdateDatabase();
+            } 
+            catch (Exception ex)
+            {
+                Environment.ExitCode = 1;
+                MessageLogger.Write("ERROR", ex.ToString());
+            }
         }
 
         private void UpdateDatabase()
@@ -161,7 +172,7 @@ namespace FluentBuild.Database
                 int fileVersion = int.Parse(fileName.Substring(0, fileName.IndexOf("_")));
                 if (fileVersion > currentVersion)
                 {
-                    MessageLogger.WriteDebugMessage("Changes found. Updating to version " + fileVersion);
+                    MessageLogger.Write("DATABASE", "Upgrading database to version " + fileVersion);
                     using (var x = new StreamReader(upgradeFile))
                     {
                         ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null, true);
