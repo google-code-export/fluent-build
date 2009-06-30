@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace FluentBuild.Compilation.ResGen
 {
@@ -28,25 +29,36 @@ namespace FluentBuild.Compilation.ResGen
 
         public FileSet Execute()
         {
-            if (!WindowsSdkFinder.IsWindowsSDKInstalled())
-            {
-                MessageLogger.Write("RESGEN", "could not find the Windows SDK which contains resgen.exe which is required to build resources");
+            if (Environment.ExitCode != 0)
                 return null;
-            }
 
-           
-
-            string resGenExecuteable = Path.Combine(WindowsSdkFinder.PathToHighestVersionedSDK(), "bin\\resgen.exe");
-            MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
-            var outputFiles = new FileSet();
-            foreach (string resourceFileName in _files.Files)
+            try
             {
-                string outputFileName = _prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
-                outputFileName = Path.Combine(_outputFolder, outputFileName);
-                Run.Executeable(resGenExecuteable).WithArguments("\"" + resourceFileName + "\"").WithArguments("\"" + outputFileName + "\"").Execute();
-                outputFiles.Include(outputFileName);
+                if (!WindowsSdkFinder.IsWindowsSDKInstalled())
+                {
+                    MessageLogger.Write("RESGEN", "could not find the Windows SDK which contains resgen.exe which is required to build resources");
+                    return null;
+                }
+
+
+                string resGenExecuteable = Path.Combine(WindowsSdkFinder.PathToHighestVersionedSDK(), "bin\\resgen.exe");
+                MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
+                var outputFiles = new FileSet();
+                foreach (string resourceFileName in _files.Files)
+                {
+                    string outputFileName = _prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
+                    outputFileName = Path.Combine(_outputFolder, outputFileName);
+                    Run.Executeable(resGenExecuteable).WithArguments("\"" + resourceFileName + "\"").WithArguments("\"" + outputFileName + "\"").Execute();
+                    outputFiles.Include(outputFileName);
+                }
+                return outputFiles;
             }
-            return outputFiles;
+            catch (Exception ex)
+            {
+                Environment.ExitCode = 1;
+                MessageLogger.Write("ERROR", ex.ToString());
+            }
+            return null;
         }
     }
 }
