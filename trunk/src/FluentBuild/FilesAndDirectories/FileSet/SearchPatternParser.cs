@@ -13,7 +13,10 @@ namespace FluentBuild
 
     public class SearchPatternParser : ISearchPatternParser
     {
-        private string searchPattern = "*.*";
+        public SearchPatternParser()
+        {
+            SearchPattern = "*.*";
+        }
 
         public void Parse(string pattern)
         {
@@ -28,7 +31,7 @@ namespace FluentBuild
             var regex = new Regex(@"[a-zA-Z0-9]\*.");
             if (regex.IsMatch(pattern))
             {
-                searchPattern = Path.GetFileName(pattern);
+                SearchPattern = Path.GetFileName(pattern);
                 Folder = pattern.Substring(0, pattern.LastIndexOf("\\")+1);
                 if (Folder.IndexOf("\\**\\") >=0)
                 {
@@ -38,25 +41,19 @@ namespace FluentBuild
             }
             else
             {
-                searchPattern = pattern.Substring(pattern.IndexOf("*"));
+                SearchPattern = pattern.Substring(pattern.IndexOf("*"));
                 Folder = pattern.Substring(0, pattern.IndexOf("*"));
 
-                if (searchPattern.IndexOf("**") >= 0)
+                if (SearchPattern.IndexOf("**") >= 0)
                 {
                     Recursive = true;
-                    searchPattern = searchPattern.Substring(searchPattern.IndexOf("**") + 3);
+                    SearchPattern = SearchPattern.Substring(SearchPattern.IndexOf("**") + 3);
                 }
             }
         }
 
-        public string SearchPattern
-        {
-            get { return searchPattern; }
-            set { searchPattern = value; }
-        }
-
+        public string SearchPattern { get; set; }
         public string Folder { get; set; }
-
         public bool Recursive { get; set; }
     }
 }

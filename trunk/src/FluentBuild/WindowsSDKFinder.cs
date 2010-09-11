@@ -8,14 +8,14 @@ namespace FluentBuild
     internal class WindowsSdkFinder
     {
         public const string RegistryKeyToSdks = "SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows";
-        private static IRegistrySeeker _seeker;
+        private static IRegistryWrapper _seeker;
 
-        public WindowsSdkFinder(IRegistrySeeker seeker)
+        public WindowsSdkFinder(IRegistryWrapper seeker)
         {
             _seeker = seeker;
         }
 
-        public WindowsSdkFinder() : this(new RegistrySeeker())
+        public WindowsSdkFinder() : this(new RegistryWrapper())
         {
         }
 
@@ -25,7 +25,7 @@ namespace FluentBuild
         /// <returns>true if the key is found and false if the key is not found</returns>
         public bool IsWindowsSdkInstalled()
         {
-            ISimpleRegistryKey key = _seeker.OpenLocalMachineKey(RegistryKeyToSdks);
+            IRegistryKeyWrapper key = _seeker.OpenLocalMachineKey(RegistryKeyToSdks);
             if (key == null)
                 return false;
             return true;
@@ -41,14 +41,14 @@ namespace FluentBuild
             if (!IsWindowsSdkInstalled())
                 throw new ApplicationException("Windows SDK is not installed!");
 
-            ISimpleRegistryKey key = _seeker.OpenLocalMachineKey(RegistryKeyToSdks);
+            IRegistryKeyWrapper key = _seeker.OpenLocalMachineKey(RegistryKeyToSdks);
 
             string path = "";
             var highestVersionFound = new Version(0, 0);
 
             foreach (string keyName in key.GetSubKeyNames())
             {
-                ISimpleRegistryKey versionKey = key.OpenSubKey(keyName);
+                IRegistryKeyWrapper versionKey = key.OpenSubKey(keyName);
                 if (versionKey == null)
                     throw new ApplicationException("A registry key vanished while it was being read");
 

@@ -3,23 +3,23 @@ using Microsoft.Win32;
 
 namespace FluentBuild
 {
-    public interface IRegistrySeeker
+    public interface IRegistryWrapper
     {
-        ISimpleRegistryKey OpenLocalMachineKey(string key);
+        IRegistryKeyWrapper OpenLocalMachineKey(string key);
     }
 
 
     /// <summary>
     /// Wrapper around registry access to provide testability
     /// </summary>
-    internal class RegistrySeeker : IRegistrySeeker
+    internal class RegistryWrapper : IRegistryWrapper
     {
-        public ISimpleRegistryKey OpenLocalMachineKey(string key)
+        public IRegistryKeyWrapper OpenLocalMachineKey(string key)
         {
             RegistryKey subKey = Registry.LocalMachine.OpenSubKey(key);
             if (subKey==null)
                 return null;
-            return new SimpleRegistryKey(subKey);
+            return new RegistryKeyWrapper(subKey);
         }
     }
 }

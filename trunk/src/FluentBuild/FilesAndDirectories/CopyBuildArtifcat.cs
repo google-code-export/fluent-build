@@ -6,13 +6,19 @@ namespace FluentBuild
 {
     public class CopyBuildArtifcat
     {
+        private readonly IFileSystemWrapper _fileSystemWrapper;
         private readonly BuildArtifact source;
 
-        public CopyBuildArtifcat(BuildArtifact artifact)
+        public CopyBuildArtifcat(IFileSystemWrapper fileSystemWrapper, BuildArtifact artifact)
         {
+            _fileSystemWrapper = fileSystemWrapper;
             source = artifact;
         }
-        //TODO: test these overloads
+
+        public CopyBuildArtifcat(BuildArtifact artifact) : this(new FileSystemWrapper(), artifact)
+        {
+        }
+
         public void To(BuildArtifact artifactDestination)
         {
             To(artifactDestination.ToString());    
@@ -45,12 +51,19 @@ namespace FluentBuild
 // ReSharper restore AssignNullToNotNullAttribute
             MessageLogger.WriteDebugMessage("Copy from " + source + " to " + dest);
             
-            File.Copy(source.ToString(), dest);    
+            _fileSystemWrapper.Copy(source.ToString(), dest);    
         }
 
+
+        /// <summary>
+        /// Replaces a token in a file 
+        /// </summary>
+        /// <param name="token">the token to be replaced</param>
+        /// <returns></returns>
+        /// <example>tokens in the file are surrounded by @ signs. So ReplaceToken("name") would replace everything in a file with @name@</example>
         public TokenWith ReplaceToken(string token)
         {
-            return new TokenReplacer(File.ReadAllText(source.ToString())).ReplaceToken(token);
+            return new TokenReplacer(_fileSystemWrapper.ReadAllText(source.ToString())).ReplaceToken(token);
         }
     }
 }

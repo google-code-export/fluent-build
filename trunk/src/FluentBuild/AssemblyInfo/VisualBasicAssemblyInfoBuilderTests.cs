@@ -28,8 +28,8 @@ namespace FluentBuild
             sb.AppendLine("<assembly: AssemblyDescription(\"asmDesc\")>");
             sb.AppendLine("<assembly: AssemblyCopyright(\"asmCopyright\")>");
             //sb.AppendFormat("[assembly: ApplicationNameAttribute(\"{0}\")]{1}", details._applicationName, Environment.NewLine);
-            sb.AppendFormat("<assembly: ApplicationCompanyAttribute(\"{0}\")>{1}", details._company, Environment.NewLine);
-            sb.AppendFormat("<assembly: ApplicationProductNameAttribute(\"{0}\")>{1}", details._product, Environment.NewLine);
+            sb.AppendFormat("<assembly: AssemblyCompany(\"{0}\")>{1}", details._company, Environment.NewLine);
+            sb.AppendFormat("<assembly: AssemblyProduct(\"{0}\")>{1}", details._product, Environment.NewLine);
             Assert.That(builder.Build(details).Trim(), Is.EqualTo(sb.ToString().Trim()));
         }
     }

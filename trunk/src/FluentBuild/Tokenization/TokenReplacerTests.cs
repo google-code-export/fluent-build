@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Rhino.Mocks;
 
 namespace FluentBuild.Tokenization
 {
@@ -30,6 +32,30 @@ namespace FluentBuild.Tokenization
             Assert.That(results, Is.EqualTo("Hello Smith, John how are you today?"));
         }
 
+        [Test, ExpectedException(typeof(ApplicationException))]
+        public void To_ShouldFailIfFileExists()
+        {
+            string destination = "c:\\temp";
+            var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
+            fs.Stub(x => x.FileExists(destination)).Return(true);
+            var replacer = new TokenReplacer(fs, "garbage");
+            replacer.To(destination);
+        }
+
+        [Test]
+        public void To_ShouldWriteOutFileIfFileDoesNotExist()
+        {
+            string destination = "c:\\temp\non.txt";
+            string input = "garbage";
+
+            var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
+            fs.Stub(x => x.FileExists(destination)).Return(false);
+            
+            var replacer = new TokenReplacer(fs, input);
+            replacer.To(destination);
+
+            fs.AssertWasCalled(x=>x.WriteAllText(destination, input));
+        }
 
     }
 }

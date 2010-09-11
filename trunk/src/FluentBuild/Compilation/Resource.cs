@@ -5,30 +5,22 @@ namespace FluentBuild
     public class Resource
     {
         //TODO: test this
-        private readonly string name;
-        private readonly string value;
+        public string Value { get; private set; }
+        public string Name { get; private set; }
 
         public Resource(string value, string name)
         {
-            this.value = value;
-            this.name = name;
+            this.Value = value;
+            this.Name = name;
         }
 
         public Resource(string value)
         {
-            this.value = value;
+            this.Value = value;
         }
 
-        public string Value
-        {
-            get { return value; }
-        }
-
-        public string Name
-        {
-            get { return name; }
-        }
-
+        
+        
         public override string ToString()
         {
             if (Name == String.Empty)
