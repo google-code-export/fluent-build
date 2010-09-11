@@ -9,6 +9,7 @@ namespace FluentBuild.Database
     public class MsSqlDatabase
     {
         //TODO: input validation on variables for potential SQL / Filesystem injection
+        //TODO: heavily refactor this
 
         private readonly SqlConnectionStringBuilder _connectionString = new SqlConnectionStringBuilder();
 

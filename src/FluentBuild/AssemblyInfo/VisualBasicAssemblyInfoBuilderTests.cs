@@ -13,7 +13,7 @@ namespace FluentBuild
         public void ShouldBuildString()
         {
             var builder = new VisualBasicAssemblyInfoBuilder();
-            var details = new AssemblyInfoDetails(builder).ComVisible(false).ClsCompliant(false).AssemblyVersion("1.0.0.0").AssemblyTitle("asmTitle").AssemblyDescription("asmDesc").AssemblyCopyright("asmCopyright");
+            var details = new AssemblyInfoDetails(builder).ComVisible(false).ClsCompliant(false).Version("1.0.0.0").Title("asmTitle").Description("asmDesc").Copyright("asmCopyright");
            
             
             var sb = new StringBuilder();
@@ -28,8 +28,8 @@ namespace FluentBuild
             sb.AppendLine("<assembly: AssemblyDescription(\"asmDesc\")>");
             sb.AppendLine("<assembly: AssemblyCopyright(\"asmCopyright\")>");
             //sb.AppendFormat("[assembly: ApplicationNameAttribute(\"{0}\")]{1}", details._applicationName, Environment.NewLine);
-            //sb.AppendFormat("[assembly: ApplicationCompanyAttribute(\"{0}\")]{1}", details._company, Environment.NewLine);
-            //sb.AppendFormat("[assembly: ApplicationProductNameAttribute(\"{0}\")]{1}", details._productName, Environment.NewLine);
+            sb.AppendFormat("<assembly: ApplicationCompanyAttribute(\"{0}\")>{1}", details._company, Environment.NewLine);
+            sb.AppendFormat("<assembly: ApplicationProductNameAttribute(\"{0}\")>{1}", details._product, Environment.NewLine);
             Assert.That(builder.Build(details).Trim(), Is.EqualTo(sb.ToString().Trim()));
         }
     }

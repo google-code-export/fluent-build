@@ -31,7 +31,7 @@ namespace FluentBuild
         [Test]
         public void Create_Should_Build_File()
         {
-            var file = new BuildFolder("c:\\temp").FileName("test.txt");
+            var file = new BuildFolder("c:\\temp").File("test.txt");
             Assert.That(file.ToString(), Is.EqualTo(@"c:\temp\test.txt"));
         }
     }

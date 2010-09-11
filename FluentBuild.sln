@@ -1,14 +1,14 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild", "src\FluentBuild\FluentBuild.csproj", "{71965190-338E-42CD-9D48-47955DB750E2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.Tests", "tests\FluentBuild.Tests\FluentBuild.Tests.csproj", "{D7817FEA-652A-4264-B25F-5E747C4CF6D8}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFF3F75D-66EA-46E7-9BCC-F2AC3875BFAE}"
 	ProjectSection(SolutionItems) = preProject
 		ToDo.txt = ToDo.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild", "src\FluentBuild\FluentBuild.csproj", "{71965190-338E-42CD-9D48-47955DB750E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.Tests", "tests\FluentBuild.Tests\FluentBuild.Tests.csproj", "{D7817FEA-652A-4264-B25F-5E747C4CF6D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildFile", "src\FluentBuild.Build\FluentBuild.BuildFile.csproj", "{5F8AAFBC-C135-4647-9433-A05A6F47D493}"
 EndProject
