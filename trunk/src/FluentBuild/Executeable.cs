@@ -11,7 +11,7 @@ namespace FluentBuild
     {
         private readonly List<String> _args = new List<string>();
         internal readonly string _executeablePath;
-        private string _workingDirectory;
+        internal string _workingDirectory;
 
         public Executeable(string executeablePath)
         {
@@ -24,7 +24,7 @@ namespace FluentBuild
             return this;
         }
 
-        private string CreateArgumentString()
+        internal string CreateArgumentString()
         {
             var sb = new StringBuilder();
             foreach (string argument in _args)
@@ -40,7 +40,14 @@ namespace FluentBuild
             return this;
         }
 
-        internal void Execute(string prefix)
+        public Executeable InWorkingDirectory(BuildFolder directory)
+        {
+            _workingDirectory = directory.ToString();
+            return this;
+        }
+
+
+        internal string Execute(string prefix)
         {
             MessageLogger.WriteDebugMessage("executing " + _executeablePath + CreateArgumentString());
             var process = new Process();
@@ -64,7 +71,7 @@ namespace FluentBuild
             process.Start();
             process.PriorityClass = ProcessPriorityClass.Idle;
             process.BeginOutputReadLine();
-            if (!process.WaitForExit(5000))
+            if (!process.WaitForExit(50000))
             {
                 MessageLogger.WriteDebugMessage("TIMEOUT!");
                 process.Kill();
@@ -77,6 +84,7 @@ namespace FluentBuild
             }
             DisplayOutput(prefix, process.ExitCode);
             process.Dispose();
+            return output.ToString();
         }
 
         //lock objects in case events fire out of order

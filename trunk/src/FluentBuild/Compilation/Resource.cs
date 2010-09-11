@@ -4,6 +4,7 @@ namespace FluentBuild
 {
     public class Resource
     {
+        //TODO: test this
         private readonly string name;
         private readonly string value;
 

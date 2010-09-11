@@ -2,7 +2,12 @@ namespace FluentBuild
 {
     public class FrameworkVersion
     {
-        internal static string frameworkVersion = "v3.5";
+        internal static string frameworkVersion = "v4.0.30319";
+
+        public static void NET4_0()
+        {
+            frameworkVersion = "v4.0.30319";
+        }
 
         public static void NET3_5()
         {

@@ -5,9 +5,11 @@ namespace FluentBuild.Compilation.ResGen
 {
     public class Resgen
     {
+        //TODO: test this
         private static FileSet _files;
         private static string _outputFolder;
         private string _prefix;
+        private WindowsSdkFinder _sdkFinder = new WindowsSdkFinder();
 
         public Resgen GenerateFrom(FileSet fileset)
         {
@@ -34,14 +36,14 @@ namespace FluentBuild.Compilation.ResGen
 
             try
             {
-                if (!WindowsSdkFinder.IsWindowsSDKInstalled())
+                if (!_sdkFinder.IsWindowsSdkInstalled())
                 {
                     MessageLogger.Write("RESGEN", "could not find the Windows SDK which contains resgen.exe which is required to build resources");
                     return null;
                 }
 
 
-                string resGenExecuteable = Path.Combine(WindowsSdkFinder.PathToHighestVersionedSDK(), "bin\\resgen.exe");
+                string resGenExecuteable = Path.Combine(_sdkFinder.PathToHighestVersionedSdk(), "bin\\resgen.exe");
                 MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
                 var outputFiles = new FileSet();
                 foreach (string resourceFileName in _files.Files)

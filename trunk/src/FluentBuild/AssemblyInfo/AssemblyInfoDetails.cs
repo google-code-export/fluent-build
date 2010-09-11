@@ -17,6 +17,8 @@ namespace FluentBuild
         internal bool _clsCompliantSet;
         internal bool _comVisible;
         internal bool _comVisibleSet;
+        internal string _company;
+        internal string _product;
 
         // internal string _applicationName;
         // internal string _company;
@@ -74,14 +76,14 @@ namespace FluentBuild
             return this;
         }
 
-        public AssemblyInfoDetails AssemblyVersion(string value)
+        public AssemblyInfoDetails Version(string value)
         {
             ImportDropIfDuplicate("System.Reflection");
             _assemblyVersion = value;
             return this;
         }
 
-        public AssemblyInfoDetails AssemblyTitle(string value)
+        public AssemblyInfoDetails Title(string value)
         {
             ImportDropIfDuplicate("System.Reflection");
             _assemblyTitle = value;
@@ -89,7 +91,7 @@ namespace FluentBuild
         }
 
 
-        public AssemblyInfoDetails AssemblyDescription(string value)
+        public AssemblyInfoDetails Description(string value)
         {
             ImportDropIfDuplicate("System.Reflection");
             _assemblyDescription = value;
@@ -97,13 +99,32 @@ namespace FluentBuild
         }
 
 
-        public AssemblyInfoDetails AssemblyCopyright(string value)
+        public AssemblyInfoDetails Copyright(string value)
         {
             ImportDropIfDuplicate("System.Reflection");
             _assemblyCopyright = value;
             return this;
         }
            
+
+        public AssemblyInfoDetails Company(string value)
+        {
+            _company = value;
+            return this;
+        }
+
+        public AssemblyInfoDetails Product(string value)
+        {
+            _product = value;
+            return this;
+        }
+
+
+        public void OutputTo(BuildArtifact artifactLocation)
+        {
+            OutputTo(artifactLocation.ToString());
+        }
+
         public void OutputTo(string filePath)
         {
             using (var fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
@@ -112,5 +133,6 @@ namespace FluentBuild
                 sw.Write(AssemblyInfoBuilder.Build(this));
             }
         }
+ 
     }
 }

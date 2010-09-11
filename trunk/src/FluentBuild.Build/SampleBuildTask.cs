@@ -20,10 +20,10 @@ namespace FluentBuild.BuildFile
             directory_base = new BuildFolder(Environment.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_tools = directory_base.SubFolder("tools");
-            assembly_FluentBuild = directory_compile.FileName("FluentBuild.dll");
-            assembly_FluentBuild_Tests = directory_compile.FileName("FluentBuild.Tests.dll");
-            thirdparty_nunit = directory_compile.FileName("nunit.framework.dll");
-            thirdparty_rhino = directory_compile.FileName("rhino.mocks.dll");
+            assembly_FluentBuild = directory_compile.File("FluentBuild.dll");
+            assembly_FluentBuild_Tests = directory_compile.File("FluentBuild.Tests.dll");
+            thirdparty_nunit = directory_compile.File("nunit.framework.dll");
+            thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
             directory_compile.Delete().Create();
 
             CompileSources();
@@ -33,24 +33,24 @@ namespace FluentBuild.BuildFile
 
         private void CompileSources()
         {
-            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().FileName("*.cs"));
+            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().File("*.cs"));
             Build.UsingCsc.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild).Execute();
         }
 
         private void CompileTests()
         {
             new FileSet()
-                .Include(directory_tools.RecurseAllSubFolders().FileName("nunit.framework.dll"))
-                .Include(directory_tools.RecurseAllSubFolders().FileName("rhino.mocks.dll"))
+                .Include(directory_tools.RecurseAllSubFolders().File("nunit.framework.dll"))
+                .Include(directory_tools.RecurseAllSubFolders().File("rhino.mocks.dll"))
                 .CopyTo(directory_compile);
             
-            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().FileName("*.cs"));
+            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().File("*.cs"));
             Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild).OutputFileTo(assembly_FluentBuild_Tests).Execute();
         }
 
         private void RunTests()
         {
-            Run.Executeable(directory_tools.SubFolder("nunit").FileName("nunit-console.exe")).WithArguments(assembly_FluentBuild.ToString()).Execute();
+            Run.Executeable(directory_tools.SubFolder("nunit").File("nunit-console.exe")).WithArguments(assembly_FluentBuild.ToString()).Execute();
         }
     }
 }

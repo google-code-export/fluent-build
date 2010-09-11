@@ -1,5 +1,7 @@
+
 namespace FluentBuild
 {
+
     public class BuildArtifact
     {
         private readonly string path;

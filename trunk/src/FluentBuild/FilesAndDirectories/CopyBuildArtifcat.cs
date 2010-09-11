@@ -12,13 +12,20 @@ namespace FluentBuild
         {
             source = artifact;
         }
+        //TODO: test these overloads
+        public void To(BuildArtifact artifactDestination)
+        {
+            To(artifactDestination.ToString());    
+        }
+
+        public void To(BuildFolder folderDestination)
+        {
+            To(folderDestination.ToString());
+        }
+
 
         public void To(String destination)
         {
-            // c:\temp\test.txt --> c:\temp\dir1
-            // c:\temp\test.txt --> c:\temp\dir1\test2.txt
-            // c:\temp\test.txt --> c:\temp\test2.txt
-            
             string destinationFileName;
             string destinationDirectory;
             //if no filename in destination then get it from the source
@@ -32,7 +39,13 @@ namespace FluentBuild
                 destinationFileName = Path.GetFileName(destination);
                 destinationDirectory = Path.GetDirectoryName(destination);
             }
-            File.Copy(source.ToString(), Path.Combine(destinationDirectory, destinationFileName));    
+            
+// ReSharper disable AssignNullToNotNullAttribute
+            string dest = Path.Combine(destinationDirectory, destinationFileName);
+// ReSharper restore AssignNullToNotNullAttribute
+            MessageLogger.WriteDebugMessage("Copy from " + source + " to " + dest);
+            
+            File.Copy(source.ToString(), dest);    
         }
 
         public TokenWith ReplaceToken(string token)

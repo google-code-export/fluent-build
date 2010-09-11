@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace FluentBuild
 {
+    /// <summary>
+    /// Sets the color of the console to support colorized output
+    /// </summary>
     internal class ConsoleColor
     {
         [DllImport("kernel32.dll")]

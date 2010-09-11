@@ -4,6 +4,7 @@ namespace FluentBuild
 {
     public class MessageLogger
     {
+        //TODO: write tests for this
         public static bool ShowDebugMessages;
 
         public static void WriteHeader(string header)
