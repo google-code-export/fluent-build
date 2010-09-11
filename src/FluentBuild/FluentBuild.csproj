@@ -79,6 +79,7 @@
     <Compile Include="AssemblyInfo\AssemblyInfoDetails.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfoLanguage.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfoLanguageTests.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfo_Tests.cs" />
     <Compile Include="AssemblyInfo\VisualBasicAssemblyInfoBuilderTests.cs" />
     <Compile Include="AssemblyInfo\CSharpAssemblyInfoBuilder.cs" />
     <Compile Include="AssemblyInfo\CSharpAssemblyInfoBuilderTests.cs" />
@@ -90,12 +91,14 @@
     <Compile Include="Compilation\Build.cs" />
     <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\Resource.cs" />
+    <Compile Include="Compilation\ResourceTests.cs" />
     <Compile Include="Database\MsSqlDatabase.cs" />
     <Compile Include="Executeable.cs" />
     <Compile Include="ExecuteableTests.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\BuildFolderTests.cs" />
+    <Compile Include="FilesAndDirectories\CopyBuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSet.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetTests.cs" />
@@ -103,10 +106,11 @@
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtilityTests.cs" />
     <Compile Include="FilesAndDirectories\BuildFolder.cs" />
     <Compile Include="ConsoleColor.cs" />
+    <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
     <Compile Include="FrameworkVersion.cs" />
     <Compile Include="IBuild.cs" />
-    <Compile Include="RegistrySeeker.cs" />
-    <Compile Include="SimpleRegistryKey.cs" />
+    <Compile Include="RegistryWrapper.cs" />
+    <Compile Include="RegistryKeyWrapper.cs" />
     <Compile Include="Tokenization\TokenWith.cs" />
     <Compile Include="Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

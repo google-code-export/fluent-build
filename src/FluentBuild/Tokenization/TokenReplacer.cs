@@ -5,11 +5,17 @@ namespace FluentBuild.Tokenization
 {
     public class TokenReplacer
     {
+        private readonly IFileSystemWrapper _fileSystemWrapper;
         internal string Input;
         internal string Token;
 
-        public TokenReplacer(string input)
+        public TokenReplacer(string input) : this(new FileSystemWrapper(), input)
         {
+        }
+
+        public TokenReplacer(IFileSystemWrapper fileSystemWrapper, string input)
+        {
+            _fileSystemWrapper = fileSystemWrapper;
             Input = input;
         }
 
@@ -21,9 +27,9 @@ namespace FluentBuild.Tokenization
 
         public void To(string destination)
         {
-            if (File.Exists(destination))
+            if (_fileSystemWrapper.FileExists(destination))
                 throw new ApplicationException("File already exists. Delete it first");
-            File.WriteAllText(destination, Input);
+            _fileSystemWrapper.WriteAllText(destination, Input);
         }
 
         public override string ToString()

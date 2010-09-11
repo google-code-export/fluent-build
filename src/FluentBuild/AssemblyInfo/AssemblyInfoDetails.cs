@@ -9,7 +9,7 @@ namespace FluentBuild
         internal readonly List<String> _imports = new List<string>();
         internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
 
-        internal string _assemblyCopyright;
+        internal string AssemblyCopyright;
         internal string _assemblyDescription;
         internal string _assemblyTitle;
         internal string _assemblyVersion;
@@ -19,27 +19,6 @@ namespace FluentBuild
         internal bool _comVisibleSet;
         internal string _company;
         internal string _product;
-
-        // internal string _applicationName;
-        // internal string _company;
-        // internal string _productName;
-        //public AssemblyInfoDetails AssemblyProduct(string productName)
-        //{
-        //    _productName = productName;
-        //    return this;
-        //}
-
-        //public AssemblyInfoDetails AssemblyCompany(string company)
-        //{
-        //    _company = company;
-        //    return this;
-        //}
-
-        //public AssemblyInfoDetails ApplicationName(string value)
-        //{
-        //    _applicationName = value;
-        //    return this;
-        //}
 
         internal AssemblyInfoDetails(IAssemblyInfoBuilder assemblyInfoBuilder)
         {
@@ -102,7 +81,7 @@ namespace FluentBuild
         public AssemblyInfoDetails Copyright(string value)
         {
             ImportDropIfDuplicate("System.Reflection");
-            _assemblyCopyright = value;
+            AssemblyCopyright = value;
             return this;
         }
            

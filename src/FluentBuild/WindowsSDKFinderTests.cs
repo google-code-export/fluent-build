@@ -9,13 +9,13 @@ namespace FluentBuild
     [TestFixture]
     public class WindowsSdkFinderTests
     {
-        private IRegistrySeeker _mockRegistrySeeker;
+        private IRegistryWrapper _mockRegistrySeeker;
         private WindowsSdkFinder _sdkFinder;
 
         [SetUp]
         public void Setup()
         {
-            _mockRegistrySeeker = MockRepository.GenerateStub<IRegistrySeeker>();
+            _mockRegistrySeeker = MockRepository.GenerateStub<IRegistryWrapper>();
             _sdkFinder = new WindowsSdkFinder(_mockRegistrySeeker);
         }
 
@@ -29,7 +29,7 @@ namespace FluentBuild
         [Test]
         public void IsWindowsSdkInstalledShouldPassIfKeyIsFound()
         {
-            _mockRegistrySeeker.Stub(x => x.OpenLocalMachineKey(WindowsSdkFinder.RegistryKeyToSdks)).Return(new SimpleRegistryKey());
+            _mockRegistrySeeker.Stub(x => x.OpenLocalMachineKey(WindowsSdkFinder.RegistryKeyToSdks)).Return(new RegistryKeyWrapper());
             Assert.That(_sdkFinder.IsWindowsSdkInstalled(), Is.True);
         }
 
@@ -43,20 +43,34 @@ namespace FluentBuild
         [Test]
         public void PathToHighestVersionedSdkShouldFindHighestVersion()
         {
-            var mockKey = MockRepository.GenerateStub<ISimpleRegistryKey>();
+            var mockKey = MockRepository.GenerateStub<IRegistryKeyWrapper>();
             _mockRegistrySeeker.Stub(x => x.OpenLocalMachineKey(WindowsSdkFinder.RegistryKeyToSdks)).Return(mockKey);
             
             mockKey.Stub(x => x.GetSubKeyNames()).Return(new System.Collections.Generic.List<String>()
                                                              {"BLAH"});
             
-            var mockVersionKey = MockRepository.GenerateStub<ISimpleRegistryKey>();
+            var mockVersionKey = MockRepository.GenerateStub<IRegistryKeyWrapper>();
             mockKey.Stub(x => x.OpenSubKey("BLAH")).Return(mockVersionKey);
             mockVersionKey.Stub(x => x.GetValue("ProductVersion")).Return("1.0");
             mockVersionKey.Stub(x => x.GetValue("InstallationFolder")).Return("c:\\");
             _sdkFinder.PathToHighestVersionedSdk();
         }
 
-       
+
+        [Test, ExpectedException(typeof(ApplicationException))]
+        public void PathToHighestVersion_ShouldFailIfRegistryKeyDeletedWhileItIsBeingRead()
+        {
+            var mockKey = MockRepository.GenerateStub<IRegistryKeyWrapper>();
+            _mockRegistrySeeker.Stub(x => x.OpenLocalMachineKey(WindowsSdkFinder.RegistryKeyToSdks)).Return(mockKey);
+
+            mockKey.Stub(x => x.GetSubKeyNames()).Return(new System.Collections.Generic.List<String>() { "BLAH" });
+
+            var mockVersionKey = MockRepository.GenerateStub<IRegistryKeyWrapper>();
+            mockKey.Stub(x => x.OpenSubKey("BLAH")).Return(null);
+
+            _sdkFinder.PathToHighestVersionedSdk();
+        }
+
 
     }
 }

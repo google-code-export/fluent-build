@@ -13,13 +13,15 @@ namespace FluentBuild
     internal class FileSystemUtility : IFileSystemUtility
     {
         private readonly ISearchPatternParser parser;
+        private readonly IFileSystemWrapper _fileSystemWrapper;
 
-        public FileSystemUtility(ISearchPatternParser parser)
+        public FileSystemUtility(ISearchPatternParser parser, IFileSystemWrapper fileSystemWrapper)
         {
             this.parser = parser;
+            _fileSystemWrapper = fileSystemWrapper;
         }
 
-        public FileSystemUtility() : this(new SearchPatternParser())
+        public FileSystemUtility() : this(new SearchPatternParser(), new FileSystemWrapper())
         {
         }
 
@@ -31,7 +33,7 @@ namespace FluentBuild
             if ((filter.LastIndexOf("*") == -1) && (Path.HasExtension(filter)))
             {
                 var list = new List<String>();
-                if (File.Exists(filter))
+                if (_fileSystemWrapper.FileExists(filter))
                     list.Add(filter);
                 return list;
             }
@@ -47,7 +49,7 @@ namespace FluentBuild
             List<string> matching = files.ToList();
             if (recursive)
             {
-                foreach (string subDirectory in Directory.GetDirectories(directory))
+                foreach (string subDirectory in _fileSystemWrapper.GetDirectories(directory))
                 {
                     matching.AddRange(GetAllFilesMatching(subDirectory, filter, true));
                 }

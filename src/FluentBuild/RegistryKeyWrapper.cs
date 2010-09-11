@@ -3,24 +3,24 @@ using Microsoft.Win32;
 
 namespace FluentBuild
 {
-    public interface ISimpleRegistryKey
+    public interface IRegistryKeyWrapper
     {
         IEnumerable<string> GetSubKeyNames();
-        ISimpleRegistryKey OpenSubKey(string keyName);
+        IRegistryKeyWrapper OpenSubKey(string keyName);
         object GetValue(string name);
         void Close();
     }
 
-    public class SimpleRegistryKey : ISimpleRegistryKey
+    public class RegistryKeyWrapper : IRegistryKeyWrapper
     {
         private readonly RegistryKey _key;
 
-        public SimpleRegistryKey(RegistryKey key)
+        public RegistryKeyWrapper(RegistryKey key)
         {
             _key = key;
         }
 
-        public SimpleRegistryKey()
+        public RegistryKeyWrapper()
         {
             
         }
@@ -30,9 +30,9 @@ namespace FluentBuild
             return _key.GetSubKeyNames();
         }
 
-        public ISimpleRegistryKey OpenSubKey(string keyName)
+        public IRegistryKeyWrapper OpenSubKey(string keyName)
         {
-            return new SimpleRegistryKey(_key.OpenSubKey(keyName));
+            return new RegistryKeyWrapper(_key.OpenSubKey(keyName));
         }
 
         public object GetValue(string name)

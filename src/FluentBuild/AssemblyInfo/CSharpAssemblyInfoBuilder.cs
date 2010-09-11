@@ -25,7 +25,7 @@ namespace FluentBuild
            sb.AppendFormat("[assembly: AssemblyVersionAttribute(\"{0}\")]{1}", details._assemblyVersion, Environment.NewLine);
            sb.AppendFormat("[assembly: AssemblyTitleAttribute(\"{0}\")]{1}", details._assemblyTitle, Environment.NewLine);
            sb.AppendFormat("[assembly: AssemblyDescriptionAttribute(\"{0}\")]{1}", details._assemblyDescription, Environment.NewLine);
-           sb.AppendFormat("[assembly: AssemblyCopyrightAttribute(\"{0}\")]{1}", details._assemblyCopyright, Environment.NewLine);
+           sb.AppendFormat("[assembly: AssemblyCopyrightAttribute(\"{0}\")]{1}", details.AssemblyCopyright, Environment.NewLine);
            //sb.AppendFormat("[assembly: ApplicationNameAttribute(\"{0}\")]{1}", details._applicationName, Environment.NewLine);
            sb.AppendFormat("[assembly: AssemblyCompany(\"{0}\")]{1}", details._company, Environment.NewLine);
            sb.AppendFormat("[assembly: AssemblyProduct(\"{0}\")]{1}", details._product, Environment.NewLine);
