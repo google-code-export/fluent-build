@@ -12,7 +12,6 @@ namespace FluentBuild
         internal readonly string compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
-        private Target _target;
 
         public BuildTask() : this("")
         {
@@ -20,15 +19,11 @@ namespace FluentBuild
 
         protected internal BuildTask(string compiler)
         {
-            _target = new Target(this);
+            Target = new Target(this);
             this.compiler = compiler;
         }
 
-        public Target Target
-        {
-            get { return _target; }
-            set { _target = value; }
-        }
+        public Target Target { get; set; }
 
         protected internal string TargetType { get; set; }
 
@@ -125,7 +120,9 @@ namespace FluentBuild
                 MessageLogger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
                 string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler + " " + Args.Replace("/", Environment.NewLine + "/");
                 MessageLogger.WriteDebugMessage(compileMessage);
-                Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler).WithArguments(Args).Execute(compilerWithoutExtentions);
+                //necessary to cast currently as method is internal so can not be exposed via an interface
+                var executeable = (Executeable) Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler).WithArguments(Args);
+                executeable.Execute(compilerWithoutExtentions);
                 MessageLogger.WriteDebugMessage("Done Compiling");
             }
             catch (Exception ex)

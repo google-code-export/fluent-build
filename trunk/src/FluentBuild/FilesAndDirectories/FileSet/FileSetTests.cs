@@ -21,6 +21,24 @@ namespace FluentBuild
         }
 
         [Test]
+        public void CopyShouldNotBeNull()
+        {
+            var fileset = new FileSet(null);
+            Assert.That(fileset.Copy, Is.Not.Null);
+        }
+
+        [Test]
+        public void BuildFileSetFromArtifact()
+        {
+            string fileName = "test.txt";
+            var artifact = new BuildArtifact(fileName);
+            var fileset = new FileSet(null).Include(artifact);
+            Assert.That(fileset.Files.Count(), Is.EqualTo(1));
+            Assert.That(fileset.Files[0], Is.EqualTo(fileName));
+        }
+
+
+        [Test]
         public void AddAllCsFiles()
         {
             string path = "c:\\temp\\*.cs";

@@ -6,12 +6,21 @@ using System.Threading;
 
 namespace FluentBuild
 {
-    public class Executeable
+    public interface IExecuteable
+    {
+        IExecuteable WithArguments(params string[] arguments);
+        IExecuteable InWorkingDirectory(string directory);
+        IExecuteable InWorkingDirectory(BuildFolder directory);
+        void Execute();
+        IExecuteable Executable(string path);
+    }
+
+    public class Executeable : IExecuteable
     {
         private readonly object ErrorLock;
         private readonly object OutputLock;
         private readonly List<String> _args;
-        internal readonly string _executeablePath;
+        internal string _executeablePath;
         private readonly StringBuilder error;
         private readonly StringBuilder output; 
         internal string _workingDirectory;
@@ -25,12 +34,12 @@ namespace FluentBuild
             output = new StringBuilder();
         }
 
-        public Executeable(string executeablePath)
+        public Executeable(string executeablePath) : this()
         {
             _executeablePath = executeablePath;
         }
 
-        public Executeable WithArguments(params string[] arguments)
+        public IExecuteable WithArguments(params string[] arguments)
         {
             _args.AddRange(arguments);
             return this;
@@ -46,13 +55,13 @@ namespace FluentBuild
             return sb.ToString();
         }
 
-        public Executeable InWorkingDirectory(string directory)
+        public IExecuteable InWorkingDirectory(string directory)
         {
             _workingDirectory = directory;
             return this;
         }
 
-        public Executeable InWorkingDirectory(BuildFolder directory)
+        public IExecuteable InWorkingDirectory(BuildFolder directory)
         {
             _workingDirectory = directory.ToString();
             return this;
@@ -152,6 +161,12 @@ namespace FluentBuild
         public void Execute()
         {
             Execute("exec");
+        }
+
+        public IExecuteable Executable(string path)
+        {
+            _executeablePath = path;
+            return this;
         }
     }
 }

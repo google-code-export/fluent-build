@@ -1,3 +1,3 @@
 -Run.Nunit.Against(assembly_name).OutputTo("")
--FIleSet does CopyTo and file does Copy.To()
 -If a failure occurs then the application should STOP (it keeps going now then exits with a return code of 0)
+-Review visibility of methods

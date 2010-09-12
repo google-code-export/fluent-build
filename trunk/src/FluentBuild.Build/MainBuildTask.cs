@@ -47,7 +47,7 @@ namespace FluentBuild.BuildFile
             new FileSet()
                 .Include(directory_tools.RecurseAllSubFolders().File("nunit.framework.dll"))
                 .Include(directory_tools.RecurseAllSubFolders().File("rhino.mocks.dll"))
-                .CopyTo(directory_compile);
+                .Copy.To(directory_compile);
 
             FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().File("*.cs"));
             Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo(assembly_FluentBuild).Execute();
@@ -58,7 +58,7 @@ namespace FluentBuild.BuildFile
             new FileSet()
              .Include(directory_tools.RecurseAllSubFolders().File("nunit.framework.dll"))
              .Include(assembly_FluentBuild)
-             .CopyTo(directory_functional_tests);
+             .Copy.To(directory_functional_tests);
 
             FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().File("*.cs"));
             Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild).OutputFileTo(assembly_Functional_Tests).Execute();

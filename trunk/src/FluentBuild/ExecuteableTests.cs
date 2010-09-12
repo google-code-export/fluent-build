@@ -11,7 +11,7 @@ namespace FluentBuild
         {
             const string executeablePath = @"c:\temp\nothing.exe";
             const string workingDirectory = @"c:\";
-            var executeable = new Executeable(executeablePath).InWorkingDirectory(workingDirectory).WithArguments(new[] { "one", "two", "three"});
+            var executeable = (Executeable) new Executeable(executeablePath).InWorkingDirectory(workingDirectory).WithArguments(new[] { "one", "two", "three"});
             Assert.That(executeable.CreateArgumentString(), Is.EqualTo(" one two three"));
             Assert.That(executeable._executeablePath, Is.EqualTo(executeablePath));
             Assert.That(executeable._workingDirectory, Is.EqualTo(workingDirectory));
@@ -23,7 +23,7 @@ namespace FluentBuild
             const string executeablePath = @"c:\temp\nothing.exe";
             const string workingDirectory = @"c:\";
             var workingFolder = new BuildFolder(workingDirectory);
-            var executeable = new Executeable(executeablePath).InWorkingDirectory(workingFolder);
+            var executeable = (Executeable) new Executeable(executeablePath).InWorkingDirectory(workingFolder);
             Assert.That(executeable._workingDirectory, Is.EqualTo(workingDirectory));
         }
 

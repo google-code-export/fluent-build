@@ -5,11 +5,20 @@ namespace FluentBuild.Compilation.ResGen
 {
     public class Resgen
     {
-        //TODO: test this
-        private static FileSet _files;
-        private static string _outputFolder;
-        private string _prefix;
-        private WindowsSdkFinder _sdkFinder = new WindowsSdkFinder();
+        private readonly IWindowsSdkFinder _sdkFinder;
+        internal FileSet _files;
+        internal string _outputFolder;
+        internal string _prefix;
+        private IExecuteable _exeRunner;
+        internal Resgen(IWindowsSdkFinder sdkFinder, IExecuteable exeRunner)
+        {
+            _sdkFinder = sdkFinder;
+            _exeRunner = exeRunner;
+        }
+
+        public Resgen() : this(new WindowsSdkFinder(), new Executeable())
+        {
+        }
 
         public Resgen GenerateFrom(FileSet fileset)
         {
@@ -29,38 +38,35 @@ namespace FluentBuild.Compilation.ResGen
             return this;
         }
 
+        internal string GetPathToResGenExecuteable()
+        {
+            if (!_sdkFinder.IsWindowsSdkInstalled())
+                throw new ApplicationException(
+                    "Could not find the Windows SDK which contains resgen.exe which is required to build resources");
+
+            string resGenExecuteable = Path.Combine(_sdkFinder.PathToHighestVersionedSdk(), "bin\\resgen.exe");
+            MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
+            return resGenExecuteable;
+        }
+
         public FileSet Execute()
         {
-            if (Environment.ExitCode != 0)
-                return null;
+            string resGenExecuteable = GetPathToResGenExecuteable();
 
-            try
+            var outputFiles = new FileSet();
+            foreach (string resourceFileName in _files.Files)
             {
-                if (!_sdkFinder.IsWindowsSdkInstalled())
-                {
-                    MessageLogger.Write("RESGEN", "could not find the Windows SDK which contains resgen.exe which is required to build resources");
-                    return null;
-                }
+                string outputFileName = _prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
+                outputFileName = Path.Combine(_outputFolder, outputFileName);
+                outputFiles.Include(outputFileName);
 
-
-                string resGenExecuteable = Path.Combine(_sdkFinder.PathToHighestVersionedSdk(), "bin\\resgen.exe");
-                MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
-                var outputFiles = new FileSet();
-                foreach (string resourceFileName in _files.Files)
-                {
-                    string outputFileName = _prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
-                    outputFileName = Path.Combine(_outputFolder, outputFileName);
-                    Run.Executeable(resGenExecuteable).WithArguments("\"" + resourceFileName + "\"").WithArguments("\"" + outputFileName + "\"").Execute();
-                    outputFiles.Include(outputFileName);
-                }
-                return outputFiles;
+                IExecuteable executeable = _exeRunner.Executable(resGenExecuteable);
+                IExecuteable withArguments = executeable.WithArguments("\"" + resourceFileName + "\"");
+                IExecuteable arguments = withArguments.WithArguments("\"" + outputFileName +"\"");
+                arguments.Execute();
+                
             }
-            catch (Exception ex)
-            {
-                Environment.ExitCode = 1;
-                MessageLogger.Write("ERROR", ex.ToString());
-            }
-            return null;
+            return outputFiles;
         }
     }
 }

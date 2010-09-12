@@ -11,6 +11,9 @@ namespace FluentBuild
         void WriteAllText(string destination, string input);
         string ReadAllText(string path);
         IEnumerable<string> GetDirectories(string directory);
+        void CreateDirectory(string path);
+        bool DirectoryExists(string path);
+        void DeleteDirectory(string path, bool recursive);
     }
 
     public class FileSystemWrapper : IFileSystemWrapper
@@ -38,6 +41,21 @@ namespace FluentBuild
         public IEnumerable<string> GetDirectories(string directory)
         {
             return Directory.GetDirectories(directory);
+        }
+
+        public void CreateDirectory(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        public bool DirectoryExists(string path)
+        {
+            return Directory.Exists(path);
+        }
+
+        public void DeleteDirectory(string path, bool recursive)
+        {
+            Directory.Delete(path, recursive);
         }
     }
 }

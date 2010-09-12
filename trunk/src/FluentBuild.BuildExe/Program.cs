@@ -18,6 +18,7 @@ namespace FluentBuild.BuildExe
                 return;
             }
 
+            AppDomain.CurrentDomain.UnhandledException += UnhandledException;
             MessageLogger.ShowDebugMessages = true;
     
             string pathToAssembly = Path.Combine(Environment.CurrentDirectory, args[0]);
@@ -29,6 +30,13 @@ namespace FluentBuild.BuildExe
 
             ExecuteBuildTask(pathToAssembly);
         }
+
+        static void UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Environment.ExitCode = 1;
+            MessageLogger.Write("ERROR", "An unexpected error has occurred. Details:" + e.ExceptionObject);
+        }
+
         /// <summary>
         /// Builds an assembly from a source folder. Currently this only works with .cs files
         /// </summary>
