@@ -16,5 +16,16 @@ namespace FluentBuild
             Assert.That(executeable._executeablePath, Is.EqualTo(executeablePath));
             Assert.That(executeable._workingDirectory, Is.EqualTo(workingDirectory));
         }
+
+        [Test]
+        public void ShouldPopulateWorkingDirectoryViaArtifact()
+        {
+            const string executeablePath = @"c:\temp\nothing.exe";
+            const string workingDirectory = @"c:\";
+            var workingFolder = new BuildFolder(workingDirectory);
+            var executeable = new Executeable(executeablePath).InWorkingDirectory(workingFolder);
+            Assert.That(executeable._workingDirectory, Is.EqualTo(workingDirectory));
+        }
+
     }
 }

@@ -92,6 +92,7 @@
     <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\Resource.cs" />
     <Compile Include="Compilation\ResourceTests.cs" />
+    <Compile Include="Compilation\TargetTests.cs" />
     <Compile Include="Database\MsSqlDatabase.cs" />
     <Compile Include="Executeable.cs" />
     <Compile Include="ExecuteableTests.cs" />
