@@ -4,7 +4,6 @@ namespace FluentBuild
 {
     public class Resource
     {
-        //TODO: test this
         public string Value { get; private set; }
         public string Name { get; private set; }
 

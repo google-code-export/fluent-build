@@ -2,7 +2,6 @@ namespace FluentBuild
 {
     public class Target
     {
-        //TODO: test this
         private readonly BuildTask buildTask;
 
         protected internal Target(BuildTask buildTask)

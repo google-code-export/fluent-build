@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
@@ -26,6 +27,20 @@ namespace FluentBuild.Compilation.ResGen
             subject.Execute();
             mockExe.AssertWasCalled(x => x.Execute());
             
+        }
+
+        [Test, ExpectedException(typeof(ApplicationException))]
+        public void Execute_ShouldNotFindSdk()
+        {
+            var fileset = new FileSet();
+            fileset.Include(@"c:\temp\nonexistant.txt");
+
+            var mockSdkFinder = MockRepository.GenerateStub<IWindowsSdkFinder>();
+            var mockExe = MockRepository.GenerateStub<IExecuteable>();
+
+            var subject = new Resgen(mockSdkFinder, mockExe).GenerateFrom(fileset).OutputTo("c:\\");
+            mockSdkFinder.Stub(x => x.IsWindowsSdkInstalled()).Return(false);
+            subject.Execute();
         }
 
         
