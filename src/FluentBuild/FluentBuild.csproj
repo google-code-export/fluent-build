@@ -90,6 +90,7 @@
     <Compile Include="Compilation\Build_Tests.cs" />
     <Compile Include="Compilation\Build.cs" />
     <Compile Include="Compilation\Resgen.cs" />
+    <Compile Include="Compilation\ResgenTests.cs" />
     <Compile Include="Compilation\Resource.cs" />
     <Compile Include="Compilation\ResourceTests.cs" />
     <Compile Include="Compilation\TargetTests.cs" />
@@ -107,9 +108,11 @@
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtilityTests.cs" />
     <Compile Include="FilesAndDirectories\BuildFolder.cs" />
     <Compile Include="ConsoleColor.cs" />
+    <Compile Include="FilesAndDirectories\FileSet\CopyFileset.cs" />
     <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
     <Compile Include="FrameworkVersion.cs" />
     <Compile Include="IBuild.cs" />
+    <Compile Include="MessageLoggerTests.cs" />
     <Compile Include="RegistryWrapper.cs" />
     <Compile Include="RegistryKeyWrapper.cs" />
     <Compile Include="Tokenization\TokenWith.cs" />

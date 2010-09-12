@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace FluentBuild
 {
     public class FileSet
@@ -54,15 +55,11 @@ namespace FluentBuild
             return this;
         }
 
-        public FileSet CopyTo(BuildFolder destination)
+        public CopyFileset Copy
         {
-            MessageLogger.Write("copy", String.Format("Copying {0} files to '{1}'", Files.Count, destination.ToString()));
-            MessageLogger.BlankLine();
-            foreach (string file in Files)
-            {
-                File.Copy(file, Path.Combine(destination.ToString(), Path.GetFileName(file)));
+            get{
+                return new CopyFileset(this);
             }
-            return this;
         }
     }
 }

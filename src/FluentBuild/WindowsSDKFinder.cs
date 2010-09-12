@@ -2,10 +2,25 @@
 
 namespace FluentBuild
 {
+    public interface IWindowsSdkFinder
+    {
+        /// <summary>
+        /// Determines if the Windows SDK is installed by checking for the existance of the SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows registry key
+        /// </summary>
+        /// <returns>true if the key is found and false if the key is not found</returns>
+        bool IsWindowsSdkInstalled();
+
+        /// <summary>
+        /// Finds the highest SDK version installed via its registry key
+        /// </summary>
+        /// <returns>The path to the hisghest SDK version</returns>
+        string PathToHighestVersionedSdk();
+    }
+
     /// <summary>
     /// A Utility class that is used to locate the Windows SDK so that the appropriate compiler can be run
     /// </summary>
-    internal class WindowsSdkFinder
+    internal class WindowsSdkFinder : IWindowsSdkFinder
     {
         public const string RegistryKeyToSdks = "SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows";
         private static IRegistryWrapper _seeker;

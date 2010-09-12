@@ -9,11 +9,17 @@ namespace FluentBuild
     /// </summary>
     public class BuildFolder
     {
+        private readonly IFileSystemWrapper _fileSystemWrapper;
         private readonly string _path;
 
-        public BuildFolder(string path)
+        public BuildFolder(IFileSystemWrapper fileSystemWrapper, string path)
         {
+            _fileSystemWrapper = fileSystemWrapper;
             _path = path;
+        }
+
+        public BuildFolder(string path) : this(new FileSystemWrapper(), path)
+        {            
         }
 
         /// <summary>
@@ -46,8 +52,8 @@ namespace FluentBuild
             MessageLogger.Write("delete", _path);
             MessageLogger.BlankLine();
 
-            if (Directory.Exists(_path))
-                Directory.Delete(_path, true);
+            if (_fileSystemWrapper.DirectoryExists(_path))
+                _fileSystemWrapper.DeleteDirectory(_path, true);
             return this;
         }
 
@@ -59,7 +65,7 @@ namespace FluentBuild
         {
             MessageLogger.Write("mkdir", _path);
             MessageLogger.BlankLine();
-            Directory.CreateDirectory(_path);
+            _fileSystemWrapper.CreateDirectory(_path);
             return this;
         }
 
