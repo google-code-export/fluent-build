@@ -86,7 +86,7 @@ namespace FluentBuild
 
             process.ErrorDataReceived += process_ErrorDataReceived;
             process.OutputDataReceived += process_OutputDataReceived;
-            process.PriorityClass = ProcessPriorityClass.Idle;
+//            process.PriorityClass = ProcessPriorityClass.Idle;
 
             return process;
         }
@@ -112,7 +112,6 @@ namespace FluentBuild
                 {
                     Environment.ExitCode += process.ExitCode;
                 }
-
                 DisplayOutput(prefix, process.ExitCode);
             }
             return output.ToString();

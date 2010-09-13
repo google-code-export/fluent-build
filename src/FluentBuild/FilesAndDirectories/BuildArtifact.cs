@@ -1,14 +1,33 @@
 
+using System;
+
 namespace FluentBuild
 {
 
     public class BuildArtifact
     {
-        private readonly string path;
+        private readonly IFileSystemWrapper _fileSystemWrapper;
+        private readonly string _path;
+        
 
-        public BuildArtifact(string path)
+        public BuildArtifact(string path) : this(new FileSystemWrapper(), path)
         {
-            this.path = path;
+        }
+
+        public BuildArtifact(IFileSystemWrapper fileSystemWrapper, string path)
+        {
+            _fileSystemWrapper = fileSystemWrapper;
+            _path = path;
+        }
+
+        public void Delete()
+        {
+            _fileSystemWrapper.DeleteFile(_path);
+        }
+
+        public RenameBuildArtifact Rename
+        {
+            get { return new RenameBuildArtifact(this); }
         }
 
         public CopyBuildArtifcat Copy
@@ -20,7 +39,7 @@ namespace FluentBuild
 
         public override string ToString()
         {
-            return path;
+            return _path;
         }
     }
 }

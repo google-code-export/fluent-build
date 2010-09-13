@@ -110,12 +110,6 @@ namespace FluentBuild
 
         public void Execute()
         {
-            try
-
-            {
-                if (Environment.ExitCode != 0)
-                    return;
-
                 string compilerWithoutExtentions = compiler.Substring(0, compiler.IndexOf("."));
                 MessageLogger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
                 string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler + " " + Args.Replace("/", Environment.NewLine + "/");
@@ -124,12 +118,6 @@ namespace FluentBuild
                 var executeable = (Executeable) Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + FrameworkVersion.frameworkVersion + "\\" + compiler).WithArguments(Args);
                 executeable.Execute(compilerWithoutExtentions);
                 MessageLogger.WriteDebugMessage("Done Compiling");
-            }
-            catch (Exception ex)
-            {
-                Environment.ExitCode = 1;
-                MessageLogger.Write("ERROR", ex.ToString());
-            }
         }
 
         public BuildTask AddSources(FileSet fileset)

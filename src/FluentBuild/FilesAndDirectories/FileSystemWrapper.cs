@@ -14,6 +14,8 @@ namespace FluentBuild
         void CreateDirectory(string path);
         bool DirectoryExists(string path);
         void DeleteDirectory(string path, bool recursive);
+        void DeleteFile(string path);
+        void MoveFile(string origin, string destination);
     }
 
     public class FileSystemWrapper : IFileSystemWrapper
@@ -56,6 +58,16 @@ namespace FluentBuild
         public void DeleteDirectory(string path, bool recursive)
         {
             Directory.Delete(path, recursive);
+        }
+
+        public void DeleteFile(string path)
+        {
+            File.Delete(path);
+        }
+
+        public void MoveFile(string origin, string destination)
+        {
+            File.Move(origin, destination);
         }
     }
 }

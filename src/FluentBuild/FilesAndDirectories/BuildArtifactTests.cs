@@ -1,11 +1,32 @@
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Rhino.Mocks;
 
 namespace FluentBuild
 {
     [TestFixture]
     public class BuildArtifactTests
     {
+        [Test]
+        public void Delete_ShouldCallToFileSystemWrapper()
+        {
+            var fs = MockRepository.GenerateMock<IFileSystemWrapper>();
+            string path = @"c:\temp\nonexistant.txt";
+            var subject = new BuildArtifact(fs, path);
+            subject.Delete();
+
+            fs.AssertWasCalled(x=>x.DeleteFile(path));
+        }
+
+        [Test]
+        public void Rename_ShouldBuildRenameObject()
+        {
+            var fs = MockRepository.GenerateMock<IFileSystemWrapper>();
+            string path = @"c:\temp\nonexistant.txt";
+            var subject = new BuildArtifact(fs, path);
+            Assert.That(subject.Rename, Is.Not.Null);
+        }
+
         [Test]
         public void ToString_Should_Output_Path()
         {
