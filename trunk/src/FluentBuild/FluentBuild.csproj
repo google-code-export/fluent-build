@@ -123,6 +123,8 @@
     <Compile Include="ConsoleColor.cs" />
     <Compile Include="FilesAndDirectories\FileSet\CopyFileset.cs" />
     <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
+    <Compile Include="FilesAndDirectories\RenameBuildArtifact.cs" />
+    <Compile Include="FilesAndDirectories\RenameBuildArtifactTests.cs" />
     <Compile Include="FrameworkVersion.cs" />
     <Compile Include="IBuild.cs" />
     <Compile Include="MessageLoggerTests.cs" />

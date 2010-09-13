@@ -1,3 +1,6 @@
 -Run.Nunit.Against(assembly_name).OutputTo("")
--If a failure occurs then the application should STOP (it keeps going now then exits with a return code of 0)
 -Review visibility of methods
+-Exceptions still seem to be happening but the application continues (event not firing immediately?)
+-Have a Run.MSBuild or Build.MsBuild item that finds msbuild for you (and the appropriate framework)
+-BuildArtifact.Execute().WithArgs()....etc. may be nice
+-For BuildASMInfo files if things are not specified then they should not appear as an attribute
