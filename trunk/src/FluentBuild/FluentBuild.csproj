@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\FluentBuild.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,20 +76,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo\AssemblyInfo.cs" />
-    <Compile Include="AssemblyInfo\AssemblyInfoDetails.cs" />
-    <Compile Include="AssemblyInfo\AssemblyInfoLanguage.cs" />
-    <Compile Include="AssemblyInfo\AssemblyInfoLanguageTests.cs" />
-    <Compile Include="AssemblyInfo\AssemblyInfo_Tests.cs" />
-    <Compile Include="AssemblyInfo\VisualBasicAssemblyInfoBuilderTests.cs" />
-    <Compile Include="AssemblyInfo\CSharpAssemblyInfoBuilder.cs" />
-    <Compile Include="AssemblyInfo\CSharpAssemblyInfoBuilderTests.cs" />
-    <Compile Include="AssemblyInfo\IAssemblyInfoBuilder.cs" />
-    <Compile Include="AssemblyInfo\VisualBasicAssemblyInfoBuilder.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetails.cs" />
+    <Compile Include="AssemblyInfoBuilding\AssemblyInfoLanguage.cs" />
+    <Compile Include="AssemblyInfoBuilding\AssemblyInfoLanguageTests.cs" />
+    <Compile Include="AssemblyInfoTests.cs" />
+    <Compile Include="AssemblyInfoBuilding\VisualBasicAssemblyInfoBuilderTests.cs" />
+    <Compile Include="AssemblyInfoBuilding\CSharpAssemblyInfoBuilder.cs" />
+    <Compile Include="AssemblyInfoBuilding\CSharpAssemblyInfoBuilderTests.cs" />
+    <Compile Include="AssemblyInfoBuilding\IAssemblyInfoBuilder.cs" />
+    <Compile Include="AssemblyInfoBuilding\VisualBasicAssemblyInfoBuilder.cs" />
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
-    <Compile Include="Compilation\Build_Tests.cs" />
-    <Compile Include="Compilation\Build.cs" />
+    <Compile Include="BuildTests.cs" />
+    <Compile Include="Build.cs" />
+    <Compile Include="Compilation\MsBuildTask.cs" />
     <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\ResgenTests.cs" />
     <Compile Include="Compilation\Resource.cs" />
@@ -108,28 +110,36 @@
     <Compile Include="Database\MsSqlUtilitiesTests.cs" />
     <Compile Include="Database\MsSqlVersionTable.cs" />
     <Compile Include="Database\MsSqlVersionTableTests.cs" />
-    <Compile Include="Executeable.cs" />
-    <Compile Include="ExecuteableTests.cs" />
-    <Compile Include="FilesAndDirectories\BuildArtifact.cs" />
+    <Compile Include="Defaults.cs" />
+    <Compile Include="Failable.cs" />
+    <Compile Include="FilesAndDirectories\FileSet\CopyFilesetTests.cs" />
+    <Compile Include="OnError.cs" />
+    <Compile Include="Runners\Executeable.cs" />
+    <Compile Include="Utilities\ExecuteableTests.cs" />
+    <Compile Include="BuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\BuildFolderTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\FileSet.cs" />
+    <Compile Include="FileSet.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtility.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtilityTests.cs" />
-    <Compile Include="FilesAndDirectories\BuildFolder.cs" />
-    <Compile Include="ConsoleColor.cs" />
+    <Compile Include="BuildFolder.cs" />
+    <Compile Include="Utilities\ConsoleColor.cs" />
     <Compile Include="FilesAndDirectories\FileSet\CopyFileset.cs" />
     <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
     <Compile Include="FilesAndDirectories\RenameBuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\RenameBuildArtifactTests.cs" />
     <Compile Include="FrameworkVersion.cs" />
-    <Compile Include="IBuild.cs" />
+    <Compile Include="BuildFile.cs" />
     <Compile Include="MessageLoggerTests.cs" />
-    <Compile Include="RegistryWrapper.cs" />
-    <Compile Include="RegistryKeyWrapper.cs" />
+    <Compile Include="Runners\NUnitRunner.cs" />
+    <Compile Include="Runners\NUnitRunnerTests.cs" />
+    <Compile Include="Utilities\FileFinder.cs" />
+    <Compile Include="Utilities\FileFinderTests.cs" />
+    <Compile Include="Utilities\RegistryWrapper.cs" />
+    <Compile Include="Utilities\RegistryKeyWrapper.cs" />
     <Compile Include="Tokenization\TokenWith.cs" />
     <Compile Include="Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,8 +150,10 @@
     <Compile Include="RunTests.cs" />
     <Compile Include="Tokenization\TokenReplacerTests.cs" />
     <Compile Include="Tokenization\TokenReplacer.cs" />
-    <Compile Include="WindowsSDKFinder.cs" />
-    <Compile Include="WindowsSDKFinderTests.cs" />
+    <Compile Include="Runners\UnitTestFrameworkRun.cs" />
+    <Compile Include="Runners\UnitTestFrameworkRunTests.cs" />
+    <Compile Include="Utilities\WindowsSDKFinder.cs" />
+    <Compile Include="Utilities\WindowsSDKFinderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -159,6 +171,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_ProjectStructure.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

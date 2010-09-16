@@ -3,7 +3,7 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories
 {
     [TestFixture]
     public class CopyBuildArtifactTests

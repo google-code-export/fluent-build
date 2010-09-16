@@ -1,6 +1,6 @@
 using System;
 
-namespace FluentBuild
+namespace FluentBuild.Compilation
 {
     public class Resource
     {

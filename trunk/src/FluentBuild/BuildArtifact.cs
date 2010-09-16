@@ -1,5 +1,6 @@
 
 using System;
+using FluentBuild.FilesAndDirectories;
 
 namespace FluentBuild
 {
@@ -22,7 +23,12 @@ namespace FluentBuild
 
         public void Delete()
         {
-            _fileSystemWrapper.DeleteFile(_path);
+            Delete(Defaults.OnError);
+        }
+
+        public void Delete(OnError onError)
+        {
+            OnErrorActionExecutor.DoAction(onError, _fileSystemWrapper.DeleteFile, _path);
         }
 
         public RenameBuildArtifact Rename

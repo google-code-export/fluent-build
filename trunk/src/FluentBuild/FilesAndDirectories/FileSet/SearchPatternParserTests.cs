@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories.FileSet
 {
     [TestFixture]
     public class SearchPatternParserTests

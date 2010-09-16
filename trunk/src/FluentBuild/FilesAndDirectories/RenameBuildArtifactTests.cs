@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Rhino.Mocks;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories
 {
     [TestFixture]
     public class RenameBuildArtifactTests
@@ -17,7 +17,7 @@ namespace FluentBuild
             var subject = new RenameBuildArtifact(fileSystemWrapper, buildArtifact);
             
             subject.To(destination);
-            fileSystemWrapper.AssertWasCalled(x=>x.MoveFile(origin, destination));
+            fileSystemWrapper.AssertWasCalled(x=>x.MoveFile(origin, "c:\\" + destination));
         }
     }
 }

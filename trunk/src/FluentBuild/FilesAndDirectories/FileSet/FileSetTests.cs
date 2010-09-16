@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories.FileSet
 {
     [TestFixture]
     public class FileSetTests
@@ -15,7 +14,7 @@ namespace FluentBuild
         public void BuildFileSet()
         {
             string fileName = "test.txt";
-            var fileset = new FileSet(null).Include(fileName);
+            var fileset = new FluentBuild.FileSet(null).Include(fileName);
             Assert.That(fileset.Files.Count(), Is.EqualTo(1));
             Assert.That(fileset.Files[0], Is.EqualTo(fileName));
         }
@@ -23,7 +22,7 @@ namespace FluentBuild
         [Test]
         public void CopyShouldNotBeNull()
         {
-            var fileset = new FileSet(null);
+            var fileset = new FluentBuild.FileSet(null);
             Assert.That(fileset.Copy, Is.Not.Null);
         }
 
@@ -32,7 +31,7 @@ namespace FluentBuild
         {
             string fileName = "test.txt";
             var artifact = new BuildArtifact(fileName);
-            var fileset = new FileSet(null).Include(artifact);
+            var fileset = new FluentBuild.FileSet(null).Include(artifact);
             Assert.That(fileset.Files.Count(), Is.EqualTo(1));
             Assert.That(fileset.Files[0], Is.EqualTo(fileName));
         }
@@ -48,7 +47,7 @@ namespace FluentBuild
             results.Add("c:\\temp\\test2.cs");
             utility.Stub(x => x.GetAllFilesMatching(path)).Return(results); 
             
-            var fileset = new FileSet(utility).Include(path);
+            var fileset = new FluentBuild.FileSet(utility).Include(path);
             Assert.That(fileset.Files.Count, Is.EqualTo(2));
             Assert.That(fileset.Files[0], Is.EqualTo("c:\\temp\\test1.cs"));
         }
@@ -63,7 +62,7 @@ namespace FluentBuild
             results.Add("c:\\temp\\test2.cs");
             utility.Stub(x => x.GetAllFilesMatching(path)).Return(results);
 
-            var fileset = new FileSet(utility).Include(path);
+            var fileset = new FluentBuild.FileSet(utility).Include(path);
             fileset.Exclude("c:\\temp\\test2.cs");
             Assert.That(fileset.Files.Count, Is.EqualTo(1));
         }
@@ -82,7 +81,7 @@ namespace FluentBuild
             utility.Stub(x => x.GetAllFilesMatching(includeFilter)).Return(includedFiles);
             utility.Stub(x => x.GetAllFilesMatching(exclusionFilter)).Return(new List<string>());
             
-            var fileset = new FileSet(utility).Include(includeFilter);
+            var fileset = new FluentBuild.FileSet(utility).Include(includeFilter);
             
             fileset.Exclude(exclusionFilter);
             utility.AssertWasCalled(x => x.GetAllFilesMatching(exclusionFilter));

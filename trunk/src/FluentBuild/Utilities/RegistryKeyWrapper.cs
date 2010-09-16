@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Win32;
 
-namespace FluentBuild
+namespace FluentBuild.Utilities
 {
     public interface IRegistryKeyWrapper
     {

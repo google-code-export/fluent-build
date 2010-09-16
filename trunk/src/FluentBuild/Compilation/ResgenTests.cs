@@ -1,9 +1,11 @@
 ﻿using System;
+using FluentBuild.Runners;
+using FluentBuild.Utilities;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
-namespace FluentBuild.Compilation.ResGen
+namespace FluentBuild.Compilation
 {
     [TestFixture]
     public class ResgenTests

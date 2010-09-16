@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace FluentBuild
+namespace FluentBuild.Utilities
 {
     /// <summary>
     /// Sets the color of the console to support colorized output

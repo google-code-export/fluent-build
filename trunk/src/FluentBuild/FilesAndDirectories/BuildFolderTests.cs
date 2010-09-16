@@ -2,7 +2,7 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories
 {
     [TestFixture]
     public class BuildFolderTests
@@ -16,17 +16,6 @@ namespace FluentBuild
             var folder = new BuildFolder(fs, expected);
             folder.Create();
             fs.AssertWasCalled(x=>x.CreateDirectory(expected));
-        }
-
-        [Test]
-        public void DeleteDirecory_ShouldCheckExistanceOfFolder()
-        {
-            MessageLogger.WindowWidth = 80;
-            var expected = "c:\\temp";
-            var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
-            var folder = new BuildFolder(fs, expected);
-            folder.Delete();
-            fs.AssertWasCalled(x => x.DirectoryExists(expected));
         }
 
         [Test]

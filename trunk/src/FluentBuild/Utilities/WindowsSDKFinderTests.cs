@@ -1,10 +1,9 @@
 using System;
-using Microsoft.Win32;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 
-namespace FluentBuild
+namespace FluentBuild.Utilities
 {
     [TestFixture]
     public class WindowsSdkFinderTests

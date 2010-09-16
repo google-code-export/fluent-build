@@ -1,4 +1,4 @@
-namespace FluentBuild
+namespace FluentBuild.Compilation
 {
     public class Target
     {

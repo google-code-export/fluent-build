@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace FluentBuild
+namespace FluentBuild.Compilation
 {
     [TestFixture]
     public class ResourceTests

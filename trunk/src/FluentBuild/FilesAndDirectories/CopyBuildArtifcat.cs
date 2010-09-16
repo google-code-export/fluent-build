@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using FluentBuild.Tokenization;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories
 {
-    public class CopyBuildArtifcat
+    public class CopyBuildArtifcat : Failable<CopyBuildArtifcat>
     {
         private readonly IFileSystemWrapper _fileSystemWrapper;
         private readonly BuildArtifact source;
@@ -21,7 +21,7 @@ namespace FluentBuild
 
         public void To(BuildArtifact artifactDestination)
         {
-            To(artifactDestination.ToString());    
+            To(artifactDestination.ToString());
         }
 
         public void To(BuildFolder folderDestination)
@@ -35,6 +35,7 @@ namespace FluentBuild
             string destinationFileName;
             string destinationDirectory;
             //if no filename in destination then get it from the source
+            
             if (!Path.HasExtension(destination))
             {
                 destinationFileName = Path.GetFileName(source.ToString());
@@ -45,13 +46,13 @@ namespace FluentBuild
                 destinationFileName = Path.GetFileName(destination);
                 destinationDirectory = Path.GetDirectoryName(destination);
             }
-            
+
 // ReSharper disable AssignNullToNotNullAttribute
             string dest = Path.Combine(destinationDirectory, destinationFileName);
 // ReSharper restore AssignNullToNotNullAttribute
             MessageLogger.WriteDebugMessage("Copy from " + source + " to " + dest);
-            
-            _fileSystemWrapper.Copy(source.ToString(), dest);    
+
+            OnErrorActionExecutor.DoAction(base.OnError, _fileSystemWrapper.Copy, source.ToString(), dest);
         }
 
 
@@ -64,6 +65,11 @@ namespace FluentBuild
         public TokenWith ReplaceToken(string token)
         {
             return new TokenReplacer(_fileSystemWrapper.ReadAllText(source.ToString())).ReplaceToken(token);
+        }
+
+        protected override CopyBuildArtifcat GetSelf
+        {
+            get { return this; }
         }
     }
 }

@@ -1,3 +1,5 @@
+using FluentBuild.AssemblyInfoBuilding;
+
 namespace FluentBuild
 {
     public class AssemblyInfo
