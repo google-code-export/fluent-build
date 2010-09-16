@@ -4,7 +4,7 @@ using NUnit.Framework.SyntaxHelpers;
 namespace FluentBuild.Compilation
 {
     [TestFixture]
-    public class Build_Tests
+    public class BuildTests
     {
         [Test]
         public void ShouldCreateTaskWithVbCompiler()
@@ -18,6 +18,13 @@ namespace FluentBuild.Compilation
         {
             var build = Build.UsingCsc;
             Assert.That(build.compiler, Is.EqualTo("csc.exe"));
+        }
+
+        [Test]
+        public void ShouldCreateMsBuildTask()
+        {
+            var build = Build.UsingMsBuild("c:\\mysln.sln");
+            Assert.That(build, Is.TypeOf(typeof(MsBuildTask)));
         }
     }
 }

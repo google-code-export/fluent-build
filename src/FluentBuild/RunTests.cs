@@ -21,5 +21,13 @@ namespace FluentBuild
             var executeable = Run.Executeable(exe);
             Assert.That(executeable._executeablePath, Is.EqualTo(exe.ToString()));
         }
+
+        [Test]
+        public void UnitTestFramework_ShouldCreateObject()
+        {
+            var framework = Run.UnitTestFramework;
+            Assert.That(framework, Is.Not.Null);
+        }
+
     }
 }

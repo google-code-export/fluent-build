@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using FluentBuild.Runners;
+using FluentBuild.Utilities;
 
-namespace FluentBuild.Compilation.ResGen
+namespace FluentBuild.Compilation
 {
     public class Resgen
     {

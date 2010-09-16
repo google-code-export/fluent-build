@@ -2,7 +2,7 @@
 
 namespace FluentBuild.BuildFile
 {
-    public class MainBuildTask : IBuild
+    public class MainBuildTask
     {
         private BuildFolder directory_base;
         private BuildFolder directory_compile;
@@ -28,8 +28,8 @@ namespace FluentBuild.BuildFile
             thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
 
             MessageLogger.WriteHeader("Setup Directories");
-            directory_compile.Delete().Create();
-            directory_functional_tests.Delete().Create();
+            directory_compile.Delete(OnError.Continue).Create();
+            directory_functional_tests.Delete(OnError.Continue).Create();
 
             MessageLogger.WriteHeader("Compile Sources");
             CompileSources();

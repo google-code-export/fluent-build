@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using FluentBuild.AssemblyInfoBuilding;
+using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
 namespace FluentBuild
 {
     [TestFixture]
-    public class AssemblyInfo_Tests
+    public class AssemblyInfoTests
     {
         [Test]
         public void MethodCallShouldNotThrowException()

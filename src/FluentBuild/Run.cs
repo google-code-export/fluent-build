@@ -1,4 +1,6 @@
-﻿namespace FluentBuild
+﻿using FluentBuild.Runners;
+
+namespace FluentBuild
 {
 
     /// <summary>
@@ -24,6 +26,11 @@
         public static Executeable Executeable(BuildArtifact executeablePath)
         {
             return new Executeable(executeablePath.ToString());
+        }
+
+        public static UnitTestFrameworkRun UnitTestFramework
+        {
+            get { return new UnitTestFrameworkRun() ;}
         }
     }
 }

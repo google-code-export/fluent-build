@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Rhino.Mocks;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories.FileSet
 {
     [TestFixture]
     public class FileSystemUtilityTests

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace FluentBuild
+namespace FluentBuild.FilesAndDirectories
 {
     public interface IFileSystemWrapper
     {
@@ -16,6 +16,7 @@ namespace FluentBuild
         void DeleteDirectory(string path, bool recursive);
         void DeleteFile(string path);
         void MoveFile(string origin, string destination);
+        IEnumerable<string> GetFilesIn(string directory);
     }
 
     public class FileSystemWrapper : IFileSystemWrapper
@@ -68,6 +69,11 @@ namespace FluentBuild
         public void MoveFile(string origin, string destination)
         {
             File.Move(origin, destination);
+        }
+
+        public IEnumerable<string> GetFilesIn(string directory)
+        {
+            return Directory.GetFiles(directory);
         }
     }
 }

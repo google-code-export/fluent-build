@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="BuildArtifactCopyTests.cs" />
     <Compile Include="DatabaseTests.cs" />
+    <Compile Include="FileSystemFinderTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="BuildArtifactTokenReplacementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

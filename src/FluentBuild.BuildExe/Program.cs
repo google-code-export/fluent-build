@@ -62,7 +62,7 @@ namespace FluentBuild.BuildExe
             MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
             string outputAssembly = Path.Combine(path, "build.dll");
             MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Build.UsingCsc.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).Target.Library.Execute();
+            Build.UsingCsc.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).IncludeDebugSymbols.Target.Library.Execute();
             return outputAssembly;
         }
 

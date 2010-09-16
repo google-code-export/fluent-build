@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace FluentBuild
 {
-    public interface IBuild
-    {
-        void Execute();
-    }
+    //public interface IBuild
+    //{
+    //    void Execute();
+    //}
 
     public class BuildFile
     {
@@ -15,9 +15,12 @@ namespace FluentBuild
         public void InvokeNextTask()
         {
             if (tasks.Count == 0)
+            {
+                MessageLogger.WriteHeader("DONE");
                 return;
+            }
             Action dequeue = tasks.Dequeue();
-            MessageLogger.WriteHeader(dequeue.Method.Name);
+            MessageLogger.WriteHeader(dequeue.Method.Name.ToUpper());
             dequeue.Invoke();
             InvokeNextTask();
         }

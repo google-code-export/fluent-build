@@ -1,7 +1,8 @@
+using FluentBuild.Runners;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace FluentBuild
+namespace FluentBuild.Utilities
 {
     [TestFixture]
     public class ExecuteableTests

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using ConsoleColor = FluentBuild.Utilities.ConsoleColor;
 
-namespace FluentBuild
+namespace FluentBuild.Runners
 {
-    public interface IExecuteable
+    public interface IExecuteable : IFailable<IExecuteable>
     {
         IExecuteable WithArguments(params string[] arguments);
         IExecuteable InWorkingDirectory(string directory);
@@ -15,14 +16,14 @@ namespace FluentBuild
         IExecuteable Executable(string path);
     }
 
-    public class Executeable : IExecuteable
+    public class Executeable : Failable<IExecuteable>, IExecuteable 
     {
         private readonly object ErrorLock;
         private readonly object OutputLock;
         private readonly List<String> _args;
-        internal string _executeablePath;
         private readonly StringBuilder error;
-        private readonly StringBuilder output; 
+        private readonly StringBuilder output;
+        internal string _executeablePath;
         internal string _workingDirectory;
 
         public Executeable()
@@ -39,20 +40,12 @@ namespace FluentBuild
             _executeablePath = executeablePath;
         }
 
+        #region IExecuteable Members
+
         public IExecuteable WithArguments(params string[] arguments)
         {
             _args.AddRange(arguments);
             return this;
-        }
-
-        internal string CreateArgumentString()
-        {
-            var sb = new StringBuilder();
-            foreach (string argument in _args)
-            {
-                sb.AppendFormat(" {0}", argument);
-            }
-            return sb.ToString();
         }
 
         public IExecuteable InWorkingDirectory(string directory)
@@ -65,6 +58,29 @@ namespace FluentBuild
         {
             _workingDirectory = directory.ToString();
             return this;
+        }
+
+        public void Execute()
+        {
+            Execute("exec");
+        }
+
+        public IExecuteable Executable(string path)
+        {
+            _executeablePath = path;
+            return this;
+        }
+
+        #endregion
+
+        internal string CreateArgumentString()
+        {
+            var sb = new StringBuilder();
+            foreach (string argument in _args)
+            {
+                sb.AppendFormat(" {0}", argument);
+            }
+            return sb.ToString();
         }
 
         internal Process CreateProcess()
@@ -96,22 +112,30 @@ namespace FluentBuild
         {
             MessageLogger.WriteDebugMessage("executing " + _executeablePath + CreateArgumentString());
 
-            using (var process = CreateProcess())
+            using (Process process = CreateProcess())
             {
-                process.Start();
-                process.BeginOutputReadLine();
+                try
+                {
+                    process.Start();
+                    process.BeginOutputReadLine();
 
-                if (!process.WaitForExit(50000))
-                {
-                    MessageLogger.WriteDebugMessage("TIMEOUT!");
-                    process.Kill();
-                    Thread.Sleep(1000); //wait one second so that the process has time to exit
-                    Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
+                    if (!process.WaitForExit(50000))
+                    {
+                        MessageLogger.WriteDebugMessage("TIMEOUT!");
+                        process.Kill();
+                        Thread.Sleep(1000); //wait one second so that the process has time to exit
+                        
+                        if (this.OnError == OnError.Fail) //exit code should only be set if we want the application to fail on error
+                            Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    Environment.ExitCode += process.ExitCode;
+                    if (OnError == OnError.Fail)
+                        throw;
+                    Debug.Write(prefix, "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
+
                 DisplayOutput(prefix, process.ExitCode);
             }
             return output.ToString();
@@ -157,15 +181,9 @@ namespace FluentBuild
             ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
         }
 
-        public void Execute()
+        protected override IExecuteable GetSelf
         {
-            Execute("exec");
-        }
-
-        public IExecuteable Executable(string path)
-        {
-            _executeablePath = path;
-            return this;
+            get { return this; }
         }
     }
 }

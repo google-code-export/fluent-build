@@ -1,7 +1,6 @@
 using System;
-using FluentBuild.Tokenization;
 
-namespace FluentBuild
+namespace FluentBuild.Tokenization
 {
     public class TokenWith
     {

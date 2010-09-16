@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using FluentBuild.FilesAndDirectories;
 
 namespace FluentBuild
 {
@@ -43,29 +44,32 @@ namespace FluentBuild
             return new BuildFolder(_path + "\\**\\");
         }
 
+
         /// <summary>
-        /// Deletes the folder if it exists. If it does not exist then no action is taken
+        /// Deletes the folder. If the the folder can not be deleted, or does not exist then an exception is thrown.
         /// </summary>
-        /// <returns>The current BuildFolder</returns>
+        /// <returns></returns>
         public BuildFolder Delete()
         {
-            MessageLogger.Write("delete", _path);
-            MessageLogger.BlankLine();
+            return Delete(Defaults.OnError);
+        }
 
-            if (_fileSystemWrapper.DirectoryExists(_path))
-                _fileSystemWrapper.DeleteDirectory(_path, true);
+        public BuildFolder Delete(OnError onError)
+        {
+            MessageLogger.WriteDebugMessage("Deleting " + _path);
+            OnErrorActionExecutor.DoAction(onError, _fileSystemWrapper.DeleteDirectory, _path, true);
             return this;
         }
 
-        /// <summary>
-        /// Created a folder based on the BuildFolder path
-        /// </summary>
-        /// <returns>The current BuildFolder object</returns>
         public BuildFolder Create()
         {
-            MessageLogger.Write("mkdir", _path);
-            MessageLogger.BlankLine();
-            _fileSystemWrapper.CreateDirectory(_path);
+            return Create(Defaults.OnError);
+        }
+       
+        public BuildFolder Create(OnError onError)
+        {
+            MessageLogger.WriteDebugMessage("Create Direcotry " + _path);
+            OnErrorActionExecutor.DoAction(onError, _fileSystemWrapper.CreateDirectory, _path);
             return this;
         }
 
