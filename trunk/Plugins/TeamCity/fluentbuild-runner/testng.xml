@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FluentBuildRunner Suite : ${ruby.interpreter}">
+  <test name="FluentBuildRunner Tests">
+    <classes>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.FluentBuildBuildScriptMessagesTest"/>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.FluentBuildBuildScriptBuildLogTest"/>
+
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.RSpecBuildLogTest"/>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.RSpecMessagesTest"/>
+
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.ShouldaBuildLogTest"/>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.ShouldaMessagesTest"/>
+
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.TestSpecBuildLogTest"/>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.TestSpecMessagesTest"/>
+
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.TestUnitBuildLogTest"/>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.TestUnitMessagesTest"/>
+
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.CucumberMessagesTest"/>
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.CucumberBuildLogTest"/>
+
+      <class name="jetbrains.slow.plugins.fluentbuildrunner.SupportedTestFrameworkTest"/>
+    </classes>
+  </test>
+</suite>

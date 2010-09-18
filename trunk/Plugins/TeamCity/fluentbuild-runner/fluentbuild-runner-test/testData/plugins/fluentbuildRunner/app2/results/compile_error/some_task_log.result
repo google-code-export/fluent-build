@@ -1,0 +1,4 @@
+--1-- Execute compile_error:some_task $TARGET_BLOCK$ ERROR
+--1--  NameError: undefined local variable or method `zz' for main:Object
+--1--##STACK_TRACE## ERROR
+--1--FluentBuild aborted! ERROR

@@ -1,0 +1,61 @@
+FluentBuild tasks runner support for TeamCity 4.x
+
+=============
+1. Build
+ * Copy archive with ruby sources (fluentbuildRunnerRuby-src.zip) to "lib/dist"
+ * Run "unpack fluentbuildRunnerRuby-src.zip" task
+ * Run "build_project" task
+
+2. Deploying
+ * Copy "dist/fluentbuild-runner-plugin.zip" to "[TeamCity]/webapps/ROOT/WEB-INF/plugins" folder
+
+3. Updating bundled TeamCity libraries
+ * Download dowload Teamcity 4.x libraries (Teamcity-XXXX.tar.gz)
+ * Copy TeamCity-XXXX.tar.gz in lib/dist/
+ * Ant task "build_project" wil automatically update bundled TC libraries
+
+4. Sources
+
+ |- root
+ |--- [fluentbuild-runner-agent] - Agent's part of Teamcity FluentBuild Runner, JAVA sources
+ |--- [fluentbuild-runner-common] - Common code for Agent's and Server's parts or Teamcity FluentBuild Runner, JAVA
+ |--- [fluentbuild-runner-server] - Server's part of Teamcity FluentBuild Runner, JAVA
+ |--- [fluentbuild-runner-test] - Tests for fluentbuild-runner. TeamCity tests API is required for running tests
+ |--- [dist] - Build artifacts
+ |--- [lib/dist] - TeamCity libs for updating bundled libs and packed ruby souces for build script and RUBY part distributive
+ |--- [lib/teamcity] - Bundled teamcity libraries
+ |--- [lib/fluentbuildRunnerRuby] - Unpacked RUBY part of plugin.
+ |--- [out] - Compilation output directory
+ |--- copyright.txt - Copyright for sources
+ |--- HowToBuild.txt - this file
+
+5. Updating fluentbuild-runner.xml
+
+ * Open fluentbuild-runner project (fluentbuild-runner.ipr)
+ * Delete JRuby facets from all modules and delet all global variables for JRuby sdks
+ * IDEA->Build->Generate Ant Build:
+   - "Generate single-file and build"
+   - "Overwrite previously generated files"
+   - Uncheck "Enable UI forms compilation" and "Use JDSK definitions from project files"
+ * remove <property file="fluentbuild-runner.properties"/> line from fluentbuild-runner.xml
+ * delete file fluentbuild-runner.properties
+ * remove section "JDK definitions"  (including classpath properties and project.jdk.*) from fluentbuild-runner.xml
+ * all invalid properties concerned to jdk
+ * delete target "j2ee.build.fluentbuild-runner-serverweb" and it's usages
+
+6. Internal Properties
+
+  Debug loggers options:
+
+  Use environament variables:
+   * "teamcity.fluentbuild.runner.debug.output.hack.disabled" - set variable
+    in "true" to disable output capturing hack that overrides operations with standard output.
+
+   * "teamcity.fluentbuild.runner.debug.output.capturer.enabled" - set variable
+    in "true" to use plugin's output capturing from fluentbuild tests instead of common TeamcCity behaviour.
+
+   * "teamcity.fluentbuild.runner.debug.log.path" - enables logger in Ruby
+     part of plugin. Value of thin variable should be path for existing diractory in which plugin will save log files
+
+  System properties:
+   * "teamcity.fluentbuild.runner.debug.mode" - set variable to enable loggin from JAVA code of agent part
