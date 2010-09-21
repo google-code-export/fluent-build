@@ -1,8 +1,9 @@
 ﻿using System;
+using FluentBuild.Core;
 using FluentBuild.Runners;
 using FluentBuild.Utilities;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Rhino.Mocks;
 
 namespace FluentBuild.Compilation

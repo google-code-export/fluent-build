@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using FluentBuild.Core;
 using FluentBuild.FilesAndDirectories;
 
 namespace FluentBuild.Utilities
@@ -54,7 +55,7 @@ namespace FluentBuild.Utilities
 
         public string Find(string fileName)
         {
-            return Find(fileName, Environment.CurrentDirectory);
+            return Find(fileName, Properties.CurrentDirectory);
         }
     }
 }

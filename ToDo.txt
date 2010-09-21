@@ -1,25 +1,36 @@
 Build
   This release
-	-Exceptions still seem to be happening but the application continues (event not firing immediately?)
-	   might be that exe's that return error code 1 don't throw an exception
+    -More unit testing
 	-More functional testing
+	-BuildEXE should fail assembly if it has no tasks.
 
-
-  Future releases
-    -Add a debug switch that will call Debugger.Invoke() on startup
+  Next Release
+    -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
+    -Remove building from source + space bar / Add a debug switch that will call Debugger.Invoke() on startup
 	-Increase method documentation
 	-Review visibility of methods
 	-Review message output and verbosity. I think a 0 would be nothing. 1 would be which tasks. 2 would be events in the task. 
 	-Add debug statements where necessary.
-	-Add in ZIP support
+
+
+  Future Releases
 	-Add in architecture detection
 	-BuildArtifact.Execute().WithArgs()....etc. may be nice
-	-ability to specify (or detect) compiler to use for build files
+	-ability to specify (or detect) compiler to use for build files (current default is c#)
 	-ability to reference (or detect) other assemblies in the build file
-	-Script to convert nant files to the start of a fluent build file
+	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository)
+	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
+	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
+
 
 Database
 -Have a local sql file folder that merges the changes in so you don't run your own SQL scripts on your own DB.
+i.e. scripts/
+			Create
+			Update
+			ToMerge
+			
+-undo scripts?
 -sql script may want to get the changeset version number preprended so that conflicts don't occur 
 	(i.e. I name my file 0001_helloWorld.sql and another dev names his 0001_dropDAtabase.sql which one runs first?)
 

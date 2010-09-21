@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using FluentBuild.Core;
+using FluentBuild.Utilities;
 using ConsoleColor = FluentBuild.Utilities.ConsoleColor;
 
 namespace FluentBuild.Runners
@@ -25,14 +27,21 @@ namespace FluentBuild.Runners
         private readonly StringBuilder output;
         internal string _executeablePath;
         internal string _workingDirectory;
+        private IColorizedOutputDisplay _colorizedOutputDisplay;
 
-        public Executeable()
+        public Executeable() : this(new ColorizedOutputDisplay())
+    {
+        
+    }
+
+        internal Executeable(IColorizedOutputDisplay colorizedOutputDisplay)
         {
             ErrorLock = new object();
             OutputLock = new object();
             _args = new List<string>();
             error = new StringBuilder();
             output = new StringBuilder();
+            _colorizedOutputDisplay = colorizedOutputDisplay;
         }
 
         public Executeable(string executeablePath) : this()
@@ -83,7 +92,7 @@ namespace FluentBuild.Runners
             return sb.ToString();
         }
 
-        internal Process CreateProcess()
+        internal IProcessWrapper CreateProcess()
         {
             var process = new Process();
             process.StartInfo.FileName = _executeablePath;
@@ -99,20 +108,17 @@ namespace FluentBuild.Runners
             if (!String.IsNullOrEmpty(_workingDirectory))
                 process.StartInfo.WorkingDirectory = _workingDirectory;
 
-
             process.ErrorDataReceived += process_ErrorDataReceived;
             process.OutputDataReceived += process_OutputDataReceived;
-//            process.PriorityClass = ProcessPriorityClass.Idle;
 
-            return process;
+            return new ProcessWrapper(process);
         }
-
 
         internal string Execute(string prefix)
         {
             MessageLogger.WriteDebugMessage("executing " + _executeablePath + CreateArgumentString());
 
-            using (Process process = CreateProcess())
+            using (IProcessWrapper process = CreateProcess())
             {
                 try
                 {
@@ -136,7 +142,10 @@ namespace FluentBuild.Runners
                     Debug.Write(prefix, "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
 
-                DisplayOutput(prefix, process.ExitCode);
+                _colorizedOutputDisplay.Display(prefix, output.ToString(), error.ToString(), process.ExitCode == 0);
+
+                if (process.ExitCode != 0)
+                    throw new ApplicationException("Exectable returned non-zero exit code");
             }
             return output.ToString();
         }
@@ -154,34 +163,7 @@ namespace FluentBuild.Runners
                 output.AppendLine(e.Data);
         }
 
-        private void DisplayOutput(string prefix, int exitCode)
-        {
-            ConsoleColor.BuildColor textColor = ConsoleColor.BuildColor.Default;
-
-            if (exitCode != 0)
-                textColor = ConsoleColor.BuildColor.Red;
-
-            foreach (string line in  output.ToString().Split(Environment.NewLine.ToCharArray()))
-            {
-                if (line.Trim().Length > 0)
-                {
-                    ConsoleColor.SetColor(textColor);
-                    if (line.Contains("warning") || line.Contains("Warning"))
-                        ConsoleColor.SetColor(ConsoleColor.BuildColor.Yellow);
-                    MessageLogger.Write(prefix, line);
-                }
-            }
-
-            ConsoleColor.SetColor(textColor);
-            foreach (string line in error.ToString().Split(Environment.NewLine.ToCharArray()))
-            {
-                if (line.Trim().Length > 0)
-                    MessageLogger.Write(prefix, line);
-            }
-            ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
-        }
-
-        protected override IExecuteable GetSelf
+        protected internal override IExecuteable GetSelf
         {
             get { return this; }
         }

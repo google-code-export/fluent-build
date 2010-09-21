@@ -11,6 +11,21 @@
       <properties />
     </buildFile>
   </component>
+  <component name="ArtifactManager">
+    <artifact type="jar" name="fluenbuildserver">
+      <output-path>$PROJECT_DIR$/out/artifacts/server</output-path>
+      <root id="archive" name="fluenbuildserver.jar">
+        <element id="module-output" name="fluentbuild-runner-server" />
+      </root>
+    </artifact>
+    <artifact type="jar" name="fluentbuildagent">
+      <output-path>$PROJECT_DIR$/out/artifacts/agent/fluentbuild-runner/lib</output-path>
+      <root id="archive" name="fluentbuildagent.jar">
+        <element id="module-output" name="fluentbuild-runner-agent" />
+        <element id="module-output" name="fluentbuild-runner-common" />
+      </root>
+    </artifact>
+  </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>

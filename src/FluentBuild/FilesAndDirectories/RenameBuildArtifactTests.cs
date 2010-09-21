@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentBuild.Core;
+using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories
@@ -17,7 +18,7 @@ namespace FluentBuild.FilesAndDirectories
             var subject = new RenameBuildArtifact(fileSystemWrapper, buildArtifact);
             
             subject.To(destination);
-            fileSystemWrapper.AssertWasCalled(x=>x.MoveFile(origin, "c:\\" + destination));
+            fileSystemWrapper.AssertWasCalled(x=>x.MoveFile(origin, "c:\\\\" + destination));
         }
     }
 }

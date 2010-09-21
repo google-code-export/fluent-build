@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using FluentBuild.Core;
 
 namespace FluentBuild.Compilation
 {
@@ -72,7 +73,7 @@ namespace FluentBuild.Compilation
 
         public void Execute()
         {
-            var pathToMsBuild = Environment.GetEnvironmentVariable("windir") + @"\Microsoft.Net\Framework\" + FrameworkVersion.frameworkVersion + @"\MsBuild.exe";
+            var pathToMsBuild = Environment.GetEnvironmentVariable("windir") + @"\Microsoft.Net\Framework\" + Defaults.FrameworkVersion.FullVersion + @"\MsBuild.exe";
             Run.Executeable(pathToMsBuild).WithArguments(BuildArgs()).Execute();
         }
 

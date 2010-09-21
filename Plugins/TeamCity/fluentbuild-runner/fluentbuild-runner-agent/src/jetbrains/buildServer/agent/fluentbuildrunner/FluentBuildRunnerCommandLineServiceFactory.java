@@ -1,6 +1,7 @@
 package jetbrains.buildServer.agent.fluentbuildrunner;
 
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
+import jetbrains.buildServer.agent.BuildAgent;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
 import jetbrains.buildServer.agent.runner.CommandLineBuildService;
 import jetbrains.buildServer.agent.runner.CommandLineBuildServiceFactory;
@@ -10,10 +11,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Pavel.Sher
  */
+
 public class FluentBuildRunnerCommandLineServiceFactory implements CommandLineBuildServiceFactory {
-  @NotNull
+
+    public FluentBuildRunnerCommandLineServiceFactory() {
+    }
+
+    @NotNull
   public CommandLineBuildService createService() {
-    return new FluentBuildTasksBuildService();
+    return new FluentBuildTaskBuildService();
   }
 
   @NotNull

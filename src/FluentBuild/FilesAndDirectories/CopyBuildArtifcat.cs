@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using FluentBuild.Core;
 using FluentBuild.Tokenization;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.FilesAndDirectories
 {
@@ -67,7 +69,7 @@ namespace FluentBuild.FilesAndDirectories
             return new TokenReplacer(_fileSystemWrapper.ReadAllText(source.ToString())).ReplaceToken(token);
         }
 
-        protected override CopyBuildArtifcat GetSelf
+        protected internal override CopyBuildArtifcat GetSelf
         {
             get { return this; }
         }

@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using FluentBuild.Core;
 
 namespace FluentBuild.Database
 {

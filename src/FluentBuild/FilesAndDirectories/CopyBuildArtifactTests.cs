@@ -1,6 +1,7 @@
+using FluentBuild.Core;
 using FluentBuild.Tokenization;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories
