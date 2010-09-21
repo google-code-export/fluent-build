@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentBuild.Core;
+using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
@@ -11,7 +12,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
         {
             MessageLogger.WindowWidth = 80;
             var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
-            var fileSet = new FluentBuild.FileSet();
+            var fileSet = new Core.FileSet();
             fileSet.Include(@"c:\temp\test1.txt");
             fileSet.Include(@"c:\temp\test2.txt");
             var subject = new CopyFileset(fileSet, fs);

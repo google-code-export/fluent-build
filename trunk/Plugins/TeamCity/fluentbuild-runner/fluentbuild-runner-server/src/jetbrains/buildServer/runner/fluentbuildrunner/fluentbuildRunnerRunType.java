@@ -30,9 +30,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author Roman Chernyatchik
  */
-public class FluentBuildRunnerRunType extends RunType {
+public class fluentbuildRunnerRunType extends RunType {
 
-  public FluentBuildRunnerRunType(final RunTypeRegistry runTypeRegistry) {
+  public fluentbuildRunnerRunType(final RunTypeRegistry runTypeRegistry) {
     runTypeRegistry.registerRunType(this);
   }
 
@@ -59,11 +59,6 @@ public class FluentBuildRunnerRunType extends RunType {
 
     final String trueStr = Boolean.TRUE.toString();
 
-    // by default let's enable : Test::Unit, RSpec, Cucumber
-    map.put(FluentBuildRunnerConstants.SERVER_UI_RAKE_TESTUNIT_ENABLED_PROPERTY, trueStr);
-    map.put(FluentBuildRunnerConstants.SERVER_UI_RAKE_RSPEC_ENABLED_PROPERTY, trueStr);
-    map.put(FluentBuildRunnerConstants.SERVER_UI_RAKE_CUCUMBER_ENABLED_PROPERTY, trueStr);
-
     // configuration version
     map.put(FluentBuildRunnerConstants.SERVER_CONFIGURATION_VERSION_PROPERTY,
             FluentBuildRunnerConstants.CURRENT_CONFIG_VERSION);
@@ -87,7 +82,7 @@ public class FluentBuildRunnerRunType extends RunType {
   }
 
   @NotNull
-  @Override
+  //@Override
   public String getShortDescription(@NotNull final Map<String, String> runnerParams) {
     StringBuilder result = new StringBuilder();
     if (runnerParams.get("use-custom-build-file") != null) {

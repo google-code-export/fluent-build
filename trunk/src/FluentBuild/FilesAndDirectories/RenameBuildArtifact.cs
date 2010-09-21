@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using FluentBuild.Core;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.FilesAndDirectories
 {

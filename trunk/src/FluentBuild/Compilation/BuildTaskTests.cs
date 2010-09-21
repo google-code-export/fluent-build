@@ -1,7 +1,8 @@
 using System;
 using System.IO;
+using FluentBuild.Core;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 
 namespace FluentBuild.Compilation
 {

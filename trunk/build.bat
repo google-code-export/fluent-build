@@ -1,1 +1,1 @@
-copy src\FluentBuild.BuildExe\bin\Debug\fb.exe .\
+Build\fb.exe FluentBuild.Build

@@ -1,7 +1,8 @@
 ﻿using System;
+using FluentBuild.Core;
 using FluentBuild.FilesAndDirectories;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Rhino.Mocks;
 
 namespace FluentBuild.Utilities
@@ -16,7 +17,7 @@ namespace FluentBuild.Utilities
             var finder = new FileFinder(mockFilesystem);
 
             string fileToSearchFor = "searchForMe.exe";
-            mockFilesystem.Stub(x => x.GetFilesIn(Environment.CurrentDirectory)).Return(new[]
+            mockFilesystem.Stub(x => x.GetFilesIn(Properties.CurrentDirectory)).Return(new[]
                                                                                             {
                                                                                                 "test.txt",
                                                                                             });
@@ -30,11 +31,11 @@ namespace FluentBuild.Utilities
             var finder = new FileFinder(mockFilesystem);
 
             string fileToSearchFor = "searchForMe.exe";
-            mockFilesystem.Stub(x => x.GetFilesIn(Environment.CurrentDirectory)).Return(new[]
+            mockFilesystem.Stub(x => x.GetFilesIn(Properties.CurrentDirectory)).Return(new[]
                                                                                             {
                                                                                                 "test.txt",
                                                                                             });
-            mockFilesystem.Stub(x => x.GetDirectories(Environment.CurrentDirectory)).Return(new[] {"src", "tools"});
+            mockFilesystem.Stub(x => x.GetDirectories(Properties.CurrentDirectory)).Return(new[] {"src", "tools"});
             mockFilesystem.Stub(x => x.GetFilesIn("src")).Return(new[]
                                                                      {
                                                                          "test.txt",

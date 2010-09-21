@@ -1,24 +1,26 @@
 ﻿using System;
 using System.IO;
+using FluentBuild.Core;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
     public class CopyFileset : Failable<CopyFileset>
     {
-        private readonly FluentBuild.FileSet _fileSet;
+        private readonly Core.FileSet _fileSet;
         private readonly IFileSystemWrapper _fileSystemWrapper;
 
-        public CopyFileset(FluentBuild.FileSet fileSet, IFileSystemWrapper fileSystemWrapper)
+        public CopyFileset(Core.FileSet fileSet, IFileSystemWrapper fileSystemWrapper)
         {
             _fileSet = fileSet;
             _fileSystemWrapper = fileSystemWrapper;
         }
 
-        public CopyFileset(FluentBuild.FileSet fileSet): this(fileSet, new FileSystemWrapper())
+        public CopyFileset(Core.FileSet fileSet): this(fileSet, new FileSystemWrapper())
         {
         }
 
-        public FluentBuild.FileSet To(BuildFolder destination)
+        public Core.FileSet To(BuildFolder destination)
         {
             MessageLogger.Write("copy", String.Format("Copying {0} files to '{1}'", _fileSet.Files.Count, destination));
             MessageLogger.BlankLine();
@@ -30,7 +32,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             return _fileSet;
         }
 
-        protected override CopyFileset GetSelf
+        protected internal override CopyFileset GetSelf
         {
             get { return this; }
         }

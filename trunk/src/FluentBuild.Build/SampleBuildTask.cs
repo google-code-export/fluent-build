@@ -1,4 +1,6 @@
 using System;
+using FluentBuild.Core;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.BuildFile
 {
@@ -15,9 +17,9 @@ namespace FluentBuild.BuildFile
 
         public void Execute()
         {
-            FrameworkVersion.NET2_0();
+            Defaults.FrameworkVersion = FrameworkVersion.NET2_0;
 
-            directory_base = new BuildFolder(Environment.CurrentDirectory);
+            directory_base = new BuildFolder(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_tools = directory_base.SubFolder("tools");
             assembly_FluentBuild = directory_compile.File("FluentBuild.dll");
@@ -29,12 +31,20 @@ namespace FluentBuild.BuildFile
             CompileSources();
             CompileTests();
             RunTests();
+            Package();
+        }
+
+        private void Package()
+        {
+            Run.Zip.Compress.SourceFolder(directory_compile)
+                .UsingCompressionLevel.Nine
+                .To(directory_compile.File("release.zip"));
         }
 
         private void CompileSources()
         {
             FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().File("*.cs"));
-            Build.UsingCsc.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild).Execute();
+            Core.Build.UsingCsc.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild).Execute();
         }
 
         private void CompileTests()
@@ -45,7 +55,7 @@ namespace FluentBuild.BuildFile
                 .Copy.To(directory_compile);
             
             FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().File("*.cs"));
-            Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild).OutputFileTo(assembly_FluentBuild_Tests).Execute();
+            Core.Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild).OutputFileTo(assembly_FluentBuild_Tests).Execute();
         }
 
         private void RunTests()

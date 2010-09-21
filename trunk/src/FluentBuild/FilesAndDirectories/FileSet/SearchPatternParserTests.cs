@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
