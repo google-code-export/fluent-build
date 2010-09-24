@@ -1,0 +1,43 @@
+#summary A walk through on how to create a fluent build file
+
+= Introduction =
+
+Fluent build allows you to write a build script right in your favorite IDE using a .NET language. This allows you to easily edit, view, refactor, reuse, and even debug your build scripts.
+
+= First Steps =
+
+  # Add a new project to your solution that will contain your build script(s)
+  # Add a reference to FluentBuild.dll to the project you just created
+  # Add a class named Default (fluent build looks for a class with this name but it can be overriden)
+  # Set the Default class to inherit from FluentBuild.Core.BuildFile
+
+= Writing A Task =
+
+A task is a set of related instructions to accomplish a goal. Example tasks would be: compiling sources, running tests, and cleanup. Using FluentBuild this is as simple as writing a method that does the work you want:
+
+{{{
+private void RunTests()
+        {
+Run.UnitTestFramework.NUnit.FileToTest("mytests.dll").Execute();
+        }
+}}}
+
+= Letting FluentBuild Know About Your Task =
+
+Tasks must be registered so that the build runner (fb.exe) knows what methods to run and in what order to run them. This is accomplished in the constructor of your BuildFile by calling AddTask(). e.g.:
+
+{{{
+    public class Default : Core.BuildFile
+    {
+        public Default()
+        {
+             AddTask(Clean);
+             AddTask(CompileSources);
+             AddTask(CompileTests);
+             AddTask(RunTests);
+             AddTask(Package);
+        }
+    }
+}}}
+
+Here we have added the methods that we want the build runner to execute in the order that we want them executed in.
