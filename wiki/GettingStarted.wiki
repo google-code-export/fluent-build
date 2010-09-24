@@ -2,7 +2,11 @@
 
 Getting started is quite easy.
 
-  # Create a C# build file (vb is currently not supported). It can be a standalone file or part of a project (a project is easier as you can reference FluentBuild.dll and get intellisense).
+  # Create a C# project to contain your builds (currently the only language supported)
+  # Create a class named Default that inherits from FluentBuild.Core.BuildFile
+  # In your constructor call AddTask() for each method you want the build to run.  
   # Place fb.exe and FluentBuild.dll in a convenient folder.
-  # run fb.exe path/to/build/folder (NOTE: it is the path to the FOLDER that contains the build file, not the path to the build file itself)
+  # run fb.exe path/to/build/folder (NOTE: it is the path to the FOLDER that contains the build file(s), not the path to the build file itself)
   # fb.exe will then compile the build file and then execute it. 
+
+For an example of what you can do see our sample build file
