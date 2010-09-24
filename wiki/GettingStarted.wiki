@@ -9,4 +9,4 @@ Getting started is quite easy.
   # run fb.exe path/to/build/folder (NOTE: it is the path to the FOLDER that contains the build file(s), not the path to the build file itself)
   # fb.exe will then compile the build file and then execute it. 
 
-For an example of what you can do see our sample build file
+For an example of what you can do see our [SampleBuildClass sample build class]
