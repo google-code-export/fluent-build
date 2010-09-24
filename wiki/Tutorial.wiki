@@ -24,7 +24,7 @@ Run.UnitTestFramework.NUnit.FileToTest("mytests.dll").Execute();
 
 = Letting FluentBuild Know About Your Task =
 
-Tasks must be registered so that the build runner (fb.exe) knows what methods to run and in what order to run them. This is accomplished in the constructor of your BuildFile by calling AddTask(). e.g.:
+Tasks must be registered so that the build runner (fb.exe) knows what methods to run and in what order to run them. This is accomplished in the constructor of your BuildFile by calling AddTask(methodToRun). e.g.:
 
 {{{
     public class Default : Core.BuildFile
@@ -40,4 +40,8 @@ Tasks must be registered so that the build runner (fb.exe) knows what methods to
     }
 }}}
 
-Here we have added the methods that we want the build runner to execute in the order that we want them executed in.
+Here we have added the methods that we want the build runner to execute in the order that we want them executed in. When the runner executes the task the method name will be output to the window along with any output that task generates.
+
+= Build Folders & Build Artifacts =
+
+In your script you can create string variable that refer to your folders and files that you use or you can use BuildFolder or BuildArtifact respectively. These classes have built in functionality for things like path concatenation, deletion, creation, copying, moving, renaming, and token replacement.
