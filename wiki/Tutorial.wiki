@@ -17,9 +17,9 @@ A task is a set of related instructions to accomplish a goal. Example tasks woul
 
 {{{
 private void RunTests()
-        {
+{
 Run.UnitTestFramework.NUnit.FileToTest("mytests.dll").Execute();
-        }
+}
 }}}
 
 = Letting FluentBuild Know About Your Task =
