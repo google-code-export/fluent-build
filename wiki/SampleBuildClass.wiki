@@ -28,7 +28,7 @@
             thirdparty_nunit = directory_compile.File("nunit.framework.dll");
             thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
 
-            AddTask(Clean);
+             AddTask(Clean);
              AddTask(CompileSources);
              AddTask(CompileTests);
              AddTask(RunTests);
