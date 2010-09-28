@@ -11,9 +11,8 @@
   # Look at implementing some conventions to make writing builds more repeatable
 
 = Possible Third Party Tools =
-  * mbunit
-  * xunit
-  * IIS config
+  * unit test runners (mbunit, xunit, mstest)
+  * IIS configuration
   * disco/wsdl tasks
   * fxcop, msi building
   * scp, fstp, ftp
