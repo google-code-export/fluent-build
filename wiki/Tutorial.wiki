@@ -137,3 +137,11 @@ You can run any external file if need be as well:
 {{{
 Run.Executeable("c:\\sample.exe").WithArguments("/c:test").Execute();
 }}}
+
+= Changing Defaults =
+Currently, FluentBuild has only two defaults. The first is the FrameworkVersion which defaults to .NET 4.0. In the future the highest installed framework will be detected and set as the default. The other default is OnError which tells FluentBuild to either fail or continue if an error occurs during certain events. Some of these events include deleting/renaming/creating/moving files or folders and running executables. 
+
+{{{
+Defaults.FrameworkVersion = FrameworkVersion.NET3_5;
+Defaults.OnError = OnError.Continue;
+}}}
