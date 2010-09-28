@@ -6,7 +6,7 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Compilation
 {
-    public class Resgen
+    internal class Resgen
     {
         private readonly IWindowsSdkFinder _sdkFinder;
         internal FileSet _files;
@@ -47,6 +47,7 @@ namespace FluentBuild.Compilation
                 throw new ApplicationException(
                     "Could not find the Windows SDK which contains resgen.exe which is required to build resources");
 
+            //TODO: this should use the PROPER SDK based on current framework version
             string resGenExecuteable = Path.Combine(_sdkFinder.PathToHighestVersionedSdk(), "bin\\resgen.exe");
             MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
             return resGenExecuteable;

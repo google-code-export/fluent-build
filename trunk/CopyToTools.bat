@@ -1,0 +1,1 @@
+copy src\FluentBuild.BuildExe\bin\Debug\* tools\fluentbuild\

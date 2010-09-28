@@ -6,30 +6,38 @@ using FluentBuild.Runners;
 
 namespace FluentBuild.Compilation
 {
+    ///<summary>
+    /// A task around builds that will execute a compiler to generate an assembly.
+    ///</summary>
     public class BuildTask
     {
         private readonly List<string> _references = new List<string>();
         private readonly List<Resource> _resources = new List<Resource>();
         private readonly List<string> _sources = new List<string>();
-        internal readonly string compiler;
+        internal readonly string Compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
 
-        public BuildTask()
-            : this("")
+        internal BuildTask() : this("")
         {
         }
 
         protected internal BuildTask(string compiler)
         {
             Target = new Target(this);
-            this.compiler = compiler;
+            Compiler = compiler;
         }
 
+        /// <summary>
+        /// Set the output file type
+        /// </summary>
         public Target Target { get; set; }
 
         protected internal string TargetType { get; set; }
 
+        /// <summary>
+        /// Sets if Debug Symbols are generated. Defaults to False.
+        /// </summary>
         public BuildTask IncludeDebugSymbols
         {
             get
@@ -60,10 +68,11 @@ namespace FluentBuild.Compilation
                 foreach (Resource res in _resources)
                 {
                     //res.ToString() does the work of converting the resource to a string
-                    resources.AppendFormat(" /resource:{0}", res.ToString());
+                    resources.AppendFormat(" /resource:{0}", res);
                 }
 
-                string args = String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources, TargetType, references, sources);
+                string args = String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources,
+                                            TargetType, references, sources);
                 if (_includeDebugSymbols)
                     args += " /debug";
 
@@ -71,44 +80,80 @@ namespace FluentBuild.Compilation
             }
         }
 
+        /// <summary>
+        /// Sets the output file location
+        /// </summary>
+        /// <param name="outputFileLocation">The path to output the file to</param>
+        /// <returns></returns>
         public BuildTask OutputFileTo(string outputFileLocation)
         {
             _outputFileLocation = outputFileLocation;
             return this;
         }
 
+        /// <summary>
+        /// Sets the output file location
+        /// </summary>
+        /// <param name="artifact">The BuildArtifact to output the file to</param>
+        /// <returns></returns>
         public BuildTask OutputFileTo(BuildArtifact artifact)
         {
             return OutputFileTo(artifact.ToString());
         }
 
+        /// <summary>
+        /// Adds a reference to be included in the build
+        /// </summary>
+        /// <param name="fileNames">a param array of string paths to the reference</param>
+        /// <returns></returns>
         public BuildTask AddRefences(params string[] fileNames)
         {
             _references.AddRange(fileNames);
             return this;
         }
 
-        public BuildTask AddRefences(params BuildArtifact[] artifact)
+        /// <summary>
+        /// Adds a reference to be included in the build
+        /// </summary>
+        /// <param name="artifacts">a param array of BuildArtifacts to the reference</param>
+        /// <returns></returns>
+        public BuildTask AddRefences(params BuildArtifact[] artifacts)
         {
-            foreach (BuildArtifact buildArtifact in artifact)
+            foreach (BuildArtifact buildArtifact in artifacts)
             {
                 _references.Add(buildArtifact.ToString());
             }
             return this;
         }
 
+        /// <summary>
+        /// Adds a single resource to be included in the build
+        /// </summary>
+        /// <param name="fileName">a resource file to include</param>
+        /// <returns></returns>
         public BuildTask AddResource(string fileName)
         {
             AddResource(fileName, null);
             return this;
         }
-
+        
+        /// <summary>
+        /// Adds a single resource to be included in the build
+        /// </summary>
+        /// <param name="fileName">a resource file to include</param>
+        /// <param name="identifier">the identifier that code uses to refer to the resource</param>
+        /// <returns></returns>
         public BuildTask AddResource(string fileName, string identifier)
         {
             _resources.Add(new Resource(fileName, identifier));
             return this;
         }
 
+        ///<summary>
+        /// Adds a fileset of resources to be included in the build
+        ///</summary>
+        ///<param name="fileSet">The fileset containing the resouces</param>
+        ///<returns></returns>
         public BuildTask AddResources(FileSet fileSet)
         {
             foreach (string file in fileSet.Files)
@@ -118,19 +163,34 @@ namespace FluentBuild.Compilation
             return this;
         }
 
+
+        ///<summary>
+        /// Executes the compliation with the provided parameters
+        ///</summary>
         public void Execute()
         {
-            string compilerWithoutExtentions = compiler.Substring(0, compiler.IndexOf("."));
-            MessageLogger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" + Defaults.FrameworkVersion.FullVersion + "\\" + compiler + " " + Args.Replace("/", Environment.NewLine + "/");
+            string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
+            MessageLogger.Write(compilerWithoutExtentions,
+                                String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
+            string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" +
+                                    Defaults.FrameworkVersion.FullVersion + "\\" + Compiler + " " +
+                                    Args.Replace("/", Environment.NewLine + "/");
             MessageLogger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
             //TODO: this should NOT be hardcoded
-            var executeable = (Executeable)Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + Defaults.FrameworkVersion.FullVersion  + "\\" + compiler).WithArguments(Args);
+            var executeable =
+                (Executeable)
+                Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + Defaults.FrameworkVersion.FullVersion + "\\" +
+                                Compiler).WithArguments(Args);
             executeable.Execute(compilerWithoutExtentions);
             MessageLogger.WriteDebugMessage("Done Compiling");
         }
 
+        ///<summary>
+        ///Adds in the source files to compile. This method is additive. It can be called multiple times without issue.
+        ///</summary>
+        ///<param name="fileset">A FileSet containing the files to be compiled.</param>
+        ///<returns></returns>
         public BuildTask AddSources(FileSet fileset)
         {
             _sources.AddRange(fileset.Files);

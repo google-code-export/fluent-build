@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace FluentBuild.Database
+﻿namespace FluentBuild.Database
 {
     public class Database
     {

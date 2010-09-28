@@ -4,20 +4,20 @@ using NUnit.Framework;
 namespace FluentBuild.Core
 {
     [TestFixture]
-    public class BuildTests
+    public class Build_Tests
     {
         [Test]
         public void ShouldCreateTaskWithVbCompiler()
         {
             var build = Build.UsingVbc;
-            Assert.That(build.compiler, Is.EqualTo("vbc.exe"));
+            Assert.That(build.Compiler, Is.EqualTo("vbc.exe"));
         }
 
         [Test]
         public void ShouldCreateTaskWithCSCCompiler()
         {
             var build = Build.UsingCsc;
-            Assert.That(build.compiler, Is.EqualTo("csc.exe"));
+            Assert.That(build.Compiler, Is.EqualTo("csc.exe"));
         }
 
         [Test]

@@ -1,17 +1,21 @@
 Build
   This release
-
-
+	-Force a TargetType
+    -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
+	-Increase method documentation
+	-Review visibility of methods
+    -review TODOs
+	-Credit google code stuff
+	
   Next Release
     -Recurse all subfolders does not seem to fit well into the BuildFolder structure (neither does Files(filter) seem to fit)
 		Folder.Subfolder("Tests").CreateFileSetString.RecurseAllSubfolders.Files("*.cs");
-    -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
-    -Add a debug switch that will call Debugger.Invoke() on startup
-	-Increase method documentation
-	-Review visibility of methods
+    -Add a Run.Debug which will call Debugger.Invoke() when hit
 	-Review message output and verbosity. I think a 0 would be nothing. 1 would be which tasks. 2 would be events in the task. 
+	-Add BuildArtifact.Move
 
   Future Releases
+    -version check that runs in the background and alerts on next run
     -Token replacement should allow you to specify the delimiter around the token.
 	-Add in architecture detection
 	-Zip might want to be Run.Zip.Compress.On(buildArtifact/BuildFolder).OutputTo(dest.zip)
@@ -22,7 +26,8 @@ Build
 		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
 	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
 	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
-
+	-Add in support for publishing to GoogleCode/CodePlex/SourceForge/Etc.
+	-It would be nice to have zip be able to output to the folder containing source. I.e. zip("c:\\temp\\).OutputTo("c:\\temp\\out.zip"). 
 
 Database
 -Have a local sql file folder that merges the changes in so you don't run your own SQL scripts on your own DB.

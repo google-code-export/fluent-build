@@ -10,13 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild", "src\FluentBu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.Tests", "tests\FluentBuild.Tests\FluentBuild.Tests.csproj", "{D7817FEA-652A-4264-B25F-5E747C4CF6D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleBuildFiles", "src\FluentBuild.Build\SampleBuildFiles.csproj", "{5F8AAFBC-C135-4647-9433-A05A6F47D493}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.Build", "src\FluentBuild.Build\FluentBuild.Build.csproj", "{5F8AAFBC-C135-4647-9433-A05A6F47D493}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildExe", "src\FluentBuild.BuildExe\FluentBuild.BuildExe.csproj", "{4007AB9B-0AEA-419F-831B-4516F947F025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildFileConverter", "FluentBuild.BuildFileConverter\FluentBuild.BuildFileConverter.csproj", "{1F6A033C-B543-4540-9A5B-C9E55891E561}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildFileConverter", "src\FluentBuild.BuildFileConverter\FluentBuild.BuildFileConverter.csproj", "{1F6A033C-B543-4540-9A5B-C9E55891E561}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -82,16 +80,6 @@ Global
 		{1F6A033C-B543-4540-9A5B-C9E55891E561}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1F6A033C-B543-4540-9A5B-C9E55891E561}.Release|x86.ActiveCfg = Release|x86
 		{1F6A033C-B543-4540-9A5B-C9E55891E561}.Release|x86.Build.0 = Release|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Debug|x86.ActiveCfg = Debug|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Debug|x86.Build.0 = Debug|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Release|Any CPU.ActiveCfg = Release|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Release|x86.ActiveCfg = Release|x86
-		{6FC0B353-5414-4AA4-AE57-6A8E254EAAE1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

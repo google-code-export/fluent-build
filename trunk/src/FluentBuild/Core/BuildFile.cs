@@ -3,36 +3,54 @@ using System.Collections.Generic;
 
 namespace FluentBuild.Core
 {
+    ///<summary>
+    /// Represents a Build file that can be run
+    ///</summary>
     public class BuildFile
     {
-        internal Queue<Action> tasks;
+        internal Queue<Action> Tasks;
 
+        ///TODO: maybe this should be private and then invoked via reflection from fb.exe (or else internalVisibleTo)
+        ///<summary>
+        /// Invokes the next task in the queue
+        ///</summary>
         public void InvokeNextTask()
         {
-            if (tasks.Count == 0)
+            while (Tasks.Count > 0)
             {
-                MessageLogger.WriteHeader("DONE");
-                return;
+                Action task = Tasks.Dequeue();
+                MessageLogger.WriteHeader(task.Method.Name.ToUpper());
+                task.Invoke();
             }
-            Action dequeue = tasks.Dequeue();
-            MessageLogger.WriteHeader(dequeue.Method.Name.ToUpper());
-            dequeue.Invoke();
-            InvokeNextTask();
+
+           MessageLogger.WriteHeader("DONE");
         }
 
+        ///<summary>
+        /// Instantiates a build file and initializes the Tasks queue.
+        ///</summary>
         public BuildFile()
         {
-            this.tasks = new Queue<Action>();
+            this.Tasks = new Queue<Action>();
         }
 
+
+        ///<summary>
+        /// Adds a task for fb.exe to run in the order that it should be run
+        ///</summary>
+        ///<param name="task">The method to run</param>
         public void AddTask(Action task)
         {
-            tasks.Enqueue(task);
+            Tasks.Enqueue(task);
         }
 
+        ///<summary>
+        /// Gets the number of tasks in the queue.
+        ///</summary>
+        ///<returns>The number of tasks in the queue</returns>
         public int TaskCount()
         {
-            return tasks.Count;
+            return Tasks.Count;
         }
     }
 }
