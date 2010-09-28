@@ -15,5 +15,5 @@
   * IIS configuration
   * disco/wsdl tasks
   * fxcop, msi building
-  * scp, fstp, ftp
+  * scp, sftp, ftp
   * source control tasks (svn, git, tfs)
