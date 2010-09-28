@@ -4,10 +4,11 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.BuildFile
 {
-    public class SampleBuildTask
+    public class Default : Core.BuildFile
     {
         private BuildFolder directory_base;
         private BuildFolder directory_compile;
+        private BuildFolder directory_release;
         private BuildFolder directory_tools;
         
         private BuildArtifact assembly_FluentBuild;
@@ -15,36 +16,47 @@ namespace FluentBuild.BuildFile
         private BuildArtifact thirdparty_nunit;
         private BuildArtifact thirdparty_rhino;
 
-        public void Execute()
+        public Default()
         {
-            Defaults.FrameworkVersion = FrameworkVersion.NET2_0;
-
             directory_base = new BuildFolder(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
+            directory_release = directory_base.SubFolder("release");
             directory_tools = directory_base.SubFolder("tools");
+
             assembly_FluentBuild = directory_compile.File("FluentBuild.dll");
             assembly_FluentBuild_Tests = directory_compile.File("FluentBuild.Tests.dll");
             thirdparty_nunit = directory_compile.File("nunit.framework.dll");
             thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
-            directory_compile.Delete(OnError.Continue).Create();
 
-            CompileSources();
-            CompileTests();
-            RunTests();
-            Package();
+             AddTask(Clean);
+             AddTask(CompileSources);
+             AddTask(CompileTests);
+             AddTask(RunTests);
+             AddTask(Package);
+        }
+
+        private void Clean()
+        {
+            directory_compile.Delete(OnError.Continue).Create();
+            directory_release.Delete(OnError.Continue).Create();
         }
 
         private void Package()
         {
-            Run.Zip.Compress.SourceFolder(directory_compile)
+            Run.Zip.Compress
+                .SourceFolder(directory_compile)
                 .UsingCompressionLevel.Nine
-                .To(directory_compile.File("release.zip"));
+                .To(directory_release.File("release.zip"));
         }
 
         private void CompileSources()
         {
-            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().File("*.cs"));
-            Core.Build.UsingCsc.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild).Execute();
+            FileSet sourceFiles = new FileSet().Include(directory_base
+                                                        .SubFolder("src")
+                                                        .RecurseAllSubFolders()
+                                                        .File("*.cs")
+                                                        );
+            Core.Build.UsingCsc.AddSources(sourceFiles).Target.Library.OutputFileTo(assembly_FluentBuild).Execute();
         }
 
         private void CompileTests()
@@ -60,7 +72,7 @@ namespace FluentBuild.BuildFile
 
         private void RunTests()
         {
-            Run.Executeable(directory_tools.SubFolder("nunit").File("nunit-console.exe")).WithArguments(assembly_FluentBuild.ToString()).Execute();
+            Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
         }
     }
 }
