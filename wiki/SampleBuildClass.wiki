@@ -16,8 +16,6 @@
 
         public Default()
         {
-            Defaults.FrameworkVersion = FrameworkVersion.NET4_0;
-
             directory_base = new BuildFolder(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_release = directory_base.SubFolder("release");
@@ -51,8 +49,12 @@
 
         private void CompileSources()
         {
-            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src").RecurseAllSubFolders().File("*.cs"));
-            Core.Build.UsingCsc.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild).Execute();
+            FileSet sourceFiles = new FileSet().Include(directory_base
+                                                        .SubFolder("src")
+                                                        .RecurseAllSubFolders()
+                                                        .File("*.cs")
+                                                        );
+            Core.Build.UsingCsc.AddSources(sourceFiles).Target.Library.OutputFileTo(assembly_FluentBuild).Execute();
         }
 
         private void CompileTests()
@@ -68,8 +70,7 @@
 
         private void RunTests()
         {
-            Run.Executeable(directory_tools.SubFolder("nunit").File("nunit-console.exe")).WithArguments(assembly_FluentBuild.ToString()).Execute();
+            Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
         }
     }
-
 }}}
