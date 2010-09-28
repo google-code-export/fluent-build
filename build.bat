@@ -1,1 +1,1 @@
-Build\fb.exe FluentBuild.Build
+tools\FluentBuild\fb.exe src\FluentBuild.Build

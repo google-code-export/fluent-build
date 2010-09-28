@@ -23,36 +23,36 @@ namespace FluentBuild.Compilation
         [Test]
         public void ShouldSetSolutionPath()
         {
-            Assert.That(_subject._projectOrSolutionFilePath, Is.EqualTo(_projectOrSolutionFilePath));
+            Assert.That(_subject.ProjectOrSolutionFilePath, Is.EqualTo(_projectOrSolutionFilePath));
         }
 
         [Test]
         public void ShouldSetTarget()
         {
             _subject.AddTarget("target");
-            Assert.That(_subject._targets.Contains("target"));
+            Assert.That(_subject.Targets.Contains("target"));
         }
 
         [Test]
         public void ShouldSetConfiguration()
         {
             _subject.Configuration("config");
-            Assert.That(_subject._configuration, Is.EqualTo("config"));
+            Assert.That(_subject.ConfigurationToUse, Is.EqualTo("config"));
         }
 
 
         [Test]
         public void ShouldSetOutDir()
         {
-            _subject.OutDir("outdir");
-            Assert.That(_subject._outdir, Is.EqualTo("outdir"));
+            _subject.OutputDirectory("outdir");
+            Assert.That(_subject.Outdir, Is.EqualTo("outdir"));
         }
 
         [Test]
         public void ShouldSetProperty()
         {
             _subject.SetProperty("name", "value");
-            var property = _subject._properties["name"];
+            var property = _subject.Properties["name"];
             Assert.That(property, Is.EqualTo("value"));
         }
         
@@ -80,14 +80,14 @@ namespace FluentBuild.Compilation
         [Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsNotSet()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutDir("c:\\temp").BuildArgs();
+            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
         [Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsSet()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutDir("c:\\temp\\").BuildArgs();
+            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp\\").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 

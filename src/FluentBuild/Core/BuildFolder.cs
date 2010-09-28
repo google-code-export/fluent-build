@@ -15,13 +15,17 @@ namespace FluentBuild.Core
         private readonly IFileSetFactory _fileSetFactory;
         private readonly string _path;
 
-        public BuildFolder(IFileSystemWrapper fileSystemWrapper, IFileSetFactory fileSetFactory, string path)
+        internal BuildFolder(IFileSystemWrapper fileSystemWrapper, IFileSetFactory fileSetFactory, string path)
         {
             _fileSystemWrapper = fileSystemWrapper;
             _fileSetFactory = fileSetFactory;
             _path = path;
         }
 
+        ///<summary>
+        /// Creates a new BuildFolder that is used by the build or will be created during the build
+        ///</summary>
+        ///<param name="path">Path to the folder</param>
         public BuildFolder(string path) : this(new FileSystemWrapper(), new FileSetFactory(),  path)
         {            
         }
@@ -64,11 +68,20 @@ namespace FluentBuild.Core
             return this;
         }
 
+        ///<summary>
+        /// Creates the folder
+        ///</summary>
+        ///<returns></returns>
         public BuildFolder Create()
         {
             return Create(Defaults.OnError);
         }
        
+        ///<summary>
+        /// Creates the folder
+        ///</summary>
+        ///<param name="onError">Allows you to set the error behavior</param>
+        ///<returns></returns>
         public BuildFolder Create(OnError onError)
         {
             MessageLogger.WriteDebugMessage("Create Direcotry " + _path);
@@ -95,6 +108,11 @@ namespace FluentBuild.Core
             return new BuildArtifact(Path.Combine(_path, name));
         }
 
+        ///<summary>
+        /// Creates a fileset based on a filter
+        ///</summary>
+        ///<param name="filter">A filter that can contain wildcards</param>
+        ///<returns></returns>
         public FileSet Files(string filter)
         {
             var fileSet = _fileSetFactory.Create();

@@ -1,47 +1,62 @@
 namespace FluentBuild.Compilation
 {
+    /// <summary>
+    /// Determines the type of assembly to build
+    /// </summary>
     public class Target
     {
-        private readonly BuildTask buildTask;
+        private readonly BuildTask _buildTask;
 
         protected internal Target(BuildTask buildTask)
         {
-            this.buildTask = buildTask;
+            _buildTask = buildTask;
         }
-        
+
+        /// <summary>
+        /// Builds a library assembly (i.e. a dll)
+        /// </summary>
         public BuildTask Library
         {
             get
             {
-                buildTask.TargetType = "library";
-                return buildTask;
+                _buildTask.TargetType = "library";
+                return _buildTask;
             }
         }
 
+        /// <summary>
+        /// Builds a windows executable
+        /// </summary>
         public BuildTask WindowsExecutable
         {
             get
             {
-                buildTask.TargetType = "winexe";
-                return buildTask;
+                _buildTask.TargetType = "winexe";
+                return _buildTask;
             }
         }
 
+        /// <summary>
+        /// Builds a console application
+        /// </summary>
         public BuildTask Executable
         {
             get
             {
-                buildTask.TargetType = "exe";
-                return buildTask;
+                _buildTask.TargetType = "exe";
+                return _buildTask;
             }
         }
 
+        /// <summary>
+        /// Builds a module
+        /// </summary>
         public BuildTask Module
         {
             get
             {
-                buildTask.TargetType = "module";
-                return buildTask;
+                _buildTask.TargetType = "module";
+                return _buildTask;
             }
         }
     }

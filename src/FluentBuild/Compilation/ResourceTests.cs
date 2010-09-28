@@ -12,7 +12,7 @@ namespace FluentBuild.Compilation
         {
             var res = new Resource("value", "name");
             Assert.That(res.Identifier, Is.EqualTo("name"));
-            Assert.That(res.FileName, Is.EqualTo("value"));
+            Assert.That(res.FilePath, Is.EqualTo("value"));
         }
 
         [Test]

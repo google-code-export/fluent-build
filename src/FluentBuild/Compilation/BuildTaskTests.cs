@@ -91,14 +91,14 @@ namespace FluentBuild.Compilation
         public void UsingCsc_Compiler_Should_Be_CSC()
         {
             BuildTask build = Build.UsingCsc;
-            Assert.That(Path.GetFileName(build.compiler), Is.EqualTo("csc.exe"));
+            Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("csc.exe"));
         }
 
         [Test]
         public void UsingCsc_Compiler_Should_Be_VBC()
         {
             BuildTask build = Build.UsingVbc;
-            Assert.That(Path.GetFileName(build.compiler), Is.EqualTo("vbc.exe"));
+            Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("vbc.exe"));
         }
     }
 }

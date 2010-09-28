@@ -77,11 +77,11 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationProperties\CommandLinePropertiesTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlPropertiesTests.cs" />
+    <Compile Include="ApplicationProperties\TeamCityPropertiesTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
     <Compile Include="Compilation\MsBuildTaskTests.cs" />
     <Compile Include="Core\AssemblyInfo.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
-    <Compile Include="Core\BuildTests.cs" />
+    <Compile Include="Core\Build_Tests.cs" />
     <Compile Include="Core\Build.cs" />
     <Compile Include="Compilation\MsBuildTask.cs" />
     <Compile Include="Compilation\Resgen.cs" />
@@ -108,7 +108,9 @@
     <Compile Include="ApplicationProperties\CruiseControlProperties.cs" />
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
     <Compile Include="Core\PropertiesTests.cs" />
+    <Compile Include="Database\MsSqlCreateTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
+    <Compile Include="Publishing\GoogleCode.cs" />
     <Compile Include="Runners\Zip\OneThroughNine.cs" />
     <Compile Include="Runners\Zip\Zip.cs" />
     <Compile Include="Database\Database.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Core\Defaults.cs" />
     <Compile Include="Core\Properties.cs" />
     <Compile Include="Runners\Zip\ZipCompress.cs" />
+    <Compile Include="Runners\Zip\ZipCompressTests.cs" />
     <Compile Include="Runners\Zip\ZipDecompress.cs" />
     <Compile Include="Runners\Zip\ZipTests.cs" />
     <Compile Include="Utilities\EnvironmentVariableWrapper.cs" />

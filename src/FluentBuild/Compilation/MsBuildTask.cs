@@ -1,88 +1,127 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using FluentBuild.Core;
 using FluentBuild.Runners;
 
 namespace FluentBuild.Compilation
 {
+    ///<summary>
+    /// Executes MsBuild to create an assembly (or multiple assemblies)
+    ///</summary>
     public class MsBuildTask
     {
-        internal readonly string _projectOrSolutionFilePath;
+        internal readonly string ProjectOrSolutionFilePath;
         private readonly IExecuteable _executeable;
-        internal readonly NameValueCollection _properties;
-        internal readonly IList<string> _targets;
-        internal string _configuration;
-        internal string _outdir;
+        internal readonly NameValueCollection Properties;
+        internal readonly IList<string> Targets;
+        internal string ConfigurationToUse;
+        internal string Outdir;
         
-        //TODO: overloads to take BuildFolder/Artifact
+        
 
-        public MsBuildTask(string projectOrSolutionFilePath, IExecuteable executeable)
+        internal MsBuildTask(string projectOrSolutionFilePath, IExecuteable executeable)
         {
-            _projectOrSolutionFilePath = projectOrSolutionFilePath;
+            ProjectOrSolutionFilePath = projectOrSolutionFilePath;
             _executeable = executeable;
-            _targets = new List<string>();
-            _properties = new NameValueCollection();
+            Targets = new List<string>();
+            Properties = new NameValueCollection();
         }
 
-        public MsBuildTask(string projectOrSolutionFilePath) : this(projectOrSolutionFilePath, new Executeable())
+        internal MsBuildTask(string projectOrSolutionFilePath) : this(projectOrSolutionFilePath, new Executeable())
         {
         }
 
 
+        ///<summary>
+        /// Adds a target to run
+        ///</summary>
+        ///<param name="target">A target that exists in your msbuild file</param>
+        ///<returns></returns>
         public MsBuildTask AddTarget(string target)
         {
-            _targets.Add(target);
+            Targets.Add(target);
             return this;
         }
 
-
+        /// <summary>
+        /// Sets a property that is passed to msbuild.exe
+        /// </summary>
+        /// <param name="name">the name of the property to set</param>
+        /// <param name="value">the value of the property</param>
+        /// <returns></returns>
         public MsBuildTask SetProperty(string name, string value)
         {
-            _properties.Add(name, value);
+            Properties.Add(name, value);
             return this;
         }
 
-        //actually a property. Just making it a bit easier to consume common items
-        public MsBuildTask OutDir(string path)
+        
+        
+        ///<summary>
+        /// Sets the output directory for the msbuild task
+        ///</summary>
+        /// <remarks>Sets the OutDir property (i.e. /p:OutDir)</remarks>
+        ///<param name="path">the output folder</param>
+        ///<returns></returns>
+        public MsBuildTask OutputDirectory(string path)
         {
-            //output dir must have trailing slash. Might as well do it for the user
-            _outdir = path;
+            Outdir = path;
             return this;
         }
 
-        //actually a property. Just making it a bit easier to consume common items
-        //might want to have Configuration.Debug .Release .Custom("myconfig")
+        ///<summary>
+        /// Sets the output directory for the msbuild task
+        ///</summary>
+        /// <remarks>Sets the OutDir property (i.e. /p:OutDir)</remarks>
+        ///<param name="path">the output folder</param>
+        ///<returns></returns>
+        public MsBuildTask OutputDirectory(BuildFolder path)
+        {
+            OutputDirectory(path.ToString());
+            return this;
+        }
+
+        
+        //TODO: might want to have Configuration.Debug .Release .Custom("myconfig")
+        ///<summary>
+        /// Sets the configuration to use for the msbuild task
+        ///</summary>
+        /// <remarks>Sets the configuration property (i.e. /p:Configuration)</remarks>
+        ///<param name="configuration">The configuration to use (e.g. Debug, Release, Custom)</param>
+        ///<returns></returns>
         public MsBuildTask Configuration(string configuration)
         {
-            _configuration = configuration;
+            //actually a property. Just making it a bit easier to consume common items
+            ConfigurationToUse = configuration;
             return this;
         }
 
 
         internal string[] BuildArgs()
         {
-            var args = new List<String>();
-            args.Add(_projectOrSolutionFilePath);
-
-            if (!String.IsNullOrEmpty(_outdir))
+            var args = new List<String> {ProjectOrSolutionFilePath};
+            if (!String.IsNullOrEmpty(Outdir))
             {
-                var tempDir = _outdir;
+                //output dir must have trailing slash. Might as well do it for the user
+                var tempDir = Outdir;
                 if (!tempDir.Trim().EndsWith("\\"))
                     tempDir += "\\";
 
                 args.Add("/p:OutDir=" + tempDir);
             }
-            if (!String.IsNullOrEmpty(_configuration))
-                args.Add("/p:Configuration=" + _configuration);
+            if (!String.IsNullOrEmpty(ConfigurationToUse))
+                args.Add("/p:Configuration=" + ConfigurationToUse);
 
-            foreach (string target in _targets)
-            {
-                args.Add("/target:" + target);
-            }
+            args.AddRange(Targets.Select(target => "/target:" + target));
             return args.ToArray();
         }
 
+
+        ///<summary>
+        /// Executes MSBuild with the provided parameters
+        ///</summary>
         public void Execute()
         {
             string pathToMsBuild = Environment.GetEnvironmentVariable("windir") + @"\Microsoft.Net\Framework\" +

@@ -54,6 +54,7 @@ namespace FluentBuild.Core
             return this;
         }
 
+        //TODO: should take a buildArtifact/Folder
         public FileSet Exclude(string path)
         {
             if (path.IndexOf('*') == -1)

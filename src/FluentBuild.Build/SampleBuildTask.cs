@@ -56,7 +56,8 @@ namespace FluentBuild.BuildFile
                                                         .RecurseAllSubFolders()
                                                         .File("*.cs")
                                                         );
-            Core.Build.UsingCsc.AddSources(sourceFiles).Target.Library.OutputFileTo(assembly_FluentBuild).Execute();
+            Core.Build.UsingCsc.AddSources(sourceFiles)
+                .Target.Library.OutputFileTo(assembly_FluentBuild).Execute();
         }
 
         private void CompileTests()

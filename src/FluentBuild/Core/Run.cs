@@ -1,18 +1,24 @@
-﻿using System;
-using System.IO;
-using System.IO.Packaging;
-using FluentBuild.Runners;
+﻿using FluentBuild.Runners;
 using FluentBuild.Runners.UnitTesting;
 using FluentBuild.Runners.Zip;
 
 namespace FluentBuild.Core
 {
-
     /// <summary>
     /// Runs an execuable. It may later be expaned to have other run tasks (e.g. nunit, code analysis, etc.)
     /// </summary>
     public class Run
     {
+        public static UnitTestFrameworkRun UnitTestFramework
+        {
+            get { return new UnitTestFrameworkRun(); }
+        }
+
+        public static Zip Zip
+        {
+            get { return new Zip(); }
+        }
+
         /// <summary>
         /// Creates an Executable object based on a string path
         /// </summary>
@@ -33,14 +39,10 @@ namespace FluentBuild.Core
             return new Executeable(executeablePath.ToString());
         }
 
-        public static UnitTestFrameworkRun UnitTestFramework
+        public static void Debugger()
         {
-            get { return new UnitTestFrameworkRun() ;}
-        }
-
-        public static Zip Zip
-        {
-            get { return new Zip();}
+            //System.Diagnostics.Debugger.Break();
+            System.Diagnostics.Debugger.Launch();
         }
     }
 }

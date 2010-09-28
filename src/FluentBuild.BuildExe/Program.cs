@@ -86,6 +86,7 @@ namespace FluentBuild.BuildExe
                 {
                     classfound = true;
                     StartRun(assemblyInstance, t);
+                    return;
                 }
             }
 
@@ -110,20 +111,7 @@ namespace FluentBuild.BuildExe
                     "No tasks were found. Make sure that you add a task in your build classes constructor via AddTask()");
                 Environment.Exit(1);
             }
-
             build.InvokeNextTask();
-
-            //Type[] interfaces = t.GetInterfaces();
-            //foreach (Type i in interfaces)
-            //{
-            //    if (i.FullName == typeof(IBuild).FullName)
-            //    {
-            //        var build = (IBuild)assemblyInstance.CreateInstance(t.FullName);
-            //        MessageLogger.WriteHeader("Execute");
-            //        MessageLogger.Write("EXECUTE", "Running Class: " + t.FullName);
-            //        build.Execute();
-            //    }
-            //}
         }
     }
 }
