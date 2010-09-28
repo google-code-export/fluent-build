@@ -14,6 +14,7 @@
   * unit test runners (mbunit, xunit, mstest)
   * IIS configuration
   * disco/wsdl tasks
+  * SvcUtil.exe tasks (generate WCF proxies)
   * fxcop, msi building
   * scp, sftp, ftp
   * source control tasks (svn, git, tfs)
