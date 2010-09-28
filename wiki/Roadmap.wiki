@@ -7,5 +7,14 @@
   # Look at other tools and add some nice helpers (unit test runners, zip support, etc.) <-- Done
   # Write plugins for build servers (Team City, Cruise Control)
   # Updating and improving the database management code.
-  # Adding language around more third party tools like mbunit, xunit, ilmerge, etc.
+  # Adding language around more third party tools.
   # Look at implementing some conventions to make writing builds more repeatable
+
+= Possible Third Party Tools =
+  * mbunit
+  * xunit
+  * IIS config
+  * disco/wsdl tasks
+  * fxcop, msi building
+  * scp, fstp, ftp
+  * source control tasks (svn, git, tfs)
