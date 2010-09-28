@@ -149,19 +149,20 @@ Defaults.OnError = OnError.Continue;
 = Building It =
 
 Once you have a build file created you will need to run it using fb.exe. 
-
+{{{
 fb.exe c:\projects\mysample\mysample.build 
-
+}}}
 This will compile the mysample.build folder and then run the build. If you want to avoid the compilation step or want to just distribute a build dll you can use the dll directly:
-
+{{{
 fb.exe c:\projects\mysample\mysample.build.dll
-
+}}}
 By default fb.exe will find and run a class named "Default". If you want to run a different class specify it with the -C flag:
-
+{{{
 fb.exe c:\projects\mysample\mysample.build -c:PublishRelease 
-
+}}}
 This will find and run the PublishRelease class.
 
 It is also possible to pass in custom properties to fb.exe that can be accessed in your build script via Properties.CommandLineProperties.
-
+{{{
 fb.exe c:\projects\mysample\mysample.build -p:name=value -p:name2=value2
+}}}
