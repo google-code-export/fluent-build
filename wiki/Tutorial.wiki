@@ -116,7 +116,7 @@ If your project references a DLL then they will need to be included via the AddR
 Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo("c:\\temp\\mysample.dll").Execute();
 }}}
 
-The key thing to remember is that nothing will happen unless you call Execute() to actually run the task!
+The key thing to remember is that nothing will happen unless you call Execute() to actually run the compile!
 
 = Doing More =
 FluentBuild has some extra syntax that enables you to do common build tasks. The most common of these is running a unit test framework. 
