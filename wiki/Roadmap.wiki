@@ -18,3 +18,4 @@
   * fxcop, msi building
   * scp, sftp, ftp
   * source control tasks (svn, git, tfs)
+  * checksum utility
