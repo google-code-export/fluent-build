@@ -84,8 +84,6 @@ namespace FluentBuild.Runners.UnitTesting
             return args.ToArray();
         }
 
-
-
         public void Execute()
         {
             if (String.IsNullOrEmpty(_pathToConsoleRunner))
@@ -99,16 +97,11 @@ namespace FluentBuild.Runners.UnitTesting
             if (OnError == OnError.Fail)
                 executeable = executeable.FailOnError;
             else if (OnError == OnError.Continue)
-                executeable = executeable.FailOnError;
+                executeable = executeable.ContinueOnError;
 
             if (!String.IsNullOrEmpty(_workingDirectory))
                 executeable = executeable.InWorkingDirectory(_workingDirectory);
             executeable.Execute();
-        }
-
-        protected internal override NUnitRunner GetSelf
-        {
-            get { return this; }
         }
     }
 }

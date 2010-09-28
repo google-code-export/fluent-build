@@ -72,8 +72,11 @@ namespace FluentBuild.Runners.Zip
         private IList<String> GetFiles()
         {
             //only one should be set
-            if (String.IsNullOrEmpty(_file) ^ (String.IsNullOrEmpty(_path)))
-                throw new ApplicationException("Either sourceFile OR sourceFolder must be set. Both can not be set and neither can be left empty.");
+            if (String.IsNullOrEmpty(_file) && (String.IsNullOrEmpty(_path)))
+                throw new ApplicationException("sourceFile OR sourceFolder must be set");
+
+            if (!String.IsNullOrEmpty(_file) && (!String.IsNullOrEmpty(_path)))
+                throw new ApplicationException("sourceFile OR sourceFolder must be set");
 
             if (!string.IsNullOrEmpty(_file))
                 return new List<String> {_file};

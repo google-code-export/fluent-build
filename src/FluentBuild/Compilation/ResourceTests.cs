@@ -11,8 +11,8 @@ namespace FluentBuild.Compilation
         public void CreateShouldBuildProperly()
         {
             var res = new Resource("value", "name");
-            Assert.That(res.Name, Is.EqualTo("name"));
-            Assert.That(res.Value, Is.EqualTo("value"));
+            Assert.That(res.Identifier, Is.EqualTo("name"));
+            Assert.That(res.FileName, Is.EqualTo("value"));
         }
 
         [Test]

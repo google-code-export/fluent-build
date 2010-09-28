@@ -3,7 +3,16 @@ using FluentBuild.FilesAndDirectories.FileSet;
 
 namespace FluentBuild.Core
 {
-    public class FileSet
+    public interface IFileSet
+    {
+        IList<string> Files { get; }
+        CopyFileset Copy { get; }
+        FileSet Include(BuildArtifact path);
+        FileSet Include(string path);
+        FileSet Exclude(string path);
+    }
+
+    public class FileSet : IFileSet
     {
         private readonly List<string> exclusions = new List<string>();
         private readonly List<string> files = new List<string>();
@@ -18,6 +27,7 @@ namespace FluentBuild.Core
             this.utility = utility;
         }
 
+        //TODO: Should this not be a read only collection?
         public IList<string> Files
         {
             get

@@ -25,7 +25,7 @@ namespace FluentBuild.FilesAndDirectories
         {
             get
             {
-                _onError = OnError.Continue;
+                _onError = OnError.Fail;
                 return this;
             }
         }

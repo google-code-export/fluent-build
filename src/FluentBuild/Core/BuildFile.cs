@@ -3,14 +3,9 @@ using System.Collections.Generic;
 
 namespace FluentBuild.Core
 {
-    //public interface IBuild
-    //{
-    //    void Execute();
-    //}
-
     public class BuildFile
     {
-        private Queue<Action> tasks;
+        internal Queue<Action> tasks;
 
         public void InvokeNextTask()
         {
@@ -35,5 +30,9 @@ namespace FluentBuild.Core
             tasks.Enqueue(task);
         }
 
+        public int TaskCount()
+        {
+            return tasks.Count;
+        }
     }
 }

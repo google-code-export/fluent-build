@@ -4,27 +4,25 @@ namespace FluentBuild.Compilation
 {
     public class Resource
     {
-        public string Value { get; private set; }
-        public string Name { get; private set; }
+        public string FileName { get; private set; }
+        public string Identifier { get; private set; }
 
-        public Resource(string value, string name)
+        public Resource(string fileName, string identifier)
         {
-            this.Value = value;
-            this.Name = name;
+            this.FileName = fileName;
+            this.Identifier = identifier;
         }
 
-        public Resource(string value)
+        public Resource(string fileName)
         {
-            this.Value = value;
+            this.FileName = fileName;
         }
-
-        
         
         public override string ToString()
         {
-            if (Name == String.Empty)
-                return Value;
-            return string.Format("\"{0}\",{1}", Value, Name);
+            if (Identifier == String.Empty)
+                return FileName;
+            return string.Format("\"{0}\",{1}", FileName, Identifier);
         }
     }
 }

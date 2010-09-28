@@ -210,13 +210,5 @@ namespace FluentBuild.Runners.UnitTesting
             mockFileFinder.Stub(x => x.Find("nunit-console.exe")).Return(null);
             subject.Execute();
         }
-
-        [Test]
-        public void GetSelf_ShouldGetSameObject()
-        {
-            var subject = new NUnitRunner();
-            Assert.That(subject.GetSelf, Is.EqualTo(subject));
-        }
-
     }
 }

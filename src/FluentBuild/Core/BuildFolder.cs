@@ -1,5 +1,6 @@
 using System.IO;
 using FluentBuild.FilesAndDirectories;
+using FluentBuild.FilesAndDirectories.FileSet;
 using FluentBuild.Utilities;
 
 namespace FluentBuild.Core
@@ -11,15 +12,17 @@ namespace FluentBuild.Core
     public class BuildFolder
     {
         private readonly IFileSystemWrapper _fileSystemWrapper;
+        private readonly IFileSetFactory _fileSetFactory;
         private readonly string _path;
 
-        public BuildFolder(IFileSystemWrapper fileSystemWrapper, string path)
+        public BuildFolder(IFileSystemWrapper fileSystemWrapper, IFileSetFactory fileSetFactory, string path)
         {
             _fileSystemWrapper = fileSystemWrapper;
+            _fileSetFactory = fileSetFactory;
             _path = path;
         }
 
-        public BuildFolder(string path) : this(new FileSystemWrapper(), path)
+        public BuildFolder(string path) : this(new FileSystemWrapper(), new FileSetFactory(),  path)
         {            
         }
 
@@ -94,7 +97,7 @@ namespace FluentBuild.Core
 
         public FileSet Files(string filter)
         {
-            var fileSet = new FileSet();
+            var fileSet = _fileSetFactory.Create();
             return fileSet.Include(Path.Combine(_path, filter));
         }
     }
