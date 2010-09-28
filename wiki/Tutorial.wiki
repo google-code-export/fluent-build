@@ -11,16 +11,31 @@ Fluent build allows you to write a build script right in your favorite IDE using
   # Add a class named Default (fluent build looks for a class with this name but it can be overriden)
   # Set the Default class to inherit from FluentBuild.Core.BuildFile
 
-= Writing A Task =
+= Setup =
 
-A task is a set of related instructions to accomplish a goal. Example tasks would be: compiling sources, running tests, and cleanup. Using FluentBuild this is as simple as writing a method that does the work you want:
+Any application will need to setup are the folders, files, and tasks for the build to succeed. Typically you will want to create variables representing the directories involved. This is best accomplished using the BuildFolder class which simplifies dealing with folders (although you can use plain old strings if you want).
 
 {{{
-private void RunTests()
-{
-Run.UnitTestFramework.NUnit.FileToTest("mytests.dll").Execute();
-}
+            directory_base = new BuildFolder(Properties.CurrentDirectory);
+            directory_compile = directory_base.SubFolder("compile");
+            directory_release = directory_base.SubFolder("release");
+            directory_tools = directory_base.SubFolder("tools");
 }}}
+
+Often you will also need to refer to files that are either used in the compilation of the assembly or as the names for outputs. This can be achieved by using the File() method on a BuildFolder which creates a new BuildArtifact:
+
+{{{
+            thirdparty_nunit = directory_compile.File("nunit.framework.dll");
+            thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
+}}}
+
+Alternatively a BuildArtifact can be created manually:
+
+{{{
+            var output = new BuildArtifact("c:\\temp\\output.dll");
+}}}
+
+The next thing we need to do is write methods that we want to run and then let the build runner know to run them.
 
 = Letting FluentBuild Know About Your Task =
 
@@ -42,6 +57,21 @@ Tasks must be registered so that the build runner (fb.exe) knows what methods to
 
 Here we have added the methods that we want the build runner to execute in the order that we want them executed in. When the runner executes the task the method name will be output to the window along with any output that task generates.
 
-= Build Folders & Build Artifacts =
+= Clean Task =
+this one is meant to cleanup anything left from the last build so that we can start fresh. Normally this is done by deleting and recreating the folders used for the build.
 
-In your script you can create string variable that refer to your folders and files that you use or you can use BuildFolder or BuildArtifact respectively. These classes have built in functionality for things like path concatenation, deletion, creation, copying, moving, renaming, and token replacement.
+{{{
+        private void Clean()
+        {
+            directory_compile.Delete(OnError.Continue).Create();
+            directory_release.Delete(OnError.Continue).Create();
+        }
+}}}
+
+Here we have told the runtime to Delete the "compile" and "release" directories and then create them. 
+
+By default if FluentBuild can not perform a task it will throw an error and stop the build. To override this behavior some methods will reveal an override that allows you to specify the behavior of what to do on an error. 
+
+NOTE: The default failure behavior can be changed by setting the Defaults.OnError property.
+
+= Compile Task = 
