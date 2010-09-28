@@ -74,7 +74,7 @@ By default if FluentBuild can not perform a task it will throw an error and stop
 
 NOTE: The default failure behavior can be changed by setting the Defaults.OnError property.
 
-= Compilation = 
+= FileSets & Compilation = 
 NOTE: Most methods will take a string path or else a BuildFolder/BuildArtifact object. Use whichever works best for you.
 
 At a minimum compliation requires a compiler, source files, a target type and an output file name.
@@ -113,7 +113,7 @@ of project you want to build. The targets are Executable (i.e. a console applica
 If your project references a DLL then they will need to be included via the AddReferences method:
 
 {{{
-	Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo("c:\\temp\\mysample.dll").Execute();
+Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo("c:\\temp\\mysample.dll").Execute();
 }}}
 
 The key thing to remember is that nothing will happen unless you call Execute() to actually run the task!
@@ -123,13 +123,13 @@ FluentBuild has some extra syntax that enables you to do common build tasks. The
 At the time of running the only currently supported framework is Nunit and can be invoked like so:
 
 {{{
-	Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
+Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
 }}}
 
 Zip support has also been added:
 
 {{{
-	Run.Zip.Compress.SourceFolder("c:\\temp").UsingCompressionLevel.Six.To("myproject.zip");
+Run.Zip.Compress.SourceFolder("c:\\temp").UsingCompressionLevel.Six.To("myproject.zip");
 }}}
 
 You can run any external file if need be as well:
