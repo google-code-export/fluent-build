@@ -57,8 +57,8 @@ Tasks must be registered so that the build runner (fb.exe) knows what methods to
 
 Here we have added the methods that we want the build runner to execute in the order that we want them executed in. When the runner executes the task the method name will be output to the window along with any output that task generates.
 
-= Clean Task =
-this one is meant to cleanup anything left from the last build so that we can start fresh. Normally this is done by deleting and recreating the folders used for the build.
+= Directory Tasks=
+The common tasks we want to do are delete and create directories for build outputs. This can be done right from the BuildFolder objects: 
 
 {{{
         private void Clean()
@@ -74,4 +74,66 @@ By default if FluentBuild can not perform a task it will throw an error and stop
 
 NOTE: The default failure behavior can be changed by setting the Defaults.OnError property.
 
-= Compile Task = 
+= Compilation = 
+NOTE: Most methods will take a string path or else a BuildFolder/BuildArtifact object. Use whichever works best for you.
+
+At a minimum compliation requires a compiler, source files, a target type and an output file name.
+
+Source files are built using a FileSet. A FileSet is an object that allows you to include and exclude files.
+
+{{{
+	FileSet sourceFiles = new FileSet()
+					.Include("c:\\projects\\mysample\\*.cs")
+					.Exclude("c:\\projects\\mysample\\AssemblyInfo.cs");
+					.Include("c:\\projects\\CommonAssemblyInfo.cs");
+
+}}}
+
+In the above example we include all *.cs files, exclude the AssemblyInfo.cs file and then include a seprate CommonAssemblyInfo.cs
+
+Often it is required to Include all files matching a filter in the root and all subfolders. 
+Instead of manually specifying subfolders the shorthand of ** can be used to indicate to recurse all folders:
+
+{{{
+	FileSet sourceFiles = new FileSet().Include("c:\\projects\\mysample\\**\*.cs")
+
+}}}
+
+Once source files are established compiling is the next step:
+
+{{{
+	Build.UsingCsc.AddSources(sourceFiles).Target.Library.OutputFileTo("c:\\temp\\mysample.dll").Execute();
+}}}
+
+Currently Build supports three build engines "UsingCsc" for the C# compiler and "UsingVbc" for the VB Compiler. If you need to run a different executable to compile your application then look at using Run.Executable() to perform those actions.
+
+Once a build engine is selected you can do many build tasks. The common ones are to AddSources (which takes a fileset), specify an output file, and select the type
+of project you want to build. The targets are Executable (i.e. a console application), Library (i.e. a dll), Module (not commonly used), and WindowsExecutable. 
+
+If your project references a DLL then they will need to be included via the AddReferences method:
+
+{{{
+	Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo("c:\\temp\\mysample.dll").Execute();
+}}}
+
+The key thing to remember is that nothing will happen unless you call Execute() to actually run the task!
+
+= Doing More =
+FluentBuild has some extra syntax that enables you to do common build tasks. The most common of these is running a unit test framework. 
+At the time of running the only currently supported framework is Nunit and can be invoked like so:
+
+{{{
+	Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
+}}}
+
+Zip support has also been added:
+
+{{{
+	Run.Zip.Compress.SourceFolder("c:\\temp").UsingCompressionLevel.Six.To("myproject.zip");
+}}}
+
+You can run any external file if need be as well:
+
+{{{
+Run.Executeable("c:\\sample.exe").WithArguments("/c:test").Execute();
+}}}
