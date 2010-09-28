@@ -11,13 +11,6 @@ namespace FluentBuild.Utilities
         private const string _executablePath = @"c:\temp\nothing.exe";
 
         [Test]
-        public void GetSelf_ShouldGetSameObject()
-        {
-            var subject = new Executeable();
-            Assert.That(subject.GetSelf, Is.EqualTo(subject));
-        }
-
-        [Test]
         public void Executable_ShouldSetProperly()
         {
             var subject = new Executeable();

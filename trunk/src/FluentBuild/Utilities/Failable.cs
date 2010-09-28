@@ -11,7 +11,6 @@ namespace FluentBuild.Utilities
     public abstract class Failable<T> : IFailable<T>
     {
         protected internal OnError OnError;
-        protected internal abstract T GetSelf { get;  }
 
         public Failable()
         {
@@ -23,7 +22,7 @@ namespace FluentBuild.Utilities
             get
             {
                 OnError = OnError.Fail;
-                return GetSelf;
+                return (T)(object)this;
             }
         }
 
@@ -32,7 +31,7 @@ namespace FluentBuild.Utilities
             get
             {
                 OnError = OnError.Continue;
-                return GetSelf;
+                return (T)(object)this;
             }
         }
 

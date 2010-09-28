@@ -1,4 +1,5 @@
 using FluentBuild.Core;
+using FluentBuild.FilesAndDirectories.FileSet;
 using NUnit.Framework;
 
 using Rhino.Mocks;
@@ -14,7 +15,7 @@ namespace FluentBuild.FilesAndDirectories
             MessageLogger.WindowWidth = 80;
             var expected = "c:\\temp";
             var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
-            var folder = new BuildFolder(fs, expected);
+            var folder = new BuildFolder(fs, null, expected);
             folder.Create();
             fs.AssertWasCalled(x=>x.CreateDirectory(expected));
         }
@@ -25,7 +26,7 @@ namespace FluentBuild.FilesAndDirectories
             MessageLogger.WindowWidth = 80;
             var expected = "c:\\temp";
             var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
-            var folder = new BuildFolder(fs, expected);
+            var folder = new BuildFolder(fs, null, expected);
             fs.Stub(x => x.DirectoryExists(expected)).Return(true);
             folder.Delete();
             fs.AssertWasCalled(x => x.DeleteDirectory(expected, true));
@@ -59,6 +60,20 @@ namespace FluentBuild.FilesAndDirectories
         {
             var file = new BuildFolder("c:\\temp").File("test.txt");
             Assert.That(file.ToString(), Is.EqualTo(@"c:\temp\test.txt"));
+        }
+
+        [Test]
+        public void Files_ShouldCreateFileset()
+        {
+            var mockFilesetFactory = MockRepository.GenerateStub<IFileSetFactory>();
+            var mockFileset = MockRepository.GenerateMock<IFileSet>();
+            mockFilesetFactory.Stub(x => x.Create()).Return(mockFileset);
+
+            new BuildFolder(null, mockFilesetFactory, "c:\\temp").Files("*.*");
+
+            mockFileset.AssertWasCalled(x=>x.Include("c:\\temp\\*.*"));
+            
+            
         }
     }
 }

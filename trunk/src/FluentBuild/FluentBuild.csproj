@@ -83,6 +83,7 @@
     <Compile Include="ApplicationProperties\CommandLinePropertiesTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlPropertiesTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
+    <Compile Include="Compilation\MsBuildTaskTests.cs" />
     <Compile Include="Core\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetails.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoLanguage.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="AssemblyInfoBuilding\VisualBasicAssemblyInfoBuilder.cs" />
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
+    <Compile Include="Core\BuildFileTests.cs" />
     <Compile Include="Core\BuildTests.cs" />
     <Compile Include="Core\Build.cs" />
     <Compile Include="Compilation\MsBuildTask.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="ApplicationProperties\CruiseControlProperties.cs" />
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
     <Compile Include="Core\PropertiesTests.cs" />
+    <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
     <Compile Include="Runners\Zip\OneThroughNine.cs" />
     <Compile Include="Runners\Zip\Zip.cs" />
     <Compile Include="Database\Database.cs" />
@@ -137,7 +140,7 @@
     <Compile Include="Runners\ExecuteableTests.cs" />
     <Compile Include="Core\BuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
-    <Compile Include="FilesAndDirectories\BuildFolderTests.cs" />
+    <Compile Include="Core\BuildFolderTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
     <Compile Include="Core\FileSet.cs" />
@@ -147,11 +150,11 @@
     <Compile Include="Core\BuildFolder.cs" />
     <Compile Include="Runners\ProcessWrapper.cs" />
     <Compile Include="Utilities\ConsoleColor.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\CopyFileset.cs" />
+    <Compile Include="Database\CopyFileset.cs" />
     <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
     <Compile Include="FilesAndDirectories\RenameBuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\RenameBuildArtifactTests.cs" />
-    <Compile Include="Core\FrameworkVersion.cs" />
+    <Compile Include="Utilities\FrameworkVersion.cs" />
     <Compile Include="Core\BuildFile.cs" />
     <Compile Include="Core\MessageLoggerTests.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunner.cs" />

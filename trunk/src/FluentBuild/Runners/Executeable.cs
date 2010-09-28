@@ -134,6 +134,10 @@ namespace FluentBuild.Runners
                         if (this.OnError == OnError.Fail) //exit code should only be set if we want the application to fail on error
                             Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
                     }
+                    _colorizedOutputDisplay.Display(prefix, output.ToString(), error.ToString(), process.ExitCode == 0);
+
+                    if (process.ExitCode != 0)
+                        throw new ApplicationException("Exectable returned non-zero exit code");
                 }
                 catch (Exception e)
                 {
@@ -141,11 +145,6 @@ namespace FluentBuild.Runners
                         throw;
                     Debug.Write(prefix, "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
-
-                _colorizedOutputDisplay.Display(prefix, output.ToString(), error.ToString(), process.ExitCode == 0);
-
-                if (process.ExitCode != 0)
-                    throw new ApplicationException("Exectable returned non-zero exit code");
             }
             return output.ToString();
         }
@@ -161,11 +160,6 @@ namespace FluentBuild.Runners
         {
             lock (ErrorLock)
                 output.AppendLine(e.Data);
-        }
-
-        protected internal override IExecuteable GetSelf
-        {
-            get { return this; }
         }
     }
 }

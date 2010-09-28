@@ -1,4 +1,4 @@
-namespace FluentBuild.Core
+namespace FluentBuild.Utilities
 {
     public class FrameworkVersion
     {

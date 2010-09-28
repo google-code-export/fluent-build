@@ -59,6 +59,7 @@ namespace FluentBuild.Compilation
                 var resources = new StringBuilder();
                 foreach (Resource res in _resources)
                 {
+                    //res.ToString() does the work of converting the resource to a string
                     resources.AppendFormat(" /resource:{0}", res.ToString());
                 }
 
@@ -96,9 +97,15 @@ namespace FluentBuild.Compilation
             return this;
         }
 
-        public BuildTask AddResource(string value, string resourceName)
+        public BuildTask AddResource(string fileName)
         {
-            _resources.Add(new Resource(value, resourceName));
+            AddResource(fileName, null);
+            return this;
+        }
+
+        public BuildTask AddResource(string fileName, string identifier)
+        {
+            _resources.Add(new Resource(fileName, identifier));
             return this;
         }
 
@@ -118,6 +125,7 @@ namespace FluentBuild.Compilation
             string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" + Defaults.FrameworkVersion.FullVersion + "\\" + compiler + " " + Args.Replace("/", Environment.NewLine + "/");
             MessageLogger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
+            //TODO: this should NOT be hardcoded
             var executeable = (Executeable)Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + Defaults.FrameworkVersion.FullVersion  + "\\" + compiler).WithArguments(Args);
             executeable.Execute(compilerWithoutExtentions);
             MessageLogger.WriteDebugMessage("Done Compiling");

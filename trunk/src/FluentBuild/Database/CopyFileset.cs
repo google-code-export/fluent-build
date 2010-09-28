@@ -22,6 +22,11 @@ namespace FluentBuild.FilesAndDirectories.FileSet
 
         public Core.FileSet To(BuildFolder destination)
         {
+            return To(destination.ToString());
+        }
+
+        public Core.FileSet To(string destination)
+        {
             MessageLogger.Write("copy", String.Format("Copying {0} files to '{1}'", _fileSet.Files.Count, destination));
             MessageLogger.BlankLine();
             foreach (string file in _fileSet.Files)
@@ -32,9 +37,5 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             return _fileSet;
         }
 
-        protected internal override CopyFileset GetSelf
-        {
-            get { return this; }
-        }
     }
 }

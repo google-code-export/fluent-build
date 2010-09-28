@@ -1,3 +1,4 @@
+using FluentBuild.Runners.Zip;
 using NUnit.Framework;
 
 namespace FluentBuild.Core
@@ -26,6 +27,13 @@ namespace FluentBuild.Core
         {
             var framework = Run.UnitTestFramework;
             Assert.That(framework, Is.Not.Null);
+        }
+
+        [Test]
+        public void Zip_ShouldCreateObject()
+        {
+            var zip = Run.Zip;
+            Assert.That(zip, Is.TypeOf<Zip>());
         }
 
     }

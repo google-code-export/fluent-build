@@ -68,10 +68,5 @@ namespace FluentBuild.FilesAndDirectories
         {
             return new TokenReplacer(_fileSystemWrapper.ReadAllText(source.ToString())).ReplaceToken(token);
         }
-
-        protected internal override CopyBuildArtifcat GetSelf
-        {
-            get { return this; }
-        }
     }
 }
