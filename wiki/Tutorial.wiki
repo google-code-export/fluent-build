@@ -37,7 +37,7 @@ var output = new BuildArtifact("c:\\temp\\output.dll");
 
 The next thing we need to do is write methods that we want to run and then let the build runner know to run them.
 
-= Letting FluentBuild Know About Your Task =
+= Letting FluentBuild Know What To Run =
 
 Tasks must be registered so that the build runner (fb.exe) knows what methods to run and in what order to run them. This is accomplished in the constructor of your BuildFile by calling AddTask(methodToRun). e.g.:
 
