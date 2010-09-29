@@ -1,0 +1,24 @@
+#summary Some frequently asked questions.
+
+=== 1. Why not use NAnt? ===
+-Build scripts are written in xml which is very chatty
+-Build scripts are interpreted. Errors come back at runtime instead of during editing
+-Intellisense is possible but requires adding a schema and configuration to each developer system
+-Getting started has a learning curve
+
+=== 2. Why not use MSBuild? ===
+-Build scripts are written in xml which is very chatty
+-Build scripts are interpreted. Errors come back at runtime instead of during editing
+-Intellisense is possible but requires adding a schema and configuration to each developer system
+-It is good at building a project but doing other tasks is usually challenging
+-No support for tokenization
+-Getting started has a learning curve higher than NAnt
+
+=== 3. Why not use PSake? ===
+-Build scripts are interpreted. Errors come back at runtime instead of during editing
+-Intellisense is possible if you use a tool like Power Console
+-It requires powershell to be installed on all systems running the build script
+-Need to be familiar with powershell syntax
+
+=== 4. Do I have to build my build script then run that? ===
+-No. That would be silly. The build runner takes EITHER a pre-compiled build dll or else a path to the folder containing your build scripts. If a folder is provided it will compile the build scripts and then run them.
