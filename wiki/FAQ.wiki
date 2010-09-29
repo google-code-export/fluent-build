@@ -20,5 +20,5 @@
   * It requires powershell to be installed on all systems running the build script
   * Need to be familiar with powershell syntax
 
-=== 4. Do I have to build my build script then run that? ===
+=== 4. Do I have to build my build script then run the compiled build file? ===
 No. That would be silly. The build runner takes EITHER a pre-compiled build dll or else a path to the folder containing your build scripts. If a folder is provided it will compile the build scripts and then run them.
