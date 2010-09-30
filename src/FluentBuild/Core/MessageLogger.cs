@@ -36,6 +36,7 @@ namespace FluentBuild.Core
 
         public static void WriteHeader(string header)
         {
+            
             Console.WriteLine(header);
         }
 

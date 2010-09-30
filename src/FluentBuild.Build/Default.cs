@@ -43,7 +43,7 @@ namespace Build
             thirdparty_rhino = directory_tools.SubFolder("rhino").File("rhino.mocks.dll");
             thirdparty_sharpzip = directory_base.SubFolder("lib").SubFolder("SharpZipLib-net2.0").File("ICSharpCode.SharpZipLib.dll");
 
-            _version = "0.1.0.0";
+            _version = "0.1.1.0";
 
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
@@ -52,7 +52,7 @@ namespace Build
             AddTask(CompileRunnerSources);
             AddTask(RunTests);
             AddTask(CompileFunctionalTests);
-//            AddTask(RunFunctionalTests);      
+            AddTask(RunFunctionalTests);      
         }
 
         private void CopyDependantAssembliesToCompileDir()
@@ -135,13 +135,13 @@ namespace Build
 
         private void RunTests()
         {
-            Run.Executeable(directory_tools.SubFolder("nunit").File("nunit-console.exe")).WithArguments(assembly_FluentBuild_WithTests.ToString()).Execute();
+           Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild_WithTests).Execute();
         }
 
         private void RunFunctionalTests()
         {
-            Run.Executeable(directory_tools.SubFolder("nunit").File("nunit-console.exe")).WithArguments(
-                assembly_Functional_Tests.ToString()).Execute();
+            //TODO: this will need the sample data copied into the compile directory
+            Run.UnitTestFramework.NUnit.FileToTest(assembly_Functional_Tests).Execute();
         }
     }
 }

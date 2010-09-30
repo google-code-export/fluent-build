@@ -74,7 +74,7 @@ namespace FluentBuild.Runners.UnitTesting
         {
             string pathToFile = "c:\\test.dll";
             var subject = new NUnitRunner().FileToTest(pathToFile);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile }));
+            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/nologo", "/nodots" }));
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace FluentBuild.Runners.UnitTesting
             string pathToFile = "c:\\test.dll";
             string singleParam = "label";
             var subject = new NUnitRunner().FileToTest(pathToFile).AddParameter(singleParam);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile,  "/" + singleParam }));
+            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + singleParam, "/nologo", "/nodots" }));
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace FluentBuild.Runners.UnitTesting
             string name = "label";
             string value = "value";
             var subject = new NUnitRunner().FileToTest(pathToFile).AddParameter(name,value);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile,  "/" + name + ":" + value }));
+            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + name + ":" + value, "/nologo", "/nodots" }));
         }
 
 

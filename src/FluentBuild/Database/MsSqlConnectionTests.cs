@@ -10,7 +10,7 @@ namespace FluentBuild.Database
         public void ShouldCreateMsSqlUtilities()
         {
             var subject = new MsSqlConnection();
-            Assert.That(subject.WithConnectionString(""), Is.TypeOf(typeof (MsSqlUtilities)));
+            Assert.That(subject.WithConnectionString(""), Is.TypeOf(typeof(MsSqlUtilities)));
         }
 
         [Test]

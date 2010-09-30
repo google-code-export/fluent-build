@@ -19,7 +19,7 @@ namespace FluentBuild.Core
             while (Tasks.Count > 0)
             {
                 Action task = Tasks.Dequeue();
-                MessageLogger.WriteHeader(task.Method.Name.ToUpper());
+                MessageLogger.WriteHeader(task.Method.Name);
                 task.Invoke();
             }
 
@@ -31,7 +31,7 @@ namespace FluentBuild.Core
         ///</summary>
         public BuildFile()
         {
-            this.Tasks = new Queue<Action>();
+            Tasks = new Queue<Action>();
         }
 
 

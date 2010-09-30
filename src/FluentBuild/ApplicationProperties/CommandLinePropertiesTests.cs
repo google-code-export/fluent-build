@@ -3,15 +3,21 @@ using NUnit.Framework;
 
 namespace FluentBuild.ApplicationProperties
 {
+    ///<summary>
+    ///</summary>
     [TestFixture]
     public class CommandLinePropertiesTests
     {
+        ///<summary>
+        ///</summary>
         [Test]
         public void ShouldConstructWithProperties()
         {
             Assert.That(Properties.CommandLineProperties.Properties, Is.Not.Null);
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void ShouldGetAndSetProperly()
         {

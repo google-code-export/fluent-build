@@ -22,7 +22,7 @@ namespace FluentBuild.BuildExe
             }
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
-            MessageLogger.ShowDebugMessages = true;
+            MessageLogger.ShowDebugMessages = false;
 
             string classToRun = "Default";
             if (args.Length > 1)
@@ -41,7 +41,8 @@ namespace FluentBuild.BuildExe
         private static void UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Environment.ExitCode = 1;
-            MessageLogger.Write("ERROR", "An unexpected error has occurred. Details:" + e.ExceptionObject);
+            var exceptionObject = e.ExceptionObject as Exception;
+            MessageLogger.Write("ERROR", "An unexpected error has occurred. Details:" + exceptionObject.Message);
             Environment.Exit(1);
         }
 

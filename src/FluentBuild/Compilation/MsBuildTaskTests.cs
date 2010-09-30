@@ -1,4 +1,7 @@
-﻿using FluentBuild.Runners;
+﻿
+using FluentBuild.Core;
+using FluentBuild.Runners;
+using FluentBuild.Utilities;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -101,6 +104,7 @@ namespace FluentBuild.Compilation
         [Test]
         public void Execute_ShouldExecuteMsBuild()
         {
+            Defaults.FrameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();
             //mock calls
             _executable.Stub(x => x.Executable("")).IgnoreArguments().Return(_executable);
             _executable.Stub(x => x.WithArguments("")).IgnoreArguments().Return(_executable);

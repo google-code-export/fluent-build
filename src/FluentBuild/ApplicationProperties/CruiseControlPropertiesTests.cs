@@ -1,12 +1,18 @@
-﻿using System;
+﻿
+using System;
+using System.Diagnostics.CodeAnalysis;
 using FluentBuild.Core;
 using NUnit.Framework;
 
 namespace FluentBuild.ApplicationProperties
 {
+    ///<summary>
+    ///</summary>
     [TestFixture]
     public class CruiseControlPropertiesTests
     {
+        ///<summary>
+        ///</summary>
         [Test]
         public void AllPropertiesShouldMap()
         {

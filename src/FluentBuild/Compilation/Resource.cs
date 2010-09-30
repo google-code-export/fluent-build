@@ -2,15 +2,11 @@ using System;
 
 namespace FluentBuild.Compilation
 {
-
     ///<summary>
     /// Represents a resource file
     ///</summary>
     internal class Resource
     {
-        internal string FilePath { get; private set; }
-        internal string Identifier { get; private set; }
-
         ///<summary>
         /// Creates a Resource for a file with a given identifier
         ///</summary>
@@ -18,8 +14,8 @@ namespace FluentBuild.Compilation
         ///<param name="identifier">The identifier to be used during compilation</param>
         internal Resource(string filePath, string identifier)
         {
-            this.FilePath = filePath;
-            this.Identifier = identifier;
+            FilePath = filePath;
+            Identifier = identifier;
         }
 
         ///<summary>
@@ -28,9 +24,12 @@ namespace FluentBuild.Compilation
         ///<param name="filePath">The path to the resource file</param>
         internal Resource(string filePath)
         {
-            this.FilePath = filePath;
+            FilePath = filePath;
         }
-        
+
+        internal string FilePath { get; private set; }
+        internal string Identifier { get; private set; }
+
         /// <summary>
         /// Creates a string representation of the path and identifier
         /// </summary>

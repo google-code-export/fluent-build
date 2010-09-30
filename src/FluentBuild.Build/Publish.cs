@@ -14,7 +14,7 @@ namespace Build
         {
             AssemblyFluentBuildRelease = directory_compile.File("FluentBuild.dll");
             AssemblyFluentBuildRunnerRelease = directory_compile.File("fb.exe");
-            _finalFileName = "FluentBuild-" + _version + ".zip";
+            _finalFileName = "FluentBuild-Alpha-" + _version + ".zip";
             ZipFilePath = directory_release.File(_finalFileName);
 
             AddTask(Clean);
@@ -48,8 +48,8 @@ namespace Build
             var x = new GoogleCode();
             x.LocalFileName = ZipFilePath.ToString();
             //TODO: pass these in via the command line
-            x.UserName = "";
-            x.Password = "";
+            x.UserName = "dave@solidhouse.com";
+            x.Password = "mW3za4Ku3wf6";
             x.ProjectName = "fluent-build";
             x.Summary = "Alpha Release (v" + _version + ")";
             x.TargetFileName = _finalFileName;
@@ -76,6 +76,7 @@ namespace Build
 
         private void Compress()
         {
+            thirdparty_sharpzip.Copy.To(directory_compile);
             Run.Zip.Compress.SourceFolder(directory_compile).To(ZipFilePath);
         }
     }

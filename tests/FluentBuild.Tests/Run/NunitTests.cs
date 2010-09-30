@@ -13,7 +13,7 @@ namespace FluentBuild.Tests
             var outputFile = rootFolder + "\\sample.xml";
             var pathToProjectRoot = Environment.CurrentDirectory + "\\..\\..\\..\\..\\";
             Core.Run.UnitTestFramework.NUnit
-                .FileToTest(pathToProjectRoot + "\\build\\fluentbuild.dll")
+                .FileToTest(Environment.CurrentDirectory + @"..\..\..\Run\Samples\SimpleTestAssembly\Sample.Test.dll")
                 .XmlOutputTo(outputFile)
                 .PathToNunitConsoleRunner(pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
                 .Execute();

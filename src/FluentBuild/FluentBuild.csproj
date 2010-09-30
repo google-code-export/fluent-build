@@ -133,9 +133,13 @@
     <Compile Include="Runners\Zip\ZipCompressTests.cs" />
     <Compile Include="Runners\Zip\ZipDecompress.cs" />
     <Compile Include="Runners\Zip\ZipTests.cs" />
+    <Compile Include="Utilities\CustomFrameworkVersion.cs" />
+    <Compile Include="Utilities\DesktopFrameworkType.cs" />
     <Compile Include="Utilities\EnvironmentVariableWrapper.cs" />
     <Compile Include="Utilities\Failable.cs" />
     <Compile Include="FilesAndDirectories\FileSet\CopyFilesetTests.cs" />
+    <Compile Include="Utilities\FrameworkNotFoundException.cs" />
+    <Compile Include="Utilities\FrameworkVersionTests.cs" />
     <Compile Include="Utilities\OnError.cs" />
     <Compile Include="ApplicationProperties\TeamCityProperties.cs" />
     <Compile Include="Utilities\ColorizedOutputDisplay.cs" />
@@ -164,6 +168,8 @@
     <Compile Include="Runners\UnitTesting\NUnitRunnerTests.cs" />
     <Compile Include="Utilities\FileFinder.cs" />
     <Compile Include="Utilities\FileFinderTests.cs" />
+    <Compile Include="Utilities\RegistryKeyValueFinder.cs" />
+    <Compile Include="Utilities\RegistryKeyValueFinderTests.cs" />
     <Compile Include="Utilities\RegistryWrapper.cs" />
     <Compile Include="Utilities\RegistryKeyWrapper.cs" />
     <Compile Include="Tokenization\TokenWith.cs" />
@@ -178,8 +184,7 @@
     <Compile Include="Tokenization\TokenReplacer.cs" />
     <Compile Include="Runners\UnitTesting\UnitTestFrameworkRun.cs" />
     <Compile Include="Runners\UnitTesting\UnitTestFrameworkRunTests.cs" />
-    <Compile Include="Utilities\WindowsSDKFinder.cs" />
-    <Compile Include="Utilities\WindowsSDKFinderTests.cs" />
+    <Compile Include="Utilities\SdkNotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

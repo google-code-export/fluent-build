@@ -6,9 +6,13 @@ using NUnit.Framework;
 
 namespace FluentBuild.Compilation
 {
+    ///<summary>
+    ///</summary>
     [TestFixture]
     public class BuildTaskTests
     {
+        ///<summary>
+        ///</summary>
         [Test]
         public void Args_ShouldCreateProperArgs()
         {
@@ -17,6 +21,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}", outputAssembly, "library")));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void Args_ShouldCreateProperArgs_With_Sources()
         {
@@ -28,7 +34,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\"", outputAssembly, "library", reference, source)));
         }
 
-
+        ///<summary>
+        ///</summary>
         [Test]
         public void Args_ShouldCreateProperReferences()
         {
@@ -43,6 +50,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\" /reference:\"{3}\"  \"{4}\"", outputAssembly, "library", references[0], references[1], source)));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void Args_ShouldCreateProperArgs_With_Sources_And_Debug_Symbols()
         {
@@ -54,6 +63,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void OutputFileTo_ShouldWorkWithBuildArtifact()
         {
@@ -65,6 +76,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void Args_ShouldCreateProperArgs_With_Resources()
         {
@@ -75,6 +88,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"Test\",ResName /target:{1}", outputAssembly, "library", reference, source)));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void Args_ShouldCreateProperArgs_With_Fileset_Resources()
         {
@@ -87,6 +102,8 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"myfile.cs\", /target:{1}", outputAssembly, "library")));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void UsingCsc_Compiler_Should_Be_CSC()
         {
@@ -94,6 +111,8 @@ namespace FluentBuild.Compilation
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("csc.exe"));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void UsingCsc_Compiler_Should_Be_VBC()
         {
