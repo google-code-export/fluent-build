@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Users\Kudos\Desktop\fluent-build\compile\FluentBuild_Functional_Tests.dll" total="39" errors="8" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2010-09-30" time="08:45:47">
+  <environment nunit-version="2.5.7.10213" clr-version="2.0.50727.4952" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="C:\Users\Kudos\Desktop\fluent-build\tests\FluentBuild.Tests" machine-name="KUDOS-LAPTOP" user="Kudos" user-domain="Kudos-Laptop" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\Users\Kudos\Desktop\fluent-build\compile\FluentBuild_Functional_Tests.dll" executed="True" result="Failure" success="False" time="52.351" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="FluentBuild" executed="True" result="Failure" success="False" time="52.330" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="52.326" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="AssemblyInfoTests" executed="True" result="Success" success="True" time="0.102" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.AssemblyInfoTests.ShouldGenerateAssemblyInfoFile" executed="True" result="Success" success="True" time="0.080" asserts="1" />
+                </results>
+              </test-suite>
+              <test-suite type="Namespace" name="Build" executed="True" result="Failure" success="False" time="0.332" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="BuildUsingCscTests" executed="True" result="Failure" success="False" time="0.320" asserts="0">
+                    <results>
+                      <test-case name="FluentBuild.Tests.Build.BuildUsingCscTests.ShouldCompileBasicAssembly" executed="True" result="Error" success="False" time="0.267" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : Could not find a part of the path 'C:\Users\Kudos\Desktop\Build\Samples\Simple\C#\'.]]></message>
+                          <stack-trace><![CDATA[at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler)
+at System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+at System.IO.Directory.InternalGetFiles(String path, String searchPattern, SearchOption searchOption)
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String directory, String filter, Boolean recursive) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 48
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String filter) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 41
+at FluentBuild.Core.FileSet.Include(String path) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs:line 53
+at FluentBuild.Tests.Build.BuildUsingCscTests.GetBasicSources()
+at FluentBuild.Tests.Build.BuildTests.Actual_ShouldCompileBasicAssembly()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="FluentBuild.Tests.Build.BuildUsingCscTests.ShouldCompileBasicAssemblyWithDebugSymbols" executed="True" result="Error" success="False" time="0.008" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : Could not find a part of the path 'C:\Users\Kudos\Desktop\Build\Samples\Simple\C#\'.]]></message>
+                          <stack-trace><![CDATA[at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler)
+at System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+at System.IO.Directory.InternalGetFiles(String path, String searchPattern, SearchOption searchOption)
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String directory, String filter, Boolean recursive) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 48
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String filter) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 41
+at FluentBuild.Core.FileSet.Include(String path) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs:line 53
+at FluentBuild.Tests.Build.BuildUsingCscTests.GetBasicSources()
+at FluentBuild.Tests.Build.BuildTests.Actual_ShouldCompileBasicAssemblyWithDebugSymbols()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="FluentBuild.Tests.Build.BuildUsingCscTests.ShouldCompileConsoleApplication" executed="True" result="Error" success="False" time="0.004" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : Could not find a part of the path 'C:\Users\Kudos\Desktop\Build\Samples\Simple\C#\'.]]></message>
+                          <stack-trace><![CDATA[at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler)
+at System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+at System.IO.Directory.InternalGetFiles(String path, String searchPattern, SearchOption searchOption)
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String directory, String filter, Boolean recursive) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 48
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String filter) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 41
+at FluentBuild.Core.FileSet.Include(String path) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs:line 53
+at FluentBuild.Tests.Build.BuildUsingCscTests.GetBasicSources()
+at FluentBuild.Tests.Build.BuildTests.Actual_ShouldCompileConsoleApplication()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="FluentBuild.Tests.Build.BuildUsingCscTests.ShouldCompileModule" executed="True" result="Error" success="False" time="0.004" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : Could not find a part of the path 'C:\Users\Kudos\Desktop\Build\Samples\Simple\C#\'.]]></message>
+                          <stack-trace><![CDATA[at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler)
+at System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+at System.IO.Directory.InternalGetFiles(String path, String searchPattern, SearchOption searchOption)
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String directory, String filter, Boolean recursive) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 48
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String filter) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 41
+at FluentBuild.Core.FileSet.Include(String path) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs:line 53
+at FluentBuild.Tests.Build.BuildUsingCscTests.GetBasicSources()
+at FluentBuild.Tests.Build.BuildTests.Actual_ShouldCompileModule()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="FluentBuild.Tests.Build.BuildUsingCscTests.ShouldCompileWindowsExe" executed="True" result="Error" success="False" time="0.004" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : Could not find a part of the path 'C:\Users\Kudos\Desktop\Build\Samples\Simple\C#\'.]]></message>
+                          <stack-trace><![CDATA[at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler)
+at System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+at System.IO.Directory.InternalGetFiles(String path, String searchPattern, SearchOption searchOption)
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String directory, String filter, Boolean recursive) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 48
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String filter) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 41
+at FluentBuild.Core.FileSet.Include(String path) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs:line 53
+at FluentBuild.Tests.Build.BuildUsingCscTests.GetBasicSources()
+at FluentBuild.Tests.Build.BuildTests.Actual_ShouldCompileWindowsExe()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="FluentBuild.Tests.Build.BuildUsingCscTests.ShouldCompileWithReference" executed="True" result="Error" success="False" time="0.004" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : Could not find a part of the path 'C:\Users\Kudos\Desktop\Build\Samples\Simple\C#\'.]]></message>
+                          <stack-trace><![CDATA[at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler)
+at System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+at System.IO.Directory.InternalGetFiles(String path, String searchPattern, SearchOption searchOption)
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String directory, String filter, Boolean recursive) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 48
+at FluentBuild.FilesAndDirectories.FileSet.FileSystemUtility.GetAllFilesMatching(String filter) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FilesAndDirectories\FileSet\FileSystemUtility.cs:line 41
+at FluentBuild.Core.FileSet.Include(String path) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs:line 53
+at FluentBuild.Tests.Build.BuildUsingCscTests.GetBasicSources()
+at FluentBuild.Tests.Build.BuildTests.Actual_ShouldCompileWithReference()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite type="Namespace" name="Samples" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                    <results>
+                      <test-suite type="Namespace" name="WithReference" executed="True" result="Success" success="True" time="0.004" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="SimpleTest" executed="True" result="Success" success="True" time="0.002" asserts="0">
+                            <results>
+                              <test-case name="FluentBuild.Tests.Build.Samples.WithReference.SimpleTest.TestSomething" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="BuildArtifactCopyTests" executed="True" result="Success" success="True" time="0.030" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.BuildArtifactCopyTests.ReplaceToken_Should_Copy_To_New_Directory_And_Change_File_Name" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactCopyTests.ReplaceToken_Should_Copy_To_New_Directory_And_Perserve_File_Name" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactCopyTests.ReplaceToken_Should_Copy_To_New_File" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="BuildArtifactTests" executed="True" result="Success" success="True" time="0.068" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldCopyFile" executed="True" result="Success" success="True" time="0.008" asserts="2" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldDeleteFile" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldFailToCopyFileIfFileDoesNotExist" executed="True" result="Success" success="True" time="0.011" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldFailToDeleteFileIfFileInUse" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldFailToRenameIfFileDoesNotExist" executed="True" result="Success" success="True" time="0.009" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldNotThrowErrorIfFileDoesNotExist" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldNotThrowErrorIfFileInUse" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldRenameFile" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildArtifactTests.ShouldSucceedIfFileDoesNotExist" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="BuildArtifactTokenReplacementTests" executed="True" result="Success" success="True" time="0.013" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.BuildArtifactTokenReplacementTests.ReplaceToken" executed="True" result="Success" success="True" time="0.013" asserts="2" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="BuildFolderTests" executed="True" result="Success" success="True" time="0.031" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.BuildFolderTests.Create_ShouldContinueIfContinueOnErrorIsSet" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildFolderTests.Create_ShouldCreateSubFolder" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildFolderTests.Create_ShouldFailIfImproperCharactersInPath" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="FluentBuild.Tests.BuildFolderTests.Delete_ShouldContinueIfContinueOnErrorIsSet" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                  <test-case name="FluentBuild.Tests.BuildFolderTests.Delete_ShouldDeleteSubFolder" executed="True" result="Success" success="True" time="0.004" asserts="2" />
+                  <test-case name="FluentBuild.Tests.BuildFolderTests.Delete_ShouldFailIfImproperCharactersInPath" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="DatabaseTests" executed="True" result="Inconclusive" success="False" time="0.001" asserts="0" />
+              <test-suite type="TestFixture" name="FilesetTests" executed="True" result="Success" success="True" time="0.039" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.FilesetTests.ShouldContinueIfErrorOccurs" executed="True" result="Success" success="True" time="0.021" asserts="1" />
+                  <test-case name="FluentBuild.Tests.FilesetTests.ShouldCopyFile" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                  <test-case name="FluentBuild.Tests.FilesetTests.ShouldFailIfDestinationDoesNotExist" executed="True" result="Success" success="True" time="0.007" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="FileSystemFinderTests" executed="True" result="Success" success="True" time="0.308" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.FileSystemFinderTests.FindFile" executed="True" result="Success" success="True" time="0.306" asserts="1" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="NunitTests" executed="True" result="Failure" success="False" time="0.081" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.NunitTests.ShouldFailIfErrorOccurs" executed="True" result="Failure" success="False" time="0.069" asserts="0">
+                    <failure>
+                      <message><![CDATA[An unexpected exception type was thrown
+Expected: System.ApplicationException
+ but was: System.ComponentModel.Win32Exception : The system cannot find the file specified]]></message>
+                      <stack-trace><![CDATA[at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+at FluentBuild.Runners.ProcessWrapper.Start() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ProcessWrapper.cs:line 28
+at FluentBuild.Runners.Executeable.Execute(String prefix) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs:line 147
+at FluentBuild.Runners.Executeable.Execute() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs:line 74
+at FluentBuild.Runners.UnitTesting.NUnitRunner.Execute() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\UnitTesting\NUnitRunner.cs:line 104
+at FluentBuild.Tests.NunitTests.ShouldFailIfErrorOccurs()
+]]></stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="FluentBuild.Tests.NunitTests.ShouldRunProperly" executed="True" result="Error" success="False" time="0.004" asserts="0">
+                    <failure>
+                      <message><![CDATA[System.ComponentModel.Win32Exception : The system cannot find the file specified]]></message>
+                      <stack-trace><![CDATA[at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+at FluentBuild.Runners.ProcessWrapper.Start() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ProcessWrapper.cs:line 28
+at FluentBuild.Runners.Executeable.Execute(String prefix) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs:line 147
+at FluentBuild.Runners.Executeable.Execute() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs:line 74
+at FluentBuild.Runners.UnitTesting.NUnitRunner.Execute() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\UnitTesting\NUnitRunner.cs:line 104
+at FluentBuild.Tests.NunitTests.ShouldRunProperly()
+]]></stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="FluentBuild.Tests.NunitTests.ShouldSucceedIfFailOnErrorIsContinue" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="RunExecuteableTests" executed="True" result="Failure" success="False" time="51.047" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.RunExecuteableTests.ShouldFailIfFileDoesNotExist" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="FluentBuild.Tests.RunExecuteableTests.ShouldNotThrowErrorIfFileDoesNotExistAndContinueOnErrorIsSet" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="FluentBuild.Tests.RunExecuteableTests.ShouldRunCmdPrompt" executed="True" result="Error" success="False" time="51.040" asserts="0">
+                    <failure>
+                      <message><![CDATA[System.ApplicationException : Exectable returned non-zero exit code]]></message>
+                      <stack-trace><![CDATA[at FluentBuild.Runners.Executeable.Execute(String prefix) in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs:line 147
+at FluentBuild.Runners.Executeable.Execute() in c:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs:line 74
+]]></stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="ZipTests" executed="True" result="Success" success="True" time="0.240" asserts="0">
+                <results>
+                  <test-case name="FluentBuild.Tests.ZipTests.ShouldZipAndUnzipFile" executed="True" result="Success" success="True" time="0.219" asserts="2" />
+                  <test-case name="FluentBuild.Tests.ZipTests.ShouldZipAndUnzipFolder" executed="True" result="Success" success="True" time="0.020" asserts="5" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
