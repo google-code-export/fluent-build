@@ -1,54 +1,46 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using FluentBuild.Core;
 using FluentBuild.Runners;
-using FluentBuild.Utilities;
 
 namespace FluentBuild.Compilation
 {
     internal class Resgen
     {
-        private readonly IWindowsSdkFinder _sdkFinder;
-        internal FileSet _files;
-        internal string _outputFolder;
-        internal string _prefix;
-        private IExecuteable _exeRunner;
-        internal Resgen(IWindowsSdkFinder sdkFinder, IExecuteable exeRunner)
+        private readonly IExecuteable _exeRunner;
+        internal FileSet Files;
+        internal string OutputFolder;
+        internal string Prefix;
+
+        internal Resgen(IExecuteable exeRunner)
         {
-            _sdkFinder = sdkFinder;
             _exeRunner = exeRunner;
         }
 
-        public Resgen() : this(new WindowsSdkFinder(), new Executeable())
+        public Resgen() : this(new Executeable())
         {
         }
 
         public Resgen GenerateFrom(FileSet fileset)
         {
-            _files = fileset;
+            Files = fileset;
             return this;
         }
 
         public Resgen OutputTo(string folder)
         {
-            _outputFolder = folder;
+            OutputFolder = folder;
             return this;
         }
 
         public Resgen PrefixOutputsWith(string prefix)
         {
-            _prefix = prefix;
+            Prefix = prefix;
             return this;
         }
 
         internal string GetPathToResGenExecuteable()
         {
-            if (!_sdkFinder.IsWindowsSdkInstalled())
-                throw new ApplicationException(
-                    "Could not find the Windows SDK which contains resgen.exe which is required to build resources");
-
-            //TODO: this should use the PROPER SDK based on current framework version
-            string resGenExecuteable = Path.Combine(_sdkFinder.PathToHighestVersionedSdk(), "bin\\resgen.exe");
+            string resGenExecuteable = Path.Combine(Defaults.FrameworkVersion.GetPathToSdk(), "bin\\resgen.exe");
             MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
             return resGenExecuteable;
         }
@@ -58,17 +50,16 @@ namespace FluentBuild.Compilation
             string resGenExecuteable = GetPathToResGenExecuteable();
 
             var outputFiles = new FileSet();
-            foreach (string resourceFileName in _files.Files)
+            foreach (string resourceFileName in Files.Files)
             {
-                string outputFileName = _prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
-                outputFileName = Path.Combine(_outputFolder, outputFileName);
+                string outputFileName = Prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
+                outputFileName = Path.Combine(OutputFolder, outputFileName);
                 outputFiles.Include(outputFileName);
 
                 IExecuteable executeable = _exeRunner.Executable(resGenExecuteable);
                 IExecuteable withArguments = executeable.WithArguments("\"" + resourceFileName + "\"");
-                IExecuteable arguments = withArguments.WithArguments("\"" + outputFileName +"\"");
+                IExecuteable arguments = withArguments.WithArguments("\"" + outputFileName + "\"");
                 arguments.Execute();
-                
             }
             return outputFiles;
         }

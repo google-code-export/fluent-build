@@ -61,6 +61,11 @@ namespace FluentBuild.Core
             return Delete(Defaults.OnError);
         }
 
+        /// <summary>
+        /// Deletes the folder.
+        /// </summary>
+        ///<param name="onError">Sets the behavior of how to handle an error</param>
+        ///<returns></returns>
         public BuildFolder Delete(OnError onError)
         {
             MessageLogger.WriteDebugMessage("Deleting " + _path);

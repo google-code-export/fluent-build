@@ -4,12 +4,16 @@ using Rhino.Mocks;
 
 namespace FluentBuild.ApplicationProperties
 {
+    ///<summary>
+    ///</summary>
     [TestFixture]
     public class TeamCityPropertiesTests
     {
         private IEnvironmentVariableWrapper _environmentVariableWrapper;
         private TeamCityProperties _subject;
 
+        ///<summary>
+        ///</summary>
         [SetUp]
         public void Setup()
         {
@@ -17,6 +21,8 @@ namespace FluentBuild.ApplicationProperties
             _subject = new TeamCityProperties(_environmentVariableWrapper);
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void BuildNumberShouldCallToWrapper()
         {
@@ -24,6 +30,8 @@ namespace FluentBuild.ApplicationProperties
             _environmentVariableWrapper.AssertWasCalled(x=>x.Get(Arg<string>.Is.Anything));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void ConfigurationNameShouldCallToWrapper()
         {
@@ -31,6 +39,8 @@ namespace FluentBuild.ApplicationProperties
             _environmentVariableWrapper.AssertWasCalled(x => x.Get(Arg<string>.Is.Anything));
         }
 
+        ///<summary>
+        ///</summary>
         [Test]
         public void ProjectName()
         {

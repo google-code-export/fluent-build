@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using FluentBuild.Core;
 using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners.UnitTesting
@@ -81,6 +82,9 @@ namespace FluentBuild.Runners.UnitTesting
                     args.Add(string.Format("/{0}:{1}", key, _parameters[key]));
                 
             }
+            args.Add("/nologo");
+            args.Add("/nodots");
+            //args.Add("/labels"););
             return args.ToArray();
         }
 
@@ -102,6 +106,11 @@ namespace FluentBuild.Runners.UnitTesting
             if (!String.IsNullOrEmpty(_workingDirectory))
                 executeable = executeable.InWorkingDirectory(_workingDirectory);
             executeable.Execute();
+        }
+
+        public NUnitRunner FileToTest(BuildArtifact buildArtifact)
+        {
+            return FileToTest(buildArtifact.ToString());
         }
     }
 }

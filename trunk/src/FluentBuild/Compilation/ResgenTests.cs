@@ -1,9 +1,7 @@
-﻿using System;
-using FluentBuild.Core;
+﻿using FluentBuild.Core;
 using FluentBuild.Runners;
 using FluentBuild.Utilities;
 using NUnit.Framework;
-
 using Rhino.Mocks;
 
 namespace FluentBuild.Compilation
@@ -11,51 +9,44 @@ namespace FluentBuild.Compilation
     [TestFixture]
     public class ResgenTests
     {
+        #region Setup/Teardown
+
+        [SetUp]
+        public void SetUp()
+        {
+            var frameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();
+            frameworkVersion.Stub(x => x.GetPathToSdk()).Return("c:\\temp").Repeat.Any();
+            Defaults.FrameworkVersion = frameworkVersion;
+        }
+
+        #endregion
+
         [Test]
         public void Execute_ShouldRunAgainstMock()
         {
             var fileset = new FileSet();
             fileset.Include(@"c:\temp\nonexistant.txt");
 
-            var mockSdkFinder = MockRepository.GenerateStub<IWindowsSdkFinder>();
             var mockExe = MockRepository.GenerateStub<IExecuteable>();
 
-            var subject = new Resgen(mockSdkFinder,mockExe).GenerateFrom(fileset).OutputTo("c:\\");
-            mockSdkFinder.Stub(x => x.IsWindowsSdkInstalled()).Return(true);
-            mockSdkFinder.Stub(x => x.PathToHighestVersionedSdk()).Return("c:\\temp");
+            Resgen subject = new Resgen(mockExe).GenerateFrom(fileset).OutputTo("c:\\");
             mockExe.Stub(x => x.Executable("c:\\temp\\bin\\resgen.exe")).Return(mockExe);
             mockExe.Stub(x => x.WithArguments(Arg<string[]>.Is.Anything)).Return(mockExe);
             mockExe.Stub(x => x.WithArguments(Arg<string[]>.Is.Anything)).Return(mockExe);
 
             subject.Execute();
             mockExe.AssertWasCalled(x => x.Execute());
-            
         }
 
-        [Test, ExpectedException(typeof(ApplicationException))]
-        public void Execute_ShouldNotFindSdk()
-        {
-            var fileset = new FileSet();
-            fileset.Include(@"c:\temp\nonexistant.txt");
-
-            var mockSdkFinder = MockRepository.GenerateStub<IWindowsSdkFinder>();
-            var mockExe = MockRepository.GenerateStub<IExecuteable>();
-
-            var subject = new Resgen(mockSdkFinder, mockExe).GenerateFrom(fileset).OutputTo("c:\\");
-            mockSdkFinder.Stub(x => x.IsWindowsSdkInstalled()).Return(false);
-            subject.Execute();
-        }
-
-        
         [Test]
         public void GenerateFrom_ShouldPopulateFiles()
         {
             var fileset = new FileSet();
             fileset.Include("c:\temp\nonexistant.txt");
 
-            var subject = new Resgen().GenerateFrom(fileset);
+            Resgen subject = new Resgen().GenerateFrom(fileset);
 
-            Assert.That(subject._files, Is.Not.Null);
+            Assert.That(subject.Files, Is.Not.Null);
             Assert.That(subject, Is.Not.Null);
         }
 
@@ -63,9 +54,9 @@ namespace FluentBuild.Compilation
         public void OutputTo_ShouldPopulatePathAndNotBeNull()
         {
             string folder = "c:\temp";
-            var subject = new Resgen().OutputTo(folder);
+            Resgen subject = new Resgen().OutputTo(folder);
 
-            Assert.That(subject._outputFolder, Is.EqualTo(folder));
+            Assert.That(subject.OutputFolder, Is.EqualTo(folder));
             Assert.That(subject, Is.Not.Null);
         }
 
@@ -74,9 +65,9 @@ namespace FluentBuild.Compilation
         public void PrefixOutputsWith_ShouldSetPrefixProperly()
         {
             string prefix = "blah";
-            var subject = new Resgen().PrefixOutputsWith(prefix);
+            Resgen subject = new Resgen().PrefixOutputsWith(prefix);
 
-            Assert.That(subject._prefix, Is.EqualTo(prefix));
+            Assert.That(subject.Prefix, Is.EqualTo(prefix));
             Assert.That(subject, Is.Not.Null);
         }
     }

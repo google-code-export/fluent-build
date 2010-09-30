@@ -172,15 +172,14 @@ namespace FluentBuild.Compilation
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
             MessageLogger.Write(compilerWithoutExtentions,
                                 String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            string compileMessage = "Compile Using: " + @"c:\Windows\Microsoft.NET\Framework\" +
-                                    Defaults.FrameworkVersion.FullVersion + "\\" + Compiler + " " +
+            string compileMessage = "Compile Using: " + 
+                                    Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " +
                                     Args.Replace("/", Environment.NewLine + "/");
             MessageLogger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
-            //TODO: this should NOT be hardcoded
             var executeable =
                 (Executeable)
-                Run.Executeable(@"c:\Windows\Microsoft.NET\Framework\" + Defaults.FrameworkVersion.FullVersion + "\\" +
+                Run.Executeable(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" +
                                 Compiler).WithArguments(Args);
             executeable.Execute(compilerWithoutExtentions);
             MessageLogger.WriteDebugMessage("Done Compiling");

@@ -124,9 +124,7 @@ namespace FluentBuild.Compilation
         ///</summary>
         public void Execute()
         {
-            string pathToMsBuild = Environment.GetEnvironmentVariable("windir") + @"\Microsoft.Net\Framework\" +
-                                   Defaults.FrameworkVersion.FullVersion + @"\MsBuild.exe";
-            
+            string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";            
             _executeable.Executable(pathToMsBuild).WithArguments(BuildArgs()).Execute();
         }
     }

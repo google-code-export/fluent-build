@@ -80,6 +80,7 @@
     <Compile Include="BuildArtifact\BuildArtifactTests.cs" />
     <Compile Include="BuildFolderTests.cs" />
     <Compile Include="Build\BuildTests.cs" />
+    <Compile Include="Build\BuildUsingCscTests.cs" />
     <Compile Include="Build\Samples\Simple\C#\basic.cs" />
     <Compile Include="Build\Samples\Simple\C#\Propgram.cs" />
     <Compile Include="Build\Samples\WithReference\C#\simpleTest.cs" />
@@ -115,6 +116,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Run\Samples\SimpleTestAssembly\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -126,6 +126,51 @@
             <param name="path">Path to nunit-console.exe</param>
             <returns></returns>
         </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.WriteFile(System.IO.Stream,System.String)">
+            <summary>
+            Writes the specified file to the specified stream.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.WriteLine(System.IO.Stream,System.String)">
+            <summary>
+            Writes the string to the specified stream and concatenates a newline.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.CreateAuthorizationToken(System.String,System.String)">
+            <summary>
+            Creates the authorization token.
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Publishing.GoogleCode.UserName">
+            <summary>
+            Gets or sets Google user name to authenticate as (this is just the username part, don't include the @gmail.com part.
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Publishing.GoogleCode.Password">
+            <summary>
+            Gets or sets the Google Code password (not the same as the gmail password).
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Publishing.GoogleCode.ProjectName">
+            <summary>
+            Gets or sets the Google Code project name to upload to.
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Publishing.GoogleCode.LocalFileName">
+            <summary>
+            Gets or sets the local path of the file to upload.
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Publishing.GoogleCode.TargetFileName">
+            <summary>
+            Gets or sets the file name that this file will be given on Google Code.
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Publishing.GoogleCode.Summary">
+            <summary>
+            Gets or sets the summary of the upload.
+            </summary>
+        </member>
         <member name="T:FluentBuild.Core.BuildFile">
             <summary>
              Represents a Build file that can be run
@@ -216,35 +261,6 @@
             <summary>
             Copies the artifact
             </summary>
-        </member>
-        <member name="M:FluentBuild.Utilities.IWindowsSdkFinder.IsWindowsSdkInstalled">
-            <summary>
-            Determines if the Windows SDK is installed by checking for the existance of the SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows registry key
-            </summary>
-            <returns>true if the key is found and false if the key is not found</returns>
-        </member>
-        <member name="M:FluentBuild.Utilities.IWindowsSdkFinder.PathToHighestVersionedSdk">
-            <summary>
-            Finds the highest SDK version installed via its registry key
-            </summary>
-            <returns>The path to the hisghest SDK version</returns>
-        </member>
-        <member name="T:FluentBuild.Utilities.WindowsSdkFinder">
-            <summary>
-            A Utility class that is used to locate the Windows SDK so that the appropriate compiler can be run
-            </summary>
-        </member>
-        <member name="M:FluentBuild.Utilities.WindowsSdkFinder.IsWindowsSdkInstalled">
-            <summary>
-            Determines if the Windows SDK is installed by checking for the existance of the SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows registry key
-            </summary>
-            <returns>true if the key is found and false if the key is not found</returns>
-        </member>
-        <member name="M:FluentBuild.Utilities.WindowsSdkFinder.PathToHighestVersionedSdk">
-            <summary>
-            Finds the highest SDK version installed via its registry key
-            </summary>
-            <returns>The path to the hisghest SDK version</returns>
         </member>
         <member name="T:FluentBuild.Core.Run">
             <summary>
@@ -533,51 +549,6 @@
             </summary>
             <param name="filter">A filter that can contain wildcards</param>
             <returns></returns>
-        </member>
-        <member name="M:FluentBuild.Publishing.GoogleCode.WriteFile(System.IO.Stream,System.String)">
-            <summary>
-            Writes the specified file to the specified stream.
-            </summary>
-        </member>
-        <member name="M:FluentBuild.Publishing.GoogleCode.WriteLine(System.IO.Stream,System.String)">
-            <summary>
-            Writes the string to the specified stream and concatenates a newline.
-            </summary>
-        </member>
-        <member name="M:FluentBuild.Publishing.GoogleCode.CreateAuthorizationToken(System.String,System.String)">
-            <summary>
-            Creates the authorization token.
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.UserName">
-            <summary>
-            Gets or sets Google user name to authenticate as (this is just the username part, don't include the @gmail.com part.
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.Password">
-            <summary>
-            Gets or sets the Google Code password (not the same as the gmail password).
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.ProjectName">
-            <summary>
-            Gets or sets the Google Code project name to upload to.
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.LocalFileName">
-            <summary>
-            Gets or sets the local path of the file to upload.
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.TargetFileName">
-            <summary>
-            Gets or sets the file name that this file will be given on Google Code.
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.Summary">
-            <summary>
-            Gets or sets the summary of the upload.
-            </summary>
         </member>
     </members>
 </doc>

@@ -15,11 +15,11 @@ namespace FluentBuild.Core
         ///<summary>
         /// Sets the .NET Framework version to use. The default is .NET 4.0
         ///</summary>
-        public static FrameworkVersion FrameworkVersion = FrameworkVersion.NET4_0;
+        public static IFrameworkVersion FrameworkVersion;
 
         static Defaults()
         {
-            FrameworkVersion = FrameworkVersion.NET4_0;
+            FrameworkVersion = Utilities.FrameworkVersion.NET4_0.Full ;
         }
     }
 }

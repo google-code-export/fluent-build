@@ -3,8 +3,15 @@ using FluentBuild.FilesAndDirectories.FileSet;
 
 namespace FluentBuild.Core
 {
+    ///<summary>
+    /// Represents a FileSet
+    ///</summary>
     public interface IFileSet
     {
+
+        ///<summary>
+        /// 
+        ///</summary>
         IList<string> Files { get; }
         CopyFileset Copy { get; }
         FileSet Include(BuildArtifact path);
@@ -14,9 +21,9 @@ namespace FluentBuild.Core
 
     public class FileSet : IFileSet
     {
-        private readonly List<string> exclusions = new List<string>();
-        private readonly List<string> files = new List<string>();
-        private readonly IFileSystemUtility utility;
+        private readonly List<string> _exclusions = new List<string>();
+        private readonly List<string> _files = new List<string>();
+        private readonly IFileSystemUtility _utility;
 
         public FileSet() : this(new FileSystemUtility())
         {
@@ -24,19 +31,22 @@ namespace FluentBuild.Core
 
         internal FileSet(IFileSystemUtility utility)
         {
-            this.utility = utility;
+            _utility = utility;
         }
 
         //TODO: Should this not be a read only collection?
+
+        #region IFileSet Members
+
         public IList<string> Files
         {
             get
             {
-                foreach (string exclusion in exclusions)
+                foreach (string exclusion in _exclusions)
                 {
-                    files.Remove(exclusion);
+                    _files.Remove(exclusion);
                 }
-                return files;
+                return _files;
             }
         }
 
@@ -48,9 +58,9 @@ namespace FluentBuild.Core
         public FileSet Include(string path)
         {
             if (path.IndexOf('*') == -1)
-                files.Add(path);
+                _files.Add(path);
             else
-                files.AddRange(utility.GetAllFilesMatching(path));
+                _files.AddRange(_utility.GetAllFilesMatching(path));
             return this;
         }
 
@@ -58,17 +68,17 @@ namespace FluentBuild.Core
         public FileSet Exclude(string path)
         {
             if (path.IndexOf('*') == -1)
-                exclusions.Add(path);
+                _exclusions.Add(path);
             else
-                exclusions.AddRange(utility.GetAllFilesMatching(path));
+                _exclusions.AddRange(_utility.GetAllFilesMatching(path));
             return this;
         }
 
         public CopyFileset Copy
         {
-            get{
-                return new CopyFileset(this);
-            }
+            get { return new CopyFileset(this); }
         }
+
+        #endregion
     }
 }

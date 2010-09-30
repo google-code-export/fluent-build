@@ -8,7 +8,9 @@ using System.Text;
 
 namespace FluentBuild.Publishing
 {
-    //TODO: all fiels are required
+    //TODO: all fields are required
+    //TODO: make this fluent
+    //This code was adapted from the nant-googlecode project http://code.google.com/p/nant-googlecode/ 
     public class GoogleCode
     {
         private static readonly byte[] NewLineAsciiBytes = Encoding.ASCII.GetBytes("\r\n");

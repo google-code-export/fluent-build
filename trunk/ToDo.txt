@@ -1,18 +1,27 @@
 Build
+  Completed
+    -Add a Run.Debug which will call Debugger.Invoke() when hit
+
   This release
-	-Force a TargetType
     -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
+	-Support for multiple frameworks
+	-Force a TargetType
+
 	-Increase method documentation
 	-Review visibility of methods
-    -review TODOs
-	-Credit google code stuff
+    
+	-review TODOs
+	-Add in ILMerge support / ILMerge in sharpzlib
 	
   Next Release
+    -Review exception types and get rid of ApplicationException where necessary
     -Recurse all subfolders does not seem to fit well into the BuildFolder structure (neither does Files(filter) seem to fit)
 		Folder.Subfolder("Tests").CreateFileSetString.RecurseAllSubfolders.Files("*.cs");
-    -Add a Run.Debug which will call Debugger.Invoke() when hit
 	-Review message output and verbosity. I think a 0 would be nothing. 1 would be which tasks. 2 would be events in the task. 
 	-Add BuildArtifact.Move
+	-TeamCity/CCNet/Team blech support
+	-Runners should be able to have their own message processor so it can determine messages. i.e. Nunit runner should be able to rpocess messages and show errors if they occur.
+	-Setting a debug state on the application (instead of the message logger) should allow other parts to determine what to do based on debug state
 
   Future Releases
     -version check that runs in the background and alerts on next run
