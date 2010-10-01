@@ -7,7 +7,6 @@ using System.Text;
 
 namespace FluentBuild.Publishing
 {
-    //TODO: all fields are required
     //This code was adapted from the nant-googlecode project http://code.google.com/p/nant-googlecode/ 
     ///<summary>
     /// Publishes a file to GoogleCode
@@ -17,7 +16,6 @@ namespace FluentBuild.Publishing
         private static readonly byte[] NewLineAsciiBytes = Encoding.ASCII.GetBytes("\r\n");
         private static readonly string Boundary = Guid.NewGuid().ToString();
         private string _localFilePath;
-
         private string _password;
         private string _projectName;
         private string _summary;
@@ -82,12 +80,28 @@ namespace FluentBuild.Publishing
             _summary = data;
             return this;
         }
-        
+
+        private void ValidateString(string value, string friendlyName)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException(String.Format("{0} is required", friendlyName));
+            }
+        }
+
         ///<summary>
         /// Executes the upload of the file via a http post
         ///</summary>
         public void Upload()
         {
+            ValidateString(_localFilePath, "LocalFilePath");
+            ValidateString(_password, "Password");
+            ValidateString(_projectName, "ProjectName");
+            ValidateString(_summary, "Summary");
+            ValidateString(_targetFileName, "TargetFileName");
+            ValidateString(_username, "Username");
+
+
             var request =
                 (HttpWebRequest) WebRequest.Create(String.Format("https://{0}.googlecode.com/files", _projectName));
             request.Method = "POST";
