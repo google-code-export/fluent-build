@@ -17,8 +17,6 @@ namespace FluentBuild.Database
         SqlConnectionStringBuilder ConnectionString { get; }
     }
 
-
-    //TODO: better testing of this area
     public class MsSqlEngine : IMsSqlEngine
     {
         internal readonly SqlConnectionStringBuilder _connectionString;

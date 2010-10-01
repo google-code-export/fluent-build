@@ -24,18 +24,33 @@ namespace FluentBuild.BuildExe
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
             MessageLogger.ShowDebugMessages = false;
 
-            string classToRun = "Default";
-            if (args.Length > 1)
-                classToRun = args[1];
+            //creates a new parser and parses args
+            var parser = new CommandLineParser(args);
 
-            string pathToAssembly = Path.Combine(Environment.CurrentDirectory, args[0]);
-            if (Path.GetExtension(args[0]).ToLower() != "dll")
+            string pathToAssembly;
+            if (parser.SourceBuild)
             {
                 Console.WriteLine("building task from sources");
-                pathToAssembly = BuildAssemblyFromSources(pathToAssembly);
+                if (!Directory.Exists(parser.PathToBuildSources))
+                {
+                    Console.WriteLine("Could not find sources at: " + parser.PathToBuildSources);
+                    return;
+                }
+                pathToAssembly = BuildAssemblyFromSources(parser.PathToBuildSources);
+            }
+            else
+            {
+
+                pathToAssembly = Path.Combine(parser.PathToBuildDll);
             }
 
-            ExecuteBuildTask(pathToAssembly, classToRun);
+            if (!File.Exists(pathToAssembly))
+            {
+                Console.WriteLine("Could not find compiled build script at: " + parser.PathToBuildSources);
+                return;
+            }
+
+            ExecuteBuildTask(pathToAssembly, parser.ClassToRun);
         }
 
         private static void UnhandledException(object sender, UnhandledExceptionEventArgs e)

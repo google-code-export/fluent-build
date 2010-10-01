@@ -29,6 +29,12 @@
             Builds a module
             </summary>
         </member>
+        <member name="T:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRunTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRunTests.Nunit_ShouldCreateNunitRunner">
+            <summary />
+        </member>
         <member name="T:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails">
             <summary>
             Sets the lines for an assembly info file
@@ -70,6 +76,13 @@
             Sets the assembly version.
             </summary>
             <param name="value">a version in the format of Major.Minor.[Build].[Revision]</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.Version(System.Version)">
+            <summary>
+            Sets the assembly version.
+            </summary>
+            <param name="value">a version object</param>
             <returns></returns>
         </member>
         <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.Title(System.String)">
@@ -117,7 +130,266 @@
             <summary>
             Execute the generation of the assembly info file and output it.
             </summary>
-            <param name="artifactLocation">The destination file path location</param>
+            <param name="filePath">The destination file path location</param>
+        </member>
+        <member name="T:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetailsTests">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetailsTests.ImportShouldNotAllowDuplicates">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Tokenization.TokenReplacer">
+            <summary>
+             Replaces tokens in a file
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Tokenization.TokenReplacer.ReplaceToken(System.String)">
+            <summary>
+             Replaces a token in a string
+            </summary>
+            <param name="token">the token to replace (without the delimiter)</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Tokenization.TokenReplacer.To(System.String)">
+            <summary>
+             Outputs the token replaced to a file
+            </summary>
+            <param name="destination">the destination path</param>
+            <exception cref="T:System.ApplicationException">Occurs if the file already exists</exception>
+        </member>
+        <member name="T:FluentBuild.Core.IFileSet">
+            <summary>
+             Represents a FileSet
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Core.IFileSet.Include(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             Includes a path in the fileset.
+            </summary>
+            <param name="path">path to files to include</param>
+        </member>
+        <member name="M:FluentBuild.Core.IFileSet.Include(System.String)">
+            <summary>
+             Includes a path in the fileset.
+            </summary>
+            <param name="path">path to files to include</param>
+        </member>
+        <member name="M:FluentBuild.Core.IFileSet.Exclude(System.String)">
+            <summary>
+             Adds an exclude filter
+            </summary>
+            <param name="path">exclude path</param>
+        </member>
+        <member name="P:FluentBuild.Core.IFileSet.Files">
+            <summary>
+             Returns a list of files that is contained within the fileset. 
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Core.IFileSet.Copy">
+            <summary>
+             Copies the fileset
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Core.FileSet">
+            <summary>
+             Represents a set of files with include and exclude filters
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Core.FileSet.#ctor">
+            <summary>
+             Creates a new fileset
+            </summary>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests.StringCopyShouldRenameFile">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests.ArtifactCopyShouldRenameFile">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests.BuildFolderCopyShouldMoveToNewFolder">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests.PerformTokenReplacement">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Runners.IExecuteable">
+            <summary>
+             Represents an executable to be run
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Utilities.IFailable`1">
+            <summary>
+             Represents a class that has continue/fail on error behavior
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:FluentBuild.Utilities.IFailable`1.FailOnError">
+            <summary>
+             On error throw an exception
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Utilities.IFailable`1.ContinueOnError">
+            <summary>
+             Swallow exceptions and continue
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecuteable.WithArguments(System.String[])">
+            <summary>
+             Sets the arguments to pass to the executable
+            </summary>
+            <param name="arguments">The arguments to pass</param>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecuteable.InWorkingDirectory(System.String)">
+            <summary>
+             Sets the working directory
+            </summary>
+            <param name="directory">path to the working directory</param>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecuteable.InWorkingDirectory(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Sets the working directory
+            </summary>
+            <param name="directory">path to the working directory</param>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecuteable.Execute">
+            <summary>
+             Executes the executable with the provided options.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecuteable.Executable(System.String)">
+            <summary>
+             Sets the executeable to run
+            </summary>
+            <param name="path">path to the executable</param>
+        </member>
+        <member name="T:FluentBuild.Runners.Executeable">
+            <summary>
+             An executable to be run
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Utilities.Failable`1">
+            <summary>
+             Represents a class that has continue/fail on error behavior
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:FluentBuild.Runners.Executeable.#ctor">
+            <summary>
+             Instantiates a new executable
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.Executeable.#ctor(System.String)">
+            <summary>
+             instantiates an executeable with the path to the assembly specified
+            </summary>
+            <param name="executeablePath">Path to the executable to run</param>
+        </member>
+        <member name="T:FluentBuild.Database.MsSqlConnectionTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlConnectionTests.ShouldCreateMsSqlUtilities">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlConnectionTests.ShouldCreateMsSqlUtilitiesAndHaveEngineBuilt">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Compilation.ResourceTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResourceTests.CreateShouldBuildProperly">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResourceTests.IfEmptyNameThenJustValueShouldBeReturned">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResourceTests.ShouldCreateQuotedString">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.ApplicationProperties.TeamCityPropertiesTests">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.TeamCityPropertiesTests.Setup">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.TeamCityPropertiesTests.BuildNumberShouldCallToWrapper">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.TeamCityPropertiesTests.ConfigurationNameShouldCallToWrapper">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.TeamCityPropertiesTests.ProjectName">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Utilities.FileFinder">
+            <summary>
+             Finds files recursevely in a directory
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Utilities.FileFinder.#ctor">
+            <summary>
+             Instantiates a new FileFinder
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Utilities.FileFinder.Find(System.String,System.String)">
+            <summary>
+             Finds a file in a directory and searches subdirectories
+            </summary>
+            <param name="fileName">The filename to find</param>
+            <param name="directory">The starting directory to search</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Utilities.FileFinder.Find(System.String)">
+            <summary>
+             Finds a file in the CURRENT directory and searches subdirectories
+            </summary>
+            <param name="fileName">The filename to search for</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentBuild.Runners.UnitTesting.NUnitRunner">
+            <summary>
+             Runs nunit against an assembly
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.WorkingDirectory(System.String)">
+            <summary>
+             Sets the working directory
+            </summary>
+            <param name="path">The working directory for nunit-console</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.FileToTest(System.String)">
+            <summary>
+             The assembly to run nunit against
+            </summary>
+            <param name="path">path to the assembly</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.FileToTest(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             The assembly to run nunit against
+            </summary>
+            <param name="buildArtifact">build artifact that represents the path to the assembly to test</param>
+            <returns></returns>
         </member>
         <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.PathToNunitConsoleRunner(System.String)">
             <summary>
@@ -125,6 +397,104 @@
             </summary>
             <param name="path">Path to nunit-console.exe</param>
             <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.XmlOutputTo(System.String)">
+            <summary>
+             Allows you to set the output to be an xml file.
+            </summary>
+            <param name="path">path for the output</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.AddParameter(System.String,System.String)">
+            <summary>
+             Adds a parameter for nunit
+            </summary>
+            <param name="name">The name of the parameter</param>
+            <param name="value">The value of the parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.AddParameter(System.String)">
+            <summary>
+             Adds a named parameter to nunit
+            </summary>
+            <param name="name">The name of the parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunner.Execute">
+            <summary>
+             Attempts to find and then run nunit-console
+            </summary>
+            <exception cref="T:System.IO.FileNotFoundException">Occurs when nunit-console.exe can not be found</exception>
+        </member>
+        <member name="T:FluentBuild.Core.MessageLoggerTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteHeader">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfDebugTurnedOn">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfDebugTurnedOff">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteBlankLine_ShouldCreateNewLine">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.Write_ShouldWrapLongLines">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Database.MsSqlUpdateTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlUpdateTests.VersionTable_ShouldSetVersionOnEngine">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Publishing.GoogleCode">
+            <summary>
+             Publishes a file to GoogleCode
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.UserName(System.String)">
+            <summary>
+            Gets or sets Google user name to authenticate as (this is just the username part, don't include the @gmail.com part.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.Password(System.String)">
+            <summary>
+            Gets or sets the Google Code password (not the same as the gmail password).
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.ProjectName(System.String)">
+            <summary>
+            Gets or sets the Google Code project name to upload to.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.LocalFileName(System.String)">
+            <summary>
+            Gets or sets the local path of the file to upload.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.TargetFileName(System.String)">
+            <summary>
+            Gets or sets the file name that this file will be given on Google Code.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.Summary(System.String)">
+            <summary>
+            Gets or sets the summary of the upload.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Publishing.GoogleCode.Upload">
+            <summary>
+             Executes the upload of the file via a http post
+            </summary>
         </member>
         <member name="M:FluentBuild.Publishing.GoogleCode.WriteFile(System.IO.Stream,System.String)">
             <summary>
@@ -141,35 +511,84 @@
             Creates the authorization token.
             </summary>
         </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.UserName">
+        <member name="T:FluentBuild.ApplicationProperties.CruiseControlProperties">
             <summary>
-            Gets or sets Google user name to authenticate as (this is just the username part, don't include the @gmail.com part.
+             Accesses a set list of cruise control properties.
             </summary>
         </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.Password">
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.ProjectName">
             <summary>
-            Gets or sets the Google Code password (not the same as the gmail password).
+             Gets the project name
             </summary>
         </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.ProjectName">
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.LastBuild">
             <summary>
-            Gets or sets the Google Code project name to upload to.
+             Gets the ID number of the last build
             </summary>
         </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.LocalFileName">
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.LastSuccessfulBuild">
             <summary>
-            Gets or sets the local path of the file to upload.
+             Gets the ID of the last successful build
             </summary>
         </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.TargetFileName">
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.BuildDate">
             <summary>
-            Gets or sets the file name that this file will be given on Google Code.
+             Returns the build date
             </summary>
         </member>
-        <member name="P:FluentBuild.Publishing.GoogleCode.Summary">
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.Timestamp">
             <summary>
-            Gets or sets the summary of the upload.
+             Gets the cctimestamp property
             </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.Label">
+            <summary>
+             Gets the cruise control label
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.Interval">
+            <summary>
+             Gets the interval property
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.LastBuildSuccessful">
+            <summary>
+             Wether the last build that was run was successful
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.LogDirectory">
+            <summary>
+             The directory that cruise control logs to
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.CruiseControlProperties.LogFile">
+            <summary>
+             The file that cruise control logs to
+            </summary>
+        </member>
+        <member name="T:FluentBuild.ApplicationProperties.CommandLinePropertiesTests">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.CommandLinePropertiesTests.ShouldConstructWithProperties">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.CommandLinePropertiesTests.ShouldGetAndSetProperly">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Utilities.RegistryKeyValueFinderTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.RegistryKeyValueFinderTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.RegistryKeyValueFinderTests.ShouldOpenLocalMachineKeyForSoftwareTwice">
+            <summary />
         </member>
         <member name="T:FluentBuild.Core.BuildFile">
             <summary>
@@ -177,7 +596,6 @@
             </summary>
         </member>
         <member name="M:FluentBuild.Core.BuildFile.InvokeNextTask">
-            TODO: maybe this should be private and then invoked via reflection from fb.exe (or else internalVisibleTo)
             <summary>
              Invokes the next task in the queue
             </summary>
@@ -198,6 +616,34 @@
              Gets the number of tasks in the queue.
             </summary>
             <returns>The number of tasks in the queue</returns>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.RenameBuildArtifactTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.RenameBuildArtifactTests.ShouldCallWrapperMoveFile">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.RenameBuildArtifactTests.PathShouldBeChangedAfterRename">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.RenameBuildArtifactTests.ShouldFailOnError">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.RenameBuildArtifactTests.ShouildContinueOnError">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.FileSystemUtilityTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSystemUtilityTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSystemUtilityTests.Should_Call_Parser_For_Path_Containing_Wildcard">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSystemUtilityTests.Should_Not_Call_Parser_For_Path_Containing_No_Wildcards">
+            <summary />
         </member>
         <member name="T:FluentBuild.Compilation.Resource">
             <summary>
@@ -222,6 +668,25 @@
             Creates a string representation of the path and identifier
             </summary>
             <returns>A string in the format of filePath[,identifier]</returns>
+        </member>
+        <member name="T:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRun">
+            <summary>
+             Allows you to choose which unit testing framework to run
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRun.NUnit">
+            <summary>
+             Selects NUnit as the unit test runner
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Utilities.FileFinderTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.FileFinderTests.Find_ShouldSearchFileSystem">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.FileFinderTests.Find_ShouldSearchFileSystemRecursively">
+            <summary />
         </member>
         <member name="T:FluentBuild.Core.BuildArtifact">
             <summary>
@@ -262,6 +727,58 @@
             Copies the artifact
             </summary>
         </member>
+        <member name="T:FluentBuild.Runners.Zip.ZipCompressTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompressTests.TestSomething">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Database.MsSqlCreateTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlCreateTests.ShouldSetPathOnEngine">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Runners.Zip.Zip">
+            <summary>
+             Choice class that determines to compress or decompress
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.Zip.Decompress(System.String)">
+            <summary>
+             Creates a ZipDecompress object that is used to decompress files
+            </summary>
+            <param name="pathToArchive">Path to the zip file to decompress</param>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.Zip.Compress">
+            <summary>
+             Creates a ZipCompress object that is used to compress files
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Compilation.ResgenTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResgenTests.SetUp">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResgenTests.Execute_ShouldRunAgainstMock">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResgenTests.GenerateFrom_ShouldPopulateFiles">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResgenTests.OutputTo_ShouldPopulatePathAndNotBeNull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.ResgenTests.PrefixOutputsWith_ShouldSetPrefixProperly">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Core.BuildFileTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildFileTests.TestThatQueueGetsProcessed">
+            <summary />
+        </member>
         <member name="T:FluentBuild.Core.Run">
             <summary>
             Runs an execuable. It may later be expaned to have other run tasks (e.g. nunit, code analysis, etc.)
@@ -290,6 +807,27 @@
             <summary>
             Sets the color of the console to support colorized output
             </summary>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.FileSetTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.BuildFileSet">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.CopyShouldNotBeNull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.BuildFileSetFromArtifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.AddAllCsFiles">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.AddAllCsFilesAndExcludeGenericFileName">
+            <summary />
         </member>
         <member name="T:FluentBuild.Compilation.MsBuildTask">
             <summary>
@@ -340,6 +878,105 @@
              Executes MSBuild with the provided parameters
             </summary>
         </member>
+        <member name="T:FluentBuild.Compilation.BuildTaskTests">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Sources">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperReferences">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Sources_And_Debug_Symbols">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.OutputFileTo_ShouldWorkWithBuildArtifact">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Resources">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Fileset_Resources">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.UsingCsc_Compiler_Should_Be_CSC">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.UsingCsc_Compiler_Should_Be_VBC">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="T:FluentBuild.AssemblyInfoBuilding.CSharpAssemblyInfoBuilderTests">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.CSharpAssemblyInfoBuilderTests.ShouldBuildString">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="T:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguageTests">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguageTests.EnsureCSharpLanguageBuildsProperly">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguageTests.EnsureVisualBasicLanguageBuildsProperly">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Utilities.ExecuteableTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecuteableTests.Executable_ShouldSetProperly">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecuteableTests.ShouldConstructProperly">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecuteableTests.ShouldPopulateWorkingDirectoryViaArtifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecuteableTests.CreateProcess_Should_Build_Process">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Utilities.FrameworkVersionTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToSdk_ShouldCallOutToRegistryKeyFinder">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToFrameworkInstall_ShouldCallOutToRegistryKeyFinder">
+            <summary />
+        </member>
         <member name="T:FluentBuild.Core.AssemblyInfo">
             <summary>
             Allows the creation of assembly info files
@@ -349,6 +986,36 @@
             <summary>
             select the language used to generate the assembly info file
             </summary>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.BuildFolderTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.CreateDirecory_ShouldCallWrapper">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.DeleteDirecory_ShouldDeleteIfFolderExists">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Have_Path">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_SubFolder">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_Recursive_And_SubFolder">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_File">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Files_ShouldCreateFileset">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.CopyFilesetTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFilesetTests.To_ShouldPerformCopy">
+            <summary />
         </member>
         <member name="T:FluentBuild.Core.Defaults">
             <summary>
@@ -364,6 +1031,200 @@
             <summary>
              Sets the .NET Framework version to use. The default is .NET 4.0
             </summary>
+        </member>
+        <member name="T:FluentBuild.Database.MsSqlVersionTableTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlVersionTableTests.ExecuteShouldCallUnderlyingEngine">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Core.PropertiesTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.PropertiesTests.TeamCityShouldReturnProperObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.PropertiesTests.CruiseControlShouldReturnProperObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.PropertiesTests.CommandLineShouldReturnProperObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.PropertiesTests.CurrentDirectoryShouldBeProper">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Utilities.DesktopFrameworkType">
+            <summary>
+             Indicates if the type is client or full (used in .NET 4.0 and higher)
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Utilities.DesktopFrameworkType.Client">
+            <summary>
+             Creates a FrameworkVersion object for the client type
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Utilities.DesktopFrameworkType.Full">
+            <summary>
+             Creates a FrameworkVersion object for the full type
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Runners.Zip.ZipTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipTests.TestSomething">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Database.MsSqlCreateOrUpdateTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlCreateOrUpdateTests.ShouldSetPropertyOnEngine">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Compilation.TargetTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.TargetTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.TargetTests.CreateExe">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.TargetTests.CreateLibrary">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.TargetTests.CreateModule">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.TargetTests.CreateWindowsExe">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Core.AssemblyInfoTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.AssemblyInfoTests.MethodCallShouldNotThrowException">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Utilities.IRegistryKeyValueFinder">
+            <summary>
+             Used to find a value in the registry
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Utilities.IRegistryKeyValueFinder.FindFirstValue(System.String[])">
+            <summary>
+             Finds the first value in a string of paths to search
+            </summary>
+            <param name="keysToCheck">A list of keys to check</param>
+            <returns>The value of the key or null if no key could be found</returns>
+        </member>
+        <member name="T:FluentBuild.Utilities.RegistryKeyValueFinder">
+            <summary>
+             Searches the registry for keys.
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Utilities.IFrameworkVersion">
+            <summary>
+             .NET Framework version
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Utilities.IFrameworkVersion.GetPathToSdk">
+            <summary>
+             Gets the path to the .NET/Windows SDK for the desired version
+            </summary>
+            <returns>path to the SDK</returns>
+            <exception cref="T:FluentBuild.Utilities.SdkNotFoundException">Thrown if the SDK can not be found</exception>
+        </member>
+        <member name="M:FluentBuild.Utilities.IFrameworkVersion.GetPathToFrameworkInstall">
+            <summary>
+             Gets the path to the .NET framework install directory
+            </summary>
+            <returns>The path to where the .NET Framework was installed</returns>
+             <exception cref="T:FluentBuild.Utilities.FrameworkNotFoundException">Thrown when the .NET Framework path can not be found</exception>
+        </member>
+        <member name="T:FluentBuild.Utilities.FrameworkVersion">
+            <summary>
+             The .NET Framework version
+            </summary>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.RenameBuildArtifact">
+            <summary>
+             Renames a build artifact
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.RenameBuildArtifact.To(System.String)">
+            <summary>
+             Renames a file to a destination
+            </summary>
+            <param name="newName">the new name of the file</param>
+        </member>
+        <member name="T:FluentBuild.ApplicationProperties.TeamCityProperties">
+            <summary>
+             Access common properties set by team city
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.BuildNumber">
+            <summary>
+             The BuildNumber that team city has determined for this build
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.ConfigurationName">
+            <summary>
+             The configuration being used for this build
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.ProjectName">
+            <summary>
+             The project being built
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Utilities.OnError">
+            <summary>
+             Used to set the behavior of what to do on errors
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Utilities.OnError.Fail">
+            <summary>
+             Pass along the exception that was thrown
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Utilities.OnError.Continue">
+            <summary>
+             Swallow errors
+            </summary>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.IFileSetFactory">
+            <summary>
+             Creates a Fileset
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.IFileSetFactory.Create">
+            <summary>
+             Builds a fileset
+            </summary>
+            <returns>a fileset</returns>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.FileSetFactory">
+            <summary>
+             Generates a new fileset
+            </summary>
+        </member>
+        <member name="T:FluentBuild.ApplicationProperties.CommandLineProperties">
+            <summary>
+             Accesses properties passed in via the command line
+            </summary>
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.CommandLineProperties.GetProperty(System.String)">
+            <summary>
+             Gets a property from the command line /p:name=value
+            </summary>
+            <param name="name">find the property by its name</param>
+            <returns>value if present</returns>
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.CommandLineProperties.Add(System.String,System.String)">
+            <summary>
+             Adds a property to the internal property collection
+            </summary>
+            <param name="name">The name of the property</param>
+            <param name="value">The value of the property</param>
         </member>
         <member name="T:FluentBuild.Core.Build">
             <summary>
@@ -385,6 +1246,17 @@
             Creates a BuildTask using the VB compiler
             </summary>
         </member>
+        <member name="T:FluentBuild.AssemblyInfoBuilding.VisualBasicAssemblyInfoBuilderTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.VisualBasicAssemblyInfoBuilderTests.ShouldBuildString">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguage">
+            <summary>
+             Determines which language to use to generate an assembly info file
+            </summary>
+        </member>
         <member name="P:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguage.CSharp">
             <summary>
             Generate using C#
@@ -394,6 +1266,29 @@
             <summary>
             Generate using Visual Basic
             </summary>
+        </member>
+        <member name="T:FluentBuild.Utilities.SdkNotFoundException">
+            <summary>
+             Thrown when the request Windows SDK can not be found
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Utilities.SdkNotFoundException.#ctor(System.String[])">
+            <summary>
+             Creates a new exception and populates the message.
+            </summary>
+            <param name="pathsSearched">Paths searched to find the SDK</param>
+        </member>
+        <member name="T:FluentBuild.Core.Build_Tests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.Build_Tests.ShouldCreateTaskWithVbCompiler">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.Build_Tests.ShouldCreateTaskWithCSCCompiler">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.Build_Tests.ShouldCreateMsBuildTask">
+            <summary />
         </member>
         <member name="T:FluentBuild.Compilation.BuildTask">
             <summary>
@@ -472,6 +1367,100 @@
             Sets if Debug Symbols are generated. Defaults to False.
             </summary>
         </member>
+        <member name="T:FluentBuild.Core.RunTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.RunTests.Run_Should_Populate_Exe">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.RunTests.Run_Should_Populate_Exe_When_Using_Build_Artifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.RunTests.UnitTestFramework_ShouldCreateObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.RunTests.Zip_ShouldCreateObject">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Tokenization.TokenWith">
+            <summary>
+             Sets the replacement text
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Tokenization.TokenWith.With(System.String)">
+            <summary>
+             Replaces the input with a value
+            </summary>
+            <param name="value">The value to use in the replacement</param>
+        </member>
+        <member name="T:FluentBuild.Runners.UnitTesting.NUnitRunnerTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.WorkingDirectory_ShouldPopulateInternalFieldAndReturnSelf">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.FileToTest_ShouldPopulateInternalFieldAndReturnSelf">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.PathToConsoleRunner_ShouldPopulateInternalFieldAndReturnSelf">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.XmlOutputTo_ShouldPopulatePropertiesAndReturnSelf">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.AddSingleParameter_ShouldAddToInteralDictionary">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.AddParameter_ShouldAddToInteralDictionary">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.BuildArgs_ShouldConstructWithFileToTest">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.BuildArgs_ShouldConstructWithFileToTestAndSingleParameter">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.BuildArgs_ShouldConstructWithFileToTestAndNameValueParameter">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.Execute_ShouldCallExecuteMethodOnMock">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.Execute_ShouldSetOnErrorStateToFalse">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.Execute_ShouldSetOnErrorStateToTrue">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.Execute_ShouldSetWorkingDirectoryOnMockIfManuallySpecifiedInCode">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.Execute_ShouldTryToFindPathToNunitIfNotSet">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.CopyBuildArtifcat">
+            <summary>
+             Copies a build artifact
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifcat.To(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             Destination
+            </summary>
+            <param name="artifactDestination">The destination</param>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifcat.To(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Destination
+            </summary>
+            <param name="folderDestination">The destination</param>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifcat.To(System.String)">
+            <summary>
+             Destination
+            </summary>
+            <param name="destination">The destination path</param>
+        </member>
         <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifcat.ReplaceToken(System.String)">
             <summary>
             Replaces a token in a file 
@@ -480,11 +1469,107 @@
             <returns></returns>
             <example>tokens in the file are surrounded by @ signs. So ReplaceToken("name") would replace everything in a file with @name@</example>
         </member>
+        <member name="T:FluentBuild.Runners.Zip.ZipCompress">
+            <summary>
+             Compresses a file or folder
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.UsingPassword(System.String)">
+            <summary>
+             Sets the password to protect the zip file with
+            </summary>
+            <param name="password">The password to use</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.SourceFile(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             Sets ZipCompress to compress a single file
+            </summary>
+            <param name="file">The file to compress</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.SourceFile(System.String)">
+            <summary>
+             Sets ZipCompress to compress a single file
+            </summary>
+            <param name="file">The file to compress</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.SourceFolder(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Sets ZipCompress to compress an entire folder
+            </summary>
+            <param name="path">The folder to compress</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.SourceFolder(System.String)">
+            <summary>
+             Sets ZipCompress to compress an entire folder
+            </summary>
+            <param name="path">The folder to compress</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.To(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             The location to place the output
+            </summary>
+            <param name="zipFilePath">path to the output file</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipCompress.To(System.String)">
+            <summary>
+             The location to place the output
+            </summary>
+            <param name="zipFilePath">path to the output file</param>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.ZipCompress.UsingCompressionLevel">
+            <summary>
+             Determine the compression level to use from 1(lowest) to 9(highest)
+            </summary>
+        </member>
         <member name="T:FluentBuild.Core.Properties">
             <summary>
             Deletes the folder if it exists. If it does not exist then no action is taken
             </summary>
             <returns>The current BuildFolder</returns>
+        </member>
+        <member name="T:FluentBuild.Compilation.MsBuildTaskTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.Setup">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.ShouldSetSolutionPath">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.ShouldSetTarget">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.ShouldSetConfiguration">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.ShouldSetOutDir">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.ShouldSetProperty">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.BuildArgs_ShouldHaveTarget">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.BuildArgs_ShouldAddConfigurationIfSpecified">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.BuildArgs_ShouldNotHaveConfigurationIfNoneSpecified">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.BuildArgs_ShouldSetOutDirIfTrailingSlashIsNotSet">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.BuildArgs_ShouldSetOutDirIfTrailingSlashIsSet">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.BuildArgs_ShouldHaveFirstArgAsProjectOrSolution">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.MsBuildTaskTests.Execute_ShouldExecuteMsBuild">
+            <summary />
         </member>
         <member name="T:FluentBuild.Core.BuildFolder">
             <summary>
@@ -515,6 +1600,13 @@
             <summary>
             Deletes the folder. If the the folder can not be deleted, or does not exist then an exception is thrown.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.Core.BuildFolder.Delete(FluentBuild.Utilities.OnError)">
+             <summary>
+             Deletes the folder.
+             </summary>
+            <param name="onError">Sets the behavior of how to handle an error</param>
             <returns></returns>
         </member>
         <member name="M:FluentBuild.Core.BuildFolder.Create">
@@ -548,6 +1640,163 @@
              Creates a fileset based on a filter
             </summary>
             <param name="filter">A filter that can contain wildcards</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentBuild.Utilities.FrameworkNotFoundException">
+            <summary>
+             Raises when the desired .NET framework can not be found
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Utilities.FrameworkNotFoundException.#ctor(System.String[])">
+            <summary>
+             Creates a new exception with the message populated
+            </summary>
+            <param name="frameworkInstallRoot">Paths that were searched to find the install path</param>
+        </member>
+        <member name="T:FluentBuild.Runners.Zip.ZipDecompress">
+            <summary>
+             Zip decompresses an archive
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipDecompress.UsingPassword(System.String)">
+            <summary>
+             Sets the password to decompress a file
+            </summary>
+            <param name="password">the password to use</param>
+        </member>
+        <member name="M:FluentBuild.Runners.Zip.ZipDecompress.To(System.String)">
+            <summary>
+             Sets the output path
+            </summary>
+            <param name="outputPath">The path you would like the file(s) outputed to</param>
+        </member>
+        <member name="T:FluentBuild.Database.MsSqlUtilitiesTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlUtilitiesTests.DoesDatabaseAlreadyExist_ShouldCallUnderlyingEngine">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.MsSqlUtilitiesTests.CreateOrUpdate_ShouldCreateProperType">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Runners.Zip.OneThroughNine">
+            <summary>
+             Used to set the compression level for compressors
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.One">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Two">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Three">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Four">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Five">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Six">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Seven">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Eight">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Runners.Zip.OneThroughNine.Nine">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Tokenization.TokenReplacerTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Tokenization.TokenReplacerTests.Replace_ShouldReplaceToken">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Tokenization.TokenReplacerTests.Replace_ShouldReplaceMultipleTokens">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Tokenization.TokenReplacerTests.To_ShouldWriteOutFileIfFileDoesNotExist">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Database.DatabaseTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Database.DatabaseTests.ShouldCreateProperObject">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.ApplicationProperties.CruiseControlPropertiesTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.CruiseControlPropertiesTests.AllPropertiesShouldMap">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Name_And_WildCard">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Recursive_Name_And_WildCard">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_JustDirectory">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_Start_Filter">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_CS_Filter">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Recursive_Start_Dot_CS_Filter">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.Core.BuildArtifactTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Delete_ShouldCallToFileSystemWrapper">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Rename_ShouldBuildRenameObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.ToString_Should_Output_Path">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Copy_ShouldCreateCopyObject">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.CopyFileset">
+            <summary>
+             Copies the fileset
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFileset.To(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Copies the fileset to the destination
+            </summary>
+            <param name="destination">A BuildFolder that will recieve the files</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFileset.To(System.String)">
+            <summary>
+             Copies the fileset to the destination
+            </summary>
+            <param name="destination">Path to a folder that will recieve the files</param>
             <returns></returns>
         </member>
     </members>
