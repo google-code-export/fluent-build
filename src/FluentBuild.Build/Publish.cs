@@ -42,10 +42,9 @@ namespace Build
 
         private void PublishToRepository()
         {
-            //TODO: pass these in via the command line
             FluentBuild.Core.Publish.ToGoogleCode.LocalFileName(ZipFilePath.ToString())
-             .UserName("dave@solidhouse.com")
-             .Password("mW3za4Ku3wf6")
+             .UserName(Properties.CommandLineProperties.GetProperty("GoogleCodeUsername"))
+             .Password(Properties.CommandLineProperties.GetProperty("GoogleCodePassword"))
              .ProjectName("fluent-build")
              .Summary("Alpha Release (v" + _version + ")")
              .TargetFileName(_finalFileName)

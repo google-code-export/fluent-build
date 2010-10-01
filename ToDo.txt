@@ -38,6 +38,7 @@ Build
 	-For MSBuild might want to have Configuration.Debug .Release .Custom("myconfig")
 	-CopyBuildArtifact may want to have it return a new BuildArtifact with the folder.
 	-BuildFile.InvokeNextTask: maybe this should be private and then invoked via reflection from fb.exe (or else internalVisibleTo) to prevent users from running it
+	-Click once deployment manifest writing
 
 Database
 -Have a local sql file folder that merges the changes in so you don't run your own SQL scripts on your own DB.
