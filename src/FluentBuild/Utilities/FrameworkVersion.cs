@@ -18,12 +18,29 @@ namespace FluentBuild.Utilities
     //SL4
     //SDK:
 
+    
+    ///<summary>
+    /// .NET Framework version
+    ///</summary>
     public interface IFrameworkVersion
     {
+        ///<summary>
+        /// Gets the path to the .NET/Windows SDK for the desired version
+        ///</summary>
+        ///<returns>path to the SDK</returns>
+        ///<exception cref="SdkNotFoundException">Thrown if the SDK can not be found</exception>
         string GetPathToSdk();
+        ///<summary>
+        /// Gets the path to the .NET framework install directory
+        ///</summary>
+        ///<returns>The path to where the .NET Framework was installed</returns>
+        /// <exception cref="FrameworkNotFoundException">Thrown when the .NET Framework path can not be found</exception>
         string GetPathToFrameworkInstall();
     }
 
+    ///<summary>
+    /// The .NET Framework version
+    ///</summary>
     public class FrameworkVersion : IFrameworkVersion 
     {
         //public static CustomFrameworkVersion Custom { get { return new CustomFrameworkVersion();} }
@@ -68,7 +85,7 @@ namespace FluentBuild.Utilities
         {
             string pathToSdk = _registryKeyValueFinder.FindFirstValue(_sdkInstallRoot);
             if (pathToSdk == null)
-                throw new SdkNotFoundException();
+                throw new SdkNotFoundException(_sdkInstallRoot);
             return pathToSdk;
         }
 
@@ -76,7 +93,7 @@ namespace FluentBuild.Utilities
         {
             string pathToFrameworkInstall = _registryKeyValueFinder.FindFirstValue(_frameworkInstallRoot);
             if (pathToFrameworkInstall == null)
-                throw new FrameworkNotFoundException();
+                throw new FrameworkNotFoundException(_frameworkInstallRoot);
             //TODO: may have to append version # if not 3.5 or 4.0
             return pathToFrameworkInstall;
         }

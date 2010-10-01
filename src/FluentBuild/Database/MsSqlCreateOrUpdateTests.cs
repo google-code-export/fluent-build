@@ -4,10 +4,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Database
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class MsSqlCreateOrUpdateTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetPropertyOnEngine()
         {
             string pathToCreateScript = @"c:\temp";

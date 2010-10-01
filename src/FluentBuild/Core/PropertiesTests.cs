@@ -4,28 +4,28 @@ using NUnit.Framework;
 
 namespace FluentBuild.Core
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class PropertiesTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void TeamCityShouldReturnProperObject()
         {
             Assert.That(Properties.TeamCity, Is.TypeOf<TeamCityProperties>());
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CruiseControlShouldReturnProperObject()
         {
             Assert.That(Properties.CruiseControl, Is.TypeOf<CruiseControlProperties>());
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CommandLineShouldReturnProperObject()
         {
             Assert.That(Properties.CommandLineProperties, Is.TypeOf<CommandLineProperties>());
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CurrentDirectoryShouldBeProper()
         {
             Assert.That(Properties.CurrentDirectory, Is.EqualTo(Environment.CurrentDirectory));

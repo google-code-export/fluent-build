@@ -6,32 +6,47 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.FilesAndDirectories
 {
+    ///<summary>
+    /// Copies a build artifact
+    ///</summary>
     public class CopyBuildArtifcat : Failable<CopyBuildArtifcat>
     {
         private readonly IFileSystemWrapper _fileSystemWrapper;
         private readonly BuildArtifact source;
 
-        public CopyBuildArtifcat(IFileSystemWrapper fileSystemWrapper, BuildArtifact artifact)
+        internal CopyBuildArtifcat(IFileSystemWrapper fileSystemWrapper, BuildArtifact artifact)
         {
             _fileSystemWrapper = fileSystemWrapper;
             source = artifact;
         }
 
-        public CopyBuildArtifcat(BuildArtifact artifact) : this(new FileSystemWrapper(), artifact)
+        internal CopyBuildArtifcat(BuildArtifact artifact) : this(new FileSystemWrapper(), artifact)
         {
         }
 
+        ///<summary>
+        /// Destination
+        ///</summary>
+        ///<param name="artifactDestination">The destination</param>
         public void To(BuildArtifact artifactDestination)
         {
             To(artifactDestination.ToString());
         }
 
+        ///<summary>
+        /// Destination
+        ///</summary>
+        ///<param name="folderDestination">The destination</param>
         public void To(BuildFolder folderDestination)
         {
             To(folderDestination.ToString());
         }
 
 
+        ///<summary>
+        /// Destination
+        ///</summary>
+        ///<param name="destination">The destination path</param>
         public void To(String destination)
         {
             string destinationFileName;
@@ -54,7 +69,8 @@ namespace FluentBuild.FilesAndDirectories
 // ReSharper restore AssignNullToNotNullAttribute
             MessageLogger.WriteDebugMessage("Copy from " + source + " to " + dest);
 
-            OnErrorActionExecutor.DoAction(base.OnError, _fileSystemWrapper.Copy, source.ToString(), dest);
+            FailableActionExecutor.DoAction(base.OnError, _fileSystemWrapper.Copy, source.ToString(), dest);
+            
         }
 
 

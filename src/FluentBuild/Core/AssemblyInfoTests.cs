@@ -3,10 +3,10 @@ using NUnit.Framework;
 
 namespace FluentBuild.Core
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class AssemblyInfoTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void MethodCallShouldNotThrowException()
         {
             AssemblyInfoLanguage assemblyInfoLanguage = AssemblyInfo.Language;

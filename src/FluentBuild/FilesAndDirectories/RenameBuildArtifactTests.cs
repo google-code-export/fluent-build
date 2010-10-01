@@ -5,10 +5,12 @@ using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class RenameBuildArtifactTests
     {
-        [Test]
+        ///<summary />
+	    [Test]
         public void ShouldCallWrapperMoveFile()
         {
             string origin = "c:\\nonexistant.txt";
@@ -22,6 +24,26 @@ namespace FluentBuild.FilesAndDirectories
             fileSystemWrapper.AssertWasCalled(x=>x.MoveFile(origin, "c:\\\\" + destination));
         }
 
+        ///<summary />
+        [Test]
+        public void PathShouldBeChangedAfterRename()
+        {
+            string origin = "c:\\nonexistant.txt";
+            string destination = "nonexistant2.txt";
+
+            var buildArtifact = new BuildArtifact(origin);
+            var fileSystemWrapper = MockRepository.GenerateMock<IFileSystemWrapper>();
+            var subject = new RenameBuildArtifact(fileSystemWrapper, buildArtifact);
+
+            var destinationWithFolder = @"c:\\" + destination;
+            fileSystemWrapper.Stub(x => x.MoveFile(origin, destinationWithFolder));
+            subject.To(destination);
+
+            Assert.That(buildArtifact.ToString(), Is.EqualTo(destinationWithFolder));
+        }
+
+        ///<summary>
+        ///</summary>
         [Test, ExpectedException(typeof(IOException))]
         public void ShouldFailOnError()
         {
@@ -35,7 +57,8 @@ namespace FluentBuild.FilesAndDirectories
             
         }
 
-        [Test]
+        ///<summary />
+	    [Test]
         public void ShouildContinueOnError()
         {
             var buildArtifact = new BuildArtifact("c:\\nonexistant.txt");

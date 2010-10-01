@@ -8,10 +8,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class FileSetTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void BuildFileSet()
         {
             string fileName = "test.txt";
@@ -20,14 +20,14 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(fileset.Files[0], Is.EqualTo(fileName));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CopyShouldNotBeNull()
         {
             var fileset = new Core.FileSet(null);
             Assert.That(fileset.Copy, Is.Not.Null);
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildFileSetFromArtifact()
         {
             string fileName = "test.txt";
@@ -38,7 +38,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
         }
 
 
-        [Test]
+        ///<summary />	[Test]
         public void AddAllCsFiles()
         {
             string path = "c:\\temp\\*.cs";
@@ -53,7 +53,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(fileset.Files[0], Is.EqualTo("c:\\temp\\test1.cs"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void AddAllCsFilesAndExcludeSpecificFileName()
         {
             string path = "c:\\temp\\*.cs";
@@ -68,7 +68,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(fileset.Files.Count, Is.EqualTo(1));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void AddAllCsFilesAndExcludeGenericFileName()
         {
             string includeFilter = @"c:\temp\**\*.cs";

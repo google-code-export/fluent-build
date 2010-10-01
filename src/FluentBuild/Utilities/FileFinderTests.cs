@@ -7,10 +7,12 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Utilities
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class FileFinderTests
     {
-        [Test]
+        ///<summary />
+	[Test]
         public void Find_ShouldSearchFileSystem()
         {
             var mockFilesystem = MockRepository.GenerateStub<IFileSystemWrapper>();
@@ -24,7 +26,8 @@ namespace FluentBuild.Utilities
             finder.Find(fileToSearchFor);
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void Find_ShouldSearchFileSystemRecursively()
         {
             var mockFilesystem = MockRepository.GenerateStub<IFileSystemWrapper>();

@@ -6,7 +6,8 @@ namespace FluentBuild.ApplicationProperties
 {
     ///<summary>
     ///</summary>
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class TeamCityPropertiesTests
     {
         private IEnvironmentVariableWrapper _environmentVariableWrapper;
@@ -14,7 +15,8 @@ namespace FluentBuild.ApplicationProperties
 
         ///<summary>
         ///</summary>
-        [SetUp]
+        ///<summary />
+	[SetUp]
         public void Setup()
         {
             _environmentVariableWrapper = MockRepository.GenerateStub<IEnvironmentVariableWrapper>();
@@ -23,7 +25,8 @@ namespace FluentBuild.ApplicationProperties
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void BuildNumberShouldCallToWrapper()
         {
             var buildNumber = _subject.BuildNumber;
@@ -32,7 +35,8 @@ namespace FluentBuild.ApplicationProperties
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void ConfigurationNameShouldCallToWrapper()
         {
             var data = _subject.ConfigurationName;
@@ -41,7 +45,8 @@ namespace FluentBuild.ApplicationProperties
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void ProjectName()
         {
             var data = _subject.ProjectName;

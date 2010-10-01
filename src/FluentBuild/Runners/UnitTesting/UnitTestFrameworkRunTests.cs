@@ -2,10 +2,10 @@
 
 namespace FluentBuild.Runners.UnitTesting
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class UnitTestFrameworkRunTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void Nunit_ShouldCreateNunitRunner()
         {
             var subject = new UnitTestFrameworkRun();

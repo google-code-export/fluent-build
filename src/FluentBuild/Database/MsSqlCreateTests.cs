@@ -3,10 +3,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Database
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class MsSqlCreateTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetPathOnEngine()
         {
             string path = @"c:\temp";

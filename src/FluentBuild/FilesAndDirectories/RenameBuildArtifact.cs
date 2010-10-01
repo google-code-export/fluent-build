@@ -4,44 +4,34 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.FilesAndDirectories
 {
-    public class RenameBuildArtifact
+    ///<summary>
+    /// Renames a build artifact
+    ///</summary>
+    public class RenameBuildArtifact : Failable<RenameBuildArtifact>
     {
         private readonly BuildArtifact _buildArtifact;
         private readonly IFileSystemWrapper _fileSystemWrapper;
-        private OnError _onError;
 
-        public RenameBuildArtifact(IFileSystemWrapper fileSystemWrapper, BuildArtifact buildArtifact)
+
+        internal RenameBuildArtifact(IFileSystemWrapper fileSystemWrapper, BuildArtifact buildArtifact)
         {
             _fileSystemWrapper = fileSystemWrapper;
             _buildArtifact = buildArtifact;
         }
 
-        public RenameBuildArtifact(BuildArtifact buildArtifact) : this(new FileSystemWrapper(), buildArtifact)
+        internal RenameBuildArtifact(BuildArtifact buildArtifact) : this(new FileSystemWrapper(), buildArtifact)
         {
         }
 
-        //TODO: this may need to be centralized into a OnErrorBase<T> class
-        public RenameBuildArtifact FailOnError
-        {
-            get
-            {
-                _onError = OnError.Fail;
-                return this;
-            }
-        }
-
-        public RenameBuildArtifact ContinueOnError
-        {
-            get
-            {
-                _onError = OnError.Continue;
-                return this;
-            }
-        }
-
+        ///<summary>
+        /// Renames a file to a destination
+        ///</summary>
+        ///<param name="newName">the new name of the file</param>
         public BuildArtifact To(string newName)
         {
-            OnErrorActionExecutor.DoAction(_onError, _fileSystemWrapper.MoveFile, _buildArtifact.ToString(), Path.GetDirectoryName(_buildArtifact.ToString()) + "\\" + newName);
+            var newPath = Path.GetDirectoryName(_buildArtifact.ToString()) + "\\" + newName;
+            FailableActionExecutor.DoAction(OnError, _fileSystemWrapper.MoveFile, _buildArtifact.ToString(), newPath);
+            _buildArtifact.Path = newPath;
             return _buildArtifact;
         }
     }

@@ -69,7 +69,7 @@ namespace FluentBuild.Core
         public BuildFolder Delete(OnError onError)
         {
             MessageLogger.WriteDebugMessage("Deleting " + _path);
-            OnErrorActionExecutor.DoAction(onError, _fileSystemWrapper.DeleteDirectory, _path, true);
+            FailableActionExecutor.DoAction(onError, _fileSystemWrapper.DeleteDirectory, _path, true);
             return this;
         }
 
@@ -90,7 +90,7 @@ namespace FluentBuild.Core
         public BuildFolder Create(OnError onError)
         {
             MessageLogger.WriteDebugMessage("Create Direcotry " + _path);
-            OnErrorActionExecutor.DoAction(onError, _fileSystemWrapper.CreateDirectory, _path);
+            FailableActionExecutor.DoAction(onError, _fileSystemWrapper.CreateDirectory, _path);
             return this;
         }
 

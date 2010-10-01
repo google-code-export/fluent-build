@@ -42,18 +42,14 @@ namespace Build
 
         private void PublishToRepository()
         {
-            //http://code.google.com/p/support/wiki/ScriptedUploads
-            //http://code.google.com/p/nant-googlecode/
-            //throw new NotImplementedException();
-            var x = new GoogleCode();
-            x.LocalFileName = ZipFilePath.ToString();
             //TODO: pass these in via the command line
-            x.UserName = "dave@solidhouse.com";
-            x.Password = "mW3za4Ku3wf6";
-            x.ProjectName = "fluent-build";
-            x.Summary = "Alpha Release (v" + _version + ")";
-            x.TargetFileName = _finalFileName;
-            x.Upload();
+            FluentBuild.Core.Publish.ToGoogleCode.LocalFileName(ZipFilePath.ToString())
+             .UserName("dave@solidhouse.com")
+             .Password("mW3za4Ku3wf6")
+             .ProjectName("fluent-build")
+             .Summary("Alpha Release (v" + _version + ")")
+             .TargetFileName(_finalFileName)
+             .Upload();
         }
 
         private void CompileCoreWithOutTests()

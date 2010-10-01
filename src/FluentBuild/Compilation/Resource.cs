@@ -36,8 +36,8 @@ namespace FluentBuild.Compilation
         /// <returns>A string in the format of filePath[,identifier]</returns>
         public override string ToString()
         {
-            if (Identifier == String.Empty)
-                return FilePath;
+            if (String.IsNullOrEmpty(Identifier))
+                return string.Format("\"{0}\"",FilePath);
             return string.Format("\"{0}\",{1}", FilePath, Identifier);
         }
     }

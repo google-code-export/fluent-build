@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    public interface ISearchPatternParser
+    internal interface ISearchPatternParser
     {
         void Parse(string pattern);
         string SearchPattern { get; set; }
@@ -11,7 +11,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
         bool Recursive { get; set; }
     }
 
-    public class SearchPatternParser : ISearchPatternParser
+    internal class SearchPatternParser : ISearchPatternParser
     {
         public SearchPatternParser()
         {

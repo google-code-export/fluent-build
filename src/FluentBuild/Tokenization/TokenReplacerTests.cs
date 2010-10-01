@@ -9,10 +9,12 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Tokenization
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class TokenReplacerTests
     {
-        [Test]
+        ///<summary />
+	[Test]
         public void Replace_ShouldReplaceToken()
         {
             const string input = "Hello @name@ how are you today?";
@@ -22,7 +24,8 @@ namespace FluentBuild.Tokenization
             Assert.That(results, Is.EqualTo("Hello john how are you today?"));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void Replace_ShouldReplaceMultipleTokens()
         {
             const string input = "Hello @LastName@, @FirstName@ how are you today?";
@@ -43,7 +46,8 @@ namespace FluentBuild.Tokenization
             replacer.To(destination);
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void To_ShouldWriteOutFileIfFileDoesNotExist()
         {
             string destination = "c:\\temp\non.txt";

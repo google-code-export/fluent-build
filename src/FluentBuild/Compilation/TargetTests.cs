@@ -7,20 +7,20 @@ using NUnit.Framework;
 
 namespace FluentBuild.Compilation
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class TargetTests
     {
         private BuildTask _buildTask;
         private Target _target;
 
-        [SetUp]
+        ///<summary />	[SetUp]
         public void Setup()
         {
             _buildTask = new BuildTask(null);
             _target = new Target(_buildTask);
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CreateExe()
         {
             BuildTask buildTask = _target.Executable;
@@ -28,7 +28,7 @@ namespace FluentBuild.Compilation
             Assert.That(buildTask.TargetType, Is.EqualTo("exe"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CreateLibrary()
         {
             BuildTask buildTask = _target.Library;
@@ -36,7 +36,7 @@ namespace FluentBuild.Compilation
             Assert.That(buildTask.TargetType, Is.EqualTo("library"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CreateModule()
         {
             BuildTask buildTask = _target.Module;
@@ -44,7 +44,7 @@ namespace FluentBuild.Compilation
             Assert.That(buildTask.TargetType, Is.EqualTo("module"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CreateWindowsExe()
         {
             BuildTask buildTask = _target.WindowsExecutable;

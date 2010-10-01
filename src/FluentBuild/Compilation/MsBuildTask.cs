@@ -84,7 +84,7 @@ namespace FluentBuild.Compilation
         }
 
         
-        //TODO: might want to have Configuration.Debug .Release .Custom("myconfig")
+        
         ///<summary>
         /// Sets the configuration to use for the msbuild task
         ///</summary>

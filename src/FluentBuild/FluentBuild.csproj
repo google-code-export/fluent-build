@@ -108,6 +108,8 @@
     <Compile Include="ApplicationProperties\CruiseControlProperties.cs" />
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
     <Compile Include="Core\PropertiesTests.cs" />
+    <Compile Include="Core\Publish.cs" />
+    <Compile Include="CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
     <Compile Include="Publishing\GoogleCode.cs" />
@@ -146,7 +148,7 @@
     <Compile Include="Runners\Executeable.cs" />
     <Compile Include="Runners\ExecuteableTests.cs" />
     <Compile Include="Core\BuildArtifact.cs" />
-    <Compile Include="FilesAndDirectories\BuildArtifactTests.cs" />
+    <Compile Include="Core\BuildArtifactTests.cs" />
     <Compile Include="Core\BuildFolderTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
@@ -157,7 +159,7 @@
     <Compile Include="Core\BuildFolder.cs" />
     <Compile Include="Runners\ProcessWrapper.cs" />
     <Compile Include="Utilities\ConsoleColor.cs" />
-    <Compile Include="Database\CopyFileset.cs" />
+    <Compile Include="FilesAndDirectories\FileSet\CopyFileset.cs" />
     <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
     <Compile Include="FilesAndDirectories\RenameBuildArtifact.cs" />
     <Compile Include="FilesAndDirectories\RenameBuildArtifactTests.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Runners\UnitTesting\NUnitRunnerTests.cs" />
     <Compile Include="Utilities\FileFinder.cs" />
     <Compile Include="Utilities\FileFinderTests.cs" />
+    <Compile Include="Utilities\FailableActionExecutor.cs" />
     <Compile Include="Utilities\RegistryKeyValueFinder.cs" />
     <Compile Include="Utilities\RegistryKeyValueFinderTests.cs" />
     <Compile Include="Utilities\RegistryWrapper.cs" />
@@ -176,7 +179,7 @@
     <Compile Include="Core\Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FilesAndDirectories\FileSet\SearchPatternParser.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\SearchPatternParserTests.cs" />
+    <Compile Include="Core\SearchPatternParserTests.cs" />
     <Compile Include="Compilation\Target.cs" />
     <Compile Include="Core\MessageLogger.cs" />
     <Compile Include="Core\RunTests.cs" />

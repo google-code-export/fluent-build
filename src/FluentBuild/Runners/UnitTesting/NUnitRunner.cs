@@ -7,6 +7,9 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners.UnitTesting
 {
+    ///<summary>
+    /// Runs nunit against an assembly
+    ///</summary>
     public class NUnitRunner : Failable<NUnitRunner>
     {
         internal string _fileToTest;
@@ -16,28 +19,48 @@ namespace FluentBuild.Runners.UnitTesting
         private IExecuteable _executable;
         private readonly IFileFinder _fileFinder;
 
-        public NUnitRunner(IExecuteable executeable, IFileFinder fileFinder)
+        internal NUnitRunner(IExecuteable executeable, IFileFinder fileFinder)
         {
             _executable = executeable;
             _fileFinder = fileFinder;
             _parameters = new NameValueCollection();
         }
 
-        public NUnitRunner() : this (new Executeable(), new FileFinder())
+        internal NUnitRunner() : this (new Executeable(), new FileFinder())
         {
 
         }
 
+        ///<summary>
+        /// Sets the working directory
+        ///</summary>
+        ///<param name="path">The working directory for nunit-console</param>
+        ///<returns></returns>
         public NUnitRunner WorkingDirectory(string path)
         {
             _workingDirectory = path;
             return this;
         }
 
+        ///<summary>
+        /// The assembly to run nunit against
+        ///</summary>
+        ///<param name="path">path to the assembly</param>
+        ///<returns></returns>
         public NUnitRunner FileToTest(string path)
         {
             _fileToTest = path;
             return this;
+        }
+
+        ///<summary>
+        /// The assembly to run nunit against
+        ///</summary>
+        ///<param name="buildArtifact">build artifact that represents the path to the assembly to test</param>
+        ///<returns></returns>
+        public NUnitRunner FileToTest(BuildArtifact buildArtifact)
+        {
+            return FileToTest(buildArtifact.ToString());
         }
 
 
@@ -52,17 +75,33 @@ namespace FluentBuild.Runners.UnitTesting
             return this;
         }
 
+        ///<summary>
+        /// Allows you to set the output to be an xml file.
+        ///</summary>
+        ///<param name="path">path for the output</param>
+        ///<returns></returns>
         public NUnitRunner XmlOutputTo(string path)
         {
             return AddParameter("xml", path);
         }
 
+        ///<summary>
+        /// Adds a parameter for nunit
+        ///</summary>
+        ///<param name="name">The name of the parameter</param>
+        ///<param name="value">The value of the parameter</param>
+        ///<returns></returns>
         public NUnitRunner AddParameter(string name, string value)
         {
             _parameters.Add(name, value);
             return this;
         }
 
+        ///<summary>
+        /// Adds a named parameter to nunit
+        ///</summary>
+        ///<param name="name">The name of the parameter</param>
+        ///<returns></returns>
         public NUnitRunner AddParameter(string name)
         {
             _parameters.Add(name, string.Empty);
@@ -72,8 +111,7 @@ namespace FluentBuild.Runners.UnitTesting
 
         internal string[] BuildArgs()
         {
-            var args = new List<string>();
-            args.Add(_fileToTest);
+            var args = new List<string> {_fileToTest};
             foreach (string key in _parameters.Keys)
             {
                 if (_parameters[key]==string.Empty)
@@ -88,6 +126,10 @@ namespace FluentBuild.Runners.UnitTesting
             return args.ToArray();
         }
 
+        ///<summary>
+        /// Attempts to find and then run nunit-console
+        ///</summary>
+        ///<exception cref="FileNotFoundException">Occurs when nunit-console.exe can not be found</exception>
         public void Execute()
         {
             if (String.IsNullOrEmpty(_pathToConsoleRunner))
@@ -108,9 +150,5 @@ namespace FluentBuild.Runners.UnitTesting
             executeable.Execute();
         }
 
-        public NUnitRunner FileToTest(BuildArtifact buildArtifact)
-        {
-            return FileToTest(buildArtifact.ToString());
-        }
     }
 }

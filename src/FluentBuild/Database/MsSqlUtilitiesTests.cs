@@ -4,10 +4,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Database
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class MsSqlUtilitiesTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void DoesDatabaseAlreadyExist_ShouldCallUnderlyingEngine()
         {
             var engine = MockRepository.GenerateStub<IMsSqlEngine>();
@@ -16,7 +16,7 @@ namespace FluentBuild.Database
             engine.AssertWasCalled(x=>x.DoesDatabaseAlreadyExist());
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void CreateOrUpdate_ShouldCreateProperType()
         {
             var engine = MockRepository.GenerateStub<IMsSqlEngine>();

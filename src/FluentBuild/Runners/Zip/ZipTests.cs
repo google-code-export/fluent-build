@@ -2,10 +2,10 @@
 
 namespace FluentBuild.Runners.Zip
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class ZipTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void TestSomething()
         {
         }

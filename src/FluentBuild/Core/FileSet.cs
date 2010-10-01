@@ -8,23 +8,47 @@ namespace FluentBuild.Core
     ///</summary>
     public interface IFileSet
     {
-
         ///<summary>
-        /// 
+        /// Returns a list of files that is contained within the fileset. 
         ///</summary>
         IList<string> Files { get; }
+
+        ///<summary>
+        /// Copies the fileset
+        ///</summary>
         CopyFileset Copy { get; }
+
+        ///<summary>
+        /// Includes a path in the fileset.
+        ///</summary>
+        ///<param name="path">path to files to include</param>
         FileSet Include(BuildArtifact path);
+
+        ///<summary>
+        /// Includes a path in the fileset.
+        ///</summary>
+        ///<param name="path">path to files to include</param>
         FileSet Include(string path);
+
+        ///<summary>
+        /// Adds an exclude filter
+        ///</summary>
+        ///<param name="path">exclude path</param>
         FileSet Exclude(string path);
     }
 
+    ///<summary>
+    /// Represents a set of files with include and exclude filters
+    ///</summary>
     public class FileSet : IFileSet
     {
         private readonly List<string> _exclusions = new List<string>();
         private readonly List<string> _files = new List<string>();
         private readonly IFileSystemUtility _utility;
 
+        ///<summary>
+        /// Creates a new fileset
+        ///</summary>
         public FileSet() : this(new FileSystemUtility())
         {
         }
@@ -34,10 +58,11 @@ namespace FluentBuild.Core
             _utility = utility;
         }
 
-        //TODO: Should this not be a read only collection?
+
 
         #region IFileSet Members
-
+        
+        //TODO: Should this not be a read only collection?
         public IList<string> Files
         {
             get

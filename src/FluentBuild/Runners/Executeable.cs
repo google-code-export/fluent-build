@@ -5,48 +5,82 @@ using System.Text;
 using System.Threading;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
-using ConsoleColor = FluentBuild.Utilities.ConsoleColor;
 
 namespace FluentBuild.Runners
 {
+    ///<summary>
+    /// Represents an executable to be run
+    ///</summary>
     public interface IExecuteable : IFailable<IExecuteable>
     {
+        ///<summary>
+        /// Sets the arguments to pass to the executable
+        ///</summary>
+        ///<param name="arguments">The arguments to pass</param>
         IExecuteable WithArguments(params string[] arguments);
+
+        ///<summary>
+        /// Sets the working directory
+        ///</summary>
+        ///<param name="directory">path to the working directory</param>
         IExecuteable InWorkingDirectory(string directory);
+
+        ///<summary>
+        /// Sets the working directory
+        ///</summary>
+        ///<param name="directory">path to the working directory</param>
         IExecuteable InWorkingDirectory(BuildFolder directory);
+
+        ///<summary>
+        /// Executes the executable with the provided options.
+        ///</summary>
         void Execute();
+
+        ///<summary>
+        /// Sets the executeable to run
+        ///</summary>
+        ///<param name="path">path to the executable</param>
         IExecuteable Executable(string path);
     }
 
-    public class Executeable : Failable<IExecuteable>, IExecuteable 
+    ///<summary>
+    /// An executable to be run
+    ///</summary>
+    public class Executeable : Failable<IExecuteable>, IExecuteable
     {
-        private readonly object ErrorLock;
-        private readonly object OutputLock;
+        private readonly object _errorLock;
+        private readonly object _outputLock;
         private readonly List<String> _args;
-        private readonly StringBuilder error;
-        private readonly StringBuilder output;
-        internal string _executeablePath;
-        internal string _workingDirectory;
-        private IColorizedOutputDisplay _colorizedOutputDisplay;
+        private readonly IColorizedOutputDisplay _colorizedOutputDisplay;
+        private readonly StringBuilder _error;
+        private readonly StringBuilder _output;
+        internal string ExecuteablePath;
+        internal string WorkingDirectory;
 
+        ///<summary>
+        /// Instantiates a new executable
+        ///</summary>
         public Executeable() : this(new ColorizedOutputDisplay())
-    {
-        
-    }
+        {
+        }
 
         internal Executeable(IColorizedOutputDisplay colorizedOutputDisplay)
         {
-            ErrorLock = new object();
-            OutputLock = new object();
+            _errorLock = new object();
+            _outputLock = new object();
             _args = new List<string>();
-            error = new StringBuilder();
-            output = new StringBuilder();
+            _error = new StringBuilder();
+            _output = new StringBuilder();
             _colorizedOutputDisplay = colorizedOutputDisplay;
         }
 
+        ///<summary>
+        /// instantiates an executeable with the path to the assembly specified
+        ///</summary>
+        ///<param name="executeablePath">Path to the executable to run</param>
         public Executeable(string executeablePath) : this()
         {
-            _executeablePath = executeablePath;
+            ExecuteablePath = executeablePath;
         }
 
         #region IExecuteable Members
@@ -59,13 +93,13 @@ namespace FluentBuild.Runners
 
         public IExecuteable InWorkingDirectory(string directory)
         {
-            _workingDirectory = directory;
+            WorkingDirectory = directory;
             return this;
         }
 
         public IExecuteable InWorkingDirectory(BuildFolder directory)
         {
-            _workingDirectory = directory.ToString();
+            WorkingDirectory = directory.ToString();
             return this;
         }
 
@@ -76,7 +110,7 @@ namespace FluentBuild.Runners
 
         public IExecuteable Executable(string path)
         {
-            _executeablePath = path;
+            ExecuteablePath = path;
             return this;
         }
 
@@ -95,7 +129,7 @@ namespace FluentBuild.Runners
         internal IProcessWrapper CreateProcess()
         {
             var process = new Process();
-            process.StartInfo.FileName = _executeablePath;
+            process.StartInfo.FileName = ExecuteablePath;
             process.StartInfo.Arguments = CreateArgumentString();
 
             //redirect to a stream so we can parse it and display it
@@ -105,18 +139,18 @@ namespace FluentBuild.Runners
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.ErrorDialog = false;
 
-            if (!String.IsNullOrEmpty(_workingDirectory))
-                process.StartInfo.WorkingDirectory = _workingDirectory;
+            if (!String.IsNullOrEmpty(WorkingDirectory))
+                process.StartInfo.WorkingDirectory = WorkingDirectory;
 
-            process.ErrorDataReceived += process_ErrorDataReceived;
-            process.OutputDataReceived += process_OutputDataReceived;
+            process.ErrorDataReceived += ProcessErrorDataReceived;
+            process.OutputDataReceived += ProcessOutputDataReceived;
 
             return new ProcessWrapper(process);
         }
 
         internal string Execute(string prefix)
         {
-            MessageLogger.WriteDebugMessage("executing " + _executeablePath + CreateArgumentString());
+            MessageLogger.WriteDebugMessage("executing " + ExecuteablePath + CreateArgumentString());
 
             using (IProcessWrapper process = CreateProcess())
             {
@@ -130,11 +164,12 @@ namespace FluentBuild.Runners
                         MessageLogger.WriteDebugMessage("TIMEOUT!");
                         process.Kill();
                         Thread.Sleep(1000); //wait one second so that the process has time to exit
-                        
-                        if (this.OnError == OnError.Fail) //exit code should only be set if we want the application to fail on error
+
+                        if (OnError == OnError.Fail)
+                            //exit code should only be set if we want the application to fail on error
                             Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
                     }
-                    _colorizedOutputDisplay.Display(prefix, output.ToString(), error.ToString(), process.ExitCode == 0);
+                    _colorizedOutputDisplay.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode == 0);
 
                     if (process.ExitCode != 0)
                         throw new ApplicationException("Exectable returned non-zero exit code");
@@ -143,23 +178,24 @@ namespace FluentBuild.Runners
                 {
                     if (OnError == OnError.Fail)
                         throw;
-                    Debug.Write(prefix, "An error occurred running a process but FailOnError was set to false. Error: " + e);
+                    Debug.Write(prefix,
+                                "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
             }
-            return output.ToString();
+            return _output.ToString();
         }
 
         //lock objects in case events fire out of order
-        private void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        private void ProcessOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            lock (OutputLock)
-                output.AppendLine(e.Data);
+            lock (_outputLock)
+                _output.AppendLine(e.Data);
         }
 
-        private void process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        private void ProcessErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-            lock (ErrorLock)
-                output.AppendLine(e.Data);
+            lock (_errorLock)
+                _output.AppendLine(e.Data);
         }
     }
 }

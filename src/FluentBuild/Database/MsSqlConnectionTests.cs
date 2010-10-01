@@ -3,17 +3,20 @@
 
 namespace FluentBuild.Database
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class MsSqlConnectionTests
     {
-        [Test]
+        ///<summary />
+	[Test]
         public void ShouldCreateMsSqlUtilities()
         {
             var subject = new MsSqlConnection();
             Assert.That(subject.WithConnectionString(""), Is.TypeOf(typeof(MsSqlUtilities)));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void ShouldCreateMsSqlUtilitiesAndHaveEngineBuilt()
         {
             var subject = new MsSqlConnection();

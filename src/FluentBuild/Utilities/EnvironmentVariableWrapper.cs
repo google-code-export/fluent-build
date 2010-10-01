@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FluentBuild.Utilities
 {
-    public interface IEnvironmentVariableWrapper
+    internal interface IEnvironmentVariableWrapper
     {
         string Get(string name);
     }

@@ -5,10 +5,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Runners.UnitTesting
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class NUnitRunnerTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void WorkingDirectory_ShouldPopulateInternalFieldAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -18,7 +18,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._workingDirectory, Is.EqualTo(workingdir));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void FileToTest_ShouldPopulateInternalFieldAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -28,7 +28,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._fileToTest, Is.EqualTo(file));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void PathToConsoleRunner_ShouldPopulateInternalFieldAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -38,7 +38,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._pathToConsoleRunner, Is.EqualTo(file));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void XmlOutputTo_ShouldPopulatePropertiesAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -48,7 +48,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._parameters["xml"], Is.EqualTo(file));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void AddSingleParameter_ShouldAddToInteralDictionary()
         {
             var subject = new NUnitRunner();
@@ -58,7 +58,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._parameters[singleparam], Is.EqualTo(string.Empty));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void AddParameter_ShouldAddToInteralDictionary()
         {
             var subject = new NUnitRunner();
@@ -69,7 +69,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._parameters[param], Is.EqualTo(value ));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldConstructWithFileToTest()
         {
             string pathToFile = "c:\\test.dll";
@@ -77,7 +77,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/nologo", "/nodots" }));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldConstructWithFileToTestAndSingleParameter()
         {
          
@@ -87,7 +87,7 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + singleParam, "/nologo", "/nodots" }));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldConstructWithFileToTestAndNameValueParameter()
         {   
             string pathToFile = "c:\\test.dll";
@@ -98,7 +98,7 @@ namespace FluentBuild.Runners.UnitTesting
         }
 
 
-        [Test]
+        ///<summary />	[Test]
         public void Execute_ShouldCallExecuteMethodOnMock()
         {
             string pathToExe = "c:\\test.exe";
@@ -118,7 +118,7 @@ namespace FluentBuild.Runners.UnitTesting
 
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Execute_ShouldSetOnErrorStateToFalse()
         {
             string pathToExe = "c:\\test.exe";
@@ -138,7 +138,7 @@ namespace FluentBuild.Runners.UnitTesting
 
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Execute_ShouldSetOnErrorStateToTrue()
         {
             string pathToExe = "c:\\test.exe";
@@ -158,7 +158,7 @@ namespace FluentBuild.Runners.UnitTesting
 
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Execute_ShouldSetWorkingDirectoryOnMockIfManuallySpecifiedInCode()
         {
             string workingDirectory = "c:\\temp";
@@ -178,7 +178,7 @@ namespace FluentBuild.Runners.UnitTesting
 
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Execute_ShouldTryToFindPathToNunitIfNotSet()
         {
             string workingDirectory = "c:\\temp";

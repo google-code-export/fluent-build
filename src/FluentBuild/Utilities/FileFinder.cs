@@ -1,30 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using FluentBuild.Core;
 using FluentBuild.FilesAndDirectories;
 
 namespace FluentBuild.Utilities
 {
-    public interface IFileFinder
+    internal interface IFileFinder
     {
         string Find(string fileName, string directory);
         string Find(string fileName);
     }
 
+    ///<summary>
+    /// Finds files recursevely in a directory
+    ///</summary>
     public class FileFinder : IFileFinder
     {
         private readonly IFileSystemWrapper _fileSystem;
 
-        public FileFinder(IFileSystemWrapper fileSystem)
+        internal FileFinder(IFileSystemWrapper fileSystem)
         {
             _fileSystem = fileSystem;
         }
 
+        ///<summary>
+        /// Instantiates a new FileFinder
+        ///</summary>
         public FileFinder() : this(new FileSystemWrapper())
         {
         }
 
+        ///<summary>
+        /// Finds a file in a directory and searches subdirectories
+        ///</summary>
+        ///<param name="fileName">The filename to find</param>
+        ///<param name="directory">The starting directory to search</param>
+        ///<returns></returns>
         public string Find(string fileName, string directory)
         {
             IEnumerable<string> filesInDirectory = _fileSystem.GetFilesIn(directory);
@@ -53,6 +64,11 @@ namespace FluentBuild.Utilities
             return null;
         }
 
+        ///<summary>
+        /// Finds a file in the CURRENT directory and searches subdirectories
+        ///</summary>
+        ///<param name="fileName">The filename to search for</param>
+        ///<returns></returns>
         public string Find(string fileName)
         {
             return Find(fileName, Properties.CurrentDirectory);

@@ -30,9 +30,6 @@
       </violation>
     </violations>
   </sourcecode>
-  <project key="900474540">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="AssemblyInfoTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>06/30/2010 11:43:56</timestamp>
@@ -1008,4 +1005,7 @@
       </violation>
     </violations>
   </sourcecode>
+  <project key="900474540">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

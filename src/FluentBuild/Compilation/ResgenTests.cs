@@ -6,12 +6,12 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Compilation
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class ResgenTests
     {
         #region Setup/Teardown
 
-        [SetUp]
+        ///<summary />	    [SetUp]
         public void SetUp()
         {
             var frameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();
@@ -21,7 +21,7 @@ namespace FluentBuild.Compilation
 
         #endregion
 
-        [Test]
+        ///<summary />	    [Test]
         public void Execute_ShouldRunAgainstMock()
         {
             var fileset = new FileSet();
@@ -38,7 +38,7 @@ namespace FluentBuild.Compilation
             mockExe.AssertWasCalled(x => x.Execute());
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GenerateFrom_ShouldPopulateFiles()
         {
             var fileset = new FileSet();
@@ -50,7 +50,7 @@ namespace FluentBuild.Compilation
             Assert.That(subject, Is.Not.Null);
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void OutputTo_ShouldPopulatePathAndNotBeNull()
         {
             string folder = "c:\temp";
@@ -61,7 +61,7 @@ namespace FluentBuild.Compilation
         }
 
 
-        [Test]
+        ///<summary />	[Test]
         public void PrefixOutputsWith_ShouldSetPrefixProperly()
         {
             string prefix = "blah";

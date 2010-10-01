@@ -3,24 +3,24 @@ using NUnit.Framework;
 
 namespace FluentBuild.Core
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class Build_Tests
     {
-        [Test]
+        ///<summary />	[Test]
         public void ShouldCreateTaskWithVbCompiler()
         {
             var build = Build.UsingVbc;
             Assert.That(build.Compiler, Is.EqualTo("vbc.exe"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldCreateTaskWithCSCCompiler()
         {
             var build = Build.UsingCsc;
             Assert.That(build.Compiler, Is.EqualTo("csc.exe"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldCreateMsBuildTask()
         {
             var build = Build.UsingMsBuild("c:\\mysln.sln");

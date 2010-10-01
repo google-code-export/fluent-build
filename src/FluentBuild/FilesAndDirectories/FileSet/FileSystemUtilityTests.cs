@@ -3,14 +3,14 @@ using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class FileSystemUtilityTests
     {
         private ISearchPatternParser _parser;
         private IFileSystemWrapper _fileSystemWrapper;
         private FileSystemUtility _util;
 
-        [SetUp]
+        ///<summary />	[SetUp]
         public void Setup()
         {
             _parser = MockRepository.GenerateStub<ISearchPatternParser>();
@@ -18,7 +18,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             _util = new FileSystemUtility(_parser, _fileSystemWrapper);
         }
         
-        [Test]
+        ///<summary />	[Test]
         public void Should_Call_Parser_For_Path_Containing_Wildcard()
         {
             const string fileName = @"c:\temp\file*.txt";            
@@ -32,7 +32,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             _parser.AssertWasCalled(x => x.Parse(fileName));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Should_Not_Call_Parser_For_Path_Containing_No_Wildcards()
         {
             const string fileName = @"c:\temp\file1.txt";
