@@ -10,7 +10,7 @@ namespace FluentBuild.Core
     {
         internal Queue<Action> Tasks;
 
-        ///TODO: maybe this should be private and then invoked via reflection from fb.exe (or else internalVisibleTo)
+        
         ///<summary>
         /// Invokes the next task in the queue
         ///</summary>
