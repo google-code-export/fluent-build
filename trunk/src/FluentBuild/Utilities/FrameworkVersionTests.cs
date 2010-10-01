@@ -7,7 +7,7 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Utilities
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class FrameworkVersionTests
     {
 
@@ -21,7 +21,7 @@ namespace FluentBuild.Utilities
             framework.GetPathToSdk();
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GetPathToSdk_ShouldCallOutToRegistryKeyFinder()
         {
             var registryKeyValueFinder = MockRepository.GenerateMock<IRegistryKeyValueFinder>();
@@ -32,7 +32,7 @@ namespace FluentBuild.Utilities
             registryKeyValueFinder.AssertWasCalled(x => x.FindFirstValue(keysToCheck));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GetPathToFrameworkInstall_ShouldCallOutToRegistryKeyFinder()
         {
             var registryKeyValueFinder = MockRepository.GenerateMock<IRegistryKeyValueFinder>();

@@ -4,10 +4,12 @@ using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class CopyFilesetTests
     {
-        [Test]
+        ///<summary />
+	[Test]
         public void To_ShouldPerformCopy()
         {
             MessageLogger.WindowWidth = 80;

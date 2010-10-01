@@ -10,7 +10,7 @@ namespace FluentBuild.Core
     public class BuildArtifact
     {
         private readonly IFileSystemWrapper _fileSystemWrapper;
-        private readonly string _path;
+        internal string Path;
         
 
         ///<summary>
@@ -23,7 +23,7 @@ namespace FluentBuild.Core
         internal BuildArtifact(IFileSystemWrapper fileSystemWrapper, string path)
         {
             _fileSystemWrapper = fileSystemWrapper;
-            _path = path;
+            Path = path;
         }
 
         ///<summary>
@@ -42,10 +42,10 @@ namespace FluentBuild.Core
         ///</summary>
         public void Delete(OnError onError)
         {
-            OnErrorActionExecutor.DoAction(onError, _fileSystemWrapper.DeleteFile, _path);
+            FailableActionExecutor.DoAction(onError, _fileSystemWrapper.DeleteFile, Path);
         }
 
-        //TODO: if a file is renamed then the BuildArtifact.ToString() should return the new name!
+        
         /// <summary>
         /// Renames the artifact
         /// </summary>
@@ -54,7 +54,7 @@ namespace FluentBuild.Core
             get { return new RenameBuildArtifact(this); }
         }
 
-        //TODO: this should return the new path!
+        
         /// <summary>
         /// Copies the artifact
         /// </summary>
@@ -70,7 +70,7 @@ namespace FluentBuild.Core
         /// <returns>The build artifact path</returns>
         public override string ToString()
         {
-            return _path;
+            return Path;
         }
     }
 }

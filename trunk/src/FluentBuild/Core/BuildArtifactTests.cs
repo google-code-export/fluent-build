@@ -1,14 +1,15 @@
-using FluentBuild.Core;
+using FluentBuild.FilesAndDirectories;
 using NUnit.Framework;
-
 using Rhino.Mocks;
 
-namespace FluentBuild.FilesAndDirectories
+namespace FluentBuild.Core
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class BuildArtifactTests
     {
-        [Test]
+        ///<summary />
+	[Test]
         public void Delete_ShouldCallToFileSystemWrapper()
         {
             var fs = MockRepository.GenerateMock<IFileSystemWrapper>();
@@ -19,7 +20,8 @@ namespace FluentBuild.FilesAndDirectories
             fs.AssertWasCalled(x=>x.DeleteFile(path));
         }
 
-        [Test]
+        ///<summary />
+	    [Test]
         public void Rename_ShouldBuildRenameObject()
         {
             var fs = MockRepository.GenerateMock<IFileSystemWrapper>();
@@ -28,7 +30,9 @@ namespace FluentBuild.FilesAndDirectories
             Assert.That(subject.Rename, Is.Not.Null);
         }
 
-        [Test]
+
+        ///<summary />
+	[Test]
         public void ToString_Should_Output_Path()
         {
             const string path = @"c:\temp\test.txt";
@@ -36,7 +40,8 @@ namespace FluentBuild.FilesAndDirectories
             Assert.That(artifact.ToString(), Is.EqualTo(path));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void Copy_ShouldCreateCopyObject()
         {
             const string path = @"c:\temp\test.txt";

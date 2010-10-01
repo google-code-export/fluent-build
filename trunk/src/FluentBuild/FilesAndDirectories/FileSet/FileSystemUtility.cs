@@ -5,19 +5,19 @@ using System.Linq;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    public interface IFileSystemUtility
+    internal interface IFileSystemUtility
     {
         IList<string> GetAllFilesMatching(string filter);
     }
 
     internal class FileSystemUtility : IFileSystemUtility
     {
-        private readonly ISearchPatternParser parser;
+        private readonly ISearchPatternParser _parser;
         private readonly IFileSystemWrapper _fileSystemWrapper;
 
         public FileSystemUtility(ISearchPatternParser parser, IFileSystemWrapper fileSystemWrapper)
         {
-            this.parser = parser;
+            _parser = parser;
             _fileSystemWrapper = fileSystemWrapper;
         }
 
@@ -37,8 +37,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
                     list.Add(filter);
                 return list;
             }
-            parser.Parse(filter);
-            return GetAllFilesMatching(parser.Folder, parser.SearchPattern, parser.Recursive);
+            _parser.Parse(filter);
+            return GetAllFilesMatching(_parser.Folder, _parser.SearchPattern, _parser.Recursive);
         }
 
         #endregion

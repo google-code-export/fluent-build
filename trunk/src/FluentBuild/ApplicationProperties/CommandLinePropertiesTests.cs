@@ -5,12 +5,12 @@ namespace FluentBuild.ApplicationProperties
 {
     ///<summary>
     ///</summary>
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class CommandLinePropertiesTests
     {
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />	[Test]
         public void ShouldConstructWithProperties()
         {
             Assert.That(Properties.CommandLineProperties.Properties, Is.Not.Null);
@@ -18,7 +18,7 @@ namespace FluentBuild.ApplicationProperties
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />	[Test]
         public void ShouldGetAndSetProperly()
         {
             var value = "testvalue";

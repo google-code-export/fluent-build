@@ -1,88 +1,116 @@
 ﻿namespace FluentBuild.Runners.Zip
 {
+    ///<summary>
+    /// Used to set the compression level for compressors
+    ///</summary>
     public class OneThroughNine
     {
+        internal OneThroughNine()
+        {
+        }
+
         private readonly ZipCompress _zipCompress;
 
-        public OneThroughNine(ZipCompress zipCompress)
+        internal OneThroughNine(ZipCompress zipCompress)
         {
             _zipCompress = zipCompress;
         }
 
+        ///<summary>
+        ///</summary>
         public ZipCompress One
         {
             get
             {
-                _zipCompress.compressionLevel = 1;
+                _zipCompress.CompressionLevel = 1;
                 return _zipCompress;
             }
         }
 
+        ///<summary>
+        ///</summary>
         public ZipCompress Two
         {
             get
             {
-                _zipCompress.compressionLevel = 2;
+                _zipCompress.CompressionLevel = 2;
                 return _zipCompress;
             }
         }
+
+        ///<summary>
+        ///</summary>
         public ZipCompress Three
         {
             get
             {
-                _zipCompress.compressionLevel = 3;
+                _zipCompress.CompressionLevel = 3;
                 return _zipCompress;
             }
         }
+
+        ///<summary>
+        ///</summary>
         public ZipCompress Four
         {
             get
             {
-                _zipCompress.compressionLevel = 4;
+                _zipCompress.CompressionLevel = 4;
                 return _zipCompress;
             }
         }
+
+        ///<summary>
+        ///</summary>
         public ZipCompress Five
         {
             get
             {
-                _zipCompress.compressionLevel = 5;
+                _zipCompress.CompressionLevel = 5;
                 return _zipCompress;
             }
         }
 
+        ///<summary>
+        ///</summary>
         public ZipCompress Six
         {
             get
             {
-                _zipCompress.compressionLevel = 6;
+                _zipCompress.CompressionLevel = 6;
                 return _zipCompress;
             }
         }
-
+        
+        ///<summary>
+        ///</summary>
         public ZipCompress Seven
         {
             get
             {
-                _zipCompress.compressionLevel = 7;
+                _zipCompress.CompressionLevel = 7;
                 return _zipCompress;
             }
         }
 
+        ///<summary>
+        ///</summary>
         public ZipCompress Eight
         {
             get
             {
-                _zipCompress.compressionLevel = 8;
+                _zipCompress.CompressionLevel = 8;
                 return _zipCompress;
             }
         }
 
+        ///<summary>
+        ///</summary>
         public ZipCompress Nine
         {
             get
             {
-                _zipCompress.compressionLevel = 9;
+                _zipCompress.CompressionLevel = 9;
                 return _zipCompress;
             }
         }

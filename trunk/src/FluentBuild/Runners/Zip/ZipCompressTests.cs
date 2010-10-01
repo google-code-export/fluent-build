@@ -2,11 +2,11 @@
 
 namespace FluentBuild.Runners.Zip
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class ZipCompressTests
     {
 
-        [Test]
+        ///<summary />	[Test]
         public void TestSomething()
         {
             var bothStringsAreSet = true ^ true;

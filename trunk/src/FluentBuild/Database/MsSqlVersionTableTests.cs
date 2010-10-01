@@ -3,10 +3,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Database
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class MsSqlVersionTableTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void ExecuteShouldCallUnderlyingEngine()
         {
             var engine = MockRepository.GenerateStub<IMsSqlEngine>();

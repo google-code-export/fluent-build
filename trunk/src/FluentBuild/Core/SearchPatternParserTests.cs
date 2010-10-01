@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class SearchPatternParserTests
     {
         /*
@@ -15,7 +15,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
      *     c:\temp\**\auto*.cs
      */
 
-        [Test]
+        ///<summary />	[Test]
         public void GetAllFilesMatching_Name_And_WildCard()
         {
             var parser = new SearchPatternParser();
@@ -25,7 +25,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GetAllFilesMatching_Recursive_Name_And_WildCard()
         {
             var parser = new SearchPatternParser();
@@ -35,7 +35,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(true));
         }
         
-        [Test]
+        ///<summary />	[Test]
         public void GetAllFilesMatching_JustDirectory()
         {
             var parser = new SearchPatternParser();
@@ -45,7 +45,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GetAllFilesMatching_Start_Dot_Start_Filter()
         {
             var parser = new SearchPatternParser();
@@ -55,7 +55,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GetAllFilesMatching_Start_Dot_CS_Filter()
         {
             var parser = new SearchPatternParser();
@@ -65,7 +65,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void GetAllFilesMatching_Recursive_Start_Dot_CS_Filter()
         {
             var parser = new SearchPatternParser();

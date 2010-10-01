@@ -6,14 +6,11 @@ using NUnit.Framework;
 
 namespace FluentBuild.ApplicationProperties
 {
-    ///<summary>
-    ///</summary>
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class CruiseControlPropertiesTests
     {
-        ///<summary>
-        ///</summary>
-        [Test]
+        ///<summary />    	[Test]
         public void AllPropertiesShouldMap()
         {
             var subject = new CruiseControlProperties();

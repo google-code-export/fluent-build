@@ -7,7 +7,7 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Compilation
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class MsBuildTaskTests
     {
         private MsBuildTask _subject;
@@ -15,7 +15,9 @@ namespace FluentBuild.Compilation
         private IExecuteable _executable;
 
 
-        [SetUp]
+        ///<summary>
+        ///</summary>
+        ///<summary />	[SetUp]
         public void Setup()
         {
             _projectOrSolutionFilePath = "c:\\temp.sln";
@@ -23,20 +25,20 @@ namespace FluentBuild.Compilation
             _subject = new MsBuildTask(_projectOrSolutionFilePath, _executable);            
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetSolutionPath()
         {
             Assert.That(_subject.ProjectOrSolutionFilePath, Is.EqualTo(_projectOrSolutionFilePath));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetTarget()
         {
             _subject.AddTarget("target");
             Assert.That(_subject.Targets.Contains("target"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetConfiguration()
         {
             _subject.Configuration("config");
@@ -44,14 +46,14 @@ namespace FluentBuild.Compilation
         }
 
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetOutDir()
         {
             _subject.OutputDirectory("outdir");
             Assert.That(_subject.Outdir, Is.EqualTo("outdir"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void ShouldSetProperty()
         {
             _subject.SetProperty("name", "value");
@@ -59,49 +61,49 @@ namespace FluentBuild.Compilation
             Assert.That(property, Is.EqualTo("value"));
         }
         
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldHaveTarget()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).AddTarget("mytarget").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/target:mytarget"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldAddConfigurationIfSpecified()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).Configuration("DEBUG").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:Configuration=DEBUG"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldNotHaveConfigurationIfNoneSpecified()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).BuildArgs();
             Assert.That(buildArgs.Length, Is.EqualTo(1));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsNotSet()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsSet()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp\\").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void BuildArgs_ShouldHaveFirstArgAsProjectOrSolution()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).BuildArgs();
             Assert.That(buildArgs[0], Is.EqualTo(_projectOrSolutionFilePath));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Execute_ShouldExecuteMsBuild()
         {
             Defaults.FrameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();

@@ -2,7 +2,7 @@
 
 namespace FluentBuild.Utilities
 {
-    public interface IRegistryWrapper
+    internal interface IRegistryWrapper
     {
         IRegistryKeyWrapper OpenLocalMachineKey(string key);
     }

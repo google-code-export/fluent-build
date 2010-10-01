@@ -2,10 +2,10 @@
 
 namespace FluentBuild.Database
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class DatabaseTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void ShouldCreateProperObject()
         {
             Assert.That(Database.MsSqlDatabase, Is.TypeOf(typeof(MsSqlConnection)));

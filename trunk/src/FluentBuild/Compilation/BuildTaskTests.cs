@@ -8,12 +8,14 @@ namespace FluentBuild.Compilation
 {
     ///<summary>
     ///</summary>
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class BuildTaskTests
     {
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void Args_ShouldCreateProperArgs()
         {
             string outputAssembly = "myapp.dll";
@@ -23,7 +25,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void Args_ShouldCreateProperArgs_With_Sources()
         {
             string reference = "external.dll";
@@ -36,7 +39,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void Args_ShouldCreateProperReferences()
         {
             var references = new System.Collections.Generic.List<BuildArtifact>();
@@ -52,7 +56,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void Args_ShouldCreateProperArgs_With_Sources_And_Debug_Symbols()
         {
             string reference = "external.dll";
@@ -65,7 +70,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void OutputFileTo_ShouldWorkWithBuildArtifact()
         {
             string reference = "external.dll";
@@ -78,7 +84,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void Args_ShouldCreateProperArgs_With_Resources()
         {
             string reference = "external.dll";
@@ -90,7 +97,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void Args_ShouldCreateProperArgs_With_Fileset_Resources()
         {
             string reference = "external.dll";
@@ -98,13 +106,13 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             var sources = new FileSet().Include(source);
             BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddResources(sources);
-            //TODO: what is up with the comma? does it affect multiple resources being included?
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"myfile.cs\", /target:{1}", outputAssembly, "library")));
+            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"myfile.cs\" /target:{1}", outputAssembly, "library")));
         }
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void UsingCsc_Compiler_Should_Be_CSC()
         {
             BuildTask build = Build.UsingCsc;
@@ -113,7 +121,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        [Test]
+        ///<summary />
+	[Test]
         public void UsingCsc_Compiler_Should_Be_VBC()
         {
             BuildTask build = Build.UsingVbc;

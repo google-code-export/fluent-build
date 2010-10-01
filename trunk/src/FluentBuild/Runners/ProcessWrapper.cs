@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace FluentBuild.Runners
 {
 
-    public interface IProcessWrapper : IDisposable
+    internal interface IProcessWrapper : IDisposable
     {
         bool Start();
         void BeginOutputReadLine();
@@ -14,7 +14,7 @@ namespace FluentBuild.Runners
     }
 
 
-    public class ProcessWrapper:IProcessWrapper
+    internal class ProcessWrapper:IProcessWrapper
     {
         private readonly Process _process;
 

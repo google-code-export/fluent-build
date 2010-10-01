@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace FluentBuild.Utilities
 {
-    public interface IRegistryKeyWrapper
+    internal interface IRegistryKeyWrapper
     {
         IEnumerable<string> GetSubKeyNames();
         IRegistryKeyWrapper OpenSubKey(string keyName);
@@ -11,7 +11,7 @@ namespace FluentBuild.Utilities
         void Close();
     }
 
-    public class RegistryKeyWrapper : IRegistryKeyWrapper
+    internal class RegistryKeyWrapper : IRegistryKeyWrapper
     {
         private readonly RegistryKey _key;
 

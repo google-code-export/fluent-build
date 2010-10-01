@@ -3,7 +3,8 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Utilities
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class RegistryKeyValueFinderTests
     {
         private IRegistryWrapper _registryWrapper;
@@ -11,7 +12,8 @@ namespace FluentBuild.Utilities
         private RegistryKeyValueFinder _subject;
         private string[] _keysToCheck;
 
-        [SetUp]
+        ///<summary />
+	[SetUp]
         public void Setup()
         {
             _registryWrapper = MockRepository.GenerateMock<IRegistryWrapper>();
@@ -23,7 +25,8 @@ namespace FluentBuild.Utilities
             _registryWrapper.Stub(x => x.OpenLocalMachineKey("SOFTWARE")).Return(_registryKey);
         }
         
-        [Test]
+        ///<summary />
+	[Test]
         public void ShouldOpenLocalMachineKeyForSoftwareTwice()
         {
             _subject.FindFirstValue(_keysToCheck);

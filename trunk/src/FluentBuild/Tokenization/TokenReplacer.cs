@@ -1,31 +1,44 @@
 using System;
-using System.IO;
 using FluentBuild.FilesAndDirectories;
 
 namespace FluentBuild.Tokenization
 {
+    ///<summary>
+    /// Replaces tokens in a file
+    ///</summary>
     public class TokenReplacer
     {
         private readonly IFileSystemWrapper _fileSystemWrapper;
         internal string Input;
         internal string Token;
 
-        public TokenReplacer(string input) : this(new FileSystemWrapper(), input)
+        internal TokenReplacer(string input) : this(new FileSystemWrapper(), input)
         {
         }
 
-        public TokenReplacer(IFileSystemWrapper fileSystemWrapper, string input)
+        internal TokenReplacer(IFileSystemWrapper fileSystemWrapper, string input)
         {
             _fileSystemWrapper = fileSystemWrapper;
             Input = input;
         }
 
+
+        ///<summary>
+        /// Replaces a token in a string
+        ///</summary>
+        ///<param name="token">the token to replace (without the delimiter)</param>
+        ///<returns></returns>
         public TokenWith ReplaceToken(string token)
         {
             Token = token;
             return new TokenWith(this);
         }
 
+        ///<summary>
+        /// Outputs the token replaced to a file
+        ///</summary>
+        ///<param name="destination">the destination path</param>
+        ///<exception cref="ApplicationException">Occurs if the file already exists</exception>
         public void To(string destination)
         {
             if (_fileSystemWrapper.FileExists(destination))

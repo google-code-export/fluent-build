@@ -6,10 +6,10 @@ using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class BuildFolderTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void CreateDirecory_ShouldCallWrapper()
         {
             MessageLogger.WindowWidth = 80;
@@ -20,7 +20,7 @@ namespace FluentBuild.FilesAndDirectories
             fs.AssertWasCalled(x=>x.CreateDirectory(expected));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void DeleteDirecory_ShouldDeleteIfFolderExists()
         {
             MessageLogger.WindowWidth = 80;
@@ -33,7 +33,7 @@ namespace FluentBuild.FilesAndDirectories
         }
 
         
-        [Test]
+        ///<summary />	[Test]
         public void Create_Should_Have_Path()
         {
             var expected = "c:\\temp";
@@ -41,28 +41,28 @@ namespace FluentBuild.FilesAndDirectories
             Assert.That(folder.ToString(), Is.EqualTo(expected));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Create_Should_Build_SubFolder()
         {
             var folder = new BuildFolder("c:\\temp").SubFolder("tmp");
             Assert.That(folder.ToString(), Is.EqualTo("c:\\temp\\tmp"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Create_Should_Build_Recursive_And_SubFolder()
         {
             var folder = new BuildFolder("c:\\temp").RecurseAllSubFolders().SubFolder("tmp");
             Assert.That(folder.ToString(), Is.EqualTo(@"c:\temp\**\tmp"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Create_Should_Build_File()
         {
             var file = new BuildFolder("c:\\temp").File("test.txt");
             Assert.That(file.ToString(), Is.EqualTo(@"c:\temp\test.txt"));
         }
 
-        [Test]
+        ///<summary />	[Test]
         public void Files_ShouldCreateFileset()
         {
             var mockFilesetFactory = MockRepository.GenerateStub<IFileSetFactory>();

@@ -2,10 +2,10 @@
 
 namespace FluentBuild.Core
 {
-    [TestFixture]
+    ///<summary />	[TestFixture]
     public class BuildFileTests
     {
-        [Test]
+        ///<summary />	[Test]
         public void TestThatQueueGetsProcessed()
         {
             var subject = new BuildFile();

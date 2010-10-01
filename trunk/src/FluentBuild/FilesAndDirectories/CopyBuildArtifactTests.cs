@@ -6,7 +6,8 @@ using Rhino.Mocks;
 
 namespace FluentBuild.FilesAndDirectories
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class CopyBuildArtifactTests
     {
         private BuildArtifact _artifact;
@@ -15,7 +16,8 @@ namespace FluentBuild.FilesAndDirectories
         private string _source;
         private string _destination;
 
-        [SetUp]
+        ///<summary />
+	[SetUp]
         public void Setup()
         {
             _source = @"c:\temp\nonexistant.txt";
@@ -26,14 +28,16 @@ namespace FluentBuild.FilesAndDirectories
             _copyEngine = new CopyBuildArtifcat(_fileSystemWrapper, _artifact);
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void StringCopyShouldRenameFile()
         {
             _copyEngine.To(_destination);
             _fileSystemWrapper.AssertWasCalled(x=>x.Copy(_source, _destination));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void ArtifactCopyShouldRenameFile()
         {
             var destinationArtifact = new BuildArtifact(_destination);
@@ -41,7 +45,8 @@ namespace FluentBuild.FilesAndDirectories
             _fileSystemWrapper.AssertWasCalled(x => x.Copy(_source, _destination));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void BuildFolderCopyShouldMoveToNewFolder()
         {
             var buildFolder = new BuildFolder(@"c:\sample");
@@ -49,7 +54,8 @@ namespace FluentBuild.FilesAndDirectories
             _fileSystemWrapper.AssertWasCalled(x => x.Copy(_source, buildFolder.ToString() + "\\nonexistant.txt"));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void PerformTokenReplacement()
         {
             _fileSystemWrapper.Stub(x => x.ReadAllText(_artifact.ToString())).Return("hello @Bills@ ya'll");

@@ -4,10 +4,12 @@ using NUnit.Framework;
 
 namespace FluentBuild.Compilation
 {
-    [TestFixture]
+    ///<summary />
+	[TestFixture]
     public class ResourceTests
     {
-        [Test]
+        ///<summary />
+	[Test]
         public void CreateShouldBuildProperly()
         {
             var res = new Resource("value", "name");
@@ -15,18 +17,21 @@ namespace FluentBuild.Compilation
             Assert.That(res.FilePath, Is.EqualTo("value"));
         }
 
-        [Test]
+        ///<summary />
+	[Test]
         public void IfEmptyNameThenJustValueShouldBeReturned()
         {
             var res = new Resource("value", String.Empty);
-            Assert.That(res.ToString(), Is.EqualTo("value"));
+            Assert.That(res.ToString(), Is.EqualTo("\"value\""));
         }
 
-        [Test]
+        ///<summary />
+    	[Test]
         public void ShouldCreateQuotedString()
         {
             var res = new Resource("value", "name");
             Assert.That(res.ToString(), Is.EqualTo("\"value\",name"));
         }
+
     }
 }

@@ -2,17 +2,32 @@
 
 namespace FluentBuild.Utilities
 {
-    public interface IFailable<T>
+    ///<summary>
+    /// Represents a class that has continue/fail on error behavior
+    ///</summary>
+    ///<typeparam name="T"></typeparam>
+    public interface IFailable<out T>
     {
+        ///<summary>
+        /// On error throw an exception
+        ///</summary>
         T FailOnError { get; }
+
+        ///<summary>
+        /// Swallow exceptions and continue
+        ///</summary>
         T ContinueOnError { get; }
     }
 
+    ///<summary>
+    /// Represents a class that has continue/fail on error behavior
+    ///</summary>
+    ///<typeparam name="T"></typeparam>
     public abstract class Failable<T> : IFailable<T>
     {
         protected internal OnError OnError;
 
-        public Failable()
+        protected Failable()
         {
             OnError = Defaults.OnError;
         }

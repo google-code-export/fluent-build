@@ -4,7 +4,7 @@ using System.IO;
 
 namespace FluentBuild.FilesAndDirectories
 {
-    public interface IFileSystemWrapper
+    internal interface IFileSystemWrapper
     {
         void Copy(string source, string destination);
         bool FileExists(string path);
@@ -19,7 +19,7 @@ namespace FluentBuild.FilesAndDirectories
         IEnumerable<string> GetFilesIn(string directory);
     }
 
-    public class FileSystemWrapper : IFileSystemWrapper
+    internal class FileSystemWrapper : IFileSystemWrapper
     {
         public void Copy(string source, string destination)
         {
