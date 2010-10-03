@@ -11,18 +11,18 @@ namespace FluentBuild.BuildExe
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-p:property=value] [-p:property]");
+                Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-p:property=value] [-p:property] -v:Verbosity");
                 Console.WriteLine();
                 Console.WriteLine(
                     "BuildFileOrSource: the dll that contains the precompiled build file OR the path to the source folder than contains build files (fb.exe will compile the build file for you)");
                 Console.WriteLine("c: The class to run. If none is specified then \"Default\" is assumed");
-                Console.WriteLine(
-                    "p: properties to pass to the build script. These can be accessed via Properties.CommandLine in your build script. ");
+                Console.WriteLine("p: properties to pass to the build script. These can be accessed via Properties.CommandLine in your build script. ");
+                Console.WriteLine("v: verbosity of output. Can be None, TaskNamesOnly, TaskDetails, Full");
                 return;
             }
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
-            MessageLogger.ShowDebugMessages = false;
+            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
 
             //creates a new parser and parses args
             var parser = new CommandLineParser(args);

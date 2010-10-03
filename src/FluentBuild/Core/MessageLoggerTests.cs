@@ -18,6 +18,23 @@ namespace FluentBuild.Core
             _textMessageWriter = new TextMessageWriter();
             Console.SetOut(_textMessageWriter);   
         }
+
+        [Test]
+        public void WrapText_ShouldHaveOneLine()
+        {
+            MessageLogger.WindowWidth = 26;
+            var wrapText = MessageLogger.WrapText(0, "hello");
+            Assert.That(wrapText[0], Is.EqualTo("hello"));
+        }
+
+        [Test]
+        public void WrapText_ShouldHaveTwoLines()
+        {
+            MessageLogger.WindowWidth = 26;
+            var wrapText = MessageLogger.WrapText(9, "  [exec] hello world how are you");
+            Assert.That(wrapText[0], Is.EqualTo("  [exec] hello world "));
+            Assert.That(wrapText[1], Is.EqualTo("         how are you"));
+        }
         
         ///<summary />
 	[Test]
@@ -28,19 +45,42 @@ namespace FluentBuild.Core
         }
 
         ///<summary />
-	[Test]
-        public void WriteDebugMessage_ShouldWriteIfDebugTurnedOn()
+	    [Test]
+        public void WriteDebugMessage_ShouldWriteIfVerbosityIsFull()
         {
-            MessageLogger.ShowDebugMessages = true;
+            MessageLogger.Verbosity = VerbosityLevel.Full;
             MessageLogger.WriteDebugMessage("test");
-            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("\t[DEBUG] test" + Environment.NewLine));
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [DEBUG] test" + Environment.NewLine));
+        }
+
+        [Test]
+        public void UsingDebug_ShouldOnlyWriteOneDebugMessage()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
+            MessageLogger.WriteDebugMessage("test1");
+            using(MessageLogger.ShowDebugMessages)
+            {
+                MessageLogger.WriteDebugMessage("test2");
+            }
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [DEBUG] test2" + Environment.NewLine));
+        }
+
+        [Test]
+        public void UsingDebug_DebugLevelsSholdChange()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;            
+            using (MessageLogger.ShowDebugMessages)
+            {
+                Assert.That(MessageLogger.Verbosity, Is.EqualTo(VerbosityLevel.Full));
+            }
+            Assert.That(MessageLogger.Verbosity, Is.EqualTo(VerbosityLevel.TaskDetails));
         }
 
         ///<summary />
-	[Test]
-        public void WriteDebugMessage_ShouldNotWriteIfDebugTurnedOff()
+	    [Test]
+        public void WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull()
         {
-            MessageLogger.ShowDebugMessages = false;
+            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
             MessageLogger.WriteDebugMessage("test");
             Assert.That(_textMessageWriter.ToString(), Is.Not.EqualTo("test" + Environment.NewLine));
         }
@@ -58,19 +98,9 @@ namespace FluentBuild.Core
         public void Write_ShouldCreateProperlyIndentedLines()
         {
             MessageLogger.Write("TEST", "Content of message");
-            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("\t[TEST] Content of message" + Environment.NewLine));
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [TEST] Content of message" + Environment.NewLine));
         }
 
         ///<summary />
-	[Test]
-        public void Write_ShouldWrapLongLines()
-        {
-            //width is set to 80 characters in setup
-            MessageLogger.Write("TEST", "Content of message that is really really really long and it just keeps on going");
-            _textMessageWriter.Flush();
-            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("\t[TEST] Content of message that is really really really long \r\n\t       and it just keeps on going\r\n"));
-        }
-
-
     }
 }

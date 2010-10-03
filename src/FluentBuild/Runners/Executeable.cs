@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
+using FluentBuild.Utilities.MessageProcessing;
 
 namespace FluentBuild.Runners
 {
@@ -48,10 +49,10 @@ namespace FluentBuild.Runners
     ///</summary>
     public class Executeable : Failable<IExecuteable>, IExecuteable
     {
+        private readonly IMessageProcessor _messageProcessor;
         private readonly object _errorLock;
         private readonly object _outputLock;
         private readonly List<String> _args;
-        private readonly IColorizedOutputDisplay _colorizedOutputDisplay;
         private readonly StringBuilder _error;
         private readonly StringBuilder _output;
         internal string ExecuteablePath;
@@ -60,18 +61,18 @@ namespace FluentBuild.Runners
         ///<summary>
         /// Instantiates a new executable
         ///</summary>
-        public Executeable() : this(new ColorizedOutputDisplay())
+        public Executeable() : this(new DefaultMessageProcessor())
         {
         }
 
-        internal Executeable(IColorizedOutputDisplay colorizedOutputDisplay)
+        internal Executeable(IMessageProcessor messageProcessor)
         {
+            _messageProcessor = messageProcessor;
             _errorLock = new object();
             _outputLock = new object();
             _args = new List<string>();
             _error = new StringBuilder();
             _output = new StringBuilder();
-            _colorizedOutputDisplay = colorizedOutputDisplay;
         }
 
         ///<summary>
@@ -151,7 +152,6 @@ namespace FluentBuild.Runners
         internal string Execute(string prefix)
         {
             MessageLogger.WriteDebugMessage("executing " + ExecuteablePath + CreateArgumentString());
-
             using (IProcessWrapper process = CreateProcess())
             {
                 try
@@ -169,7 +169,8 @@ namespace FluentBuild.Runners
                             //exit code should only be set if we want the application to fail on error
                             Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
                     }
-                    _colorizedOutputDisplay.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode == 0);
+                    
+                    _messageProcessor.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode);
 
                     if (process.ExitCode != 0)
                         throw new ApplicationException("Exectable returned non-zero exit code");

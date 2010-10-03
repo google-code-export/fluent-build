@@ -67,6 +67,16 @@ namespace FluentBuild.BuildExe
                 case "C":
                     ClassToRun = data;
                     break;
+                case "V":
+                    VerbosityLevel tmp;
+                    var tryParse = Enum.TryParse(data, out tmp);
+                    if (!tryParse)
+                    {
+                        Console.WriteLine("Could not determine verbosity level");
+                        Environment.Exit(1);
+                    }
+                    MessageLogger.Verbosity = tmp;
+                    break;
                 default:
                     throw new ArgumentException("Do not understand type");
                     
