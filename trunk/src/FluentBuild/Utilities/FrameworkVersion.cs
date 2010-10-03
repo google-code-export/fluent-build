@@ -1,3 +1,5 @@
+using FluentBuild.FrameworkFinders;
+
 namespace FluentBuild.Utilities
 {
     //CF1.0
@@ -18,7 +20,7 @@ namespace FluentBuild.Utilities
     //SL4
     //SDK:
 
-    
+
     ///<summary>
     /// .NET Framework version
     ///</summary>
@@ -30,6 +32,7 @@ namespace FluentBuild.Utilities
         ///<returns>path to the SDK</returns>
         ///<exception cref="SdkNotFoundException">Thrown if the SDK can not be found</exception>
         string GetPathToSdk();
+
         ///<summary>
         /// Gets the path to the .NET framework install directory
         ///</summary>
@@ -41,61 +44,50 @@ namespace FluentBuild.Utilities
     ///<summary>
     /// The .NET Framework version
     ///</summary>
-    public class FrameworkVersion : IFrameworkVersion 
+    public class FrameworkVersion : IFrameworkVersion
     {
         //public static CustomFrameworkVersion Custom { get { return new CustomFrameworkVersion();} }
-        
-        public static DesktopFrameworkType NET4_0 = new DesktopFrameworkType("v4.0.30319", new[] {""}
-                                                                                         ,new[]{ @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\InstallPath" ,@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client\InstallPath" ,@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
-        public static IFrameworkVersion NET3_5 = new FrameworkVersion("v3.5", new[]{@"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v7.0A\InstallationFolder", @"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v7.0\InstallationFolder", @"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.1\InstallationFolder", @"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.0A\WinSDKNetFxTools\InstallationFolder"}
-                                                                            , new[]{@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5\InstallPath", @"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
 
-        public static IFrameworkVersion NET3_0 = new FrameworkVersion("v3.0", new[]{@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRootv2.0"}
-                                                                            , new[]{@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
+        public static DesktopFrameworkType NET4_0 = new DesktopFrameworkType(new Desktop4_0ClientFrameworkFinder(),
+                                                                             new Desktop4_0FullFrameworkFinder());
 
-        public static IFrameworkVersion NET2_0 = new FrameworkVersion("v2.0.50727", new[] {@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRootv2.0"}
-                                                                                  , new[] {@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
+        public static IFrameworkVersion NET3_5 = new FrameworkVersion(new Desktop3_5Finder());
 
-        public static IFrameworkVersion NET1_1 = new FrameworkVersion("v1.1.4322", new[] {@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRootv1.1"}
-                                                                                 , new[] {@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
+        public static IFrameworkVersion NET3_0 = new FrameworkVersion(new Desktop3_0Finder());
 
-        public static IFrameworkVersion NET1_0 = new FrameworkVersion("v1.0.3705", new[] {@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRoot"}
-                                                                                 , new[] {@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
+        public static IFrameworkVersion NET2_0 = new FrameworkVersion(new Desktop2_0Finder());
+        private readonly IFrameworkFinder _frameworkFinder;
 
-        private readonly string[] _frameworkInstallRoot;
-        private readonly string _fullVersion;
-        private readonly IRegistryKeyValueFinder _registryKeyValueFinder;
-        private readonly string[] _sdkInstallRoot;
+        //public static IFrameworkVersion NET1_1 = new FrameworkVersion("v1.1.4322", new[] {@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRootv1.1"}
+        //                                                                         , new[] {@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
 
-        internal FrameworkVersion(IRegistryKeyValueFinder registryKeyValueFinder, string fullVersion,
-                                  string[] sdkInstallRoot, string[] frameworkInstallRoot)
+        //public static IFrameworkVersion NET1_0 = new FrameworkVersion("v1.0.3705", new[] {@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRoot"}
+        //                                                                         , new[] {@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
+
+
+        internal FrameworkVersion(IFrameworkFinder frameworkFinder)
         {
-            _registryKeyValueFinder = registryKeyValueFinder;
-            _fullVersion = fullVersion;
-            _sdkInstallRoot = sdkInstallRoot;
-            _frameworkInstallRoot = frameworkInstallRoot;
+            _frameworkFinder = frameworkFinder;
         }
 
-        internal FrameworkVersion(string fullVersion, string[] sdkInstallRoot, string[] frameworkInstallRoot)
-            : this(new RegistryKeyValueFinder(), fullVersion, sdkInstallRoot, frameworkInstallRoot)
-        {
-        }
+        #region IFrameworkVersion Members
 
         public string GetPathToSdk()
         {
-            string pathToSdk = _registryKeyValueFinder.FindFirstValue(_sdkInstallRoot);
+            string pathToSdk = _frameworkFinder.PathToSdk();
             if (pathToSdk == null)
-                throw new SdkNotFoundException(_sdkInstallRoot);
+                throw new SdkNotFoundException(_frameworkFinder.SdkSearchPathsUsed);
             return pathToSdk;
         }
 
         public string GetPathToFrameworkInstall()
         {
-            string pathToFrameworkInstall = _registryKeyValueFinder.FindFirstValue(_frameworkInstallRoot);
+            string pathToFrameworkInstall = _frameworkFinder.PathToFrameworkInstall();
             if (pathToFrameworkInstall == null)
-                throw new FrameworkNotFoundException(_frameworkInstallRoot);
-            //TODO: may have to append version # if not 3.5 or 4.0
+                throw new FrameworkNotFoundException(_frameworkFinder.FrameworkSearchPaths);
             return pathToFrameworkInstall;
         }
+
+        #endregion
     }
 }

@@ -62,6 +62,7 @@
       <HintPath>..\..\tools\rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -81,14 +82,15 @@
     <Compile Include="BuildFolderTests.cs" />
     <Compile Include="Build\BuildTests.cs" />
     <Compile Include="Build\BuildUsingCscTests.cs" />
-    <Compile Include="Build\Samples\Simple\C#\basic.cs" />
-    <Compile Include="Build\Samples\Simple\C#\Propgram.cs" />
-    <Compile Include="Build\Samples\WithReference\C#\simpleTest.cs" />
+    <Compile Include="Samples\Build\Simple\C#\basic.cs" />
+    <Compile Include="Samples\Build\Simple\C#\Propgram.cs" />
+    <Compile Include="Samples\Build\WithReference\C#\simpleTest.cs" />
     <Compile Include="DatabaseTests.cs" />
     <Compile Include="FilesetTests.cs" />
     <Compile Include="FileSystemFinderTests.cs" />
     <Compile Include="Run\RunExecuteableTests.cs" />
     <Compile Include="Run\NunitTests.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Run\ZipTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="BuildArtifact\BuildArtifactTokenReplacementTests.cs" />
@@ -118,7 +120,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Run\Samples\SimpleTestAssembly\" />
+    <Folder Include="Samples\Run\SimpleTestAssembly\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="App.config.template" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

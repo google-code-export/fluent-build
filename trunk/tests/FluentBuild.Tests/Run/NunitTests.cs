@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
+using FluentBuild.Core;
 using NUnit.Framework;
 
 namespace FluentBuild.Tests
@@ -7,43 +9,49 @@ namespace FluentBuild.Tests
     [TestFixture]
     public class NunitTests : TestBase
     {
+        private string _outputFile;
+        private string _pathToProjectRoot;
+
+        [SetUp]
+        public void Setup()
+        {
+            _outputFile = rootFolder + "\\sample.xml";
+            _pathToProjectRoot = Settings.PathToRootFolder;
+            Console.WriteLine(_pathToProjectRoot);
+        }
+
         [Test]
         public void ShouldRunProperly()
         {
-            var outputFile = rootFolder + "\\sample.xml";
-            var pathToProjectRoot = Environment.CurrentDirectory + "\\..\\..\\..\\..\\";
             Core.Run.UnitTestFramework.NUnit
-                .FileToTest(Environment.CurrentDirectory + @"..\..\..\Run\Samples\SimpleTestAssembly\Sample.Test.dll")
-                .XmlOutputTo(outputFile)
-                .PathToNunitConsoleRunner(pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
+                .FileToTest(Settings.PathToSamplesFolder  + @"\\Run\SimpleTestAssembly\Sample.Test.dll")
+                .XmlOutputTo(_outputFile)
+                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
                 .Execute();
-            Assert.That(File.Exists(outputFile));
+            Assert.That(File.Exists(_outputFile));
         }
 
         [Test, ExpectedException(typeof(ApplicationException))]
         public void ShouldFailIfErrorOccurs()
         {
+            
             //test fail/continue on error
-            var outputFile = rootFolder + "\\sample.xml";
-            var pathToProjectRoot = Environment.CurrentDirectory + "\\..\\..\\..\\..\\";
             Core.Run.UnitTestFramework.NUnit
                 .FileToTest("nonexistant.dll")
-                .XmlOutputTo(outputFile)
-                .PathToNunitConsoleRunner(pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
+                .XmlOutputTo(_outputFile)
+                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
                 .Execute();
-            Assert.That(File.Exists(outputFile));
+            Assert.That(File.Exists(_outputFile));
         }
 
         [Test]
         public void ShouldSucceedIfFailOnErrorIsContinue()
         {
             //test fail/continue on error
-            var outputFile = rootFolder + "\\sample.xml";
-            var pathToProjectRoot = Environment.CurrentDirectory + "\\..\\..\\..\\..\\";
             Core.Run.UnitTestFramework.NUnit
                 .FileToTest("nonexistant.dll")
-                .XmlOutputTo(outputFile)
-                .PathToNunitConsoleRunner(pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
+                .XmlOutputTo(_outputFile)
+                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
                 .ContinueOnError
                 .Execute();
         }

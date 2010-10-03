@@ -7,7 +7,8 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Compilation
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class MsBuildTaskTests
     {
         private MsBuildTask _subject;
@@ -17,7 +18,8 @@ namespace FluentBuild.Compilation
 
         ///<summary>
         ///</summary>
-        ///<summary />	[SetUp]
+        ///<summary />
+	[SetUp]
         public void Setup()
         {
             _projectOrSolutionFilePath = "c:\\temp.sln";
@@ -25,20 +27,23 @@ namespace FluentBuild.Compilation
             _subject = new MsBuildTask(_projectOrSolutionFilePath, _executable);            
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void ShouldSetSolutionPath()
         {
             Assert.That(_subject.ProjectOrSolutionFilePath, Is.EqualTo(_projectOrSolutionFilePath));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void ShouldSetTarget()
         {
             _subject.AddTarget("target");
             Assert.That(_subject.Targets.Contains("target"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void ShouldSetConfiguration()
         {
             _subject.Configuration("config");
@@ -46,14 +51,16 @@ namespace FluentBuild.Compilation
         }
 
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void ShouldSetOutDir()
         {
             _subject.OutputDirectory("outdir");
             Assert.That(_subject.Outdir, Is.EqualTo("outdir"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void ShouldSetProperty()
         {
             _subject.SetProperty("name", "value");
@@ -61,49 +68,56 @@ namespace FluentBuild.Compilation
             Assert.That(property, Is.EqualTo("value"));
         }
         
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldHaveTarget()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).AddTarget("mytarget").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/target:mytarget"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldAddConfigurationIfSpecified()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).Configuration("DEBUG").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:Configuration=DEBUG"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldNotHaveConfigurationIfNoneSpecified()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).BuildArgs();
             Assert.That(buildArgs.Length, Is.EqualTo(1));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsNotSet()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsSet()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp\\").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldHaveFirstArgAsProjectOrSolution()
         {
             var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).BuildArgs();
             Assert.That(buildArgs[0], Is.EqualTo(_projectOrSolutionFilePath));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void Execute_ShouldExecuteMsBuild()
         {
             Defaults.FrameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();

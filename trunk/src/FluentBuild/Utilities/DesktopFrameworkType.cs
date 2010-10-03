@@ -1,19 +1,21 @@
-﻿namespace FluentBuild.Utilities
+﻿using System;
+using FluentBuild.FrameworkFinders;
+
+namespace FluentBuild.Utilities
 {
     ///<summary>
     /// Indicates if the type is client or full (used in .NET 4.0 and higher)
     ///</summary>
     public class DesktopFrameworkType
     {
-        private readonly string _frameworkVersion;
-        private readonly string[] _sdkInstalledRoot;
-        private readonly string[] _frameworkInstalled;
+        private readonly IFrameworkFinder _clientFinder;
+        private readonly IFrameworkFinder _fullFinder;
 
-        internal DesktopFrameworkType(string frameworkVersion, string[] sdkInstalledRoot, string[] frameworkInstalled)
+    
+        public DesktopFrameworkType(IFrameworkFinder clientFinder, IFrameworkFinder fullFinder)
         {
-            _frameworkVersion = frameworkVersion;
-            _sdkInstalledRoot = sdkInstalledRoot;
-            _frameworkInstalled = frameworkInstalled;
+            _clientFinder = clientFinder;
+            _fullFinder = fullFinder;
         }
 
         ///<summary>
@@ -21,7 +23,7 @@
         ///</summary>
         public FrameworkVersion Client
         {
-            get { return new FrameworkVersion(_frameworkVersion, _sdkInstalledRoot, _frameworkInstalled ); }
+            get { return new FrameworkVersion(_clientFinder); }
         }
 
         ///<summary>
@@ -29,7 +31,7 @@
         ///</summary>
         public FrameworkVersion Full
         {
-            get { return new FrameworkVersion(_frameworkVersion, _sdkInstalledRoot, _frameworkInstalled); }
+            get { return new FrameworkVersion(_fullFinder); }
         }
     }
 }
