@@ -112,6 +112,13 @@
     <Compile Include="CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
+    <Compile Include="FrameworkFinders\DefaultFinder.cs" />
+    <Compile Include="FrameworkFinders\Desktop2_0Finder.cs" />
+    <Compile Include="FrameworkFinders\Desktop3_0Finder.cs" />
+    <Compile Include="FrameworkFinders\Desktop3_5Finder.cs" />
+    <Compile Include="FrameworkFinders\Desktop4_0ClientFrameworkFinder.cs" />
+    <Compile Include="FrameworkFinders\Desktop4_0FullFrameworkFinder.cs" />
+    <Compile Include="FrameworkFinders\IFrameworkFinder.cs" />
     <Compile Include="Publishing\GoogleCode.cs" />
     <Compile Include="Runners\Zip\OneThroughNine.cs" />
     <Compile Include="Runners\Zip\Zip.cs" />

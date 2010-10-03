@@ -25,7 +25,6 @@ namespace FluentBuild.Core
                     }
                     catch (IOException e) //if the output is redirected to a stream then getting the width will fail
                     {
-                        //TODO: see if it can be detected by checking the standard handle (apparently 7) vs the current handle
                         _windowWidth = 80;
                     }
                 return _windowWidth;

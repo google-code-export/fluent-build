@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Win32;
 
 namespace FluentBuild.Utilities
@@ -9,6 +10,7 @@ namespace FluentBuild.Utilities
         IRegistryKeyWrapper OpenSubKey(string keyName);
         object GetValue(string name);
         void Close();
+        string Name { get; }
     }
 
     internal class RegistryKeyWrapper : IRegistryKeyWrapper
@@ -43,6 +45,11 @@ namespace FluentBuild.Utilities
         public void Close()
         {
             _key.Close();
+        }
+
+        public string Name
+        {
+            get { return _key.Name; }
         }
     }
 }

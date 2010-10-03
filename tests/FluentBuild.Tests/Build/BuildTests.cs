@@ -64,7 +64,7 @@ namespace FluentBuild.Tests.Build
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
             CreateBuildTask().AddSources(GetBasicSources())
-                .AddRefences(Environment.CurrentDirectory + "\\..\\..\\..\\..\\Tools\\nunit\\nunit.framework.dll")
+                .AddRefences(Settings.PathToRootFolder + "\\Tools\\nunit\\nunit.framework.dll")
                 .Target.Library.OutputFileTo(outputFileLocation).Execute();
             Assert.That(File.Exists(outputFileLocation));
         }
@@ -74,7 +74,7 @@ namespace FluentBuild.Tests.Build
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
             CreateBuildTask().AddSources(GetBasicSources())
-                .AddResource(Environment.CurrentDirectory + "\\..\\..\\Build\\Samples\\WithReference\\C#\\test.resource")
+                .AddResource(Settings.PathToRootFolder + "\\WithReference\\C#\\test.resource")
                 .Target.Library.OutputFileTo(outputFileLocation).Execute();
             Assert.That(File.Exists(outputFileLocation));
         }

@@ -11,14 +11,14 @@ namespace FluentBuild.Tests.Build
         public override FileSet GetBasicSources()
         {
             var fileSet = new FileSet();
-            fileSet.Include(Environment.CurrentDirectory + "\\..\\..\\Build\\Samples\\Simple\\C#\\*.cs");
+            fileSet.Include(Settings.PathToSamplesFolder + "\\Build\\Simple\\C#\\*.cs");
             return fileSet;
         }
 
         public override FileSet GetWithReferenceSources()
         {
             var fileSet = new FileSet();
-            fileSet.Include(Environment.CurrentDirectory + "\\..\\..\\Build\\Samples\\WithReference\\C#\\*.cs");
+            fileSet.Include(Settings.PathToSamplesFolder + "\\Build\\WithReference\\C#\\*.cs");
             return fileSet;
         }
 
@@ -30,7 +30,6 @@ namespace FluentBuild.Tests.Build
         [Test]
         public override void ShouldCompileBasicAssembly()
         {
-            Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);
             Actual_ShouldCompileBasicAssembly();
         }
 
@@ -61,6 +60,7 @@ namespace FluentBuild.Tests.Build
         [Test]
         public override void ShouldCompileWithReference()
         {
+            
             Actual_ShouldCompileWithReference();
         }
 

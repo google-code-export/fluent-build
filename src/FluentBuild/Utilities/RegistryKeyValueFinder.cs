@@ -1,4 +1,7 @@
-﻿namespace FluentBuild.Utilities
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
+
+namespace FluentBuild.Utilities
 {
     ///<summary>
     /// Used to find a value in the registry
@@ -9,8 +12,8 @@
         /// Finds the first value in a string of paths to search
         ///</summary>
         ///<param name="keysToCheck">A list of keys to check</param>
-        ///<returns>The value of the key or null if no key could be found</returns>
-        string FindFirstValue(params string[] keysToCheck);
+        ///<returns>The name value pair of the key (name is the key and value is the value of that key) or null if no key could be found</returns>
+        KeyValuePair<string, string> FindFirstValue(params string[] keysToCheck);
     }
 
     ///<summary>
@@ -31,7 +34,7 @@
 
         #region IRegistryKeyValueFinder Members
 
-        public string FindFirstValue(params string[] keysToCheck)
+        public KeyValuePair<string, string> FindFirstValue(params string[] keysToCheck)
         {
             foreach (string keyToCheck in keysToCheck)
             {
@@ -45,9 +48,9 @@
                 }
 
                 if (key != null) //could open all keys now try to get the value
-                    return key.GetValue(parts[parts.Length - 1]).ToString();
+                    return new KeyValuePair<string, string>(key.Name, key.GetValue(parts[parts.Length - 1]).ToString());
             }
-            return string.Empty; //can't find anything so return an emtpy string
+            return new KeyValuePair<string, string>(); //can't find anything so return an emtpy string
         }
 
         #endregion

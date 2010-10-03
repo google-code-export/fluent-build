@@ -20,16 +20,11 @@ namespace FluentBuild.Utilities
         /// Creates a new exception and populates the message.
         ///</summary>
         ///<param name="pathsSearched">Paths searched to find the SDK</param>
-        public SdkNotFoundException(string[] pathsSearched)
+        public SdkNotFoundException(string pathsSearched)
         {
             var sb = new StringBuilder();
             sb.Append("Could not find the SDK by searching paths ");
-            foreach (var paths in pathsSearched)
-            {
-                sb.Append(paths);
-                sb.Append(", ");
-            }
-            sb.Remove(sb.Length - 2, 2);
+            sb.Append(pathsSearched);
             sb.Append(". Please make sure it is installed.");
             _message = sb.ToString();
         }

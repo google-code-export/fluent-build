@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using FluentBuild.FilesAndDirectories.FileSet;
 
 namespace FluentBuild.Core
@@ -11,7 +12,7 @@ namespace FluentBuild.Core
         ///<summary>
         /// Returns a list of files that is contained within the fileset. 
         ///</summary>
-        IList<string> Files { get; }
+        ReadOnlyCollection<string> Files { get; }
 
         ///<summary>
         /// Copies the fileset
@@ -61,9 +62,7 @@ namespace FluentBuild.Core
 
 
         #region IFileSet Members
-        
-        //TODO: Should this not be a read only collection?
-        public IList<string> Files
+        public ReadOnlyCollection<string> Files
         {
             get
             {
@@ -71,7 +70,7 @@ namespace FluentBuild.Core
                 {
                     _files.Remove(exclusion);
                 }
-                return _files;
+                return _files.AsReadOnly();
             }
         }
 
@@ -89,7 +88,7 @@ namespace FluentBuild.Core
             return this;
         }
 
-        //TODO: should take a buildArtifact/Folder
+        
         public FileSet Exclude(string path)
         {
             if (path.IndexOf('*') == -1)

@@ -88,7 +88,7 @@ namespace FluentBuild.BuildFileConverter
             var regex = new Regex(@"\{[A-Za-z0-9_.]*\}");
             if (regex.IsMatch(valueToSet))
             {
-                //TODO: what if the variable is "asdfom\${varname}\4ewgsa";
+                //What if the variable is "asdfom\${varname}\4ewgsa";
                 //here there is a variable so we have to parse it out
                 var indexOfEndOfVariable = valueToSet.IndexOf("}");
                 var startIndex = valueToSet.IndexOf("{") +1;
@@ -96,7 +96,7 @@ namespace FluentBuild.BuildFileConverter
                 var data = valueToSet.Substring(indexOfEndOfVariable + 1);
                 foreach (string property in _properties)
                 {
-                    //TODO: what about when a path is "{Variable}\nunit\nunit.exe"
+                    //what about when a path is "{Variable}\nunit\nunit.exe"
                     if (variableName == property)
                     {
                         var valueForFunction = data;

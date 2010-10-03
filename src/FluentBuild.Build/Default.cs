@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using FluentBuild;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
@@ -43,7 +45,7 @@ namespace Build
             thirdparty_rhino = directory_tools.SubFolder("rhino").File("rhino.mocks.dll");
             thirdparty_sharpzip = directory_base.SubFolder("lib").SubFolder("SharpZipLib-net2.0").File("ICSharpCode.SharpZipLib.dll");
 
-            _version = "0.1.2.0";
+            _version = "0.1.3.0";
 
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
@@ -140,7 +142,16 @@ namespace Build
 
         private void RunFunctionalTests()
         {
-            //TODO: this will need the sample data copied into the compile directory
+            //Copy sample folder to compile directory
+            var sampleData = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").SubFolder("Samples");
+            Run.Executeable(@"C:\Windows\System32\xcopy.exe").WithArguments(sampleData.ToString(), directory_compile.SubFolder("Samples").ToString(), "/E /I").Execute();
+            var configSource = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").File("app.config.template");
+            var configDestination = directory_compile.File("FluentBuild_Functional_Tests.dll.config");
+            configSource.Copy
+                .ReplaceToken("RelativeRoot").With("..\\")
+                .ReplaceToken("RelativeSamples").With(@"Samples")
+                .To(configDestination.ToString());
+
             Run.UnitTestFramework.NUnit.FileToTest(assembly_Functional_Tests).Execute();
         }
     }
