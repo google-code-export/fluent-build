@@ -435,10 +435,10 @@
         <member name="M:FluentBuild.Core.MessageLoggerTests.WriteHeader">
             <summary />
         </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfDebugTurnedOn">
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
             <summary />
         </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfDebugTurnedOff">
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
             <summary />
         </member>
         <member name="M:FluentBuild.Core.MessageLoggerTests.WriteBlankLine_ShouldCreateNewLine">
@@ -971,10 +971,10 @@
         <member name="T:FluentBuild.Utilities.FrameworkVersionTests">
             <summary />
         </member>
-        <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToSdk_ShouldCallOutToRegistryKeyFinder">
+        <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToSdk_ShouldNotThrowException">
             <summary />
         </member>
-        <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToFrameworkInstall_ShouldCallOutToRegistryKeyFinder">
+        <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToFrameworkInstall_ShouldNotThrowException">
             <summary />
         </member>
         <member name="T:FluentBuild.Core.AssemblyInfo">
@@ -1114,7 +1114,7 @@
              Finds the first value in a string of paths to search
             </summary>
             <param name="keysToCheck">A list of keys to check</param>
-            <returns>The value of the key or null if no key could be found</returns>
+            <returns>The name value pair of the key (name is the key and value is the value of that key) or null if no key could be found</returns>
         </member>
         <member name="T:FluentBuild.Utilities.RegistryKeyValueFinder">
             <summary>
@@ -1272,7 +1272,7 @@
              Thrown when the request Windows SDK can not be found
             </summary>
         </member>
-        <member name="M:FluentBuild.Utilities.SdkNotFoundException.#ctor(System.String[])">
+        <member name="M:FluentBuild.Utilities.SdkNotFoundException.#ctor(System.String)">
             <summary>
              Creates a new exception and populates the message.
             </summary>
@@ -1571,6 +1571,11 @@
         <member name="M:FluentBuild.Compilation.MsBuildTaskTests.Execute_ShouldExecuteMsBuild">
             <summary />
         </member>
+        <member name="P:FluentBuild.Core.MessageLogger.Verbosity">
+            <summary>
+             Gets or sets the message logging verbosity level
+            </summary>
+        </member>
         <member name="T:FluentBuild.Core.BuildFolder">
             <summary>
             Represents a folder used in the build process.
@@ -1647,7 +1652,7 @@
              Raises when the desired .NET framework can not be found
             </summary>
         </member>
-        <member name="M:FluentBuild.Utilities.FrameworkNotFoundException.#ctor(System.String[])">
+        <member name="M:FluentBuild.Utilities.FrameworkNotFoundException.#ctor(System.String)">
             <summary>
              Creates a new exception with the message populated
             </summary>
@@ -1798,6 +1803,31 @@
             </summary>
             <param name="destination">Path to a folder that will recieve the files</param>
             <returns></returns>
+        </member>
+        <member name="T:FluentBuild.Core.VerbosityLevel">
+            <summary>
+             The verbosity of messages
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.None">
+            <summary>
+             Nothing should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.TaskNamesOnly">
+            <summary>
+             Only task names should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.TaskDetails">
+            <summary>
+             Task names and their details should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.Full">
+            <summary>
+             Output everything possible.
+            </summary>
         </member>
     </members>
 </doc>

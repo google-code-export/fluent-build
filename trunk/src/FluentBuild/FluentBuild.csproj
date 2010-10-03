@@ -109,8 +109,11 @@
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
     <Compile Include="Core\PropertiesTests.cs" />
     <Compile Include="Core\Publish.cs" />
+    <Compile Include="Core\VerbosityLevel.cs" />
     <Compile Include="CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
+    <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessor.cs" />
+    <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessorTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
     <Compile Include="FrameworkFinders\DefaultFinder.cs" />
     <Compile Include="FrameworkFinders\Desktop2_0Finder.cs" />
@@ -119,6 +122,9 @@
     <Compile Include="FrameworkFinders\Desktop4_0ClientFrameworkFinder.cs" />
     <Compile Include="FrameworkFinders\Desktop4_0FullFrameworkFinder.cs" />
     <Compile Include="FrameworkFinders\IFrameworkFinder.cs" />
+    <Compile Include="Utilities\MessageProcessing\IMessageProcessor.cs" />
+    <Compile Include="Utilities\MessageProcessing\Message.cs" />
+    <Compile Include="Utilities\MessageProcessing\MessageType.cs" />
     <Compile Include="Publishing\GoogleCode.cs" />
     <Compile Include="Runners\Zip\OneThroughNine.cs" />
     <Compile Include="Runners\Zip\Zip.cs" />
@@ -151,7 +157,6 @@
     <Compile Include="Utilities\FrameworkVersionTests.cs" />
     <Compile Include="Utilities\OnError.cs" />
     <Compile Include="ApplicationProperties\TeamCityProperties.cs" />
-    <Compile Include="Utilities\ColorizedOutputDisplay.cs" />
     <Compile Include="Runners\Executeable.cs" />
     <Compile Include="Runners\ExecuteableTests.cs" />
     <Compile Include="Core\BuildArtifact.cs" />

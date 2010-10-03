@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace FluentBuild.Core
@@ -8,7 +9,6 @@ namespace FluentBuild.Core
         //[DllImport("kernel32.dll")]
         //public static extern IntPtr GetStdHandle(uint nStdHandle);
 
-        public static bool ShowDebugMessages;
         private static int _windowWidth;
 
         internal static int WindowWidth
@@ -32,41 +32,85 @@ namespace FluentBuild.Core
             set { _windowWidth = value; }
         }
 
+        ///<summary>
+        /// Gets or sets the message logging verbosity level
+        ///</summary>
+        public static VerbosityLevel Verbosity { get; set; }
+
+        internal class DebugMessages : IDisposable
+        {
+            private VerbosityLevel _originalVerbosity;
+
+            public DebugMessages()
+            {
+                _originalVerbosity = MessageLogger.Verbosity;
+                MessageLogger.Verbosity = VerbosityLevel.Full;
+            }
+
+            public void Dispose()
+            {
+                MessageLogger.Verbosity = _originalVerbosity;
+            }
+        }
+
+        public static IDisposable ShowDebugMessages
+        {
+            get { return new DebugMessages(); }
+        }
+
 
         public static void WriteHeader(string header)
         {
-            
-            Console.WriteLine(header);
+            if (Verbosity >= VerbosityLevel.TaskNamesOnly)
+            {
+                Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Purple);
+                Console.WriteLine(header);
+                Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+            }
         }
 
         public static void WriteDebugMessage(string message)
         {
-            if (ShowDebugMessages)
+            if (Verbosity >= VerbosityLevel.Full)
                 Write("DEBUG", message);
+        }
+
+        internal static List<String> WrapText(int leftColumnStartsAtPostion, string message)
+        {
+            var maxLengthOfMessage = WindowWidth - 5; //add some padding on the right
+            if (message.Length <= maxLengthOfMessage)
+                return new List<string>() {message};
+
+
+            var lines = new List<string>();
+            lines.Add(message.Substring(0, maxLengthOfMessage)); //add the line with the prefix
+
+            var remainingText = message.Substring(maxLengthOfMessage); //cut out the string we already put into lines
+            while(remainingText.Length > 0)
+            {
+                //create a line that has room for left indent
+                var lengthToEndOfline = maxLengthOfMessage - leftColumnStartsAtPostion;
+                //if the length we calculate is longer than the remaining text
+                //then just take the length of the remaning text
+                if (lengthToEndOfline > remainingText.Length) 
+                    lengthToEndOfline = remainingText.Length;
+                var line = remainingText.Substring(0, lengthToEndOfline);
+                var padding = "".PadLeft(leftColumnStartsAtPostion, ' ');
+                lines.Add(padding + line);
+                //shrink down remaining text
+                remainingText = remainingText.Substring(lengthToEndOfline);
+            }
+            return lines;
         }
 
         public static void Write(string type, string message)
         {
-            string outputMessage = String.Format("[{0}] {1}", type, message);
-            do
+            string outputMessage = String.Format("  [{0}] {1}", type, message);
+            var wrapText = WrapText(5 + type.Length, outputMessage);
+            foreach (var text in wrapText)
             {
-                int length = 0;
-                if (outputMessage.Length > WindowWidth - 20)
-                    length = WindowWidth - 20;
-                else
-                    length = outputMessage.Length;
-
-                //ugly indentation code. Better way to do it but brain hurts
-                if (!outputMessage.Substring(0, length).Contains(String.Format("[{0}]", type)))
-                {
-                    Console.WriteLine("\t".PadRight(type.Length + 4, ' ') + outputMessage.Substring(0, length));
-                }
-                else
-                {
-                    Console.WriteLine("\t" + outputMessage.Substring(0, length));
-                }
-                outputMessage = outputMessage.Substring(length);
-            } while (outputMessage.Trim().Length > 0);
+                Console.WriteLine(text);
+            }
         }
 
         public static void BlankLine()

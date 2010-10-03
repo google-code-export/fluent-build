@@ -14,7 +14,7 @@ namespace FluentBuild.Utilities
         [DllImport("kernel32.dll")]
         public static extern IntPtr GetStdHandle(uint nStdHandle);
 
-        public enum BuildColor { Default=007, Red=12, Yellow=14, Green=10, Aqua=11, Purple=14};
+        public enum BuildColor { Default=007, Red=12, Yellow=14, Green=10, Aqua=11, Purple=13};
         
         //public static void ShowAllColors()
         //{
