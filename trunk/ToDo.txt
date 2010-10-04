@@ -9,7 +9,6 @@ Build
     -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
 	-Nightly build setup
 	
-		
   Next Release
   	-Add in ILMerge support / ILMerge in sharpzlib
     -Review exception types and get rid of ApplicationException where necessary
