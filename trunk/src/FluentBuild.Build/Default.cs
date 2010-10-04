@@ -47,7 +47,7 @@ namespace Build
 
             _version = "0.1.3.0";
 
- 
+            Run.Debugger();
 
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
@@ -97,10 +97,7 @@ namespace Build
         private void CompileCoreSources()
         {
             
-            FileSet sourceFiles = new FileSet()
-                .Include(directory_src_core
-                             .RecurseAllSubFolders()
-                             .File("*.cs"));
+            FileSet sourceFiles = new FileSet().Include(directory_src_core).RecurseAllSubDirectories.Filter("*.cs");
 
             FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)
@@ -113,9 +110,8 @@ namespace Build
         private void CompileRunnerSources()
         {
             FileSet sourceFiles = new FileSet()
-                             .Include(directory_src_runner
-                             .RecurseAllSubFolders()
-                             .File("*.cs"));
+                             .Include(directory_src_runner)
+                             .RecurseAllSubDirectories.Filter("*.cs");
 
             FluentBuild.Core.Build.UsingCsc.Target.Executable
                 .AddSources(sourceFiles)
@@ -127,7 +123,7 @@ namespace Build
 
         private void CompileFunctionalTests()
         {
-            FileSet sourceFiles =new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().File("*.cs"));
+            FileSet sourceFiles =new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
             FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests)

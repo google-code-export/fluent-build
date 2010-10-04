@@ -48,9 +48,9 @@ namespace FluentBuild.Core
         /// Gets the number of tasks in the queue.
         ///</summary>
         ///<returns>The number of tasks in the queue</returns>
-        public int TaskCount()
+        public int TaskCount
         {
-            return Tasks.Count;
+            get { return Tasks.Count; } 
         }
     }
 }

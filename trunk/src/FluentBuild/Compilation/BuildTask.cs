@@ -12,7 +12,7 @@ namespace FluentBuild.Compilation
     public class BuildTask
     {
         private readonly List<string> _references = new List<string>();
-        private readonly List<Resource> _resources = new List<Resource>();
+        internal readonly List<Resource> Resources = new List<Resource>();
         private readonly List<string> _sources = new List<string>();
         internal readonly string Compiler;
         private bool _includeDebugSymbols;
@@ -64,7 +64,7 @@ namespace FluentBuild.Compilation
                 }
 
                 var resources = new StringBuilder();
-                foreach (Resource res in _resources)
+                foreach (Resource res in Resources)
                 {
                     //res.ToString() does the work of converting the resource to a string
                     resources.AppendFormat(" /resource:{0}", res);
@@ -144,7 +144,7 @@ namespace FluentBuild.Compilation
         /// <returns></returns>
         public BuildTask AddResource(string fileName, string identifier)
         {
-            _resources.Add(new Resource(fileName, identifier));
+            Resources.Add(new Resource(fileName, identifier));
             return this;
         }
 
@@ -157,7 +157,7 @@ namespace FluentBuild.Compilation
         {
             foreach (string file in fileSet.Files)
             {
-                _resources.Add(new Resource(file));
+                Resources.Add(new Resource(file));
             }
             return this;
         }

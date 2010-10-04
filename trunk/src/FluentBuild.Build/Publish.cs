@@ -28,9 +28,8 @@ namespace Build
         private void CompileRunner()
         {
             FileSet sourceFiles = new FileSet()
-                .Include(directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe")
-                             .RecurseAllSubFolders()
-                             .File("*.cs"));
+                .Include(directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe"))
+                .RecurseAllSubDirectories.Filter("*.cs");
 
             FluentBuild.Core.Build.UsingCsc.Target.Executable
                 .AddSources(sourceFiles)
@@ -54,12 +53,10 @@ namespace Build
         private void CompileCoreWithOutTests()
         {
             FileSet sourceFiles = new FileSet()
-                .Include(directory_base.SubFolder("src").SubFolder("FluentBuild")
-                             .RecurseAllSubFolders()
-                             .File("*.cs"))
-                .Exclude(directory_base.SubFolder("src").SubFolder("FluentBuild")
-                             .RecurseAllSubFolders()
-                             .File("*Tests.cs").ToString());
+                .Include(directory_base.SubFolder("src").SubFolder("FluentBuild"))
+                             .RecurseAllSubDirectories.Filter("*.cs")
+                .Exclude(directory_base.SubFolder("src").SubFolder("FluentBuild"))
+                             .RecurseAllSubDirectories.Filter("*Tests.cs");
 
             FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)

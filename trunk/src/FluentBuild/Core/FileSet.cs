@@ -36,6 +36,18 @@ namespace FluentBuild.Core
         ///</summary>
         ///<param name="path">exclude path</param>
         FileSet Exclude(string path);
+
+        ///<summary>
+        /// Sets the include to be a folder and opens additional options
+        ///</summary>
+        ///<param name="path">The buildfolder representing the path to be used</param>
+        BuildFolderChoices Include(BuildFolder path);
+        
+        ///<summary>
+        /// Sets the exclude to be a folder and opens additional options
+        ///</summary>
+        ///<param name="path">The buildfolder representing the path to be used</param>
+        BuildFolderChoices Exclude(BuildFolder path);
     }
 
     ///<summary>
@@ -43,7 +55,7 @@ namespace FluentBuild.Core
     ///</summary>
     public class FileSet : IFileSet
     {
-        private readonly List<string> _exclusions = new List<string>();
+        internal readonly List<string> Exclusions = new List<string>();
         private readonly List<string> _files = new List<string>();
         private readonly IFileSystemUtility _utility;
 
@@ -66,13 +78,31 @@ namespace FluentBuild.Core
         {
             get
             {
-                foreach (string exclusion in _exclusions)
+                ProcessPendings();
+                foreach (string exclusion in Exclusions)
                 {
                     _files.Remove(exclusion);
                 }
                 return _files.AsReadOnly();
             }
         }
+
+        
+        protected internal string PendingInclude;
+        protected internal string PendingExclude;
+
+        public BuildFolderChoices Include(BuildFolder path)
+        {
+            PendingInclude = path.ToString();
+            return new BuildFolderChoices(this);
+        }
+
+        public BuildFolderChoices Exclude(BuildFolder path)
+        {
+            PendingExclude = path.ToString();
+            return new BuildFolderChoices(this);
+        }
+
 
         public FileSet Include(BuildArtifact path)
         {
@@ -81,6 +111,8 @@ namespace FluentBuild.Core
 
         public FileSet Include(string path)
         {
+            ProcessPendings();
+
             if (path.IndexOf('*') == -1)
                 _files.Add(path);
             else
@@ -89,18 +121,41 @@ namespace FluentBuild.Core
         }
 
         
+        internal void ProcessPendings()
+        {
+            if (!string.IsNullOrEmpty(PendingExclude))
+            {
+                var tmp = PendingExclude;
+                PendingExclude = string.Empty;
+                Exclude(tmp);
+            }
+
+            if (!string.IsNullOrEmpty(PendingInclude))
+            {
+                var tmp = PendingInclude;
+                PendingInclude = string.Empty;
+                Include(tmp);
+            }
+        }
+
         public FileSet Exclude(string path)
         {
+            ProcessPendings();
+
             if (path.IndexOf('*') == -1)
-                _exclusions.Add(path);
+                Exclusions.Add(path);
             else
-                _exclusions.AddRange(_utility.GetAllFilesMatching(path));
+                Exclusions.AddRange(_utility.GetAllFilesMatching(path));
             return this;
         }
 
         public CopyFileset Copy
         {
-            get { return new CopyFileset(this); }
+            get
+            {
+                ProcessPendings();
+                return new CopyFileset(this);
+            }
         }
 
         #endregion

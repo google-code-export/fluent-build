@@ -97,6 +97,8 @@
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
+    <Compile Include="Core\PublishTests.cs" />
+    <Compile Include="FilesAndDirectories\FileSet\BuildFolderChoices.cs" />
     <Compile Include="Core\Build_Tests.cs" />
     <Compile Include="Core\Build.cs" />
     <Compile Include="Compilation\MsBuildTask.cs" />
@@ -167,7 +169,7 @@
     <Compile Include="FilesAndDirectories\CopyBuildArtifactTests.cs" />
     <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
     <Compile Include="Core\FileSet.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\FileSetTests.cs" />
+    <Compile Include="Core\FileSetTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtility.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSystemUtilityTests.cs" />
     <Compile Include="Core\BuildFolder.cs" />

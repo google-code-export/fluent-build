@@ -1,17 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentBuild.Core;
+using FluentBuild.FilesAndDirectories.FileSet;
 using NUnit.Framework;
-
 using Rhino.Mocks;
 
-namespace FluentBuild.FilesAndDirectories.FileSet
+namespace FluentBuild.Core
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class FileSetTests
     {
-        ///<summary />	[Test]
+
+        [Test]
+        public void ProcessPending_ShouldClearPendings()
+        {
+            var subject = new FileSet();
+            var includePath = "c:\\temp";
+            subject.PendingInclude = includePath;
+            var excludePath = "c:\\windows\\";
+            subject.PendingExclude = excludePath;
+            subject.ProcessPendings();
+            Assert.That(subject.PendingInclude, Is.EqualTo(string.Empty));
+            Assert.That(subject.PendingExclude, Is.EqualTo(string.Empty));
+            Assert.That(subject.Files[0], Is.EqualTo(includePath));
+            Assert.That(subject.Exclusions[0], Is.EqualTo(excludePath));
+        }
+        [Test]
+        public void TestNewSyntax()
+        {
+            var x = new FileSet();
+            var folder = new BuildFolder("");
+            var files = x.Include(folder).RecurseAllSubDirectories.Filter("*.cs")
+                         .Exclude(folder).RecurseAllSubDirectories.Filter("AssemblyInfo.*")
+                         .Include("c:\\temp\test.txt")
+                         .Files;
+        }
+
+        ///<summary />
+	[Test]
         public void BuildFileSet()
         {
             string fileName = "test.txt";
@@ -20,14 +47,16 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(fileset.Files[0], Is.EqualTo(fileName));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void CopyShouldNotBeNull()
         {
             var fileset = new Core.FileSet(null);
             Assert.That(fileset.Copy, Is.Not.Null);
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildFileSetFromArtifact()
         {
             string fileName = "test.txt";
@@ -38,7 +67,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
         }
 
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void AddAllCsFiles()
         {
             string path = "c:\\temp\\*.cs";
@@ -53,7 +83,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(fileset.Files[0], Is.EqualTo("c:\\temp\\test1.cs"));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void AddAllCsFilesAndExcludeSpecificFileName()
         {
             string path = "c:\\temp\\*.cs";
@@ -68,7 +99,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(fileset.Files.Count, Is.EqualTo(1));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void AddAllCsFilesAndExcludeGenericFileName()
         {
             string includeFilter = @"c:\temp\**\*.cs";

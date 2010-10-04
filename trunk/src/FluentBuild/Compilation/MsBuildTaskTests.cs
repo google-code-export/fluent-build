@@ -116,6 +116,15 @@ namespace FluentBuild.Compilation
             Assert.That(buildArgs[0], Is.EqualTo(_projectOrSolutionFilePath));
         }
 
+        [Test]
+        public void OutputDirectory_ShouldSetDir()
+        {
+            var path = "c:\\temp";
+            var folder = new BuildFolder(path);
+            _subject.OutputDirectory(folder);
+            Assert.That(_subject.Outdir, Is.EqualTo(path));
+        }
+
         ///<summary />
 	[Test]
         public void Execute_ShouldExecuteMsBuild()

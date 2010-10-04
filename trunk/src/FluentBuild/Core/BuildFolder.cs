@@ -42,15 +42,6 @@ namespace FluentBuild.Core
         }
 
 
-        /// <summary>
-        /// Creates a new BuildFolder that encompases the current folder and all of its subdirectories
-        /// </summary>
-        /// <returns>A buildfolder that represents the current folder and all its subdirectories</returns>
-        public BuildFolder RecurseAllSubFolders()
-        {
-            return new BuildFolder(_path + "\\**\\");
-        }
-
 
         /// <summary>
         /// Deletes the folder. If the the folder can not be deleted, or does not exist then an exception is thrown.
