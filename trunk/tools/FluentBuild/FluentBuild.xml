@@ -1026,7 +1026,7 @@
         </member>
         <member name="F:FluentBuild.Core.Defaults.FrameworkVersion">
             <summary>
-             Sets the .NET Framework version to use. The default is .NET 4.0
+             Sets the .NET Framework version to use. The default is the highest desktop framework found.
             </summary>
         </member>
         <member name="T:FluentBuild.Database.MsSqlVersionTableTests">
@@ -1136,6 +1136,12 @@
             </summary>
             <returns>The path to where the .NET Framework was installed</returns>
              <exception cref="T:FluentBuild.Utilities.FrameworkNotFoundException">Thrown when the .NET Framework path can not be found</exception>
+        </member>
+        <member name="M:FluentBuild.Utilities.IFrameworkVersion.IsFrameworkInstalled">
+            <summary>
+             Determins if the .NET framework is installed
+            </summary>
+            <returns>true if framework is found (determined by searching the registry</returns>
         </member>
         <member name="T:FluentBuild.Utilities.FrameworkVersion">
             <summary>

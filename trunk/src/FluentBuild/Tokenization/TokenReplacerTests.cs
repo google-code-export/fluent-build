@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using FluentBuild.FilesAndDirectories;
@@ -36,7 +37,7 @@ namespace FluentBuild.Tokenization
             Assert.That(results, Is.EqualTo("Hello Smith, John how are you today?"));
         }
 
-        [Test, ExpectedException(typeof(ApplicationException))]
+        [Test, ExpectedException(typeof(IOException))]
         public void To_ShouldFailIfFileExists()
         {
             string destination = "c:\\temp";

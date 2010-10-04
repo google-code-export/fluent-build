@@ -80,10 +80,10 @@ namespace FluentBuild.Runners.Zip
         {
             //only one should be set
             if (String.IsNullOrEmpty(_file) && (String.IsNullOrEmpty(_path)))
-                throw new ApplicationException("sourceFile OR sourceFolder must be set");
+                throw new ArgumentException("sourceFile OR sourceFolder must be set");
 
             if (!String.IsNullOrEmpty(_file) && (!String.IsNullOrEmpty(_path)))
-                throw new ApplicationException("sourceFile OR sourceFolder must be set");
+                throw new ArgumentException("sourceFile OR sourceFolder must be set");
 
             if (!string.IsNullOrEmpty(_file))
                 return new List<String> {_file};

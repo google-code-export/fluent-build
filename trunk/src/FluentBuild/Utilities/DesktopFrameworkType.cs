@@ -23,7 +23,7 @@ namespace FluentBuild.Utilities
         ///</summary>
         public FrameworkVersion Client
         {
-            get { return new FrameworkVersion(_clientFinder); }
+            get { return new FrameworkVersion(".NET 4.0 (Client)", _clientFinder); }
         }
 
         ///<summary>
@@ -31,7 +31,7 @@ namespace FluentBuild.Utilities
         ///</summary>
         public FrameworkVersion Full
         {
-            get { return new FrameworkVersion(_fullFinder); }
+            get { return new FrameworkVersion(".NET 4.0 (Full)", _fullFinder); }
         }
     }
 }

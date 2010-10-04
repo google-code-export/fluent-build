@@ -173,7 +173,7 @@ namespace FluentBuild.Runners
                     _messageProcessor.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode);
 
                     if (process.ExitCode != 0)
-                        throw new ApplicationException("Exectable returned non-zero exit code");
+                        throw new ExecutableFailedException("Exectable returned non-zero exit code");
                 }
                 catch (Exception e)
                 {

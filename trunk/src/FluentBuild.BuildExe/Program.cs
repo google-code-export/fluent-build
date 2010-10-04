@@ -92,7 +92,8 @@ namespace FluentBuild.BuildExe
         private static void ExecuteBuildTask(string path, string classToRun)
         {
             MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
-
+            
+            MessageLogger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
             Assembly assemblyInstance = Assembly.LoadFile(path);
             Type[] types = assemblyInstance.GetTypes();
             bool classfound = false;
