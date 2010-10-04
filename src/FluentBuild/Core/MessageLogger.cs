@@ -77,7 +77,7 @@ namespace FluentBuild.Core
 
         internal static List<String> WrapText(int leftColumnStartsAtPostion, string message)
         {
-            var maxLengthOfMessage = WindowWidth - 5; //add some padding on the right
+            var maxLengthOfMessage = WindowWidth - 1; //add some padding on the right
             if (message.Length <= maxLengthOfMessage)
                 return new List<string>() {message};
 

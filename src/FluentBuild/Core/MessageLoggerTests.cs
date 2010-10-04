@@ -22,7 +22,7 @@ namespace FluentBuild.Core
         [Test]
         public void WrapText_ShouldHaveOneLine()
         {
-            MessageLogger.WindowWidth = 26;
+            MessageLogger.WindowWidth = 22;
             var wrapText = MessageLogger.WrapText(0, "hello");
             Assert.That(wrapText[0], Is.EqualTo("hello"));
         }
@@ -30,7 +30,7 @@ namespace FluentBuild.Core
         [Test]
         public void WrapText_ShouldHaveTwoLines()
         {
-            MessageLogger.WindowWidth = 26;
+            MessageLogger.WindowWidth = 22;
             var wrapText = MessageLogger.WrapText(9, "  [exec] hello world how are you");
             Assert.That(wrapText[0], Is.EqualTo("  [exec] hello world "));
             Assert.That(wrapText[1], Is.EqualTo("         how are you"));

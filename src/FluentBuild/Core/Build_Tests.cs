@@ -11,7 +11,7 @@ namespace FluentBuild.Core
 	[Test]
         public void ShouldCreateTaskWithVbCompiler()
         {
-            var build = Build.UsingVbc;
+            var build = Build.UsingVbc.Target.Library;
             Assert.That(build.Compiler, Is.EqualTo("vbc.exe"));
         }
 
@@ -19,7 +19,7 @@ namespace FluentBuild.Core
 	[Test]
         public void ShouldCreateTaskWithCSCCompiler()
         {
-            var build = Build.UsingCsc;
+            var build = Build.UsingCsc.Target.Library;
             Assert.That(build.Compiler, Is.EqualTo("csc.exe"));
         }
 

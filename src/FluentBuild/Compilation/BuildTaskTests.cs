@@ -19,7 +19,7 @@ namespace FluentBuild.Compilation
         public void Args_ShouldCreateProperArgs()
         {
             string outputAssembly = "myapp.dll";
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library;
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}", outputAssembly, "library")));
         }
 
@@ -33,7 +33,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             var sources = new FileSet().Include(source);
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddRefences(reference).AddSources(sources);
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\"", outputAssembly, "library", reference, source)));
         }
 
@@ -50,7 +50,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             var sources = new FileSet().Include(source);
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddRefences(references.ToArray()).AddSources(sources);
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly).AddRefences(references.ToArray()).AddSources(sources);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\" /reference:\"{3}\"  \"{4}\"", outputAssembly, "library", references[0], references[1], source)));
         }
 
@@ -64,7 +64,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             var sources = new FileSet().Include(source);
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
         }
 
@@ -78,7 +78,7 @@ namespace FluentBuild.Compilation
             var outputAssembly = new BuildArtifact("myapp.dll");
             string source = "myfile.cs";
             var sources = new FileSet().Include(source);
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
         }
 
@@ -91,7 +91,7 @@ namespace FluentBuild.Compilation
             string reference = "external.dll";
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddResource("Test", "ResName");
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly).AddResource("Test", "ResName");
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"Test\",ResName /target:{1}", outputAssembly, "library", reference, source)));
         }
 
@@ -105,7 +105,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             var sources = new FileSet().Include(source);
-            BuildTask build = Build.UsingCsc.OutputFileTo(outputAssembly).Target.Library.AddResources(sources);
+            BuildTask build = Build.UsingCsc.Target.Library.OutputFileTo(outputAssembly).AddResources(sources);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"myfile.cs\" /target:{1}", outputAssembly, "library")));
         }
 
@@ -115,7 +115,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void UsingCsc_Compiler_Should_Be_CSC()
         {
-            BuildTask build = Build.UsingCsc;
+            BuildTask build = Build.UsingCsc.Target.Library;
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("csc.exe"));
         }
 
@@ -125,7 +125,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void UsingCsc_Compiler_Should_Be_VBC()
         {
-            BuildTask build = Build.UsingVbc;
+            BuildTask build = Build.UsingVbc.Target.Library;
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("vbc.exe"));
         }
     }
