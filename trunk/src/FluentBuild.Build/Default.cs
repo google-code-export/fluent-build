@@ -47,6 +47,8 @@ namespace Build
 
             _version = "0.1.3.0";
 
+            MessageLogger.Verbosity = VerbosityLevel.Full;
+
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
             AddTask(CopyDependantAssembliesToCompileDir);
@@ -100,11 +102,10 @@ namespace Build
                              .RecurseAllSubFolders()
                              .File("*.cs"));
 
-            FluentBuild.Core.Build.UsingCsc
+            FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, thirdparty_sharpzip)
                 .OutputFileTo(assembly_FluentBuild_WithTests)
-                .Target.Library
                 .IncludeDebugSymbols
                 .Execute();
         }
@@ -116,10 +117,10 @@ namespace Build
                              .RecurseAllSubFolders()
                              .File("*.cs"));
 
-            FluentBuild.Core.Build.UsingCsc
+            FluentBuild.Core.Build.UsingCsc.Target.Executable
                 .AddSources(sourceFiles)
                 .AddRefences(assembly_FluentBuild_WithTests)
-                .Target.Executable
+                
                 .OutputFileTo(assembly_FluentBuild_Runner)
                 .Execute();
         }
@@ -127,9 +128,8 @@ namespace Build
         private void CompileFunctionalTests()
         {
             FileSet sourceFiles =new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().File("*.cs"));
-            FluentBuild.Core.Build.UsingCsc
+            FluentBuild.Core.Build.UsingCsc.Target.Executable
                 .AddSources(sourceFiles)
-                .Target.Library
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests)
                 .OutputFileTo(assembly_Functional_Tests)
                 .Execute();

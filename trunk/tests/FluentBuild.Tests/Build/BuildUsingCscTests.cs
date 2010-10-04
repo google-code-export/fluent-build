@@ -22,7 +22,7 @@ namespace FluentBuild.Tests.Build
             return fileSet;
         }
 
-        public override BuildTask CreateBuildTask()
+        public override TargetType CreateBuildTask()
         {
             return Core.Build.UsingCsc;
         }

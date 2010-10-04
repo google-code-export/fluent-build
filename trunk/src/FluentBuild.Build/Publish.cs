@@ -32,10 +32,10 @@ namespace Build
                              .RecurseAllSubFolders()
                              .File("*.cs"));
 
-            FluentBuild.Core.Build.UsingCsc
+            FluentBuild.Core.Build.UsingCsc.Target.Executable
                 .AddSources(sourceFiles)
                 .AddRefences(AssemblyFluentBuildRelease)
-                .Target.Executable
+                
                 .OutputFileTo(AssemblyFluentBuildRunnerRelease)
                 .Execute();
         }
@@ -61,11 +61,10 @@ namespace Build
                              .RecurseAllSubFolders()
                              .File("*Tests.cs").ToString());
 
-            FluentBuild.Core.Build.UsingCsc
+            FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_sharpzip)
                 .OutputFileTo(AssemblyFluentBuildRelease)
-                .Target.Library
                 .Execute();
         }
 

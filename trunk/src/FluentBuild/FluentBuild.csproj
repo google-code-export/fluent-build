@@ -109,6 +109,7 @@
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
     <Compile Include="Core\PropertiesTests.cs" />
     <Compile Include="Core\Publish.cs" />
+    <Compile Include="Compilation\TargetType.cs" />
     <Compile Include="Core\VerbosityLevel.cs" />
     <Compile Include="CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />

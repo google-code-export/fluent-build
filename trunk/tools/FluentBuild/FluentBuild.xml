@@ -447,9 +447,6 @@
         <member name="M:FluentBuild.Core.MessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
             <summary />
         </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.Write_ShouldWrapLongLines">
-            <summary />
-        </member>
         <member name="T:FluentBuild.Database.MsSqlUpdateTests">
             <summary />
         </member>
@@ -1357,7 +1354,7 @@
             <param name="fileset">A FileSet containing the files to be compiled.</param>
             <returns></returns>
         </member>
-        <member name="P:FluentBuild.Compilation.BuildTask.Target">
+        <member name="P:FluentBuild.Compilation.BuildTask.TargetType">
             <summary>
             Set the output file type
             </summary>
@@ -1827,6 +1824,16 @@
         <member name="F:FluentBuild.Core.VerbosityLevel.Full">
             <summary>
              Output everything possible.
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Core.TargetType">
+            <summary>
+             Picks the Target Type
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Core.TargetType.Target">
+            <summary>
+             Pick the target
             </summary>
         </member>
     </members>

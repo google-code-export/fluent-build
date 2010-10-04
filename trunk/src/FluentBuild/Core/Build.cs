@@ -10,17 +10,17 @@ namespace FluentBuild.Core
         /// <summary>
         /// Creates a BuildTask using the C# compiler
         /// </summary>
-        public static BuildTask UsingCsc
+        public static TargetType UsingCsc
         {
-            get { return new BuildTask("csc.exe"); }
+            get { return new TargetType(new BuildTask("csc.exe")); }
         }
 
         /// <summary>
         /// Creates a BuildTask using the VB compiler
         /// </summary>
-        public static BuildTask UsingVbc
+        public static TargetType UsingVbc
         {
-            get { return new BuildTask("vbc.exe"); }
+            get { return new TargetType(new BuildTask("vbc.exe")); }
         }
 
         /// <summary>

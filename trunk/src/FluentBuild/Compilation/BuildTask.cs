@@ -24,14 +24,13 @@ namespace FluentBuild.Compilation
 
         protected internal BuildTask(string compiler)
         {
-            Target = new Target(this);
             Compiler = compiler;
         }
 
         /// <summary>
         /// Set the output file type
         /// </summary>
-        public Target Target { get; set; }
+        //public Target Target { get; set; }
 
         protected internal string TargetType { get; set; }
 
@@ -173,8 +172,7 @@ namespace FluentBuild.Compilation
             MessageLogger.Write(compilerWithoutExtentions,
                                 String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
             string compileMessage = "Compile Using: " + 
-                                    Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " +
-                                    Args.Replace("/", Environment.NewLine + "/");
+                                    Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " + Args;
             MessageLogger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
             var executeable =
