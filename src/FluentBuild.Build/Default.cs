@@ -128,7 +128,7 @@ namespace Build
         private void CompileFunctionalTests()
         {
             FileSet sourceFiles =new FileSet().Include(directory_base.SubFolder("tests").RecurseAllSubFolders().File("*.cs"));
-            FluentBuild.Core.Build.UsingCsc.Target.Executable
+            FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests)
                 .OutputFileTo(assembly_Functional_Tests)
