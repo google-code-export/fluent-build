@@ -47,7 +47,7 @@ namespace Build
 
             _version = "0.1.3.0";
 
-            MessageLogger.Verbosity = VerbosityLevel.Full;
+ 
 
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
