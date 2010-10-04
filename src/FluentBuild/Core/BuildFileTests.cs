@@ -2,15 +2,17 @@
 
 namespace FluentBuild.Core
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+    [TestFixture]
     public class BuildFileTests
     {
-        ///<summary />	[Test]
+        ///<summary />
+        [Test]
         public void TestThatQueueGetsProcessed()
         {
             var subject = new BuildFile();
             bool methodCalled = false;
-            
+
             subject.AddTask(delegate { methodCalled = true; });
             Assert.That(subject.Tasks.Count, Is.EqualTo(1));
             subject.InvokeNextTask();
@@ -18,5 +20,14 @@ namespace FluentBuild.Core
             Assert.That(subject.Tasks.Count, Is.EqualTo(0));
         }
 
+        [Test]
+        public void BuildCountShouldBeCorrect()
+        {
+            var subject = new BuildFile();
+            bool methodCalled = false;
+
+            subject.AddTask(delegate { methodCalled = true; });
+            Assert.That(subject.TaskCount, Is.EqualTo(1));
+        }
     }
 }

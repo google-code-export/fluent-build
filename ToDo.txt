@@ -7,14 +7,15 @@ Build
 	-Nightly build setup
     -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
 	-Review exception types and get rid of ApplicationException where necessary
-
-  This release    
-    -Recurse all subfolders does not seem to fit well into the BuildFolder structure (neither does Files(filter) seem to fit)
+	-Recurse all subfolders does not seem to fit well into the BuildFolder structure (neither does Files(filter) seem to fit)
 		Folder.Subfolder("Tests").CreateFileSetString.RecurseAllSubfolders.Files("*.cs");
 		Fileset.Include(BuildFolder).RecurseAllSubfolders.Filter("*.cs");
 		       .Exclude(BuildFolder).Filter("AssmeblyInfo.cs")
 			   .Exclude("AssemblyInfo.cs")
 	-Fileset: should take a buildArtifact/Folder? depends on recurse all subfolders behavior
+
+  This release    
+    
 
   Next Release
   	-Add in ILMerge support / ILMerge in sharpzlib
@@ -23,6 +24,7 @@ Build
 	-TeamCity/CCNet/Team blech support
 	
   Future Releases
+    -Sandcastle generator
     -Ability to change console colors
 	-CustomFrameworkVersion
     -version check that runs in the background and alerts on next run

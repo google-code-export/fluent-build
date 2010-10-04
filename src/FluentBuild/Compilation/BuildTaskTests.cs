@@ -128,5 +128,16 @@ namespace FluentBuild.Compilation
             BuildTask build = Build.UsingVbc.Target.Library;
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("vbc.exe"));
         }
+
+        [Test]
+        public void AddResource_ShouldAddSingleFileResource()
+        {
+            var fileName = "blah.txt";
+            var build = Build.UsingCsc.Target.Library.AddResource(fileName);
+            var resrouce = build.Resources[0];
+            Assert.That(resrouce, Is.Not.Null);
+            Assert.That(resrouce.FilePath, Is.EqualTo(fileName));
+            Assert.That(resrouce.Identifier, Is.EqualTo(null));
+        }
     }
 }

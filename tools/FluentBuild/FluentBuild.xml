@@ -159,7 +159,7 @@
              Outputs the token replaced to a file
             </summary>
             <param name="destination">the destination path</param>
-            <exception cref="T:System.ApplicationException">Occurs if the file already exists</exception>
+            <exception cref="T:System.IO.IOException">Occurs if the file already exists</exception>
         </member>
         <member name="T:FluentBuild.Core.IFileSet">
             <summary>
@@ -183,6 +183,18 @@
              Adds an exclude filter
             </summary>
             <param name="path">exclude path</param>
+        </member>
+        <member name="M:FluentBuild.Core.IFileSet.Include(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Sets the include to be a folder and opens additional options
+            </summary>
+            <param name="path">The buildfolder representing the path to be used</param>
+        </member>
+        <member name="M:FluentBuild.Core.IFileSet.Exclude(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Sets the exclude to be a folder and opens additional options
+            </summary>
+            <param name="path">The buildfolder representing the path to be used</param>
         </member>
         <member name="P:FluentBuild.Core.IFileSet.Files">
             <summary>
@@ -608,7 +620,7 @@
             </summary>
             <param name="task">The method to run</param>
         </member>
-        <member name="M:FluentBuild.Core.BuildFile.TaskCount">
+        <member name="P:FluentBuild.Core.BuildFile.TaskCount">
             <summary>
              Gets the number of tasks in the queue.
             </summary>
@@ -805,27 +817,6 @@
             Sets the color of the console to support colorized output
             </summary>
         </member>
-        <member name="T:FluentBuild.FilesAndDirectories.FileSet.FileSetTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.BuildFileSet">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.CopyShouldNotBeNull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.BuildFileSetFromArtifact">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.AddAllCsFiles">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSetTests.AddAllCsFilesAndExcludeGenericFileName">
-            <summary />
-        </member>
         <member name="T:FluentBuild.Compilation.MsBuildTask">
             <summary>
              Executes MsBuild to create an assembly (or multiple assemblies)
@@ -990,19 +981,16 @@
         <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.CreateDirecory_ShouldCallWrapper">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.DeleteDirecory_ShouldDeleteIfFolderExists">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Have_Path">
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_File">
             <summary />
         </member>
         <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_SubFolder">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_Recursive_And_SubFolder">
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Have_Path">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Create_Should_Build_File">
+        <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.DeleteDirecory_ShouldDeleteIfFolderExists">
             <summary />
         </member>
         <member name="M:FluentBuild.FilesAndDirectories.BuildFolderTests.Files_ShouldCreateFileset">
@@ -1598,12 +1586,6 @@
             <returns>a new BuildFolder object</returns>
             <remarks>The folder does not need to exist to use this method</remarks>
         </member>
-        <member name="M:FluentBuild.Core.BuildFolder.RecurseAllSubFolders">
-            <summary>
-            Creates a new BuildFolder that encompases the current folder and all of its subdirectories
-            </summary>
-            <returns>A buildfolder that represents the current folder and all its subdirectories</returns>
-        </member>
         <member name="M:FluentBuild.Core.BuildFolder.Delete">
             <summary>
             Deletes the folder. If the the folder can not be deleted, or does not exist then an exception is thrown.
@@ -1840,6 +1822,43 @@
         <member name="P:FluentBuild.Core.TargetType.Target">
             <summary>
              Pick the target
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Core.FileSetTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSet">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.CopyShouldNotBeNull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSetFromArtifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFiles">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeGenericFileName">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices">
+            <summary>
+             Allows the user to pick certain attributes to add to a folder
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices.Filter(System.String)">
+            <summary>
+             Applies a filter to use when searching for files
+            </summary>
+            <param name="filter">A wildcard filter (e.g. *.cs)</param>
+        </member>
+        <member name="P:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices.RecurseAllSubDirectories">
+            <summary>
+             Modifies the current include to have a \\**\\ added to the end
             </summary>
         </member>
     </members>

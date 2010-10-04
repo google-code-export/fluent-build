@@ -122,7 +122,7 @@ namespace FluentBuild.BuildExe
             var build = (BuildFile) assemblyInstance.CreateInstance(t.FullName);
             MessageLogger.WriteHeader("Execute");
             MessageLogger.Write("EXECUTE", "Running Class: " + t.FullName);
-            if (build.TaskCount() == 0)
+            if (build.TaskCount == 0)
             {
                 Console.WriteLine(
                     "No tasks were found. Make sure that you add a task in your build classes constructor via AddTask()");
