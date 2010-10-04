@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.IO;
 using FluentBuild.Core;
+using FluentBuild.Runners;
 using NUnit.Framework;
 
 namespace FluentBuild.Tests
@@ -31,7 +32,7 @@ namespace FluentBuild.Tests
             Assert.That(File.Exists(_outputFile));
         }
 
-        [Test, ExpectedException(typeof(ApplicationException))]
+        [Test, ExpectedException(typeof(ExecutableFailedException))]
         public void ShouldFailIfErrorOccurs()
         {
             

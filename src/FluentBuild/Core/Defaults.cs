@@ -1,4 +1,5 @@
-﻿using FluentBuild.Utilities;
+﻿using System.Collections.Generic;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.Core
 {
@@ -13,13 +14,27 @@ namespace FluentBuild.Core
         public static OnError OnError = OnError.Fail;
 
         ///<summary>
-        /// Sets the .NET Framework version to use. The default is .NET 4.0
+        /// Sets the .NET Framework version to use. The default is the highest desktop framework found.
         ///</summary>
         public static IFrameworkVersion FrameworkVersion;
 
         static Defaults()
         {
-            FrameworkVersion = Utilities.FrameworkVersion.NET4_0.Full ;
+            var frameworkVersionsToCheck = new List<IFrameworkVersion>();
+            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Full);
+            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Client);
+            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_5);
+            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_0);
+            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET2_0);
+
+            foreach (var frameworkVersion in frameworkVersionsToCheck)
+            {
+                if (frameworkVersion.IsFrameworkInstalled())
+                {
+                    Defaults.FrameworkVersion = frameworkVersion;
+                    return;
+                }
+            }
         }
     }
 }

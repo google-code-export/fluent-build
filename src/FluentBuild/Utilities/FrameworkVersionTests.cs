@@ -18,7 +18,7 @@ namespace FluentBuild.Utilities
         {
             var frameworkFinder = MockRepository.GenerateMock<IFrameworkFinder>();
             
-            var framework = new FrameworkVersion(frameworkFinder);
+            var framework = new FrameworkVersion("",frameworkFinder);
             frameworkFinder.Stub(x => x.PathToSdk()).Return(null);
             framework.GetPathToSdk();
         }
@@ -29,7 +29,7 @@ namespace FluentBuild.Utilities
         {
             var frameworkFinder = MockRepository.GenerateMock<IFrameworkFinder>();
 
-            var framework = new FrameworkVersion(frameworkFinder);
+            var framework = new FrameworkVersion("", frameworkFinder);
             frameworkFinder.Stub(x => x.PathToSdk()).Return("C:\\temp");
             framework.GetPathToSdk();
         }
@@ -40,7 +40,7 @@ namespace FluentBuild.Utilities
         {
             var frameworkFinder = MockRepository.GenerateMock<IFrameworkFinder>();
 
-            var framework = new FrameworkVersion(frameworkFinder);
+            var framework = new FrameworkVersion("", frameworkFinder);
             frameworkFinder.Stub(x => x.PathToFrameworkInstall()).Return("C:\\temp");
             framework.GetPathToFrameworkInstall();
         }
@@ -50,7 +50,7 @@ namespace FluentBuild.Utilities
         {
             var frameworkFinder = MockRepository.GenerateMock<IFrameworkFinder>();
 
-            var framework = new FrameworkVersion(frameworkFinder);
+            var framework = new FrameworkVersion("", frameworkFinder);
             frameworkFinder.Stub(x => x.PathToFrameworkInstall()).Return(null);
             framework.GetPathToFrameworkInstall();
         }

@@ -1,3 +1,4 @@
+using System;
 using FluentBuild.FrameworkFinders;
 
 namespace FluentBuild.Utilities
@@ -39,6 +40,13 @@ namespace FluentBuild.Utilities
         ///<returns>The path to where the .NET Framework was installed</returns>
         /// <exception cref="FrameworkNotFoundException">Thrown when the .NET Framework path can not be found</exception>
         string GetPathToFrameworkInstall();
+
+
+        ///<summary>
+        /// Determins if the .NET framework is installed
+        ///</summary>
+        ///<returns>true if framework is found (determined by searching the registry</returns>
+        bool IsFrameworkInstalled();
     }
 
     ///<summary>
@@ -46,16 +54,16 @@ namespace FluentBuild.Utilities
     ///</summary>
     public class FrameworkVersion : IFrameworkVersion
     {
-        //public static CustomFrameworkVersion Custom { get { return new CustomFrameworkVersion();} }
 
+        private string _friendlyName;
         public static DesktopFrameworkType NET4_0 = new DesktopFrameworkType(new Desktop4_0ClientFrameworkFinder(),
                                                                              new Desktop4_0FullFrameworkFinder());
 
-        public static IFrameworkVersion NET3_5 = new FrameworkVersion(new Desktop3_5Finder());
+        public static IFrameworkVersion NET3_5 = new FrameworkVersion(".NET 3.5", new Desktop3_5Finder());
 
-        public static IFrameworkVersion NET3_0 = new FrameworkVersion(new Desktop3_0Finder());
+        public static IFrameworkVersion NET3_0 = new FrameworkVersion(".NET 3.0", new Desktop3_0Finder());
 
-        public static IFrameworkVersion NET2_0 = new FrameworkVersion(new Desktop2_0Finder());
+        public static IFrameworkVersion NET2_0 = new FrameworkVersion(".NET 2.0", new Desktop2_0Finder());
         private readonly IFrameworkFinder _frameworkFinder;
 
         //public static IFrameworkVersion NET1_1 = new FrameworkVersion("v1.1.4322", new[] {@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRootv1.1"}
@@ -65,9 +73,10 @@ namespace FluentBuild.Utilities
         //                                                                         , new[] {@"SOFTWARE\Microsoft\.NETFramework\InstallRoot"});
 
 
-        internal FrameworkVersion(IFrameworkFinder frameworkFinder)
+        internal FrameworkVersion(string friendlyName, IFrameworkFinder frameworkFinder)
         {
             _frameworkFinder = frameworkFinder;
+            _friendlyName = friendlyName;
         }
 
         #region IFrameworkVersion Members
@@ -86,6 +95,16 @@ namespace FluentBuild.Utilities
             if (pathToFrameworkInstall == null)
                 throw new FrameworkNotFoundException(_frameworkFinder.FrameworkSearchPaths);
             return pathToFrameworkInstall;
+        }
+
+        public bool IsFrameworkInstalled()
+        {
+            return _frameworkFinder.PathToFrameworkInstall() != null;
+        }
+
+        public override string ToString()
+        {
+            return _friendlyName;
         }
 
         #endregion

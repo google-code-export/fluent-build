@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using FluentBuild.FilesAndDirectories;
 
 namespace FluentBuild.Tokenization
@@ -38,11 +39,11 @@ namespace FluentBuild.Tokenization
         /// Outputs the token replaced to a file
         ///</summary>
         ///<param name="destination">the destination path</param>
-        ///<exception cref="ApplicationException">Occurs if the file already exists</exception>
+        ///<exception cref="IOException">Occurs if the file already exists</exception>
         public void To(string destination)
         {
             if (_fileSystemWrapper.FileExists(destination))
-                throw new ApplicationException("File already exists. Delete it first");
+                throw new IOException("File already exists. Delete it first");
             _fileSystemWrapper.WriteAllText(destination, Input);
         }
 

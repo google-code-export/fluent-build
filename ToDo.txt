@@ -4,20 +4,20 @@ Build
 		i.e. Nunit runner should be able to rpocess messages and show errors if they occur.
 	-Can now use (MessageLogger.ShowDebugMessages) { //things to debug }}
 	-Force a TargetType for csc/vbc	
+	-Nightly build setup
+    -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
+	-Review exception types and get rid of ApplicationException where necessary
 
   This release    
-    -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
-	-Nightly build setup
-	
-  Next Release
-  	-Add in ILMerge support / ILMerge in sharpzlib
-    -Review exception types and get rid of ApplicationException where necessary
     -Recurse all subfolders does not seem to fit well into the BuildFolder structure (neither does Files(filter) seem to fit)
 		Folder.Subfolder("Tests").CreateFileSetString.RecurseAllSubfolders.Files("*.cs");
 		Fileset.Include(BuildFolder).RecurseAllSubfolders.Filter("*.cs");
 		       .Exclude(BuildFolder).Filter("AssmeblyInfo.cs")
 			   .Exclude("AssemblyInfo.cs")
 	-Fileset: should take a buildArtifact/Folder? depends on recurse all subfolders behavior
+
+  Next Release
+  	-Add in ILMerge support / ILMerge in sharpzlib
 	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
 	-TeamCity/CCNet/Team blech support

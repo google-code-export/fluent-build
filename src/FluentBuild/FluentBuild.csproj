@@ -113,6 +113,7 @@
     <Compile Include="Core\VerbosityLevel.cs" />
     <Compile Include="CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
+    <Compile Include="Runners\ExecutableFailedException.cs" />
     <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessor.cs" />
     <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessorTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
