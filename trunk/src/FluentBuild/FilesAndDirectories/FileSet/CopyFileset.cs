@@ -41,7 +41,6 @@ namespace FluentBuild.FilesAndDirectories.FileSet
         public Core.FileSet To(string destination)
         {
             MessageLogger.Write("copy", String.Format("Copying {0} files to '{1}'", _fileSet.Files.Count, destination));
-            MessageLogger.BlankLine();
             foreach (string file in _fileSet.Files)
             {
                 string destinationPath = Path.Combine(destination.ToString(), Path.GetFileName(file));

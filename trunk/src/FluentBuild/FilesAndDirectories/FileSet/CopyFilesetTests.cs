@@ -12,7 +12,6 @@ namespace FluentBuild.FilesAndDirectories.FileSet
 	[Test]
         public void To_ShouldPerformCopy()
         {
-            MessageLogger.WindowWidth = 80;
             var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
             var fileSet = new Core.FileSet();
             fileSet.Include(@"c:\temp\test1.txt");

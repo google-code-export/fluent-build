@@ -20,7 +20,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
 
         public void Parse(string pattern)
         {
-            //no wildcards so just a folder i.e. c:\temp
+            pattern = pattern.Replace(@"\\", @"\"); //remove double slashes
+            //no wildcards so just a folder i.e. c:\temp)
             if (pattern.IndexOf("*") == -1)
             {
                 Folder = pattern;

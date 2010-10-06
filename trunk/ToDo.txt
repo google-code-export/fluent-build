@@ -1,29 +1,23 @@
 Build
   Completed
-	-Runners should be able to have their own message processor so it can determine messages. 
-		i.e. Nunit runner should be able to rpocess messages and show errors if they occur.
-	-Can now use (MessageLogger.ShowDebugMessages) { //things to debug }}
-	-Force a TargetType for csc/vbc	
-	-Nightly build setup
-    -Finds the highest framework and uses that (unless specified otherwise). Currently default is .NET4
-	-Review exception types and get rid of ApplicationException where necessary
-	-Recurse all subfolders does not seem to fit well into the BuildFolder structure (neither does Files(filter) seem to fit)
-		Folder.Subfolder("Tests").CreateFileSetString.RecurseAllSubfolders.Files("*.cs");
-		Fileset.Include(BuildFolder).RecurseAllSubfolders.Filter("*.cs");
-		       .Exclude(BuildFolder).Filter("AssmeblyInfo.cs")
-			   .Exclude("AssemblyInfo.cs")
-	-Fileset: should take a buildArtifact/Folder? depends on recurse all subfolders behavior
+	-Message logger wrapping needs to handle when input has newline characters in it.
+	-Team City support added.
 
   This release    
-    
-
-  Next Release
-  	-Add in ILMerge support / ILMerge in sharpzlib
+    -Run.ILMerge.OutputTo("").AddSource("").AddSource("")
+    -Add in ILMerge support / ILMerge in sharpzlib
 	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
-	-TeamCity/CCNet/Team blech support
-	
+	-CCNet support
+
+  Next Release
+  		
   Future Releases
+    -Allow message verbosity to be changed from TeamCity
+	-MS Team build support
+    -Build.dll should be output to a temp folder instead of current folder
+    -If tests are marked as Ignore() for too long then fail build
+	-Xml MessageLogger
     -Sandcastle generator
     -Ability to change console colors
 	-CustomFrameworkVersion

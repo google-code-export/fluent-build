@@ -3,7 +3,8 @@ using NUnit.Framework;
 
 namespace FluentBuild.FilesAndDirectories.FileSet
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class SearchPatternParserTests
     {
         /*
@@ -13,9 +14,11 @@ namespace FluentBuild.FilesAndDirectories.FileSet
      *     c:\temp\**\*.cs
      *     c:\temp\auto*.cs
      *     c:\temp\**\auto*.cs
+     *     c:\temp\**\\\\*.cs
      */
 
-        ///<summary />	[Test]
+        ///<summary />
+	    [Test]
         public void GetAllFilesMatching_Name_And_WildCard()
         {
             var parser = new SearchPatternParser();
@@ -25,7 +28,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	    [Test]
         public void GetAllFilesMatching_Recursive_Name_And_WildCard()
         {
             var parser = new SearchPatternParser();
@@ -35,7 +39,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(true));
         }
         
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void GetAllFilesMatching_JustDirectory()
         {
             var parser = new SearchPatternParser();
@@ -45,7 +50,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void GetAllFilesMatching_Start_Dot_Start_Filter()
         {
             var parser = new SearchPatternParser();
@@ -55,7 +61,8 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	    [Test]
         public void GetAllFilesMatching_Start_Dot_CS_Filter()
         {
             var parser = new SearchPatternParser();
@@ -65,7 +72,19 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             Assert.That(parser.Recursive, Is.EqualTo(false));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+        [Test]
+        public void GetAllFilesMatching_Star_Dot_CS_Filter_WithDoubleSlashes()
+        {
+            var parser = new SearchPatternParser();
+            parser.Parse(@"c:\temp\\*.cs");
+            Assert.That(parser.Folder, Is.EqualTo(@"c:\temp\"));
+            Assert.That(parser.SearchPattern, Is.EqualTo("*.cs"));
+            Assert.That(parser.Recursive, Is.EqualTo(false));
+        }
+
+        ///<summary />
+	[Test]
         public void GetAllFilesMatching_Recursive_Start_Dot_CS_Filter()
         {
             var parser = new SearchPatternParser();

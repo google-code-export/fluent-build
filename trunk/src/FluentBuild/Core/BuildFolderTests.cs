@@ -13,7 +13,7 @@ namespace FluentBuild.FilesAndDirectories
         [Test]
         public void CreateDirecory_ShouldCallWrapper()
         {
-            MessageLogger.WindowWidth = 80;
+            
             string expected = "c:\\temp";
             var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
             var folder = new BuildFolder(fs, null, expected);
@@ -50,7 +50,6 @@ namespace FluentBuild.FilesAndDirectories
         [Test]
         public void DeleteDirecory_ShouldDeleteIfFolderExists()
         {
-            MessageLogger.WindowWidth = 80;
             string expected = "c:\\temp";
             var fs = MockRepository.GenerateStub<IFileSystemWrapper>();
             var folder = new BuildFolder(fs, null, expected);

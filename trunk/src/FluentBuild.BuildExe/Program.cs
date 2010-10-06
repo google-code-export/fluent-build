@@ -57,7 +57,7 @@ namespace FluentBuild.BuildExe
         {
             Environment.ExitCode = 1;
             var exceptionObject = e.ExceptionObject as Exception;
-            MessageLogger.Write("ERROR", "An unexpected error has occurred. Details:" + exceptionObject.Message);
+            MessageLogger.WriteError("An unexpected error has occurred. Details:" + exceptionObject.ToString());
             Environment.Exit(1);
         }
 

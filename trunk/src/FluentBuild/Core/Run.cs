@@ -42,6 +42,7 @@ namespace FluentBuild.Core
         public static void Debugger()
         {
             System.Diagnostics.Debugger.Break();
+            System.Diagnostics.Debugger.Launch();
         }
     }
 }

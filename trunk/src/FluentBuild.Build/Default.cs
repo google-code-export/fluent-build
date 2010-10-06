@@ -47,8 +47,6 @@ namespace Build
 
             _version = "0.1.3.0";
 
-            Run.Debugger();
-
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
             AddTask(CopyDependantAssembliesToCompileDir);
