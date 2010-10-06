@@ -29,6 +29,30 @@
             Builds a module
             </summary>
         </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Name_And_WildCard">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Recursive_Name_And_WildCard">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_JustDirectory">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_Start_Filter">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_CS_Filter">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Star_Dot_CS_Filter_WithDoubleSlashes">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Recursive_Start_Dot_CS_Filter">
+            <summary />
+        </member>
         <member name="T:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRunTests">
             <summary />
         </member>
@@ -315,6 +339,16 @@
         <member name="M:FluentBuild.Database.MsSqlConnectionTests.ShouldCreateMsSqlUtilitiesAndHaveEngineBuilt">
             <summary />
         </member>
+        <member name="T:FluentBuild.Core.TargetType">
+            <summary>
+             Picks the Target Type
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Core.TargetType.Target">
+            <summary>
+             Pick the target
+            </summary>
+        </member>
         <member name="T:FluentBuild.Compilation.ResourceTests">
             <summary />
         </member>
@@ -438,27 +472,6 @@
             </summary>
             <exception cref="T:System.IO.FileNotFoundException">Occurs when nunit-console.exe can not be found</exception>
         </member>
-        <member name="T:FluentBuild.Core.MessageLoggerTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.Setup">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteHeader">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteBlankLine_ShouldCreateNewLine">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
-            <summary />
-        </member>
         <member name="T:FluentBuild.Database.MsSqlUpdateTests">
             <summary />
         </member>
@@ -518,6 +531,31 @@
         <member name="M:FluentBuild.Publishing.GoogleCode.CreateAuthorizationToken(System.String,System.String)">
             <summary>
             Creates the authorization token.
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Core.VerbosityLevel">
+            <summary>
+             The verbosity of messages
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.None">
+            <summary>
+             Nothing should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.TaskNamesOnly">
+            <summary>
+             Only task names should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.TaskDetails">
+            <summary>
+             Task names and their details should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Core.VerbosityLevel.Full">
+            <summary>
+             Output everything possible.
             </summary>
         </member>
         <member name="T:FluentBuild.ApplicationProperties.CruiseControlProperties">
@@ -677,6 +715,22 @@
             Creates a string representation of the path and identifier
             </summary>
             <returns>A string in the format of filePath[,identifier]</returns>
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices">
+            <summary>
+             Allows the user to pick certain attributes to add to a folder
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices.Filter(System.String)">
+            <summary>
+             Applies a filter to use when searching for files
+            </summary>
+            <param name="filter">A wildcard filter (e.g. *.cs)</param>
+        </member>
+        <member name="P:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices.RecurseAllSubDirectories">
+            <summary>
+             Modifies the current include to have a \\**\\ added to the end
+            </summary>
         </member>
         <member name="T:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRun">
             <summary>
@@ -1269,6 +1323,21 @@
             </summary>
             <param name="pathsSearched">Paths searched to find the SDK</param>
         </member>
+        <member name="T:FluentBuild.Core.BuildArtifactTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Delete_ShouldCallToFileSystemWrapper">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Rename_ShouldBuildRenameObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.ToString_Should_Output_Path">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Copy_ShouldCreateCopyObject">
+            <summary />
+        </member>
         <member name="T:FluentBuild.Core.Build_Tests">
             <summary />
         </member>
@@ -1427,6 +1496,46 @@
             <summary />
         </member>
         <member name="M:FluentBuild.Runners.UnitTesting.NUnitRunnerTests.Execute_ShouldTryToFindPathToNunitIfNotSet">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.FilesAndDirectories.FileSet.CopyFileset">
+            <summary>
+             Copies the fileset
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFileset.To(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Copies the fileset to the destination
+            </summary>
+            <param name="destination">A BuildFolder that will recieve the files</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFileset.To(System.String)">
+            <summary>
+             Copies the fileset to the destination
+            </summary>
+            <param name="destination">Path to a folder that will recieve the files</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentBuild.Core.FileSetTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSet">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.CopyShouldNotBeNull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSetFromArtifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFiles">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeGenericFileName">
             <summary />
         </member>
         <member name="T:FluentBuild.FilesAndDirectories.CopyBuildArtifcat">
@@ -1734,132 +1843,26 @@
         <member name="M:FluentBuild.ApplicationProperties.CruiseControlPropertiesTests.AllPropertiesShouldMap">
             <summary />
         </member>
-        <member name="T:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests">
+        <member name="T:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Name_And_WildCard">
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Setup">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Recursive_Name_And_WildCard">
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.WriteHeader">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_JustDirectory">
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_Start_Filter">
+        <member name="M:FluentBuild.Core.MessageLoggerTests.Setup">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Start_Dot_CS_Filter">
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
             <summary />
         </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.SearchPatternParserTests.GetAllFilesMatching_Recursive_Start_Dot_CS_Filter">
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
             <summary />
-        </member>
-        <member name="T:FluentBuild.Core.BuildArtifactTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.BuildArtifactTests.Delete_ShouldCallToFileSystemWrapper">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.BuildArtifactTests.Rename_ShouldBuildRenameObject">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.BuildArtifactTests.ToString_Should_Output_Path">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.BuildArtifactTests.Copy_ShouldCreateCopyObject">
-            <summary />
-        </member>
-        <member name="T:FluentBuild.FilesAndDirectories.FileSet.CopyFileset">
-            <summary>
-             Copies the fileset
-            </summary>
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFileset.To(FluentBuild.Core.BuildFolder)">
-            <summary>
-             Copies the fileset to the destination
-            </summary>
-            <param name="destination">A BuildFolder that will recieve the files</param>
-            <returns></returns>
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.CopyFileset.To(System.String)">
-            <summary>
-             Copies the fileset to the destination
-            </summary>
-            <param name="destination">Path to a folder that will recieve the files</param>
-            <returns></returns>
-        </member>
-        <member name="T:FluentBuild.Core.VerbosityLevel">
-            <summary>
-             The verbosity of messages
-            </summary>
-        </member>
-        <member name="F:FluentBuild.Core.VerbosityLevel.None">
-            <summary>
-             Nothing should be output
-            </summary>
-        </member>
-        <member name="F:FluentBuild.Core.VerbosityLevel.TaskNamesOnly">
-            <summary>
-             Only task names should be output
-            </summary>
-        </member>
-        <member name="F:FluentBuild.Core.VerbosityLevel.TaskDetails">
-            <summary>
-             Task names and their details should be output
-            </summary>
-        </member>
-        <member name="F:FluentBuild.Core.VerbosityLevel.Full">
-            <summary>
-             Output everything possible.
-            </summary>
-        </member>
-        <member name="T:FluentBuild.Core.TargetType">
-            <summary>
-             Picks the Target Type
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Core.TargetType.Target">
-            <summary>
-             Pick the target
-            </summary>
-        </member>
-        <member name="T:FluentBuild.Core.FileSetTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSet">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.CopyShouldNotBeNull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSetFromArtifact">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFiles">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeGenericFileName">
-            <summary />
-        </member>
-        <member name="T:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices">
-            <summary>
-             Allows the user to pick certain attributes to add to a folder
-            </summary>
-        </member>
-        <member name="M:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices.Filter(System.String)">
-            <summary>
-             Applies a filter to use when searching for files
-            </summary>
-            <param name="filter">A wildcard filter (e.g. *.cs)</param>
-        </member>
-        <member name="P:FluentBuild.FilesAndDirectories.FileSet.BuildFolderChoices.RecurseAllSubDirectories">
-            <summary>
-             Modifies the current include to have a \\**\\ added to the end
-            </summary>
         </member>
     </members>
 </doc>

@@ -1,17 +1,18 @@
 package jetbrains.buildServer.agent.fluentbuildrunner;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.containers.HashMap;
 import java.io.File;
 import java.util.*;
 import jetbrains.buildServer.RunBuildException;
+import jetbrains.buildServer.agent.AgentRuntimeProperties;
 import jetbrains.buildServer.agent.fluentbuildrunner.utils.*;
 import jetbrains.buildServer.agent.runner.CommandLineBuildService;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
 import jetbrains.buildServer.agent.runner.SimpleProgramCommandLine;
 import jetbrains.buildServer.fluentbuildrunner.FluentBuildRunnerConstants;
 import jetbrains.buildServer.runner.BuildFileRunnerUtil;
-import jetbrains.buildServer.util.PropertiesUtil;
-import jetbrains.buildServer.util.StringUtil;
+import jetbrains.buildServer.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,7 @@ public class FluentBuildTaskBuildService extends CommandLineBuildService impleme
     final File buildFile = getBuildFile(runParams);
     // FluentBuild options
     // Custom FluentBuildfile if specified
-    //TODO:throw exception if we can't find the build file
+
     if (buildFile != null) {
       arguments.add(buildFile.getAbsolutePath());
     }
@@ -71,21 +72,13 @@ public class FluentBuildTaskBuildService extends CommandLineBuildService impleme
     }
   }
 
+    private static final Logger LOG = Logger.getInstance(BuildFileRunnerUtil.class.getName());
   @Nullable
   private File getBuildFile(Map<String, String> runParameters) throws RunBuildException {
-    final File buildFile;
-    if (BuildFileRunnerUtil.isCustomBuildFileUsed(runParameters)) {
-      buildFile = BuildFileRunnerUtil.getBuildFile(runParameters);
-      myFilesToDelete.add(buildFile);
-    } else {
-      final String buildFilePath = runParameters.get(BUILD_FILE_PATH_KEY);
-      if (PropertiesUtil.isEmptyOrNull(buildFilePath)) {
-        //use fluentbuildrunner defaults
-        buildFile = null;
-      } else {
-        buildFile = BuildFileRunnerUtil.getBuildFile(runParameters);
-      }
-    }
-    return buildFile;
+        final File buildFile;
+        final String buildFilePath = runParameters.get(BUILD_FILE_PATH_KEY);
+        final File checkoutDir = new File(AgentRuntimeProperties.getCheckoutDir(runParameters));
+        buildFile = jetbrains.buildServer.util.FileUtil.resolvePath(checkoutDir, buildFilePath);
+        return buildFile;
   }
 }

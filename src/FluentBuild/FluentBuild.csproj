@@ -97,7 +97,11 @@
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
+    <Compile Include="Core\MessageLoggerTests.cs" />
+    <Compile Include="MessageLoggers\ConsoleMessageLogger.cs" />
+    <Compile Include="MessageLoggers\IMessageLogger.cs" />
     <Compile Include="Core\PublishTests.cs" />
+    <Compile Include="MessageLoggers\TeamCityMessageLogger.cs" />
     <Compile Include="FilesAndDirectories\FileSet\BuildFolderChoices.cs" />
     <Compile Include="Core\Build_Tests.cs" />
     <Compile Include="Core\Build.cs" />
@@ -181,7 +185,7 @@
     <Compile Include="FilesAndDirectories\RenameBuildArtifactTests.cs" />
     <Compile Include="Utilities\FrameworkVersion.cs" />
     <Compile Include="Core\BuildFile.cs" />
-    <Compile Include="Core\MessageLoggerTests.cs" />
+    <Compile Include="MessageLoggers\ConsoleMessageLoggerTests.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunner.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunnerTests.cs" />
     <Compile Include="Utilities\FileFinder.cs" />
@@ -195,7 +199,7 @@
     <Compile Include="Core\Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FilesAndDirectories\FileSet\SearchPatternParser.cs" />
-    <Compile Include="Core\SearchPatternParserTests.cs" />
+    <Compile Include="FilesAndDirectories\FileSet\SearchPatternParserTests.cs" />
     <Compile Include="Compilation\Target.cs" />
     <Compile Include="Core\MessageLogger.cs" />
     <Compile Include="Core\RunTests.cs" />
