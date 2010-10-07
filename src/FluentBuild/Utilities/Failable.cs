@@ -6,7 +6,7 @@ namespace FluentBuild.Utilities
     /// Represents a class that has continue/fail on error behavior
     ///</summary>
     ///<typeparam name="T"></typeparam>
-    public interface IFailable<out T>
+    public interface IFailable<T>
     {
         ///<summary>
         /// On error throw an exception

@@ -45,7 +45,9 @@ namespace Build
             thirdparty_rhino = directory_tools.SubFolder("rhino").File("rhino.mocks.dll");
             thirdparty_sharpzip = directory_base.SubFolder("lib").SubFolder("SharpZipLib-net2.0").File("ICSharpCode.SharpZipLib.dll");
 
-            _version = "0.1.3.0";
+            _version = "0.0.0.0";
+
+            Defaults.FrameworkVersion = FrameworkVersion.NET3_5;
 
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);

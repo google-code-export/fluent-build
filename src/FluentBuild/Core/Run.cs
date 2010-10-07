@@ -19,6 +19,11 @@ namespace FluentBuild.Core
             get { return new Zip(); }
         }
 
+        public static ILMerge ILMerge
+        {
+            get { return new ILMerge(); }
+        }
+
         /// <summary>
         /// Creates an Executable object based on a string path
         /// </summary>

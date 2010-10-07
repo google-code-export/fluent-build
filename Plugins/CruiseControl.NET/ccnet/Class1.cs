@@ -15,7 +15,7 @@ namespace ccnet.fluentbuild.plugin
 
         public void Run(IIntegrationResult result)
         {
-            throw new NotImplementedException();
+            //result.
         }
     }
 }
