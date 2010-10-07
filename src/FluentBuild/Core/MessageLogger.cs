@@ -9,7 +9,7 @@ namespace FluentBuild.Core
 
         static MessageLogger()
         {
-            InternalLogger = new TeamCityMessageLogger();
+            InternalLogger = new ConsoleMessageLogger();
         }
 
         ///<summary>

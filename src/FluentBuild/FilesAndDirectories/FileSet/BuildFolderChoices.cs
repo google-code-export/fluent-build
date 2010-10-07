@@ -5,11 +5,15 @@
     ///</summary>
     public class BuildFolderChoices : Core.FileSet
     {
-        private readonly Core.FileSet _fileset;
+        private readonly bool _isInclusion;
 
-        internal BuildFolderChoices(Core.FileSet fileset)
+        internal BuildFolderChoices(Core.FileSet fileset, IFileSystemUtility utility, bool isInclusion) : base(utility)
         {
-            _fileset = fileset;
+            _isInclusion = isInclusion;
+            this.PendingInclude = fileset.PendingInclude;
+            this.PendingExclude = fileset.PendingExclude;
+            this.Inclusions = fileset.Inclusions;
+            this.Exclusions = fileset.Exclusions;
         }
 
         ///<summary>
@@ -19,7 +23,10 @@
         {
             get
             {
-                _fileset.PendingInclude = _fileset.PendingInclude + "\\**\\";
+                if (_isInclusion)
+                    this.PendingInclude = this.PendingInclude + "\\**\\";
+                else
+                    this.PendingExclude = this.PendingExclude + "\\**\\";
                 return this;
             }
         }
@@ -28,9 +35,13 @@
         /// Applies a filter to use when searching for files
         ///</summary>
         ///<param name="filter">A wildcard filter (e.g. *.cs)</param>
-        public BuildFolderChoices Filter(string filter)
+        public Core.FileSet Filter(string filter)
         {
-            _fileset.PendingInclude = _fileset.PendingInclude + "\\" + filter;
+            if (_isInclusion)
+                this.PendingInclude = this.PendingInclude + "\\" + filter;
+            else
+                this.PendingExclude = this.PendingExclude + "\\" + filter;
+            ProcessPendings();
             return this;
         }
     }
