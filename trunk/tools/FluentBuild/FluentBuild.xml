@@ -613,6 +613,15 @@
              The file that cruise control logs to
             </summary>
         </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
+            <summary />
+        </member>
         <member name="T:FluentBuild.ApplicationProperties.CommandLinePropertiesTests">
             <summary>
             </summary>
@@ -800,6 +809,18 @@
             <summary />
         </member>
         <member name="M:FluentBuild.Database.MsSqlCreateTests.ShouldSetPathOnEngine">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.WriteHeader">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
             <summary />
         </member>
         <member name="T:FluentBuild.Runners.Zip.Zip">
@@ -1520,22 +1541,19 @@
         <member name="T:FluentBuild.Core.FileSetTests">
             <summary />
         </member>
-        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSet">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.CopyShouldNotBeNull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSetFromArtifact">
-            <summary />
-        </member>
         <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFiles">
             <summary />
         </member>
         <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeSpecificFileName">
             <summary />
         </member>
-        <member name="M:FluentBuild.Core.FileSetTests.AddAllCsFilesAndExcludeGenericFileName">
+        <member name="M:FluentBuild.Core.FileSetTests.BuildFileSetFromArtifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.CopyShouldNotBeNull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.FileSetTests.Include_ShouldLoadCollection">
             <summary />
         </member>
         <member name="T:FluentBuild.FilesAndDirectories.CopyBuildArtifcat">
@@ -1841,27 +1859,6 @@
             <summary />
         </member>
         <member name="M:FluentBuild.ApplicationProperties.CruiseControlPropertiesTests.AllPropertiesShouldMap">
-            <summary />
-        </member>
-        <member name="T:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Setup">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.WriteHeader">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.Setup">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
             <summary />
         </member>
     </members>
