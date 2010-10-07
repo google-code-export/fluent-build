@@ -17,7 +17,7 @@ namespace FluentBuild.Runners
             var args = new List<String>();
             args.AddRange(sources);
             args.Add("/OUT:" + _destination);
-            args.Add("/lib:" + Defaults.FrameworkVersion.GetPathToFrameworkInstall());
+            args.Add("/targetplatform:v4," + Defaults.FrameworkVersion.GetPathToFrameworkInstall());
             args.Add("/ndebug"); //nopdb
             //TODO autofind exepath
             Run.Executeable(_exePath).WithArguments(args.ToArray()).Execute();
