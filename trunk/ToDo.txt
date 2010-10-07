@@ -2,10 +2,11 @@ Build
   Completed
 	-Message logger wrapping needs to handle when input has newline characters in it.
 	-Team City support added.
+	-Compiled for .NET 3.5 for better compatability
 
   This release    
-    -Run.ILMerge.OutputTo("").AddSource("").AddSource("")
-    -Add in ILMerge support / ILMerge in sharpzlib
+    -Better testing on filesets
+    -ILmerge testing
 	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
 	-CCNet support

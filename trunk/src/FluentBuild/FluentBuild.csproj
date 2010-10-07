@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FluentBuild</RootNamespace>
     <AssemblyName>FluentBuild</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -120,6 +120,7 @@
     <Compile Include="CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
     <Compile Include="Runners\ExecutableFailedException.cs" />
+    <Compile Include="Runners\ILMerge.cs" />
     <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessor.cs" />
     <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessorTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />

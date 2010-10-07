@@ -6,6 +6,26 @@ namespace FluentBuild.BuildExe
 {
     internal class CommandLineParser
     {
+        public CommandLineParser(string[] args)
+        {
+            ClassToRun = "Default";
+            //what about when build class is passed in
+            if (Path.GetExtension(args[0]).ToLower() != "dll")
+            {
+                SourceBuild = true;
+                PathToBuildSources = GetFullPathIfRelative(args[0]);
+            }
+            else
+            {
+                PathToBuildDll = GetFullPathIfRelative(args[0]);
+            }
+
+            for (int i = 1; i < args.Length; i++)
+            {
+                ParseArg(args[i]);
+            }
+        }
+
         public string PathToBuildDll { get; set; }
         public string PathToBuildSources { get; set; }
         public bool SourceBuild { get; private set; }
@@ -20,45 +40,25 @@ namespace FluentBuild.BuildExe
             return Path.Combine(Environment.CurrentDirectory, path);
         }
 
-        public CommandLineParser(string[] args)
-        {
-            ClassToRun = "Default";
-            //what about when build class is passed in
-            if (Path.GetExtension(args[0]).ToLower() != "dll")
-            {
-                SourceBuild = true;
-                PathToBuildSources = GetFullPathIfRelative(args[0]);
-            }
-            else
-            {
-                PathToBuildDll = GetFullPathIfRelative(args[0]);
-            }
-            
-            for (int i = 1; i < args.Length; i++)
-            {
-                ParseArg(args[i]);
-            }
-        }
-
         private void ParseArg(string arg)
         {
             arg = arg.Substring(1); //drop the preceeding - or / character
-            var type = arg.Substring(0, arg.IndexOf(":")); //get the type
-            var data = arg.Substring(arg.IndexOf(":")+1); //get the value
+            string type = arg.Substring(0, arg.IndexOf(":")); //get the type
+            string data = arg.Substring(arg.IndexOf(":") + 1); //get the value
 
             string name;
             string value;
             if (data.IndexOf("=") > 0)
             {
                 name = data.Substring(0, data.IndexOf("="));
-                value = data.Substring(data.IndexOf("=")+1);
+                value = data.Substring(data.IndexOf("=") + 1);
             }
             else
             {
                 name = data;
                 value = String.Empty;
             }
-                
+
             switch (type.ToUpper())
             {
                 case "P":
@@ -68,18 +68,33 @@ namespace FluentBuild.BuildExe
                     ClassToRun = data;
                     break;
                 case "V":
-                    VerbosityLevel tmp;
-                    var tryParse = Enum.TryParse(data, out tmp);
-                    if (!tryParse)
-                    {
-                        Console.WriteLine("Could not determine verbosity level");
-                        Environment.Exit(1);
-                    }
-                    MessageLogger.Verbosity = tmp;
+                    DetermineVerbosity(data);
                     break;
                 default:
                     throw new ArgumentException("Do not understand type");
-                    
+            }
+        }
+
+        private void DetermineVerbosity(string data)
+        {
+            switch (data.ToUpper())
+            {
+                case "FULL":
+                    MessageLogger.Verbosity = VerbosityLevel.Full;
+                    break;
+                case "NONE":
+                    MessageLogger.Verbosity = VerbosityLevel.None;
+                    break;
+                case "TASKDETAILS":
+                    MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
+                    break;
+                case "TASKNAMESONLY":
+                    MessageLogger.Verbosity = VerbosityLevel.TaskNamesOnly;
+                    break;
+                default:
+                    Console.WriteLine("Could not determine verbosity level");
+                    Environment.Exit(1);
+                    break;
             }
         }
     }
