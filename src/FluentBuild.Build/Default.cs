@@ -47,7 +47,7 @@ namespace Build
 
             _version = "0.0.0.0";
 
-            Defaults.FrameworkVersion = FrameworkVersion.NET3_5;
+            Defaults.FrameworkVersion = FrameworkVersion.NET4_0.Full;
 
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);

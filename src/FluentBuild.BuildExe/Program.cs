@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using FluentBuild.Core;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.BuildExe
 {
@@ -41,7 +42,7 @@ namespace FluentBuild.BuildExe
             else
             {
 
-                pathToAssembly = Path.Combine(parser.PathToBuildDll);
+                pathToAssembly = parser.PathToBuildDll;
             }
 
             if (!File.Exists(pathToAssembly))
