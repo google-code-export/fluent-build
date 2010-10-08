@@ -24,7 +24,7 @@ namespace Build
             AddTask(CompileRunner);
             AddTask(Compress);
             //move to tools folder here?
-            //AddTask(PublishToRepository);
+            AddTask(PublishToRepository);
         }
 
         private void CompileRunner()
