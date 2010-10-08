@@ -9,6 +9,7 @@ Build
     -ILmerge needs to know what version it is running on (i.e. v4,v3,v2, etc)
     -Better testing on filesets
     -ILmerge testing
+
 	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
 	-CCNet support
