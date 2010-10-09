@@ -77,7 +77,7 @@ namespace FluentBuild.MessageLoggers
         public void WriteError_ShouldWriteErrorMessage()
         {
             _messageLogger.WindowWidth = 200;
-            _messageLogger.WriteError("Content of message");
+            _messageLogger.WriteError("ERROR", "Content of message");
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [ERROR] Content of message" + Environment.NewLine));
         }
 

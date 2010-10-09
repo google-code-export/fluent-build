@@ -5,6 +5,7 @@ using ConsoleColor = FluentBuild.Utilities.ConsoleColor;
 
 namespace FluentBuild.MessageLoggers.MessageProcessing
 {
+    //used by Execetable to examine output and error strings and process accordingly
     internal class DefaultMessageProcessor : IMessageProcessor
     {
         public void Display(string prefix, string output, string error, int exitCode)
@@ -15,21 +16,19 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
                 switch (message.MessageType)
                 {
                     case MessageType.Regular:
-                        ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
+                        MessageLogger.Write(message.Prefix, message.Contents);
                         break;
                     case MessageType.Warning:
-                        ConsoleColor.SetColor(ConsoleColor.BuildColor.Yellow);
+                        MessageLogger.WriteWarning(message.Prefix, message.Contents);
                         break;
                     case MessageType.Error:
-                        ConsoleColor.SetColor(ConsoleColor.BuildColor.Red);
+                        MessageLogger.WriteError(message.Prefix, message.Contents);
                         break;
                     default:
                         throw new NotImplementedException("Message type has not been implemented. Type: " +
                                                           message.MessageType);
                 }
-                MessageLogger.Write(message.Prefix, message.Contents);
             }
-            ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
         }
 
         public IList<Message> Parse(string prefix, string output, string error, int processeExitCode)

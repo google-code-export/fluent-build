@@ -31,6 +31,27 @@ namespace FluentBuild.MessageLoggers
         }
 
         [Test]
+        public void Write_ShouldCreateMessage()
+        {   
+            _subject.Write("test", "this is a test");
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("##teamcity[message text='[test|] this is a test' errorDetails='' status='NORMAL']\r\n"));
+        }
+
+        [Test]
+        public void Debug_ShouldCreateMessage()
+        {
+            _subject.WriteDebugMessage("this is a test");
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("##teamcity[message text='[DEBUG|] this is a test' errorDetails='' status='NORMAL']\r\n"));
+        }
+
+        [Test]
+        public void Error_ShouldCreateMessage()
+        {
+            _subject.WriteError("CSC", "this is a test");
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("##teamcity[message text='this is a test' errorDetails='this is a test' status='ERROR']\r\n"));
+        }
+
+        [Test]
         public void WriteHeader_ShouldCloseOldHeaderIfItExists()
         {
             var newHeader = "NewHeader";
@@ -96,9 +117,15 @@ namespace FluentBuild.MessageLoggers
             WriteMessage(outputMessage);
         }
 
-        public void WriteError(string message)
+        public void WriteError(string type, string message)
         {
-            WriteMessage(message, message, "ERROR");
+            WriteMessage(message,message, "ERROR");
+        }
+
+        public void WriteWarning(string type, string message)
+        {
+            var outputMessage = String.Format("[{0}] {1}", type, message);
+            WriteMessage(outputMessage, string.Empty, "WARNING");
         }
 
         #endregion
@@ -110,6 +137,7 @@ namespace FluentBuild.MessageLoggers
 
         private static void WriteMessage(string message, string error, string type)
         {
+            //NORMAL, WARNING, FAILURE, ERROR
             message = EscapeCharacters(message);
             error = EscapeCharacters(error);
             Console.WriteLine(String.Format("##teamcity[message text='{0}' errorDetails='{1}' status='{2}']", message,

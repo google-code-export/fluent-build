@@ -89,6 +89,7 @@ namespace FluentBuild.MessageLoggers
 
         public void Write(string type, string message)
         {
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
             string outputMessage = String.Format("  [{0}] {1}", type, message);
             var wrapText = WrapText(5 + type.Length, outputMessage);
             foreach (var text in wrapText)
@@ -97,9 +98,18 @@ namespace FluentBuild.MessageLoggers
             }
         }
 
-        public void WriteError(string message)
+        public void WriteError(string type, string message)
         {
-            Write("ERROR", message);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Red);
+            Write(type, message);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+        }
+
+        public void WriteWarning(string type, string message)
+        {
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Yellow);
+            Write(type, message);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
         }
     }
 }
