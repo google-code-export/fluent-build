@@ -4,11 +4,8 @@ Build
 	-Team City support added.
 	-Compiled for .NET 3.5 for better compatability
 
-
   This release    
-
-    -ILmerge needs to know what version it is running on (i.e. v4,v3,v2, etc)
-    -Better testing on filesets
+	-more testing
     -ILmerge testing
 	-CCNet support
 

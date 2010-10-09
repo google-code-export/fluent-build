@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
-<coverage profilerVersion="3.4.12.6869" driverVersion="3.4.12.6869" exportversion="3" viewdisplayname="" startTime="2010-10-09T16:46:56.5441716Z" measureTime="2010-10-09T16:47:06.3527326Z" projectName="FluentBuild" buildid="7c84696c-ff0e-45fb-9081-efe0f1622df6" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="FluentBuild" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+<coverage profilerVersion="3.4.12.6869" driverVersion="3.4.12.6869" exportversion="3" viewdisplayname="" startTime="2010-10-09T21:02:44.9443095Z" measureTime="2010-10-09T21:02:54.7038677Z" projectName="FluentBuild" buildid="b4917005-6ac9-4940-b733-17f1c1156ce5" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="FluentBuild" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
   <rebasedpaths />
   <filters />
   <documents>
@@ -42,8 +42,8 @@
     <doc id="66" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\Defaults.cs" cs="630C1DE71F07A060A138C5127BED3D29" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="11" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSet.cs" cs="629D55C68CC4FFD9E8C9652A0633F79F" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="100" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\FileSetTests.cs" cs="15F3086B46BA2ED76BF826B4FD85395D" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="107" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\MessageLogger.cs" cs="55F8208B441134B978B2333E8C7B5EA4" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="25" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\MessageLoggerTests.cs" cs="E3A18AAFFB8E7ACB606618BF057D3531" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="107" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\MessageLogger.cs" cs="6E91D31DEED72072EA450D670F163DFC" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="25" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\MessageLoggerTests.cs" cs="1AC296BD64AF6D1CA3D351BCB25A2741" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="103" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\Properties.cs" cs="E4F89F7D26AA454B16F18D670568B70B" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="69" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\PropertiesTests.cs" cs="50DF0A2F584FA7740002B363E4B5D592" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="61" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Core\Publish.cs" cs="31C7E0B853B0668D8B52B53F749BB167" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
@@ -85,12 +85,12 @@
     <doc id="43" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FrameworkFinders\Desktop3_5Finder.cs" cs="AFD14BA74AD75BA521E398A2536E7D10" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="42" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FrameworkFinders\Desktop4_0ClientFrameworkFinder.cs" cs="886ED5DEF21FC16308DEC7776F1AD5A9" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="116" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\FrameworkFinders\Desktop4_0FullFrameworkFinder.cs" cs="E5FD3273FD0FBB808B4FD2D2A079BA62" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="7" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\ConsoleMessageLogger.cs" cs="C0440F1608AAA1369EAF39AE03165FC8" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="45" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\ConsoleMessageLoggerTests.cs" cs="BCF8CB00ED6644D268B51D6270BCB215" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="118" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\MessageProcessing\DefaultMessageProcessor.cs" cs="6850544A3E0B5EF574BB83627570D8C2" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="7" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\ConsoleMessageLogger.cs" cs="2B17A930509823DF566FB0C43E10AA6B" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="45" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\ConsoleMessageLoggerTests.cs" cs="851DE0C675FF4739EF0B9D1338AA4692" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="118" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\MessageProcessing\DefaultMessageProcessor.cs" cs="0661E95CC548A3285ADEDC2C42CA1EC3" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="119" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\MessageProcessing\DefaultMessageProcessorTests.cs" cs="D30F187D2FECFC50A9C68B89EAB4364C" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="120" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\MessageProcessing\Message.cs" cs="BF45298414422687C8306E352A589A8A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="37" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\TeamCityMessageLogger.cs" cs="FCCF4FBA1A6CAE28ECF4629679741A44" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="37" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\MessageLoggers\TeamCityMessageLogger.cs" cs="BD5BCB453AF8134C17F84BB1208E8F33" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="23" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Publishing\GoogleCode.cs" cs="1E92342E6326AFE4A54664E3FD1E35B0" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="60" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ExecutableFailedException.cs" cs="E1271ED8283BE481EAF4C6DEF5C06776" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="14" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs" cs="8FB9FB5970EC18F6B6717232451EB035" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
@@ -939,11 +939,11 @@
       <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
         <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="51" nid="0" />
       </method>
-      <method name="SetColor" signature="SetColor(FluentBuild.Utilities.ConsoleColor+BuildColor color) : void [static]" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
-        <seqpnt vc="2" o="1" l="35" el="35" c="13" ec="56" ex="false" fl="65536" doc="51" nid="0" />
-        <seqpnt vc="2" o="9" l="36" el="36" c="13" ec="59" ex="false" fl="65536" doc="51" nid="0" />
-        <seqpnt vc="2" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="51" nid="0" />
-        <seqpnt vc="2" o="11" l="37" el="37" c="9" ec="10" ex="false" fl="65536" doc="51" nid="0" />
+      <method name="SetColor" signature="SetColor(FluentBuild.Utilities.ConsoleColor+BuildColor color) : void [static]" excluded="false" instrumented="true" cc="1" vc="7" nid="0">
+        <seqpnt vc="7" o="1" l="35" el="35" c="13" ec="56" ex="false" fl="65536" doc="51" nid="0" />
+        <seqpnt vc="7" o="9" l="36" el="36" c="13" ec="59" ex="false" fl="65536" doc="51" nid="0" />
+        <seqpnt vc="7" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="51" nid="0" />
+        <seqpnt vc="7" o="11" l="37" el="37" c="9" ec="10" ex="false" fl="65536" doc="51" nid="0" />
       </method>
     </class>
     <class name="FluentBuild.MessageLoggers.ConsoleMessageLogger" signature="FluentBuild.MessageLoggers.ConsoleMessageLogger" excluded="false" nid="0">
@@ -1001,26 +1001,29 @@
         <seqpnt vc="6" o="116" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
       </method>
       <method name="Write" signature="Write(System.String type,System.String message) : void" excluded="false" instrumented="true" cc="2" vc="3" nid="0">
-        <seqpnt vc="3" o="1" l="92" el="92" c="13" ec="80" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="3" o="E" l="93" el="93" c="13" ec="69" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="3" o="1F" l="94" el="94" c="34" ec="42" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="3" o="28" l="94" el="94" c="22" ec="30" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="3" o="31" l="96" el="96" c="17" ec="41" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="3" o="39" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
-        <seqpnt vc="6" o="39" l="94" el="94" c="31" ec="33" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="6" o="44" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
-        <seqpnt vc="3" o="58" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
-        <seqpnt vc="3" o="58" l="98" el="98" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="1" l="92" el="92" c="13" ec="88" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="8" l="93" el="93" c="13" ec="80" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="15" l="94" el="94" c="13" ec="69" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="26" l="95" el="95" c="34" ec="42" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="2F" l="95" el="95" c="22" ec="30" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="38" l="97" el="97" c="17" ec="41" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="3" o="40" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+        <seqpnt vc="6" o="40" l="95" el="95" c="31" ec="33" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="6" o="4B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+        <seqpnt vc="3" o="5F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+        <seqpnt vc="3" o="5F" l="99" el="99" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
       </method>
       <method name="WriteDebugMessage" signature="WriteDebugMessage(System.String message) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="1" l="87" el="87" c="13" ec="37" ex="false" fl="65536" doc="7" nid="0" />
         <seqpnt vc="1" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
         <seqpnt vc="1" o="E" l="88" el="88" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
       </method>
-      <method name="WriteError" signature="WriteError(System.String message) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="102" el="102" c="13" ec="37" ex="false" fl="65536" doc="7" nid="0" />
-        <seqpnt vc="1" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
-        <seqpnt vc="1" o="E" l="103" el="103" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
+      <method name="WriteError" signature="WriteError(System.String type,System.String message) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="103" el="103" c="13" ec="84" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="1" o="9" l="104" el="104" c="13" ec="34" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="1" o="12" l="105" el="105" c="13" ec="88" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="1" o="19" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+        <seqpnt vc="1" o="19" l="106" el="106" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
       </method>
       <method name="WriteHeader" signature="WriteHeader(System.String header) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="1" l="79" el="79" c="13" ec="87" ex="false" fl="65536" doc="7" nid="0" />
@@ -1028,6 +1031,13 @@
         <seqpnt vc="1" o="10" l="81" el="81" c="13" ec="88" ex="false" fl="65536" doc="7" nid="0" />
         <seqpnt vc="1" o="17" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
         <seqpnt vc="1" o="17" l="83" el="83" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
+      </method>
+      <method name="WriteWarning" signature="WriteWarning(System.String type,System.String message) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="110" el="110" c="13" ec="87" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="9" l="111" el="111" c="13" ec="34" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="12" l="112" el="112" c="13" ec="88" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="19" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+        <seqpnt vc="0" o="19" l="113" el="113" c="9" ec="10" ex="false" fl="65536" doc="7" nid="0" />
       </method>
     </class>
     <class name="FluentBuild.MessageLoggers.ConsoleMessageLoggerTests" signature="FluentBuild.MessageLoggers.ConsoleMessageLoggerTests" excluded="false" nid="0">
@@ -1081,10 +1091,10 @@
       </method>
       <method name="WriteError_ShouldWriteErrorMessage" signature="WriteError_ShouldWriteErrorMessage() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="1" l="79" el="79" c="13" ec="46" ex="false" fl="65536" doc="45" nid="0" />
-        <seqpnt vc="1" o="12" l="80" el="80" c="13" ec="61" ex="false" fl="65536" doc="45" nid="0" />
-        <seqpnt vc="1" o="23" l="81" el="81" c="13" ec="122" ex="false" fl="65536" doc="45" nid="0" />
-        <seqpnt vc="1" o="48" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="45" nid="0" />
-        <seqpnt vc="1" o="48" l="82" el="82" c="9" ec="10" ex="false" fl="65536" doc="45" nid="0" />
+        <seqpnt vc="1" o="12" l="80" el="80" c="13" ec="70" ex="false" fl="65536" doc="45" nid="0" />
+        <seqpnt vc="1" o="28" l="81" el="81" c="13" ec="122" ex="false" fl="65536" doc="45" nid="0" />
+        <seqpnt vc="1" o="4D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="45" nid="0" />
+        <seqpnt vc="1" o="4D" l="82" el="82" c="9" ec="10" ex="false" fl="65536" doc="45" nid="0" />
       </method>
       <method name="WriteHeader" signature="WriteHeader() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="1" l="63" el="63" c="13" ec="48" ex="false" fl="65536" doc="45" nid="0" />
@@ -1572,65 +1582,63 @@
         <seqpnt vc="30" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
       </method>
       <method name="Display" signature="Display(System.String prefix,System.String output,System.String error,System.Int32 exitCode) : void" excluded="false" instrumented="false" cc="5" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="12" el="12" c="13" ec="75" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="E" l="13" el="13" c="41" ec="46" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="17" l="13" el="13" c="22" ec="37" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="1F" l="15" el="15" c="17" ec="45" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="1" l="13" el="13" c="13" ec="75" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="E" l="14" el="14" c="41" ec="46" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="17" l="14" el="14" c="22" ec="37" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="1F" l="16" el="16" c="17" ec="45" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="0" o="27" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="0" o="3A" l="18" el="18" c="25" ec="80" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="41" l="19" el="19" c="25" ec="31" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="43" l="21" el="21" c="25" ec="79" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="4B" l="22" el="22" c="25" ec="31" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="4D" l="24" el="24" c="25" ec="76" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="55" l="25" el="25" c="25" ec="31" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="57" l="27" el="28" c="25" ec="80" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="71" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="0" o="72" l="30" el="30" c="17" ec="71" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="85" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="0" o="85" l="13" el="13" c="38" ec="40" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="8F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="0" o="9B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="0" o="A6" l="32" el="32" c="13" ec="68" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="0" o="AD" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="0" o="AD" l="33" el="33" c="9" ec="10" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="3A" l="19" el="19" c="25" ec="79" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="4C" l="20" el="20" c="25" ec="31" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="4E" l="22" el="22" c="25" ec="86" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="60" l="23" el="23" c="25" ec="31" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="62" l="25" el="25" c="25" ec="84" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="74" l="26" el="26" c="25" ec="31" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="76" l="28" el="29" c="25" ec="80" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="90" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
+        <seqpnt vc="0" o="92" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
+        <seqpnt vc="0" o="92" l="14" el="14" c="38" ec="40" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="0" o="9C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
+        <seqpnt vc="0" o="AB" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
+        <seqpnt vc="0" o="B6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
+        <seqpnt vc="0" o="B6" l="32" el="32" c="9" ec="10" ex="false" fl="65536" doc="118" nid="0" />
       </method>
       <method name="Parse" signature="Parse(System.String prefix,System.String output,System.String error,System.Int32 processeExitCode) : System.Collections.Generic.IList&lt;FluentBuild.MessageLoggers.MessageProcessing.Message&gt;" excluded="false" instrumented="true" cc="8" vc="4" nid="0">
-        <seqpnt vc="4" o="1" l="37" el="37" c="13" ec="48" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="4" o="7" l="39" el="39" c="13" ec="66" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="4" o="9" l="41" el="41" c="13" ec="39" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="1" l="36" el="36" c="13" ec="48" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="7" l="38" el="38" c="13" ec="66" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="9" l="40" el="40" c="13" ec="39" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="4" o="12" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="1" o="14" l="42" el="42" c="17" ec="56" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="1" o="14" l="41" el="41" c="17" ec="56" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="1" o="16" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="4" o="17" l="44" el="44" c="37" ec="84" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="6" o="2E" l="44" el="44" c="22" ec="33" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="6" o="35" l="46" el="46" c="17" ec="44" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="17" l="43" el="43" c="37" ec="84" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="6" o="2E" l="43" el="43" c="22" ec="33" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="6" o="35" l="45" el="45" c="17" ec="44" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="6" o="4A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="5" o="4D" l="48" el="48" c="21" ec="75" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="5" o="55" l="49" el="49" c="21" ec="78" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="5" o="4D" l="47" el="47" c="21" ec="75" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="5" o="55" l="48" el="48" c="21" ec="78" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="5" o="60" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
         <seqpnt vc="0" o="73" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
         <seqpnt vc="5" o="77" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="1" o="79" l="50" el="50" c="25" ec="76" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="1" o="79" l="49" el="49" c="25" ec="76" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="1" o="81" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="5" o="81" l="51" el="51" c="21" ec="45" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="5" o="89" l="52" el="52" c="21" ec="43" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="5" o="81" l="50" el="50" c="21" ec="45" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="5" o="89" l="51" el="51" c="21" ec="43" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="5" o="92" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
         <seqpnt vc="6" o="99" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="10" o="99" l="44" el="44" c="34" ec="36" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="10" o="99" l="43" el="43" c="34" ec="36" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="10" o="A5" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="4" o="A8" l="56" el="56" c="37" ec="83" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="4" o="BF" l="56" el="56" c="22" ec="33" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="4" o="C6" l="58" el="58" c="17" ec="44" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="A8" l="55" el="55" c="37" ec="83" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="BF" l="55" el="55" c="22" ec="33" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="C6" l="57" el="57" c="17" ec="44" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="4" o="DB" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="1" o="DE" l="60" el="60" c="21" ec="74" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="1" o="E6" l="61" el="61" c="21" ec="45" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="1" o="EE" l="62" el="62" c="21" ec="43" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="1" o="DE" l="59" el="59" c="21" ec="74" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="1" o="E6" l="60" el="60" c="21" ec="45" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="1" o="EE" l="61" el="61" c="21" ec="43" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="1" o="F7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
         <seqpnt vc="4" o="FE" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="8" o="FE" l="56" el="56" c="34" ec="36" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="8" o="FE" l="55" el="55" c="34" ec="36" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="8" o="10A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
-        <seqpnt vc="4" o="10C" l="66" el="66" c="13" ec="29" ex="false" fl="65536" doc="118" nid="0" />
-        <seqpnt vc="4" o="111" l="67" el="67" c="9" ec="10" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="10C" l="65" el="65" c="13" ec="29" ex="false" fl="65536" doc="118" nid="0" />
+        <seqpnt vc="4" o="111" l="66" el="66" c="9" ec="10" ex="false" fl="65536" doc="118" nid="0" />
         <seqpnt vc="4" o="113" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="118" nid="0" />
       </method>
     </class>
@@ -2886,9 +2894,14 @@
         <seqpnt vc="11" o="19" l="54" el="54" c="9" ec="10" ex="false" fl="65536" doc="107" nid="0" />
       </method>
       <method name="WriteError" signature="WriteError(System.String message) : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="64" el="64" c="13" ec="48" ex="false" fl="65536" doc="107" nid="0" />
-        <seqpnt vc="1" o="D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="107" nid="0" />
-        <seqpnt vc="1" o="D" l="65" el="65" c="9" ec="10" ex="false" fl="65536" doc="107" nid="0" />
+        <seqpnt vc="1" o="1" l="64" el="64" c="13" ec="57" ex="false" fl="65536" doc="107" nid="0" />
+        <seqpnt vc="1" o="12" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="107" nid="0" />
+        <seqpnt vc="1" o="12" l="65" el="65" c="9" ec="10" ex="false" fl="65536" doc="107" nid="0" />
+      </method>
+      <method name="WriteError" signature="WriteError(System.String prefix,System.String message) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="69" el="69" c="13" ec="56" ex="false" fl="65536" doc="107" nid="0" />
+        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="107" nid="0" />
+        <seqpnt vc="0" o="E" l="70" el="70" c="9" ec="10" ex="false" fl="65536" doc="107" nid="0" />
       </method>
       <method name="WriteHeader" signature="WriteHeader(System.String header) : void [static]" excluded="false" instrumented="true" cc="2" vc="4" nid="0">
         <seqpnt vc="4" o="1" l="43" el="43" c="13" ec="59" ex="false" fl="65536" doc="107" nid="0" />
@@ -2896,6 +2909,11 @@
         <seqpnt vc="1" o="E" l="45" el="45" c="17" ec="52" ex="false" fl="65536" doc="107" nid="0" />
         <seqpnt vc="1" o="1B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="107" nid="0" />
         <seqpnt vc="4" o="1B" l="47" el="47" c="9" ec="10" ex="false" fl="65536" doc="107" nid="0" />
+      </method>
+      <method name="WriteWarning" signature="WriteWarning(System.String prefix,System.String message) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="74" el="74" c="13" ec="58" ex="false" fl="65536" doc="107" nid="0" />
+        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="107" nid="0" />
+        <seqpnt vc="0" o="E" l="75" el="75" c="9" ec="10" ex="false" fl="65536" doc="107" nid="0" />
       </method>
     </class>
     <class name="FluentBuild.Core.MessageLogger+DebugMessages" signature="FluentBuild.Core.MessageLogger+DebugMessages" excluded="false" nid="0">
@@ -2926,7 +2944,7 @@
         <seqpnt vc="1" o="0" l="56" el="56" c="61" ec="88" ex="false" fl="65536" doc="25" nid="0" />
       </method>
       <method name="&lt;WriteError_ShouldWriteIfVerbosityIsNone&gt;b__a" signature="&lt;WriteError_ShouldWriteIfVerbosityIsNone&gt;b__a(FluentBuild.MessageLoggers.IMessageLogger x) : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="0" l="80" el="80" c="63" ec="83" ex="false" fl="65536" doc="25" nid="0" />
+        <seqpnt vc="1" o="0" l="80" el="80" c="63" ec="92" ex="false" fl="65536" doc="25" nid="0" />
       </method>
       <method name="&lt;WriteHeader_ShouldNotWriteIfVerbosityIsNone&gt;b__8" signature="&lt;WriteHeader_ShouldNotWriteIfVerbosityIsNone&gt;b__8(FluentBuild.MessageLoggers.IMessageLogger x) : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="0" l="72" el="72" c="66" ec="87" ex="false" fl="65536" doc="25" nid="0" />
@@ -2978,7 +2996,7 @@
       <method name="WriteError_ShouldWriteIfVerbosityIsNone" signature="WriteError_ShouldWriteIfVerbosityIsNone() : void" excluded="false" instrumented="true" cc="2" vc="1" nid="0">
         <seqpnt vc="1" o="1" l="78" el="78" c="13" ec="59" ex="false" fl="65536" doc="25" nid="0" />
         <seqpnt vc="1" o="8" l="79" el="79" c="13" ec="46" ex="false" fl="65536" doc="25" nid="0" />
-        <seqpnt vc="1" o="13" l="80" el="80" c="13" ec="85" ex="false" fl="65536" doc="25" nid="0" />
+        <seqpnt vc="1" o="13" l="80" el="80" c="13" ec="94" ex="false" fl="65536" doc="25" nid="0" />
         <seqpnt vc="1" o="1D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="25" nid="0" />
         <seqpnt vc="1" o="3D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="25" nid="0" />
         <seqpnt vc="1" o="3D" l="81" el="81" c="9" ec="10" ex="false" fl="65536" doc="25" nid="0" />
@@ -4841,96 +4859,120 @@
       </method>
     </class>
     <class name="FluentBuild.MessageLoggers.TeamCityMessageLogger" signature="FluentBuild.MessageLoggers.TeamCityMessageLogger" excluded="false" nid="0">
-      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
-        <seqpnt vc="4" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="7" nid="0">
+        <seqpnt vc="7" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
       </method>
-      <method name="EscapeCharacters" signature="EscapeCharacters(System.String data) : System.String [static]" excluded="false" instrumented="true" cc="1" vc="6" nid="0">
-        <seqpnt vc="6" o="1" l="121" el="121" c="13" ec="122" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="6" o="50" l="122" el="122" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="6" o="51" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+      <method name="EscapeCharacters" signature="EscapeCharacters(System.String data) : System.String [static]" excluded="false" instrumented="true" cc="1" vc="12" nid="0">
+        <seqpnt vc="12" o="1" l="149" el="149" c="13" ec="122" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="12" o="50" l="150" el="150" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="12" o="51" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
       </method>
-      <method name="Write" signature="Write(System.String type,System.String message) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="95" el="95" c="13" ec="78" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="E" l="96" el="96" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="0" o="15" l="97" el="97" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      <method name="Write" signature="Write(System.String type,System.String message) : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="116" el="116" c="13" ec="78" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="E" l="117" el="117" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="2" o="15" l="118" el="118" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
-      <method name="WriteDebugMessage" signature="WriteDebugMessage(System.String message) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="90" el="90" c="13" ec="37" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="0" o="E" l="91" el="91" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      <method name="WriteDebugMessage" signature="WriteDebugMessage(System.String message) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="111" el="111" c="13" ec="37" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="1" o="E" l="112" el="112" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
-      <method name="WriteError" signature="WriteError(System.String message) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="101" el="101" c="13" ec="53" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="0" o="E" l="102" el="102" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      <method name="WriteError" signature="WriteError(System.String type,System.String message) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="122" el="122" c="13" ec="52" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="1" o="E" l="123" el="123" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
       <method name="WriteHeader" signature="WriteHeader(System.String header) : void" excluded="false" instrumented="true" cc="2" vc="2" nid="0">
-        <seqpnt vc="2" o="1" l="81" el="81" c="13" ec="55" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="1" l="102" el="102" c="13" ec="55" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="2" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="1" o="10" l="82" el="82" c="17" ec="104" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="10" l="103" el="103" c="17" ec="104" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="1" o="26" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="2" o="26" l="84" el="84" c="13" ec="37" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="2" o="2D" l="85" el="85" c="13" ec="92" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="26" l="105" el="105" c="13" ec="37" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="2D" l="106" el="106" c="13" ec="92" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="2" o="3E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="2" o="3E" l="86" el="86" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="3E" l="107" el="107" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
-      <method name="WriteMessage" signature="WriteMessage(System.String message) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="108" el="108" c="13" ec="59" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="12" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="0" o="12" l="109" el="109" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      <method name="WriteMessage" signature="WriteMessage(System.String message) : void [static]" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="135" el="135" c="13" ec="59" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="2" o="12" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="2" o="12" l="136" el="136" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
-      <method name="WriteMessage" signature="WriteMessage(System.String message,System.String error,System.String type) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="113" el="113" c="13" ec="49" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="9" l="114" el="114" c="13" ec="45" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="11" l="115" el="116" c="13" ec="59" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="0" o="24" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="0" o="24" l="117" el="117" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      <method name="WriteMessage" signature="WriteMessage(System.String message,System.String error,System.String type) : void [static]" excluded="false" instrumented="true" cc="1" vc="3" nid="0">
+        <seqpnt vc="3" o="1" l="141" el="141" c="13" ec="49" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="3" o="9" l="142" el="142" c="13" ec="45" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="3" o="11" l="143" el="144" c="13" ec="59" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="3" o="24" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="3" o="24" l="145" el="145" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      </method>
+      <method name="WriteWarning" signature="WriteWarning(System.String type,System.String message) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="127" el="127" c="13" ec="75" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="0" o="E" l="128" el="128" c="13" ec="66" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="0" o="1F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="0" o="1F" l="129" el="129" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
     </class>
     <class name="FluentBuild.MessageLoggers.TeamCityMessageLoggerTests" signature="FluentBuild.MessageLoggers.TeamCityMessageLoggerTests" excluded="false" nid="0">
       <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
       </method>
+      <method name="Debug_ShouldCreateMessage" signature="Debug_ShouldCreateMessage() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="43" el="43" c="13" ec="58" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="12" l="44" el="44" c="13" ec="158" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="2D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="1" o="2D" l="45" el="45" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      </method>
+      <method name="Error_ShouldCreateMessage" signature="Error_ShouldCreateMessage() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="50" el="50" c="13" ec="58" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="17" l="51" el="51" c="13" ec="162" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="32" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="1" o="32" l="52" el="52" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      </method>
       <method name="EscapeCharacters_ShouldEscapeCharacters" signature="EscapeCharacters_ShouldEscapeCharacters() : void" excluded="false" instrumented="true" cc="3" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="51" el="51" c="13" ec="57" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="7" l="53" el="53" c="13" ec="40" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="18" l="54" el="54" c="13" ec="40" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="29" l="55" el="55" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="3A" l="56" el="56" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="4B" l="57" el="57" c="13" ec="40" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="5D" l="59" el="59" c="36" ec="52" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="5" o="6B" l="59" el="59" c="22" ec="32" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="5" o="78" l="61" el="61" c="17" ec="104" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="1" l="72" el="72" c="13" ec="57" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="7" l="74" el="74" c="13" ec="40" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="18" l="75" el="75" c="13" ec="40" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="29" l="76" el="76" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="3A" l="77" el="77" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="4B" l="78" el="78" c="13" ec="40" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="5D" l="80" el="80" c="36" ec="52" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="5" o="6B" l="80" el="80" c="22" ec="32" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="5" o="78" l="82" el="82" c="17" ec="104" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="5" o="91" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="6" o="91" l="59" el="59" c="33" ec="35" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="6" o="91" l="80" el="80" c="33" ec="35" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="6" o="99" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
         <seqpnt vc="1" o="AC" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
         <seqpnt vc="1" o="B8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="1" o="B8" l="63" el="63" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="B8" l="84" el="84" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
       <method name="EscapeCharacters_ShouldNotEscapePipeRepeatedly" signature="EscapeCharacters_ShouldNotEscapePipeRepeatedly() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="68" el="68" c="13" ec="85" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="C" l="69" el="69" c="13" ec="63" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="1" l="89" el="89" c="13" ec="85" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="C" l="90" el="90" c="13" ec="63" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="1" o="1D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="1" o="1D" l="70" el="70" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="1D" l="91" el="91" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
-      <method name="Setup" signature="Setup() : void" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
-        <seqpnt vc="4" o="1" l="15" el="15" c="13" ec="58" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="4" o="C" l="16" el="16" c="13" ec="48" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="4" o="18" l="17" el="17" c="13" ec="52" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="4" o="23" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="4" o="23" l="18" el="18" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      <method name="Setup" signature="Setup() : void" excluded="false" instrumented="true" cc="1" vc="7" nid="0">
+        <seqpnt vc="7" o="1" l="15" el="15" c="13" ec="58" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="7" o="C" l="16" el="16" c="13" ec="48" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="7" o="18" l="17" el="17" c="13" ec="52" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="7" o="23" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="7" o="23" l="18" el="18" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+      </method>
+      <method name="Write_ShouldCreateMessage" signature="Write_ShouldCreateMessage() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="36" el="36" c="13" ec="54" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="17" l="37" el="37" c="13" ec="157" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="32" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
+        <seqpnt vc="1" o="32" l="38" el="38" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
       <method name="WriteHeader_ShouldCloseOldHeaderIfItExists" signature="WriteHeader_ShouldCloseOldHeaderIfItExists() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="36" el="36" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="7" l="37" el="37" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="D" l="38" el="38" c="13" ec="49" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="19" l="39" el="39" c="13" ec="45" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="26" l="40" el="43" c="13" ec="48" ex="false" fl="65536" doc="37" nid="0" />
-        <seqpnt vc="1" o="4C" l="44" el="44" c="13" ec="78" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="1" l="57" el="57" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="7" l="58" el="58" c="13" ec="41" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="D" l="59" el="59" c="13" ec="49" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="19" l="60" el="60" c="13" ec="45" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="26" l="61" el="64" c="13" ec="48" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="4C" l="65" el="65" c="13" ec="78" ex="false" fl="65536" doc="37" nid="0" />
         <seqpnt vc="1" o="63" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="37" nid="0" />
-        <seqpnt vc="1" o="63" l="45" el="45" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
+        <seqpnt vc="1" o="63" l="66" el="66" c="9" ec="10" ex="false" fl="65536" doc="37" nid="0" />
       </method>
       <method name="WriteHeader_ShouldOpenNewHeaderIfNothingElseHasBeenOpened" signature="WriteHeader_ShouldOpenNewHeaderIfNothingElseHasBeenOpened() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="1" l="28" el="28" c="13" ec="33" ex="false" fl="65536" doc="37" nid="0" />

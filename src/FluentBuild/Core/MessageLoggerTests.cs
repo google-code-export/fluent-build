@@ -77,7 +77,7 @@ namespace FluentBuild.Core
         {
             MessageLogger.Verbosity = VerbosityLevel.None;
             MessageLogger.WriteError("test");
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("test"));
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("ERROR", "test"));
         }
 
     }

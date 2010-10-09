@@ -61,7 +61,17 @@ namespace FluentBuild.Core
         
         public static void WriteError(string message)
         {
-            InternalLogger.WriteError(message);
+            InternalLogger.WriteError("ERROR", message);
+        }
+
+        public static void WriteError(string prefix, string message)
+        {
+            InternalLogger.WriteError(prefix, message);
+        }
+
+        public static void WriteWarning(string prefix, string message)
+        {
+            InternalLogger.WriteWarning(prefix, message);
         }
     }
 }
