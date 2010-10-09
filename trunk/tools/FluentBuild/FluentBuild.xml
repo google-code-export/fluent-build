@@ -59,6 +59,47 @@
         <member name="M:FluentBuild.Runners.UnitTesting.UnitTestFrameworkRunTests.Nunit_ShouldCreateNunitRunner">
             <summary />
         </member>
+        <member name="T:FluentBuild.Runners.ILMerge">
+            <summary>
+             Merges assemblies together
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.ILMerge.Execute">
+            <summary>
+             Executes the ILMerge assembly
+            </summary>
+            <exception cref="T:System.IO.FileNotFoundException">If the path to the executeable was not set or can not be found automatically.</exception>
+        </member>
+        <member name="M:FluentBuild.Runners.ILMerge.ExecuteableLocatedAt(System.String)">
+            <summary>
+             Sets the path to the ILMerge.exe executeable
+            </summary>
+            <param name="path">path to ILMerge.exe</param>
+        </member>
+        <member name="M:FluentBuild.Runners.ILMerge.OutputTo(System.String)">
+            <summary>
+             Sets the output location
+            </summary>
+            <param name="destination">path to output file</param>
+        </member>
+        <member name="M:FluentBuild.Runners.ILMerge.OutputTo(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             Sets the output location
+            </summary>
+            <param name="destination">path to output file</param>
+        </member>
+        <member name="M:FluentBuild.Runners.ILMerge.AddSource(System.String)">
+            <summary>
+             Adds a source file to merge in
+            </summary>
+            <param name="source">path to the file to merge in</param>
+        </member>
+        <member name="M:FluentBuild.Runners.ILMerge.AddSource(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             Adds a source file to merge in
+            </summary>
+            <param name="source">path to the file to merge in</param>
+        </member>
         <member name="T:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails">
             <summary>
             Sets the lines for an assembly info file
@@ -701,6 +742,39 @@
         <member name="M:FluentBuild.FilesAndDirectories.FileSet.FileSystemUtilityTests.Should_Not_Call_Parser_For_Path_Containing_No_Wildcards">
             <summary />
         </member>
+        <member name="T:FluentBuild.FrameworkFinders.DefaultFinder">
+            <summary>
+            Default abstract finder class. Used to do common work for finding frameworks.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.DefaultFinder.PathToSdk">
+            <summary>
+             Seaches the registry for a given framework and determines the most
+             accurate physical path to the SDK
+            </summary>
+            <returns>Path to SDK if found. Null if not found</returns>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.DefaultFinder.PathToFrameworkInstall">
+            <summary>
+             Seaches the registry for a given framework and determines the most
+             accurate physical path to the framework
+            </summary>
+            <returns>Path to framework if found. Null if not found</returns>
+        </member>
+        <member name="P:FluentBuild.FrameworkFinders.DefaultFinder.SdkSearchPathsUsed">
+            <summary>
+             Creates a comma seperated list of paths used to find the SDK.
+             This is typically used to generate error message text
+             when the SDK can not be found
+            </summary>
+        </member>
+        <member name="P:FluentBuild.FrameworkFinders.DefaultFinder.FrameworkSearchPaths">
+            <summary>
+             Creates a comma seperated list of paths used to find the SDK.
+             This is typically used to generate error message text
+             when the framework can not be found
+            </summary>
+        </member>
         <member name="T:FluentBuild.Compilation.Resource">
             <summary>
              Represents a resource file
@@ -804,6 +878,26 @@
         </member>
         <member name="M:FluentBuild.Runners.Zip.ZipCompressTests.TestSomething">
             <summary />
+        </member>
+        <member name="T:FluentBuild.FrameworkFinders.Desktop4_0ClientFrameworkFinder">
+            <summary>
+             Determines the location of Framework 4.0 client components.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.Desktop4_0ClientFrameworkFinder.#ctor">
+            <summary>
+             Creates the finder.
+            </summary>
+        </member>
+        <member name="T:FluentBuild.FrameworkFinders.Desktop3_5Finder">
+            <summary>
+             Determines the location of Framework 3.5 components.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.Desktop3_5Finder.#ctor">
+            <summary>
+             Creates the finder.
+            </summary>
         </member>
         <member name="T:FluentBuild.Database.MsSqlCreateTests">
             <summary />
@@ -1097,6 +1191,16 @@
         </member>
         <member name="M:FluentBuild.Database.MsSqlVersionTableTests.ExecuteShouldCallUnderlyingEngine">
             <summary />
+        </member>
+        <member name="T:FluentBuild.FrameworkFinders.Desktop2_0Finder">
+            <summary>
+             Determines the location of Framework 2.0 components.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.Desktop2_0Finder.#ctor">
+            <summary>
+             Creates the finder.
+            </summary>
         </member>
         <member name="T:FluentBuild.Core.PropertiesTests">
             <summary />
@@ -1837,6 +1941,16 @@
             <summary>
             </summary>
         </member>
+        <member name="T:FluentBuild.FrameworkFinders.Desktop3_0Finder">
+            <summary>
+             Determines the location of Framework 3.0 components.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.Desktop3_0Finder.#ctor">
+            <summary>
+             Creates the finder.
+            </summary>
+        </member>
         <member name="T:FluentBuild.Tokenization.TokenReplacerTests">
             <summary />
         </member>
@@ -1854,6 +1968,16 @@
         </member>
         <member name="M:FluentBuild.Database.DatabaseTests.ShouldCreateProperObject">
             <summary />
+        </member>
+        <member name="T:FluentBuild.FrameworkFinders.Desktop4_0FullFrameworkFinder">
+            <summary>
+             Determines the location of Framework 4.0 Full components.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FrameworkFinders.Desktop4_0FullFrameworkFinder.#ctor">
+            <summary>
+             Creates the finder.
+            </summary>
         </member>
         <member name="T:FluentBuild.ApplicationProperties.CruiseControlPropertiesTests">
             <summary />
