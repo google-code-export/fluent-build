@@ -6,16 +6,16 @@ Build
 
 
   This release    
+
     -ILmerge needs to know what version it is running on (i.e. v4,v3,v2, etc)
     -Better testing on filesets
     -ILmerge testing
-
-	-Add BuildArtifact.Move
-	-Add BuildFolder.Copy / .Move
 	-CCNet support
 
   Next Release
-  		
+  	-Add BuildArtifact.Move
+	-Add BuildFolder.Copy / .Move
+		
   Future Releases
     -Allow message verbosity to be changed from TeamCity
 	-MS Team build support
@@ -23,7 +23,7 @@ Build
     -If tests are marked as Ignore() for too long then fail build
 	-Xml MessageLogger
     -Sandcastle generator
-    -Ability to change console colors
+    -Ability to change default console colors
 	-CustomFrameworkVersion
     -version check that runs in the background and alerts on next run
     -Token replacement should allow you to specify the delimiter around the token.

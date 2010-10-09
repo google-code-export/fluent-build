@@ -73,6 +73,22 @@ namespace FluentBuild.MessageLoggers
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [TEST] Content of message" + Environment.NewLine));
         }
 
+        [Test]
+        public void WriteError_ShouldWriteErrorMessage()
+        {
+            _messageLogger.WindowWidth = 200;
+            _messageLogger.WriteError("Content of message");
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [ERROR] Content of message" + Environment.NewLine));
+        }
+
+        [Test]
+        public void WriteDebug_ShouldWriteErrorMessage()
+        {
+            _messageLogger.WindowWidth = 200;
+            _messageLogger.WriteDebugMessage("Content of message");
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [DEBUG] Content of message" + Environment.NewLine));
+        }
+
         ///<summary />
     }
 }

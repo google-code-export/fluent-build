@@ -74,6 +74,7 @@ namespace FluentBuild.Core
 
 
 
+
         #region IFileSet Members
         public ReadOnlyCollection<string> Files
         {
@@ -81,40 +82,35 @@ namespace FluentBuild.Core
             {
                 ProcessPendings();
                 var files = new List<string>();
-                foreach (var inclusion in Inclusions)
+                files.AddRange(DetermineActualFiles(Inclusions));
+                foreach (var exclusion in DetermineActualFiles(Exclusions))
                 {
-                    if (inclusion.IndexOf('*') == -1)
-                        files.Add(inclusion);
-                    else
-                    {
-                        var allFilesMatching = _utility.GetAllFilesMatching(inclusion);
-                        if (allFilesMatching != null)
-                            files.AddRange(allFilesMatching);
-                    }
-                }
-
-                foreach (var exclusion in Exclusions)
-                {
-                    if (exclusion.IndexOf('*') == -1)
-                        files.Remove(exclusion);
-                    else
-                    {
-                        var allFilesMatching = _utility.GetAllFilesMatching(exclusion);
-                        if (allFilesMatching != null)
-                        {
-                            foreach (var match in allFilesMatching)
-                            {
-                                files.Remove(match);
-                            }
-                        }
-                    }
-
-
+                    files.Remove(exclusion);
                 }
                 return files.AsReadOnly();
             }
         }
-        
+
+        internal IEnumerable<string> DetermineActualFiles(List<string> input)
+        {
+            foreach (var path in input)
+            {
+                if (path.IndexOf('*') == -1)
+                    yield return path;
+                else
+                {
+                    var allFilesMatching = _utility.GetAllFilesMatching(path);
+                    if (allFilesMatching != null)
+                    {
+                        foreach (var match in allFilesMatching)
+                        {
+                            yield return match;
+                        }
+                    }
+                }
+            }
+        }
+
         protected internal string PendingInclude;
         protected internal string PendingExclude;
 

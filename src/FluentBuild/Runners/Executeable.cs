@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using FluentBuild.Core;
+using FluentBuild.MessageLoggers.MessageProcessing;
 using FluentBuild.Utilities;
-using FluentBuild.Utilities.MessageProcessing;
 
 namespace FluentBuild.Runners
 {
