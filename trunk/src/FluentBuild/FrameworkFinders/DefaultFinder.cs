@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentBuild.Utilities;
+﻿using System.Collections.Generic;
 using System.Linq;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.FrameworkFinders
 {
@@ -34,34 +32,57 @@ namespace FluentBuild.FrameworkFinders
     //FrameworkVersion.Silverlight
     //FrameworkVersion.Compact
     //FrameworkVersion.Mono / Moonlight
-        
 
-
+    ///<summary>
+    ///Default abstract finder class. Used to do common work for finding frameworks.
+    ///</summary>
     public abstract class DefaultFinder : IFrameworkFinder
     {
-        protected DefaultFinder()
+        private readonly IRegistryKeyValueFinder _finder;
+
+        protected DefaultFinder() : this(new RegistryKeyValueFinder())
         {
+            
+        }
+
+        protected IList<string> PossibleSdkInstallKeys { get; set; }
+
+        protected abstract string FrameworkFolderVersionName { get; }
+        protected IList<string> PossibleFrameworkInstallKeys { get; set; }
+
+        #region IFrameworkFinder Members
+
+        protected DefaultFinder(IRegistryKeyValueFinder finder)
+        {
+            _finder = finder;
             PossibleSdkInstallKeys = new List<string>();
             PossibleFrameworkInstallKeys = new List<string>();
         }
 
+        ///<summary>
+        /// Seaches the registry for a given framework and determines the most
+        /// accurate physical path to the SDK
+        ///</summary>
+        ///<returns>Path to SDK if found. Null if not found</returns>
         public string PathToSdk()
         {
-            var finder = new RegistryKeyValueFinder();
-            var foundValue = finder.FindFirstValue(PossibleSdkInstallKeys.ToArray());
+            KeyValuePair<string, string> foundValue = _finder.FindFirstValue(PossibleSdkInstallKeys.ToArray());
             if (string.IsNullOrEmpty(foundValue.Key))
                 return null;
             return foundValue.Value;
         }
 
-        protected IList<string> PossibleSdkInstallKeys { get; set; }
-
+        ///<summary>
+        /// Seaches the registry for a given framework and determines the most
+        /// accurate physical path to the framework
+        ///</summary>
+        ///<returns>Path to framework if found. Null if not found</returns>
         public virtual string PathToFrameworkInstall()
         {
-            var baseInstallPath = @"SOFTWARE\Microsoft\.NETFramework\InstallRoot";
+            //TODO: this should be moved out as FrameworkSearchPaths will not include this
+            string baseInstallPath = @"SOFTWARE\Microsoft\.NETFramework\InstallRoot";
             PossibleFrameworkInstallKeys.Add(baseInstallPath);
-            var finder = new RegistryKeyValueFinder();
-            var foundValue = finder.FindFirstValue(PossibleFrameworkInstallKeys.ToArray());
+            KeyValuePair<string, string> foundValue = _finder.FindFirstValue(PossibleFrameworkInstallKeys.ToArray());
             if (string.IsNullOrEmpty(foundValue.Key))
                 return null;
             if (foundValue.Key == baseInstallPath)
@@ -69,33 +90,27 @@ namespace FluentBuild.FrameworkFinders
             return foundValue.Value;
         }
 
-        protected abstract string FrameworkFolderVersionName { get; }
 
-        private string CreateCommaSeperatedList(IList<string> input)
-        {
-            var sb = new StringBuilder();
-            foreach (var paths in input)
-            {
-                sb.Append(paths);
-                sb.Append(", ");
-            }
-            sb.Remove(sb.Length - 2, 2);
-            return sb.ToString();
-        }
-
+        ///<summary>
+        /// Creates a comma seperated list of paths used to find the SDK.
+        /// This is typically used to generate error message text
+        /// when the SDK can not be found
+        ///</summary>
         public string SdkSearchPathsUsed
         {
-            get { return CreateCommaSeperatedList(PossibleSdkInstallKeys); }
-           
+            get { return StringUtility.CreateCommaSeperatedList(PossibleSdkInstallKeys); }
         }
 
+        ///<summary>
+        /// Creates a comma seperated list of paths used to find the SDK.
+        /// This is typically used to generate error message text
+        /// when the framework can not be found
+        ///</summary>
         public string FrameworkSearchPaths
         {
-            get { return CreateCommaSeperatedList(PossibleFrameworkInstallKeys); }
-          
+            get { return StringUtility.CreateCommaSeperatedList(PossibleFrameworkInstallKeys); }
         }
 
-        protected IList<string> PossibleFrameworkInstallKeys { get; set; }
-
+        #endregion
     }
 }

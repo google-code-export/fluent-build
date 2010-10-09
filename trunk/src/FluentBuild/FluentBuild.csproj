@@ -99,6 +99,8 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
     <Compile Include="Core\MessageLoggerTests.cs" />
+    <Compile Include="FrameworkFinders\DefaultFinderTests.cs" />
+    <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLogger.cs" />
     <Compile Include="MessageLoggers\IMessageLogger.cs" />
     <Compile Include="Core\PublishTests.cs" />
@@ -122,8 +124,8 @@
     <Compile Include="Database\MsSqlCreateTests.cs" />
     <Compile Include="Runners\ExecutableFailedException.cs" />
     <Compile Include="Runners\ILMerge.cs" />
-    <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessor.cs" />
-    <Compile Include="Utilities\MessageProcessing\DefaultMessageProcessorTests.cs" />
+    <Compile Include="MessageLoggers\MessageProcessing\DefaultMessageProcessor.cs" />
+    <Compile Include="MessageLoggers\MessageProcessing\DefaultMessageProcessorTests.cs" />
     <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
     <Compile Include="FrameworkFinders\DefaultFinder.cs" />
     <Compile Include="FrameworkFinders\Desktop2_0Finder.cs" />
@@ -132,9 +134,9 @@
     <Compile Include="FrameworkFinders\Desktop4_0ClientFrameworkFinder.cs" />
     <Compile Include="FrameworkFinders\Desktop4_0FullFrameworkFinder.cs" />
     <Compile Include="FrameworkFinders\IFrameworkFinder.cs" />
-    <Compile Include="Utilities\MessageProcessing\IMessageProcessor.cs" />
-    <Compile Include="Utilities\MessageProcessing\Message.cs" />
-    <Compile Include="Utilities\MessageProcessing\MessageType.cs" />
+    <Compile Include="MessageLoggers\MessageProcessing\IMessageProcessor.cs" />
+    <Compile Include="MessageLoggers\MessageProcessing\Message.cs" />
+    <Compile Include="MessageLoggers\MessageProcessing\MessageType.cs" />
     <Compile Include="Publishing\GoogleCode.cs" />
     <Compile Include="Runners\Zip\OneThroughNine.cs" />
     <Compile Include="Runners\Zip\Zip.cs" />

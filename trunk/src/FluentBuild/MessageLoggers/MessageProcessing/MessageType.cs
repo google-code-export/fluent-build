@@ -1,4 +1,4 @@
-﻿namespace FluentBuild.Utilities.MessageProcessing
+﻿namespace FluentBuild.MessageLoggers.MessageProcessing
 {
     internal enum MessageType
     {

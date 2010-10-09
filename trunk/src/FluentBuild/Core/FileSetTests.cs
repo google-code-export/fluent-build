@@ -26,6 +26,17 @@ namespace FluentBuild.Core
         private FileSet _subject;
         private IFileSystemUtility _mockFs;
 
+        [Test]
+        public void DetermineActualFiles_ShouldProcessSingleFile()
+        {
+            var utility = MockRepository.GenerateStub<IFileSystemUtility>();
+            var subject = new FileSet(utility);
+            var input = new List<string>();
+            var singleFile = "c:\\temp\\";
+            input.Add(singleFile);
+            var determineActualFiles = subject.DetermineActualFiles(input).ToList();
+            Assert.That(determineActualFiles[0], Is.EqualTo(singleFile));
+        }
 
         ///<summary />
         [Test]

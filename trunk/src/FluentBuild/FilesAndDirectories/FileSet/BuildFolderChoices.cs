@@ -10,10 +10,10 @@
         internal BuildFolderChoices(Core.FileSet fileset, IFileSystemUtility utility, bool isInclusion) : base(utility)
         {
             _isInclusion = isInclusion;
-            this.PendingInclude = fileset.PendingInclude;
-            this.PendingExclude = fileset.PendingExclude;
-            this.Inclusions = fileset.Inclusions;
-            this.Exclusions = fileset.Exclusions;
+            PendingInclude = fileset.PendingInclude;
+            PendingExclude = fileset.PendingExclude;
+            Inclusions = fileset.Inclusions;
+            Exclusions = fileset.Exclusions;
         }
 
         ///<summary>
@@ -24,9 +24,9 @@
             get
             {
                 if (_isInclusion)
-                    this.PendingInclude = this.PendingInclude + "\\**\\";
+                    PendingInclude = PendingInclude + "\\**\\";
                 else
-                    this.PendingExclude = this.PendingExclude + "\\**\\";
+                    PendingExclude = PendingExclude + "\\**\\";
                 return this;
             }
         }
@@ -38,9 +38,9 @@
         public Core.FileSet Filter(string filter)
         {
             if (_isInclusion)
-                this.PendingInclude = this.PendingInclude + "\\" + filter;
+                PendingInclude = PendingInclude + "\\" + filter;
             else
-                this.PendingExclude = this.PendingExclude + "\\" + filter;
+                PendingExclude = PendingExclude + "\\" + filter;
             ProcessPendings();
             return this;
         }

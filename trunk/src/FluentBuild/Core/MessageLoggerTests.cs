@@ -55,5 +55,30 @@ namespace FluentBuild.Core
             MessageLogger.WriteDebugMessage("test");
             MessageLogger.InternalLogger.AssertWasCalled(x=>x.WriteDebugMessage("test"));
         }
+
+        [Test]
+        public void WriteHeader_ShouldWriteIfVerbosityIsFull()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.Full;
+            MessageLogger.WriteHeader("test");
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteHeader("test"));
+        }
+
+        [Test]
+        public void WriteHeader_ShouldNotWriteIfVerbosityIsNone()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.None;
+            MessageLogger.WriteHeader("test");
+            MessageLogger.InternalLogger.AssertWasNotCalled(x => x.WriteHeader("test"));
+        }
+
+        [Test]
+        public void WriteError_ShouldWriteIfVerbosityIsNone()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.None;
+            MessageLogger.WriteError("test");
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("test"));
+        }
+
     }
 }

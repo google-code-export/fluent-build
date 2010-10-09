@@ -47,6 +47,8 @@ namespace FluentBuild.Utilities
         ///</summary>
         ///<returns>true if framework is found (determined by searching the registry</returns>
         bool IsFrameworkInstalled();
+
+        string FriendlyName { get; }
     }
 
     ///<summary>
@@ -55,7 +57,7 @@ namespace FluentBuild.Utilities
     public class FrameworkVersion : IFrameworkVersion
     {
 
-        private string _friendlyName;
+        public string FriendlyName { get; private set; }
         public static DesktopFrameworkType NET4_0 = new DesktopFrameworkType(new Desktop4_0ClientFrameworkFinder(),
                                                                              new Desktop4_0FullFrameworkFinder());
 
@@ -76,7 +78,7 @@ namespace FluentBuild.Utilities
         internal FrameworkVersion(string friendlyName, IFrameworkFinder frameworkFinder)
         {
             _frameworkFinder = frameworkFinder;
-            _friendlyName = friendlyName;
+            FriendlyName = friendlyName;
         }
 
         #region IFrameworkVersion Members
@@ -104,7 +106,7 @@ namespace FluentBuild.Utilities
 
         public override string ToString()
         {
-            return _friendlyName;
+            return FriendlyName;
         }
 
         #endregion

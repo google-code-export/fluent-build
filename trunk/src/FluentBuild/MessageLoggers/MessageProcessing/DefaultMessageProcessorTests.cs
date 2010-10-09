@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace FluentBuild.Utilities.MessageProcessing
+namespace FluentBuild.MessageLoggers.MessageProcessing
 {
     [TestFixture]
     public class DefaultMessageProcessorTests

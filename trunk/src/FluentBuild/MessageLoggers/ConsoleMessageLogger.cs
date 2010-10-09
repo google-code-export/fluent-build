@@ -99,7 +99,7 @@ namespace FluentBuild.MessageLoggers
 
         public void WriteError(string message)
         {
-            throw new NotImplementedException();
+            Write("ERROR", message);
         }
     }
 }

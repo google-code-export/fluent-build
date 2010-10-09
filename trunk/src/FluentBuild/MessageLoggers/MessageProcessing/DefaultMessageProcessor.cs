@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentBuild.Core;
+using ConsoleColor = FluentBuild.Utilities.ConsoleColor;
 
-namespace FluentBuild.Utilities.MessageProcessing
+namespace FluentBuild.MessageLoggers.MessageProcessing
 {
     internal class DefaultMessageProcessor : IMessageProcessor
     {
