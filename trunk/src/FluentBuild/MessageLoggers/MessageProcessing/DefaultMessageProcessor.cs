@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentBuild.Core;
-using ConsoleColor = FluentBuild.Utilities.ConsoleColor;
 
 namespace FluentBuild.MessageLoggers.MessageProcessing
 {
     //used by Execetable to examine output and error strings and process accordingly
     internal class DefaultMessageProcessor : IMessageProcessor
     {
-        public void Display(string prefix, string output, string error, int exitCode)
+        public void Display(IList<Message> messages)
         {
-            IList<Message> lines = Parse(prefix, output, error, exitCode);
-            foreach (Message message in lines)
+            foreach (Message message in messages)
             {
                 switch (message.MessageType)
                 {
@@ -29,6 +27,12 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
                                                           message.MessageType);
                 }
             }
+            
+        }
+        public void Display(string prefix, string output, string error, int exitCode)
+        {
+            IList<Message> lines = Parse(prefix, output, error, exitCode);
+            Display(lines);
         }
 
         public IList<Message> Parse(string prefix, string output, string error, int processeExitCode)

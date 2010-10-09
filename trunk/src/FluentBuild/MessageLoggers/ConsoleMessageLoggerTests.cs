@@ -89,6 +89,12 @@ namespace FluentBuild.MessageLoggers
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [DEBUG] Content of message" + Environment.NewLine));
         }
 
-        ///<summary />
+        [Test]
+        public void WriteWarning_ShouldWriteMessage()
+        {
+            _messageLogger.WindowWidth = 200;
+            _messageLogger.WriteWarning("CSC", "Content of message");
+            Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [CSC] Content of message" + Environment.NewLine));
+        }
     }
 }

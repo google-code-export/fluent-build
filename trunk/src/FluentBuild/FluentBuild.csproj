@@ -100,6 +100,10 @@
     <Compile Include="Core\BuildFileTests.cs" />
     <Compile Include="Core\MessageLoggerTests.cs" />
     <Compile Include="FrameworkFinders\DefaultFinderTests.cs" />
+    <Compile Include="MessageLoggers\TeamCityMessageLoggerTests.cs" />
+    <Compile Include="Publishing\GoogleCodeTests.cs" />
+    <Compile Include="Runners\ExecutableFailedExceptionTests.cs" />
+    <Compile Include="Runners\ILMergeTests.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLogger.cs" />
     <Compile Include="MessageLoggers\IMessageLogger.cs" />

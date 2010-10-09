@@ -13,11 +13,24 @@ namespace FluentBuild.Runners
     ///</summary>
     public class ILMerge
     {
-        private string _destination;
-        private IList<String> sources;
+        internal string Destination;
+        internal IList<String> Sources;
         private string _exePath;
         private readonly IFileFinder _fileFinder;
 
+        internal string[] BuildArgs()
+        {
+            var args = new List<String>();
+            args.AddRange(Sources);
+            args.Add("/OUT:" + Destination);
+
+            //for some reson ILMerge does not work properly with 4.0 
+            //so forcing the version and path to assemlies fixes this
+            if (Defaults.FrameworkVersion.FriendlyName == FrameworkVersion.NET4_0.Full.FriendlyName)
+                args.Add("/targetplatform:v4," + Defaults.FrameworkVersion.GetPathToFrameworkInstall());
+            args.Add("/ndebug"); //no pdb generated
+            return args.ToArray();
+        }
 
         ///<summary>
         /// Executes the ILMerge assembly
@@ -25,23 +38,13 @@ namespace FluentBuild.Runners
         ///<exception cref="FileNotFoundException">If the path to the executeable was not set or can not be found automatically.</exception>
         public void Execute()
         {
-            var args = new List<String>();
-            args.AddRange(sources);
-            args.Add("/OUT:" + _destination);
-
-            //for some reson ILMerge does not work properly with 4.0 
-            //so forcing the version and path to assemlies fixes this
-            if (Defaults.FrameworkVersion.FriendlyName == FrameworkVersion.NET4_0.Full.FriendlyName)
-                args.Add("/targetplatform:v4," + Defaults.FrameworkVersion.GetPathToFrameworkInstall());
-            args.Add("/ndebug"); //no pdb generated
-        
             if (string.IsNullOrEmpty(_exePath))
                 _exePath = _fileFinder.Find("ILMerge.exe");
 
             if (_exePath == null)
                 throw new FileNotFoundException("Could not automatically find ILMerge.exe. Please specify it manually using ILMerge.ExecuteableLocatedAt");
 
-            Run.Executeable(_exePath).WithArguments(args.ToArray()).Execute();
+            Run.Executeable(_exePath).WithArguments(BuildArgs()).Execute();
         }
 
         ///<summary>
@@ -57,7 +60,7 @@ namespace FluentBuild.Runners
         internal ILMerge(IFileFinder fileFinder)
         {
             _fileFinder = fileFinder;
-            sources = new List<string>();
+            Sources = new List<string>();
         }
 
         internal ILMerge() : this(new FileFinder())
@@ -71,7 +74,7 @@ namespace FluentBuild.Runners
         ///<param name="destination">path to output file</param>
         public ILMerge OutputTo(string destination)
         {
-            _destination = destination;
+            Destination = destination;
             return this;
         }
 
@@ -91,7 +94,7 @@ namespace FluentBuild.Runners
         ///<param name="source">path to the file to merge in</param>
         public ILMerge AddSource(string source)
         {
-            sources.Add(source);
+            Sources.Add(source);
             return this;
         }
 

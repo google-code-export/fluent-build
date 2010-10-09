@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentBuild.Core;
 using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace FluentBuild.MessageLoggers.MessageProcessing
 {
@@ -12,12 +14,49 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
         [SetUp]
         public void Setup()
         {
+            MessageLogger.InternalLogger = MockRepository.GenerateStub<IMessageLogger>();
             _subject = new DefaultMessageProcessor();
         }
 
         #endregion
 
         private DefaultMessageProcessor _subject;
+
+        [Test]
+        public void ShouldProcessErrorMessage()
+        {
+            var messages = new List<Message>();
+            messages.Add(new Message("TEST", MessageType.Error));
+            _subject.Display(messages);
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+        }
+
+        [Test]
+        public void ShouldProcessWarningMessage()
+        {
+            var messages = new List<Message>();
+            messages.Add(new Message("TEST", MessageType.Warning));
+            _subject.Display(messages);
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteWarning(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+        }
+
+        [Test]
+        public void ShouldProcessRegularMessage()
+        {
+            var messages = new List<Message>();
+            messages.Add(new Message("TEST", MessageType.Regular));
+            _subject.Display(messages);
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+        }
+
+        [Test, ExpectedException(typeof(NotImplementedException))]
+        public void ShouldNotProcessUnkownErrorType()
+        {
+            var messages = new List<Message>();
+            messages.Add(new Message("TEST", (MessageType)999));
+            _subject.Display(messages);
+            MessageLogger.InternalLogger.AssertWasNotCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+        }
 
         [Test]
         public void ShouldHaveAllMessagesAsErrorWhenProcessErrorCodeNonZero()
