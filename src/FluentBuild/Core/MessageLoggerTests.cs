@@ -80,5 +80,22 @@ namespace FluentBuild.Core
             MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("ERROR", "test"));
         }
 
+        [Test]
+        public void WriteError_ShouldWriteCustomPrefix()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.None;
+            MessageLogger.WriteError("ERR", "test");
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("ERR", "test"));
+        }
+
+
+        [Test]
+        public void WriteWarning_ShouldWriteCustomPrefix()
+        {
+            MessageLogger.Verbosity = VerbosityLevel.Full;
+            MessageLogger.WriteWarning("WRN", "test");
+            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteWarning("WRN", "test"));
+        }
+
     }
 }

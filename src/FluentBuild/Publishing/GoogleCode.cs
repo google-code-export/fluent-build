@@ -81,7 +81,7 @@ namespace FluentBuild.Publishing
             return this;
         }
 
-        private void ValidateString(string value, string friendlyName)
+        internal void ValidateString(string value, string friendlyName)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -89,29 +89,30 @@ namespace FluentBuild.Publishing
             }
         }
 
+        internal HttpWebRequest CreateRequest()
+        {
+            var request = (HttpWebRequest)WebRequest.Create(String.Format("https://{0}.googlecode.com/files", _projectName));
+            request.Method = "POST";
+            request.ContentType = String.Concat("multipart/form-data; boundary=" + Boundary);
+            request.UserAgent = String.Concat("Google Code Upload FluentBuild Task ",Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            request.Headers.Add("Authorization", String.Concat("Basic ", CreateAuthorizationToken(_username, _password)));
+            return request;
+        }
+
         ///<summary>
         /// Executes the upload of the file via a http post
         ///</summary>
         public void Upload()
         {
-            ValidateString(_localFilePath, "LocalFilePath");
-            ValidateString(_password, "Password");
-            ValidateString(_projectName, "ProjectName");
-            ValidateString(_summary, "Summary");
-            ValidateString(_targetFileName, "TargetFileName");
-            ValidateString(_username, "Username");
+            Validate();
+            var request= CreateRequest();
+            using (var requestStream = request.GetRequestStream())
+                CreateRequestContent(requestStream);    
+            request.GetResponse();
+        }
 
-
-            var request =
-                (HttpWebRequest) WebRequest.Create(String.Format("https://{0}.googlecode.com/files", _projectName));
-            request.Method = "POST";
-            request.ContentType = String.Concat("multipart/form-data; boundary=" + Boundary);
-            request.UserAgent = String.Concat("Google Code Upload Nant Task ",
-                                              Assembly.GetExecutingAssembly().GetName().Version.ToString());
-            request.Headers.Add("Authorization", String.Concat("Basic ", CreateAuthorizationToken(_username, _password)));
-
-            using (Stream stream = request.GetRequestStream())
-            {
+        private void CreateRequestContent(Stream stream)
+        {
                 WriteLine(stream, String.Concat("--", Boundary));
                 WriteLine(stream, @"content-disposition: form-data; name=""summary""");
                 WriteLine(stream, "");
@@ -126,10 +127,17 @@ namespace FluentBuild.Publishing
                 WriteLine(stream, "");
                 WriteFile(stream, _localFilePath);
                 WriteLine(stream, "");
-                WriteLine(stream, String.Concat("--", Boundary, "--"));
-            }
+                WriteLine(stream, String.Concat("--", Boundary, "--"));   
+        }
 
-            request.GetResponse();
+        internal void Validate()
+        {
+            ValidateString(_localFilePath, "LocalFilePath");
+            ValidateString(_password, "Password");
+            ValidateString(_projectName, "ProjectName");
+            ValidateString(_summary, "Summary");
+            ValidateString(_targetFileName, "TargetFileName");
+            ValidateString(_username, "Username");
         }
 
         /// <summary>
@@ -137,12 +145,6 @@ namespace FluentBuild.Publishing
         /// </summary>
         internal void WriteFile(Stream outputStream, string fileToWrite)
         {
-            if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
-
-            if (fileToWrite == null)
-                throw new ArgumentNullException("fileToWrite");
-
             using (var fileStream = new FileStream(_localFilePath, FileMode.Open))
             {
                 var buffer = new byte[1024];
@@ -172,13 +174,7 @@ namespace FluentBuild.Publishing
         /// </summary>
         internal static string CreateAuthorizationToken(string username, string password)
         {
-            if (username == null)
-                throw new ArgumentNullException("username");
-
-            if (password == null)
-                throw new ArgumentNullException("password");
-
-            byte[] authBytes = Encoding.ASCII.GetBytes(String.Concat(username, ":", password));
+            var authBytes = Encoding.ASCII.GetBytes(String.Concat(username, ":", password));
             return Convert.ToBase64String(authBytes);
         }
     }
