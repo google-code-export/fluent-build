@@ -1,6 +1,8 @@
-﻿using FluentBuild.Core;
+﻿using System.IO;
+using FluentBuild.Core;
 using FluentBuild.Utilities;
 using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace FluentBuild.Runners
 {
@@ -8,11 +10,37 @@ namespace FluentBuild.Runners
     public class ILMergeTests
     {
         private ILMerge _subject;
+        private IFileFinder _fileFinder;
 
         [SetUp]
         public void Setup()
         {
-            _subject = new ILMerge();
+            _fileFinder = MockRepository.GenerateMock<IFileFinder>();
+            _subject = new ILMerge(_fileFinder);
+        }
+
+        [Test]
+        public void FindExecuteable_ShouldUseSetArg()
+        {
+            var path = "c:\\temp\\ilmerge.exe";
+            _subject.ExecuteableLocatedAt(path);
+            Assert.That(_subject.FindExecuteable(), Is.EqualTo(path));
+        }
+
+        [Test]
+        public void FindExecuteable_ShouldAutoFindIfNotSet()
+        {
+            _fileFinder.Stub(x => x.Find("ILMerge.exe")).Return("c:\\ilmerge.exe");
+            _subject.FindExecuteable();
+            _fileFinder.AssertWasCalled(x=>x.Find("ILMerge.exe"));
+        }
+
+        [Test, ExpectedException(typeof(FileNotFoundException))]
+        public void FindExecuteable_ShouldThrowExecptionIfItCantBeFound()
+        {
+            _fileFinder.Stub(x => x.Find("ILMerge.exe")).Return(null);
+            _subject.FindExecuteable();
+
         }
 
         [Test]

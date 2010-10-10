@@ -38,13 +38,20 @@ namespace FluentBuild.Runners
         ///<exception cref="FileNotFoundException">If the path to the executeable was not set or can not be found automatically.</exception>
         public void Execute()
         {
-            if (string.IsNullOrEmpty(_exePath))
-                _exePath = _fileFinder.Find("ILMerge.exe");
+            Run.Executeable(FindExecuteable()).WithArguments(BuildArgs()).Execute();
+        }
 
-            if (_exePath == null)
+        internal string FindExecuteable()
+        {
+            if (!string.IsNullOrEmpty(_exePath))
+                return _exePath;
+
+            var tmp =_fileFinder.Find("ILMerge.exe");
+
+            if (tmp == null)
                 throw new FileNotFoundException("Could not automatically find ILMerge.exe. Please specify it manually using ILMerge.ExecuteableLocatedAt");
 
-            Run.Executeable(_exePath).WithArguments(BuildArgs()).Execute();
+            return tmp;
         }
 
         ///<summary>
