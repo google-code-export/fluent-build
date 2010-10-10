@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
-<coverage profilerVersion="3.4.12.6869" driverVersion="3.4.12.6869" exportversion="3" viewdisplayname="" startTime="2010-10-09T22:32:36.4376853Z" measureTime="2010-10-09T22:32:46.259247Z" projectName="FluentBuild" buildid="d48643bb-708e-406a-abc8-174b5e81bb2c" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="FluentBuild" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+<coverage profilerVersion="3.4.12.6869" driverVersion="3.4.12.6869" exportversion="3" viewdisplayname="" startTime="2010-10-10T03:39:26.5970081Z" measureTime="2010-10-10T03:39:36.4025689Z" projectName="FluentBuild" buildid="731c9e02-179a-461a-a493-d0f2823d93d6" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="FluentBuild" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
   <rebasedpaths />
   <filters />
   <documents>
@@ -98,8 +98,8 @@
     <doc id="125" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ExecutableFailedExceptionTests.cs" cs="6AC750C81C9B7FAADEF3BDD53EAC98C5" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="14" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\Executeable.cs" cs="8FB9FB5970EC18F6B6717232451EB035" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="58" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ExecuteableTests.cs" cs="30655A57032A803E8A1A917610A2CC4A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="6" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ILMerge.cs" cs="82E3A442BBC087116A776A5954053C82" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="126" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ILMergeTests.cs" cs="0F953B366CBB51C9CD387744F166E1FC" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="6" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ILMerge.cs" cs="7EFE0E480DDCC4629741A1A5290E9AD3" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="126" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ILMergeTests.cs" cs="DE6FF6C6095BE9957F5C5533A60AF47D" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="82" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\ProcessWrapper.cs" cs="5A4BE0D0E4408D7AF8AC78FDE24A0C62" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="21" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\UnitTesting\NUnitRunner.cs" cs="FAE6E7718D2985B5670DF25DD5B95C08" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
     <doc id="98" excluded="false" url="C:\Users\Kudos\Desktop\fluent-build\src\FluentBuild\Runners\UnitTesting\NUnitRunnerTests.cs" cs="4414C9AF9E7795D3BE0B65B7D1494328" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
@@ -2098,16 +2098,16 @@
       </method>
     </class>
     <class name="FluentBuild.Utilities.FileFinder" signature="FluentBuild.Utilities.FileFinder" excluded="false" nid="0">
-      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="17" nid="0">
-        <seqpnt vc="17" o="0" l="29" el="29" c="9" ec="60" ex="false" fl="65536" doc="20" nid="0" />
-        <seqpnt vc="17" o="D" l="31" el="31" c="9" ec="10" ex="false" fl="65536" doc="20" nid="0" />
-        <seqpnt vc="17" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="20" nid="0" />
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="11" nid="0">
+        <seqpnt vc="11" o="0" l="29" el="29" c="9" ec="60" ex="false" fl="65536" doc="20" nid="0" />
+        <seqpnt vc="11" o="D" l="31" el="31" c="9" ec="10" ex="false" fl="65536" doc="20" nid="0" />
+        <seqpnt vc="11" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="20" nid="0" />
       </method>
-      <method name=".ctor" signature=".ctor(FluentBuild.FilesAndDirectories.IFileSystemWrapper fileSystem) : void" excluded="false" instrumented="true" cc="1" vc="19" nid="0">
-        <seqpnt vc="19" o="0" l="21" el="21" c="9" ec="59" ex="false" fl="65536" doc="20" nid="0" />
-        <seqpnt vc="19" o="8" l="23" el="23" c="13" ec="38" ex="false" fl="65536" doc="20" nid="0" />
-        <seqpnt vc="19" o="F" l="24" el="24" c="9" ec="10" ex="false" fl="65536" doc="20" nid="0" />
-        <seqpnt vc="19" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="20" nid="0" />
+      <method name=".ctor" signature=".ctor(FluentBuild.FilesAndDirectories.IFileSystemWrapper fileSystem) : void" excluded="false" instrumented="true" cc="1" vc="13" nid="0">
+        <seqpnt vc="13" o="0" l="21" el="21" c="9" ec="59" ex="false" fl="65536" doc="20" nid="0" />
+        <seqpnt vc="13" o="8" l="23" el="23" c="13" ec="38" ex="false" fl="65536" doc="20" nid="0" />
+        <seqpnt vc="13" o="F" l="24" el="24" c="9" ec="10" ex="false" fl="65536" doc="20" nid="0" />
+        <seqpnt vc="13" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="20" nid="0" />
       </method>
       <method name="Find" signature="Find(System.String fileName) : System.String" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
         <seqpnt vc="2" o="1" l="74" el="74" c="13" ec="64" ex="false" fl="65536" doc="20" nid="0" />
@@ -2541,8 +2541,8 @@
       </method>
     </class>
     <class name="FluentBuild.FilesAndDirectories.FileSystemWrapper" signature="FluentBuild.FilesAndDirectories.FileSystemWrapper" excluded="false" nid="0">
-      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="62" nid="0">
-        <seqpnt vc="62" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="30" nid="0" />
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="56" nid="0">
+        <seqpnt vc="56" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="30" nid="0" />
       </method>
       <method name="Copy" signature="Copy(System.String source,System.String destination) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
         <seqpnt vc="0" o="1" l="26" el="26" c="13" ec="43" ex="false" fl="65536" doc="30" nid="0" />
@@ -2882,27 +2882,27 @@
       </method>
     </class>
     <class name="FluentBuild.Runners.ILMerge" signature="FluentBuild.Runners.ILMerge" excluded="false" nid="0">
-      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="7" nid="0">
-        <seqpnt vc="7" o="0" l="66" el="66" c="9" ec="52" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="7" o="D" l="69" el="69" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="7" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="75" el="75" c="9" ec="52" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="D" l="78" el="78" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
-      <method name=".ctor" signature=".ctor(FluentBuild.Utilities.IFileFinder fileFinder) : void" excluded="false" instrumented="true" cc="1" vc="7" nid="0">
-        <seqpnt vc="7" o="0" l="60" el="60" c="9" ec="49" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="7" o="8" l="62" el="62" c="13" ec="38" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="7" o="F" l="63" el="63" c="13" ec="42" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="7" o="1A" l="64" el="64" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="7" o="1B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+      <method name=".ctor" signature=".ctor(FluentBuild.Utilities.IFileFinder fileFinder) : void" excluded="false" instrumented="true" cc="1" vc="10" nid="0">
+        <seqpnt vc="10" o="0" l="69" el="69" c="9" ec="49" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="10" o="8" l="71" el="71" c="13" ec="38" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="10" o="F" l="72" el="72" c="13" ec="42" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="10" o="1A" l="73" el="73" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="10" o="1B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
       <method name="AddSource" signature="AddSource(FluentBuild.Core.BuildArtifact source) : FluentBuild.Runners.ILMerge" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="107" el="107" c="13" ec="49" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="1" o="10" l="108" el="108" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="1" l="116" el="116" c="13" ec="49" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="10" l="117" el="117" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
         <seqpnt vc="1" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
       <method name="AddSource" signature="AddSource(System.String source) : FluentBuild.Runners.ILMerge" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
-        <seqpnt vc="4" o="1" l="97" el="97" c="13" ec="33" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="4" o="E" l="98" el="98" c="13" ec="25" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="4" o="12" l="99" el="99" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="4" o="1" l="106" el="106" c="13" ec="33" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="4" o="E" l="107" el="107" c="13" ec="25" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="4" o="12" l="108" el="108" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
         <seqpnt vc="4" o="13" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
       <method name="BuildArgs" signature="BuildArgs() : System.String[]" excluded="false" instrumented="true" cc="2" vc="2" nid="0">
@@ -2918,34 +2918,39 @@
         <seqpnt vc="2" o="80" l="33" el="33" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
         <seqpnt vc="2" o="81" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
-      <method name="Execute" signature="Execute() : void" excluded="false" instrumented="false" cc="3" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="41" el="41" c="13" ec="48" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
-        <seqpnt vc="0" o="13" l="42" el="42" c="17" ec="60" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="29" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
-        <seqpnt vc="0" o="29" l="44" el="44" c="13" ec="34" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="37" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
-        <seqpnt vc="0" o="39" l="45" el="45" c="17" ec="156" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="43" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
-        <seqpnt vc="0" o="44" l="47" el="47" c="13" ec="76" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="60" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
-        <seqpnt vc="0" o="60" l="48" el="48" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+      <method name="Execute" signature="Execute() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="43" el="43" c="13" ec="85" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="1D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="0" o="1D" l="44" el="44" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
       </method>
-      <method name="ExecuteableLocatedAt" signature="ExecuteableLocatedAt(System.String path) : FluentBuild.Runners.ILMerge" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="1" l="56" el="56" c="13" ec="29" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="8" l="57" el="57" c="13" ec="25" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="C" l="58" el="58" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="0" o="D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+      <method name="ExecuteableLocatedAt" signature="ExecuteableLocatedAt(System.String path) : FluentBuild.Runners.ILMerge" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="65" el="65" c="13" ec="29" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="8" l="66" el="66" c="13" ec="25" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="C" l="67" el="67" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+      </method>
+      <method name="FindExecuteable" signature="FindExecuteable() : System.String" excluded="false" instrumented="true" cc="3" vc="3" nid="0">
+        <seqpnt vc="3" o="1" l="48" el="48" c="13" ec="49" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="3" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="1" o="10" l="49" el="49" c="17" ec="33" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="19" l="51" el="51" c="13" ec="54" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="2A" l="53" el="53" c="13" ec="29" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="33" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="1" o="35" l="54" el="54" c="17" ec="156" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="3F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="1" o="40" l="56" el="56" c="13" ec="24" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="44" l="57" el="57" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="45" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
       <method name="OutputTo" signature="OutputTo(FluentBuild.Core.BuildArtifact destination) : FluentBuild.Runners.ILMerge" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="88" el="88" c="13" ec="53" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="1" o="10" l="89" el="89" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="1" l="97" el="97" c="13" ec="53" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="10" l="98" el="98" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
         <seqpnt vc="1" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
       <method name="OutputTo" signature="OutputTo(System.String destination) : FluentBuild.Runners.ILMerge" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
-        <seqpnt vc="4" o="1" l="77" el="77" c="13" ec="39" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="4" o="8" l="78" el="78" c="13" ec="25" ex="false" fl="65536" doc="6" nid="0" />
-        <seqpnt vc="4" o="C" l="79" el="79" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="4" o="1" l="86" el="86" c="13" ec="39" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="4" o="8" l="87" el="87" c="13" ec="25" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="4" o="C" l="88" el="88" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
         <seqpnt vc="4" o="D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
       </method>
     </class>
@@ -2953,54 +2958,87 @@
       <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
         <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
       </method>
+      <method name="&lt;FindExecuteable_ShouldAutoFindIfNotSet&gt;b__0" signature="&lt;FindExecuteable_ShouldAutoFindIfNotSet&gt;b__0(FluentBuild.Utilities.IFileFinder x) : System.String [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="33" el="33" c="35" ec="56" ex="false" fl="65536" doc="126" nid="0" />
+      </method>
+      <method name="&lt;FindExecuteable_ShouldAutoFindIfNotSet&gt;b__1" signature="&lt;FindExecuteable_ShouldAutoFindIfNotSet&gt;b__1(FluentBuild.Utilities.IFileFinder x) : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="35" el="35" c="44" ec="65" ex="false" fl="65536" doc="126" nid="0" />
+      </method>
+      <method name="&lt;FindExecuteable_ShouldThrowExecptionIfItCantBeFound&gt;b__4" signature="&lt;FindExecuteable_ShouldThrowExecptionIfItCantBeFound&gt;b__4(FluentBuild.Utilities.IFileFinder x) : System.String [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="41" el="41" c="35" ec="56" ex="false" fl="65536" doc="126" nid="0" />
+      </method>
       <method name="AddBuildArtifactSource_ShouldSetSource" signature="AddBuildArtifactSource_ShouldSetSource() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="48" el="48" c="13" ec="60" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="C" l="49" el="49" c="13" ec="40" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="19" l="50" el="50" c="13" ec="77" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="1" l="76" el="76" c="13" ec="60" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="C" l="77" el="77" c="13" ec="40" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="19" l="78" el="78" c="13" ec="77" ex="false" fl="65536" doc="126" nid="0" />
         <seqpnt vc="1" o="3B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="1" o="3B" l="51" el="51" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="3B" l="79" el="79" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
       <method name="AddSource_ShouldSetSource" signature="AddSource_ShouldSetSource() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="40" el="40" c="13" ec="41" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="7" l="41" el="41" c="13" ec="40" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="14" l="42" el="42" c="13" ec="66" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="1" l="68" el="68" c="13" ec="41" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="7" l="69" el="69" c="13" ec="40" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="14" l="70" el="70" c="13" ec="66" ex="false" fl="65536" doc="126" nid="0" />
         <seqpnt vc="1" o="31" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="1" o="31" l="43" el="43" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="31" l="71" el="71" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
       <method name="BuildArgs_ShouldBuildArgs" signature="BuildArgs_ShouldBuildArgs() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="21" el="21" c="13" ec="65" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="B" l="23" el="23" c="13" ec="93" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="2B" l="24" el="24" c="13" ec="59" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="3E" l="25" el="25" c="13" ec="67" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="51" l="26" el="26" c="13" ec="57" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="1" l="49" el="49" c="13" ec="65" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="B" l="51" el="51" c="13" ec="93" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="2B" l="52" el="52" c="13" ec="59" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="3E" l="53" el="53" c="13" ec="67" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="51" l="54" el="54" c="13" ec="57" ex="false" fl="65536" doc="126" nid="0" />
         <seqpnt vc="1" o="64" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="1" o="64" l="27" el="27" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="64" l="55" el="55" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
       <method name="BuildArgs_ShouldSetFrameworkTypeIfFrameworkIsDotNet4" signature="BuildArgs_ShouldSetFrameworkTypeIfFrameworkIsDotNet4() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="32" el="32" c="13" ec="70" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="10" l="33" el="33" c="13" ec="93" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="30" l="34" el="34" c="13" ec="76" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="1" l="60" el="60" c="13" ec="70" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="10" l="61" el="61" c="13" ec="93" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="30" l="62" el="62" c="13" ec="76" ex="false" fl="65536" doc="126" nid="0" />
         <seqpnt vc="1" o="43" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="1" o="43" l="35" el="35" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="43" l="63" el="63" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+      </method>
+      <method name="FindExecuteable_ShouldAutoFindIfNotSet" signature="FindExecuteable_ShouldAutoFindIfNotSet() : void" excluded="false" instrumented="true" cc="3" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="33" el="33" c="13" ec="84" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="1" o="36" l="34" el="34" c="13" ec="40" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="42" l="35" el="35" c="13" ec="67" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="4D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="1" o="6D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="1" o="6D" l="36" el="36" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+      </method>
+      <method name="FindExecuteable_ShouldThrowExecptionIfItCantBeFound" signature="FindExecuteable_ShouldThrowExecptionIfItCantBeFound() : void" excluded="false" instrumented="true" cc="2" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="41" el="41" c="13" ec="71" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="1" o="32" l="42" el="42" c="13" ec="40" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="0" o="3E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="0" o="3E" l="44" el="44" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+      </method>
+      <method name="FindExecuteable_ShouldUseSetArg" signature="FindExecuteable_ShouldUseSetArg() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="25" el="25" c="13" ec="48" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="7" l="26" el="26" c="13" ec="49" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="14" l="27" el="27" c="13" ec="71" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="1" o="2B" l="28" el="28" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
       <method name="OutputTo_ShouldOutpt" signature="OutputTo_ShouldOutpt() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="64" el="64" c="13" ec="41" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="7" l="65" el="65" c="13" ec="39" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="14" l="66" el="66" c="13" ec="67" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="1" l="92" el="92" c="13" ec="41" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="7" l="93" el="93" c="13" ec="39" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="14" l="94" el="94" c="13" ec="67" ex="false" fl="65536" doc="126" nid="0" />
         <seqpnt vc="1" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="1" o="2B" l="67" el="67" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="2B" l="95" el="95" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
       <method name="OutputToWithBuildArtifact_ShouldOutpt" signature="OutputToWithBuildArtifact_ShouldOutpt() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="56" el="56" c="13" ec="60" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="C" l="57" el="57" c="13" ec="39" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="1" o="19" l="58" el="58" c="13" ec="78" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="1" l="84" el="84" c="13" ec="60" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="C" l="85" el="85" c="13" ec="39" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="19" l="86" el="86" c="13" ec="78" ex="false" fl="65536" doc="126" nid="0" />
         <seqpnt vc="1" o="35" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="1" o="35" l="59" el="59" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="1" o="35" l="87" el="87" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
-      <method name="Setup" signature="Setup() : void" excluded="false" instrumented="true" cc="1" vc="6" nid="0">
-        <seqpnt vc="6" o="1" l="15" el="15" c="13" ec="38" ex="false" fl="65536" doc="126" nid="0" />
-        <seqpnt vc="6" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
-        <seqpnt vc="6" o="C" l="16" el="16" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
+      <method name="Setup" signature="Setup() : void" excluded="false" instrumented="true" cc="1" vc="9" nid="0">
+        <seqpnt vc="9" o="1" l="18" el="18" c="13" ec="70" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="9" o="12" l="19" el="19" c="13" ec="49" ex="false" fl="65536" doc="126" nid="0" />
+        <seqpnt vc="9" o="23" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="126" nid="0" />
+        <seqpnt vc="9" o="23" l="20" el="20" c="9" ec="10" ex="false" fl="65536" doc="126" nid="0" />
       </method>
     </class>
     <class name="FluentBuild.MessageLoggers.MessageProcessing.Message" signature="FluentBuild.MessageLoggers.MessageProcessing.Message" excluded="false" nid="0">
