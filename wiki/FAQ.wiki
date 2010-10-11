@@ -28,3 +28,6 @@ No. That would be silly. The build runner takes EITHER a pre-compiled build dll 
   * Need to be familiar with powershell syntax
   * Hard to see where properties are used
   * Hard to refactor
+
+=== Is Fluent Build compatible with Cruise Control?  ===
+  Yes and no. You can run cruise control via an <exec> task as you would normally run from the command line. 
