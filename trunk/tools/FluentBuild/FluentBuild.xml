@@ -1134,6 +1134,17 @@
         <member name="M:FluentBuild.Utilities.FrameworkVersionTests.GetPathToFrameworkInstall_ShouldNotThrowException">
             <summary />
         </member>
+        <member name="T:FluentBuild.Runners.ExecutableFailedException">
+            <summary>
+             Occurs when an EXE returns a non zero exception
+            </summary>
+        </member>
+        <member name="M:FluentBuild.Runners.ExecutableFailedException.#ctor(System.String)">
+            <summary>
+             Creates an exception
+            </summary>
+            <param name="message">message text to include in the error</param>
+        </member>
         <member name="T:FluentBuild.Core.AssemblyInfo">
             <summary>
             Allows the creation of assembly info files

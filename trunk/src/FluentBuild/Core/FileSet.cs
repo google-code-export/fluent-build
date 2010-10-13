@@ -96,7 +96,9 @@ namespace FluentBuild.Core
             foreach (var path in input)
             {
                 if (path.IndexOf('*') == -1)
+                {
                     yield return path;
+                }
                 else
                 {
                     var allFilesMatching = _utility.GetAllFilesMatching(path);

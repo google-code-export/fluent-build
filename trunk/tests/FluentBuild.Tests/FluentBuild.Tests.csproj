@@ -82,6 +82,7 @@
     <Compile Include="BuildFolderTests.cs" />
     <Compile Include="Build\BuildTests.cs" />
     <Compile Include="Build\BuildUsingCscTests.cs" />
+    <Compile Include="Build\FrameworkVersionTests.cs" />
     <Compile Include="Samples\Build\Simple\C#\basic.cs" />
     <Compile Include="Samples\Build\Simple\C#\Propgram.cs" />
     <Compile Include="Samples\Build\WithReference\C#\simpleTest.cs" />

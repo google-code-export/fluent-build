@@ -130,6 +130,20 @@ namespace FluentBuild.Core
         }
 
         [Test]
+        public void ShouldNotAddDirectory()
+        {
+            var folder1 = new BuildFolder("c:\\temp");
+            var fs = new FileSet(_mockFs);
+            var fsWithChoices = fs.Include(folder1).RecurseAllSubDirectories.Filter("*.cs")
+                .Exclude(folder1).RecurseAllSubDirectories.Filter("AssemblyInfo.cs")
+                .Include(folder1.File("CommonAssemblyInfo.cs"));
+            fsWithChoices.ProcessPendings();
+
+            Assert.That(fs.Inclusions.Count, Is.EqualTo(2));
+            Assert.That(fsWithChoices.Inclusions.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void RecurseAllSubfoldersShouldWork()
         {
             var folder = new BuildFolder("c:\\windows");
