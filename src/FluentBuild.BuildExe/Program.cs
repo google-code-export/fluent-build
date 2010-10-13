@@ -19,7 +19,7 @@ namespace FluentBuild.BuildExe
                 Console.WriteLine("c: The class to run. If none is specified then \"Default\" is assumed");
                 Console.WriteLine("p: properties to pass to the build script. These can be accessed via Properties.CommandLine in your build script. ");
                 Console.WriteLine("v: verbosity of output. Can be None, TaskNamesOnly, TaskDetails, Full");
-                return;
+                Environment.Exit(1);
             }
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
@@ -35,7 +35,7 @@ namespace FluentBuild.BuildExe
                 if (!Directory.Exists(parser.PathToBuildSources))
                 {
                     Console.WriteLine("Could not find sources at: " + parser.PathToBuildSources);
-                    return;
+                    Environment.Exit(1);
                 }
                 pathToAssembly = BuildAssemblyFromSources(parser.PathToBuildSources);
             }
@@ -48,7 +48,7 @@ namespace FluentBuild.BuildExe
             if (!File.Exists(pathToAssembly))
             {
                 Console.WriteLine("Could not find compiled build script at: " + parser.PathToBuildSources);
-                return;
+                Environment.Exit(1);
             }
 
             ExecuteBuildTask(pathToAssembly, parser.ClassToRun);

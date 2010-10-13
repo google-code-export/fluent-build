@@ -85,7 +85,7 @@ namespace FluentBuild.FrameworkFinders
             KeyValuePair<string, string> foundValue = _finder.FindFirstValue(PossibleFrameworkInstallKeys.ToArray());
             if (string.IsNullOrEmpty(foundValue.Key))
                 return null;
-            if (foundValue.Key == baseInstallPath)
+            if (foundValue.Key == @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework")
                 return foundValue.Value + "\\" + FrameworkFolderVersionName;
             return foundValue.Value;
         }

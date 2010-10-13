@@ -17,7 +17,8 @@ namespace FluentBuild.FrameworkFinders
 
         protected override string FrameworkFolderVersionName
         {
-            get { return "v3.0"; }
+            //this is done as 3.0 uses the 2.0 compiles with some new libraries
+            get { return "v2.0.50727"; }
         }
 
     }

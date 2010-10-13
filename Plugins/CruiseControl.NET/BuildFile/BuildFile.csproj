@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CB05F232-022B-41D7-99F9-D620586C509B}</ProjectGuid>
+    <ProjectGuid>{F0680AD5-CA8A-4A98-B3A0-7B62852DA527}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ccnet.fluentbuild.plugin</RootNamespace>
-    <AssemblyName>ccnet.fluentbuild.plugin.dll</AssemblyName>
+    <RootNamespace>BuildFile</RootNamespace>
+    <AssemblyName>BuildFile</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetReflector">
-      <HintPath>lib\NetReflector.dll</HintPath>
+    <Reference Include="FluentBuild">
+      <HintPath>..\Tools\FluentBuild\FluentBuild.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,12 +41,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ThoughtWorks.CruiseControl.Core">
-      <HintPath>lib\ThoughtWorks.CruiseControl.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FluentBuild.cs" />
+    <Compile Include="Default.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
