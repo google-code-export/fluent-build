@@ -42,13 +42,16 @@ public class FluentBuildTaskBuildService extends CommandLineBuildService impleme
     }
 
       // Tasks names
-      final String tasks_names = runParams.get(SERVER_UI_RAKE_TASKS_PROPERTY);
+      final String tasks_names = runParams.get(SERVER_UI_FLUENTBUILD_TASKS_PROPERTY);
       if (!PropertiesUtil.isEmptyOrNull(tasks_names)) {
         addCmdlineArguments(arguments, "/c:" +tasks_names);
       }
 
+      // Set Logger to use the TeamCityLogger
+      addCmdlineArguments(arguments, "/L:TeamCity");
+
      // Other arguments
-     final String otherArgsString = runParams.get(SERVER_UI_RAKE_ADDITIONAL_CMD_PARAMS_PROPERTY);
+     final String otherArgsString = runParams.get(SERVER_UI_FLUENTBUILD_ADDITIONAL_CMD_PARAMS_PROPERTY);
      if (!TextUtil.isEmptyOrWhitespaced(otherArgsString)) {
        addCmdlineArguments(arguments, otherArgsString);
      }

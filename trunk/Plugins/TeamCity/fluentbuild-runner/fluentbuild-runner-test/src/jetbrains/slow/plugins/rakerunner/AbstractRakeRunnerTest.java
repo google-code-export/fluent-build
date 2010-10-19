@@ -87,7 +87,7 @@ public abstract class AbstractFluentBuildRunnerTest extends RunnerTest2Base {
   }
 
   protected void setTaskNames(final String task_names) {
-    addRunParameter(FluentBuildRunnerConstants.SERVER_UI_RAKE_TASKS_PROPERTY, task_names);
+    addRunParameter(FluentBuildRunnerConstants.SERVER_UI_FLUENTBUILD_TASKS_PROPERTY, task_names);
   }
 
   protected void setWorkingDir(final Map<String, String> runParameters,

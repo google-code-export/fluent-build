@@ -29,10 +29,10 @@ public interface FluentBuildRunnerConstants {
 // Server properties
 
   // task name
-  @NonNls String SERVER_UI_RAKE_TASKS_PROPERTY = "ui.fluentbuildRunner.fluentbuildrunner.tasks.names";
+  @NonNls String SERVER_UI_FLUENTBUILD_TASKS_PROPERTY = "ui.fluentbuildRunner.fluentbuildrunner.tasks.names";
 
   // Additional CMD params
-  @NonNls String SERVER_UI_RAKE_ADDITIONAL_CMD_PARAMS_PROPERTY = "ui.fluentbuildRunner.additional.fluentbuildrunner.cmd.params";
+  @NonNls String SERVER_UI_FLUENTBUILD_ADDITIONAL_CMD_PARAMS_PROPERTY = "ui.fluentbuildRunner.additional.fluentbuild.cmd.params";
   @NonNls String SERVER_UI_FLUENTBUILD_CMD_PATH = "ui.fluentbuildRunner.fluentbuild.cmd.path";
   @NonNls String SERVER_CONFIGURATION_VERSION_PROPERTY = "ui.fluentbuildRunner.config.version";
 
