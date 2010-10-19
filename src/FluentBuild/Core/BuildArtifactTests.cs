@@ -5,11 +5,20 @@ using Rhino.Mocks;
 namespace FluentBuild.Core
 {
     ///<summary />
-	[TestFixture]
+    [TestFixture]
     public class BuildArtifactTests
     {
         ///<summary />
-	[Test]
+        [Test]
+        public void Copy_ShouldCreateCopyObject()
+        {
+            const string path = @"c:\temp\test.txt";
+            var artifact = new BuildArtifact(path);
+            Assert.That(artifact.Copy, Is.Not.Null);
+        }
+
+        ///<summary />
+        [Test]
         public void Delete_ShouldCallToFileSystemWrapper()
         {
             var fs = MockRepository.GenerateMock<IFileSystemWrapper>();
@@ -17,11 +26,20 @@ namespace FluentBuild.Core
             var subject = new BuildArtifact(fs, path);
             subject.Delete();
 
-            fs.AssertWasCalled(x=>x.DeleteFile(path));
+            fs.AssertWasCalled(x => x.DeleteFile(path));
         }
 
         ///<summary />
-	    [Test]
+        [Test]
+        public void Move_ShouldCreateMoveObject()
+        {
+            const string path = @"c:\temp\test.txt";
+            var artifact = new BuildArtifact(path);
+            Assert.That(artifact.Move, Is.Not.Null);
+        }
+
+        ///<summary />
+        [Test]
         public void Rename_ShouldBuildRenameObject()
         {
             var fs = MockRepository.GenerateMock<IFileSystemWrapper>();
@@ -32,22 +50,12 @@ namespace FluentBuild.Core
 
 
         ///<summary />
-	[Test]
+        [Test]
         public void ToString_Should_Output_Path()
         {
             const string path = @"c:\temp\test.txt";
             var artifact = new BuildArtifact(path);
             Assert.That(artifact.ToString(), Is.EqualTo(path));
         }
-
-        ///<summary />
-	[Test]
-        public void Copy_ShouldCreateCopyObject()
-        {
-            const string path = @"c:\temp\test.txt";
-            var artifact = new BuildArtifact(path);
-            Assert.That(artifact.Copy, Is.Not.Null);
-        }
-
     }
 }

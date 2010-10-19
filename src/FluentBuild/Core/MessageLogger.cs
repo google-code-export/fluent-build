@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentBuild.MessageLoggers;
 using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
+using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
 
 namespace FluentBuild.Core
 {
@@ -87,7 +88,7 @@ namespace FluentBuild.Core
                     InternalLogger = new ConsoleMessageLogger();
                     break;
                 case "TEAMCITY":
-                    InternalLogger = new TeamCityMessageLogger();
+                    InternalLogger = new MessageLoggers.TeamCityMessageLoggers.MessageLogger();
                     break;
                 default:
                     throw new ArgumentException("logger type " + logger + " unkown.");

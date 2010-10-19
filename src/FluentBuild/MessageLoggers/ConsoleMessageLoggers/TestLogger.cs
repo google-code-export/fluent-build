@@ -3,13 +3,15 @@ using FluentBuild.Core;
 
 namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 {
-    internal class ConsoleTestLogger : ITestLogger
+    internal class TestLogger : ITestLogger
     {
         private readonly string _testName;
+        private int _indentation;
 
 
-        public ConsoleTestLogger(string testName)
+        public TestLogger(int indentation, string testName)
         {
+            _indentation = indentation;
             _testName = testName.Substring(testName.LastIndexOf(".") +1); //strip out the suite name from the test name
         }
 
@@ -20,14 +22,14 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
             Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
         }
 
-        private void WriteMessage(string name, string data)
+        internal void WriteMessage(string name, string data)
         {
-            var remainingWidth = ConsoleMessageLogger.WindowWidth-10 - ConsoleMessageLogger.TestIndentation - name.Length - data.Length;
+            var remainingWidth = ConsoleMessageLogger.WindowWidth-11 - _indentation- name.Length - data.Length;
             if (remainingWidth <=0)
             {
                 remainingWidth = 0;
             }
-            MessageLogger.Write("TEST", "".PadRight(ConsoleMessageLogger.TestIndentation, ' ') + name + "".PadRight(remainingWidth, '.')  + data);
+            MessageLogger.Write("TEST", "".PadRight(_indentation, ' ') + name + "".PadRight(remainingWidth, '.')  + " " + data);
         }
 
         public void WriteTestIgnored(string message)

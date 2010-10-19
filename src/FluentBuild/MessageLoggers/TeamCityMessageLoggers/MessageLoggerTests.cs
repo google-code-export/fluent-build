@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Specialized;
+using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
 using NUnit.Framework;
 
 namespace FluentBuild.MessageLoggers
 {
     [TestFixture]
-    public class TeamCityMessageLoggerTests
+    public class MessageLoggerTests
     {
         #region Setup/Teardown
 
@@ -14,13 +15,20 @@ namespace FluentBuild.MessageLoggers
         {
             _textMessageWriter = new TextMessageWriter();
             Console.SetOut(_textMessageWriter);
-            _subject = new TeamCityMessageLogger();
+            _subject = new MessageLogger();
         }
 
         #endregion
 
-        private TeamCityMessageLogger _subject;
+        private MessageLogger _subject;
         private TextMessageWriter _textMessageWriter;
+
+        [Test]
+        public void WriteTestSuiteStarted_ShouldCreateNewLoggingObject()
+        {
+            var testSuiteMessageLogger = _subject.WriteTestSuiteStared("na");
+            Assert.That(testSuiteMessageLogger, Is.TypeOf<TeamCityMessageLoggers.TestSuiteMessageLogger>());
+        }
 
         [Test]
         public void WriteHeader_ShouldOpenNewHeaderIfNothingElseHasBeenOpened()
@@ -86,14 +94,14 @@ namespace FluentBuild.MessageLoggers
 
             foreach (string key in itemsToTest.Keys)
             {
-                Assert.That(TeamCityMessageLogger.EscapeCharacters(key), Is.EqualTo(itemsToTest[key]));
+                Assert.That(MessageLogger.EscapeCharacters(key), Is.EqualTo(itemsToTest[key]));
             }
         }
 
         [Test]
         public void EscapeCharacters_ShouldNotEscapePipeRepeatedly()
         {
-            string escapeCharacters = TeamCityMessageLogger.EscapeCharacters("\n|");
+            string escapeCharacters = MessageLogger.EscapeCharacters("\n|");
             Assert.That(escapeCharacters, Is.EqualTo("|n||"));
         }
     }

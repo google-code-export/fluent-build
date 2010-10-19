@@ -1,5 +1,7 @@
 ﻿using System;
 using FluentBuild.MessageLoggers;
+using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
+using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -14,6 +16,8 @@ namespace FluentBuild.Core
         {
             MessageLogger.InternalLogger = MockRepository.GenerateMock<IMessageLogger>();
         }
+
+        
 
         [Test]
         public void UsingDebug_ShouldOnlyWriteOneDebugMessage()
@@ -97,5 +101,38 @@ namespace FluentBuild.Core
             MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteWarning("WRN", "test"));
         }
 
+        [Test]
+        public void SetLogger_ShouldSetLoggerToConsoleLogger()
+        {
+            MessageLogger.SetLogger("console");
+            Assert.That(MessageLogger.InternalLogger, Is.TypeOf<ConsoleMessageLogger>());
+        }
+
+        [Test]
+        public void SetLogger_ShouldSetLoggerToTeamCityLogger()
+        {
+            MessageLogger.SetLogger("TeamCity");
+            Assert.That(MessageLogger.InternalLogger, Is.TypeOf<MessageLoggers.TeamCityMessageLoggers.MessageLogger>());
+        }
+
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void SetLogger_ShouldThrowExceptionIfUnkownType()
+        {
+            MessageLogger.SetLogger("garbage");
+        }
+
+        [Test]
+        public void WriteTestStarted_ShouldCallInternalLogger()
+        {
+            var name = "test";
+            MessageLogger.WriteTestSuiteStarted(name);
+            MessageLogger.InternalLogger.AssertWasCalled(x=>x.WriteTestSuiteStared(name));
+        }
+
+        [TearDown]
+        public void ResetLogger()
+        {
+            MessageLogger.SetLogger("CONSOLE");
+        }
     }
 }
