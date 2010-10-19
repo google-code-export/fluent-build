@@ -42,10 +42,10 @@ namespace FluentBuild.BuildExe
             string pathToAssembly;
             if (parser.SourceBuild)
             {
-                Console.WriteLine("building task from sources");
+                MessageLogger.Write("INIT", "building task from sources");
                 if (!Directory.Exists(parser.PathToBuildSources))
                 {
-                    Console.WriteLine("Could not find sources at: " + parser.PathToBuildSources);
+                    MessageLogger.WriteError("Could not find sources at: " + parser.PathToBuildSources);
                     Environment.Exit(1);
                 }
                 pathToAssembly = BuildAssemblyFromSources(parser.PathToBuildSources);
@@ -89,7 +89,9 @@ namespace FluentBuild.BuildExe
 
             string dllReference = Path.Combine(startPath, "FluentBuild.dll");
             MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
-            string outputAssembly = Path.Combine(path, "build.dll");
+            var tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks.ToString();
+            Directory.CreateDirectory(tempPath);
+            string outputAssembly = Path.Combine(tempPath, "build.dll");
             MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
             Build.UsingCsc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
                 IncludeDebugSymbols.Execute();
