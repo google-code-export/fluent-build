@@ -99,6 +99,8 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
     <Compile Include="Core\MessageLoggerTests.cs" />
+    <Compile Include="FilesAndDirectories\MoveBuildArtifact.cs" />
+    <Compile Include="FilesAndDirectories\MoveBuildArtifactTests.cs" />
     <Compile Include="FrameworkFinders\DefaultFinderTests.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleTestLogger.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleTestSuiteMessageLogger.cs" />

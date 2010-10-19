@@ -7,10 +7,10 @@ Build
 	-TeamCity plugin should set logger to.... TEAMCITY
 	-TeamCity not passing additional args
 	-Build.dll should be output to a temp folder instead of current folder
+	-Add BuildArtifact.Move
 
   This release    
 	-Fileset bug
-  	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
 
   Future Releases
