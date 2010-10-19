@@ -342,12 +342,19 @@
             <summary>
              Executes the executable with the provided options.
             </summary>
+             <returns>the return code of the process</returns>
         </member>
         <member name="M:FluentBuild.Runners.IExecuteable.Executable(System.String)">
             <summary>
              Sets the executeable to run
             </summary>
             <param name="path">path to the executable</param>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecuteable.WithMessageProcessor(FluentBuild.MessageLoggers.MessageProcessing.IMessageProcessor)">
+            <summary>
+             Allows you to override the default message parser. This is typically used for parsing a runners output (i.e. nunit outputs in xml so a different parser is used to transform messages)
+            </summary>
+            <param name="processor">The processor to use</param>
         </member>
         <member name="T:FluentBuild.Runners.Executeable">
             <summary>
@@ -903,18 +910,6 @@
             <summary />
         </member>
         <member name="M:FluentBuild.Database.MsSqlCreateTests.ShouldSetPathOnEngine">
-            <summary />
-        </member>
-        <member name="T:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Setup">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.WriteHeader">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
             <summary />
         </member>
         <member name="T:FluentBuild.Runners.Zip.Zip">
@@ -1994,6 +1989,18 @@
             <summary />
         </member>
         <member name="M:FluentBuild.ApplicationProperties.CruiseControlPropertiesTests.AllPropertiesShouldMap">
+            <summary />
+        </member>
+        <member name="T:FluentBuild.MessageLoggers.ConsoleMessageLoggers.ConsoleMessageLoggerTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggers.ConsoleMessageLoggerTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggers.ConsoleMessageLoggerTests.WriteHeader">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.ConsoleMessageLoggers.ConsoleMessageLoggerTests.Write_ShouldCreateProperlyIndentedLines">
             <summary />
         </member>
     </members>

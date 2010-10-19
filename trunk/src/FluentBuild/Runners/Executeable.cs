@@ -6,6 +6,7 @@ using System.Threading;
 using FluentBuild.Core;
 using FluentBuild.MessageLoggers.MessageProcessing;
 using FluentBuild.Utilities;
+using System.Linq;
 
 namespace FluentBuild.Runners
 {
@@ -35,13 +36,22 @@ namespace FluentBuild.Runners
         ///<summary>
         /// Executes the executable with the provided options.
         ///</summary>
-        void Execute();
+        /// <returns>the return code of the process</returns>
+        int Execute();
 
         ///<summary>
         /// Sets the executeable to run
         ///</summary>
         ///<param name="path">path to the executable</param>
         IExecuteable Executable(string path);
+
+
+        ///<summary>
+        /// Allows you to override the default message parser. This is typically used for parsing a runners output (i.e. nunit outputs in xml so a different parser is used to transform messages)
+        ///</summary>
+        ///<param name="processor">The processor to use</param>
+        IExecuteable WithMessageProcessor(IMessageProcessor processor);
+
     }
 
     ///<summary>
@@ -49,7 +59,7 @@ namespace FluentBuild.Runners
     ///</summary>
     public class Executeable : Failable<IExecuteable>, IExecuteable
     {
-        private readonly IMessageProcessor _messageProcessor;
+        private IMessageProcessor _messageProcessor;
         private readonly object _errorLock;
         private readonly object _outputLock;
         private readonly List<String> _args;
@@ -73,6 +83,7 @@ namespace FluentBuild.Runners
             _args = new List<string>();
             _error = new StringBuilder();
             _output = new StringBuilder();
+            
         }
 
         ///<summary>
@@ -85,6 +96,12 @@ namespace FluentBuild.Runners
         }
 
         #region IExecuteable Members
+
+        public IExecuteable WithMessageProcessor(IMessageProcessor processor)
+        {
+            _messageProcessor = processor;
+            return this;
+        }
 
         public IExecuteable WithArguments(params string[] arguments)
         {
@@ -104,9 +121,9 @@ namespace FluentBuild.Runners
             return this;
         }
 
-        public void Execute()
+        public int Execute()
         {
-            Execute("exec");
+            return Execute("exec");
         }
 
         public IExecuteable Executable(string path)
@@ -134,8 +151,9 @@ namespace FluentBuild.Runners
             process.StartInfo.Arguments = CreateArgumentString();
 
             //redirect to a stream so we can parse it and display it
-            process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.ErrorDialog = false;
@@ -149,16 +167,16 @@ namespace FluentBuild.Runners
             return new ProcessWrapper(process);
         }
 
-        internal string Execute(string prefix)
+        internal int Execute(string prefix)
         {
-            MessageLogger.WriteDebugMessage("executing " + ExecuteablePath + CreateArgumentString());
+            MessageLogger.Write(prefix , ExecuteablePath + CreateArgumentString());
+            int exitCode = 0;
             using (IProcessWrapper process = CreateProcess())
             {
                 try
                 {
                     process.Start();
-                    process.BeginOutputReadLine();
-
+                    process.BeginOutputAndErrorReadLine();
                     if (!process.WaitForExit(50000))
                     {
                         MessageLogger.WriteDebugMessage("TIMEOUT!");
@@ -171,9 +189,7 @@ namespace FluentBuild.Runners
                     }
                     
                     _messageProcessor.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode);
-
-                    if (process.ExitCode != 0)
-                        throw new ExecutableFailedException("Exectable returned non-zero exit code");
+                    exitCode = process.ExitCode;
                 }
                 catch (Exception e)
                 {
@@ -183,7 +199,7 @@ namespace FluentBuild.Runners
                                 "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
             }
-            return _output.ToString();
+            return exitCode;
         }
 
         //lock objects in case events fire out of order
@@ -196,7 +212,7 @@ namespace FluentBuild.Runners
         private void ProcessErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
             lock (_errorLock)
-                _output.AppendLine(e.Data);
+                _error.AppendLine(e.Data);
         }
     }
 }

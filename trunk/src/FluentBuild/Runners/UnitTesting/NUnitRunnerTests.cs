@@ -1,14 +1,17 @@
 ﻿using System.IO;
+using FluentBuild.MessageLoggers.MessageProcessing;
 using FluentBuild.Utilities;
 using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace FluentBuild.Runners.UnitTesting
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class NUnitRunnerTests
     {
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void WorkingDirectory_ShouldPopulateInternalFieldAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -18,7 +21,8 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._workingDirectory, Is.EqualTo(workingdir));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void FileToTest_ShouldPopulateInternalFieldAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -28,7 +32,8 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._fileToTest, Is.EqualTo(file));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void PathToConsoleRunner_ShouldPopulateInternalFieldAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -38,7 +43,8 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._pathToConsoleRunner, Is.EqualTo(file));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void XmlOutputTo_ShouldPopulatePropertiesAndReturnSelf()
         {
             var subject = new NUnitRunner();
@@ -48,7 +54,8 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._parameters["xml"], Is.EqualTo(file));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void AddSingleParameter_ShouldAddToInteralDictionary()
         {
             var subject = new NUnitRunner();
@@ -58,7 +65,8 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._parameters[singleparam], Is.EqualTo(string.Empty));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void AddParameter_ShouldAddToInteralDictionary()
         {
             var subject = new NUnitRunner();
@@ -69,36 +77,40 @@ namespace FluentBuild.Runners.UnitTesting
             Assert.That(nUnitRunner._parameters[param], Is.EqualTo(value ));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldConstructWithFileToTest()
         {
             string pathToFile = "c:\\test.dll";
             var subject = new NUnitRunner().FileToTest(pathToFile);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/nologo", "/nodots" }));
+            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/nologo", "/nodots", "/xmlconsole" }));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldConstructWithFileToTestAndSingleParameter()
         {
          
             string pathToFile = "c:\\test.dll";
             string singleParam = "label";
             var subject = new NUnitRunner().FileToTest(pathToFile).AddParameter(singleParam);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + singleParam, "/nologo", "/nodots" }));
+            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + singleParam, "/nologo", "/nodots", "/xmlconsole" }));
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void BuildArgs_ShouldConstructWithFileToTestAndNameValueParameter()
         {   
             string pathToFile = "c:\\test.dll";
             string name = "label";
             string value = "value";
             var subject = new NUnitRunner().FileToTest(pathToFile).AddParameter(name,value);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + name + ":" + value, "/nologo", "/nodots" }));
+            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + name + ":" + value, "/nologo", "/nodots", "/xmlconsole" }));
         }
 
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void Execute_ShouldCallExecuteMethodOnMock()
         {
             string pathToExe = "c:\\test.exe";
@@ -111,14 +123,15 @@ namespace FluentBuild.Runners.UnitTesting
             
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
-
+            mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);
             subject.PathToNunitConsoleRunner(pathToExe).Execute();
 
             mockExecutable.AssertWasCalled(x=>x.Execute());
 
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void Execute_ShouldSetOnErrorStateToFalse()
         {
             string pathToExe = "c:\\test.exe";
@@ -131,14 +144,16 @@ namespace FluentBuild.Runners.UnitTesting
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
-
+            mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);
+        
             subject.PathToNunitConsoleRunner(pathToExe).ContinueOnError.Execute();
 
            Assert.That(subject.OnError, Is.EqualTo(OnError.Continue));
 
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void Execute_ShouldSetOnErrorStateToTrue()
         {
             string pathToExe = "c:\\test.exe";
@@ -151,6 +166,8 @@ namespace FluentBuild.Runners.UnitTesting
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);
+
 
             subject.PathToNunitConsoleRunner(pathToExe).FailOnError.Execute();
 
@@ -158,7 +175,8 @@ namespace FluentBuild.Runners.UnitTesting
 
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void Execute_ShouldSetWorkingDirectoryOnMockIfManuallySpecifiedInCode()
         {
             string workingDirectory = "c:\\temp";
@@ -172,13 +190,16 @@ namespace FluentBuild.Runners.UnitTesting
             mockExecutable.Stub(x => x.InWorkingDirectory(workingDirectory)).Return(mockExecutable);
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);
+
             subject.PathToNunitConsoleRunner(pathToExe).WorkingDirectory(workingDirectory).Execute();
 
             mockExecutable.AssertWasCalled(x => x.InWorkingDirectory(workingDirectory));
 
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void Execute_ShouldTryToFindPathToNunitIfNotSet()
         {
             string workingDirectory = "c:\\temp";
@@ -193,7 +214,7 @@ namespace FluentBuild.Runners.UnitTesting
             mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
-
+            mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);
             subject.Execute();
 
             mockFileFinder.AssertWasCalled(x => x.Find("nunit-console.exe"));

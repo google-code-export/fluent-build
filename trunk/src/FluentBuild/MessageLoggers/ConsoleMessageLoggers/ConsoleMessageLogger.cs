@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using FluentBuild.Core;
 
-namespace FluentBuild.MessageLoggers
+namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 {
     internal class ConsoleMessageLogger : IMessageLogger
     {
+        internal static int TestIndentation;
+
         internal List<string> WrapText(int leftColumnStartsAtPostion, string message)
         {
             var maxLengthOfMessage = WindowWidth - 1; //add some padding on the right
@@ -53,7 +54,7 @@ namespace FluentBuild.MessageLoggers
         
         private static int _windowWidth;
 
-        internal int WindowWidth
+        internal static int WindowWidth
         {
             get
             {
@@ -89,7 +90,6 @@ namespace FluentBuild.MessageLoggers
 
         public void Write(string type, string message)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
             string outputMessage = String.Format("  [{0}] {1}", type, message);
             var wrapText = WrapText(5 + type.Length, outputMessage);
             foreach (var text in wrapText)
@@ -110,6 +110,13 @@ namespace FluentBuild.MessageLoggers
             Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Yellow);
             Write(type, message);
             Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+        }
+
+        public ITestSuiteMessageLogger WriteTestSuiteStared(string name)
+        {
+            Write("TEST", "".PadLeft(TestIndentation, ' ') + name);
+            TestIndentation++;
+            return new ConsoleTestSuiteMessageLogger();
         }
     }
 }

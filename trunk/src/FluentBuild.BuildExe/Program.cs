@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
 
@@ -22,11 +23,21 @@ namespace FluentBuild.BuildExe
                 Environment.Exit(1);
             }
 
+            
+
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
             MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
 
             //creates a new parser and parses args
             var parser = new CommandLineParser(args);
+
+            var argString = new StringBuilder();
+            foreach (var s in args)
+            {
+                argString.Append(" /" + s);
+            }
+
+            MessageLogger.Write("INIT", "running fb.exe " + argString.ToString());
 
             string pathToAssembly;
             if (parser.SourceBuild)

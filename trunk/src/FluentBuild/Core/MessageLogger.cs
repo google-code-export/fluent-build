@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentBuild.MessageLoggers;
+using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
 
 namespace FluentBuild.Core
 {
@@ -37,6 +38,10 @@ namespace FluentBuild.Core
             get { return new DebugMessages(); }
         }
 
+        public static ITestSuiteMessageLogger WriteTestSuiteStarted(string name)
+        {
+            return InternalLogger.WriteTestSuiteStared(name);
+        }
 
         public static void WriteHeader(string header)
         {
@@ -72,6 +77,22 @@ namespace FluentBuild.Core
         public static void WriteWarning(string prefix, string message)
         {
             InternalLogger.WriteWarning(prefix, message);
+        }
+
+        public static void SetLogger(string logger)
+        {
+            switch (logger.ToUpper())
+            {
+                case "CONSOLE":
+                    InternalLogger = new ConsoleMessageLogger();
+                    break;
+                case "TEAMCITY":
+                    InternalLogger = new TeamCityMessageLogger();
+                    break;
+                default:
+                    throw new ArgumentException("logger type " + logger + " unkown.");
+            }
+            
         }
     }
 }

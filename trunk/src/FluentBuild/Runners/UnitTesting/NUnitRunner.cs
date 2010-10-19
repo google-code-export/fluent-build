@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using FluentBuild.Core;
+using FluentBuild.MessageLoggers.MessageProcessing;
 using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners.UnitTesting
@@ -122,6 +123,7 @@ namespace FluentBuild.Runners.UnitTesting
             }
             args.Add("/nologo");
             args.Add("/nodots");
+            args.Add("/xmlconsole");
             //args.Add("/labels"););
             return args.ToArray();
         }
@@ -140,14 +142,22 @@ namespace FluentBuild.Runners.UnitTesting
             }
 
             var executeable = _executable.Executable(_pathToConsoleRunner).WithArguments(BuildArgs());
-            if (OnError == OnError.Fail)
-                executeable = executeable.FailOnError;
-            else if (OnError == OnError.Continue)
-                executeable = executeable.ContinueOnError;
+            //if (OnError == OnError.Fail)
+            //    executeable = executeable.FailOnError;
+            //else if (OnError == OnError.Continue)
+            //    executeable = executeable.ContinueOnError;
 
             if (!String.IsNullOrEmpty(_workingDirectory))
                 executeable = executeable.InWorkingDirectory(_workingDirectory);
-            executeable.Execute();
+            
+            //don't throw an errors
+            var returnCode = executeable.WithMessageProcessor(new NunitMessageProcessor()).Execute();
+
+            //if it returned non-zero then just exit (as a test failed)
+            if (returnCode != 0 && OnError == OnError.Fail)
+            {
+                Environment.Exit(1);
+            }
         }
 
     }
