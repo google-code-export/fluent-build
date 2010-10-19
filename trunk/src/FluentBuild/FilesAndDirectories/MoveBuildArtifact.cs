@@ -12,7 +12,6 @@ namespace FluentBuild.FilesAndDirectories
         private readonly BuildArtifact _buildArtifact;
         private readonly IFileSystemWrapper _fileSystemWrapper;
 
-
         internal MoveBuildArtifact(IFileSystemWrapper fileSystemWrapper, BuildArtifact buildArtifact)
         {
             _fileSystemWrapper = fileSystemWrapper;

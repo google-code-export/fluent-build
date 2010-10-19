@@ -6,8 +6,6 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 {
     internal class ConsoleMessageLogger : IMessageLogger
     {
-        internal static int TestIndentation;
-
         internal List<string> WrapText(int leftColumnStartsAtPostion, string message)
         {
             var maxLengthOfMessage = WindowWidth - 1; //add some padding on the right
@@ -114,9 +112,7 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public ITestSuiteMessageLogger WriteTestSuiteStared(string name)
         {
-            Write("TEST", "".PadLeft(TestIndentation, ' ') + name);
-            TestIndentation++;
-            return new ConsoleTestSuiteMessageLogger();
+            return new TestSuiteLogger(0, name);
         }
     }
 }

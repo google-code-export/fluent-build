@@ -43,7 +43,7 @@ namespace FluentBuild.FilesAndDirectories
         {
             var folderDestination = "c:\\";
             _fileSystemWrapper.Stub(x => x.DirectoryExists(folderDestination)).Return(true);
-            _subject.To(folderDestination);
+            _subject.To(new BuildFolder(folderDestination));
             _fileSystemWrapper.AssertWasCalled(x => x.MoveFile(_source, _destination));
         }
     }

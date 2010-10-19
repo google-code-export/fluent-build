@@ -95,5 +95,12 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
             _messageLogger.WriteWarning("CSC", "Content of message");
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [CSC] Content of message" + Environment.NewLine));
         }
+
+        [Test]
+        public void WriteTestSuiteStarted_ShouldCreateTestSuiteObject()
+        {
+            var testSuiteMessageLogger = _messageLogger.WriteTestSuiteStared("test");
+            Assert.That(testSuiteMessageLogger, Is.TypeOf<TestSuiteLogger>());
+        }
     }
 }
