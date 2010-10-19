@@ -35,6 +35,24 @@ namespace FluentBuild.Core
             Delete(Defaults.OnError);
         }
 
+
+        ///<summary>
+        /// Moves a build artifact to a new location
+        ///</summary>
+        public MoveBuildArtifact Move
+        {
+            get { return new MoveBuildArtifact(this);}
+        }
+
+        ///<summary>
+        /// Returns only the file name of the build artifact
+        ///</summary>
+        ///<returns>The filename of the artifact</returns>
+        public string FileName()
+        {
+            return System.IO.Path.GetFileName(Path);
+        }
+
         ///<summary>
         /// Deletes the file 
         ///<remarks>If the file does not exist no error will be thrown (even if OnError is set to fail)</remarks>
