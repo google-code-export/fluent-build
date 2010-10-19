@@ -70,6 +70,9 @@ namespace FluentBuild.BuildExe
                 case "V":
                     DetermineVerbosity(data);
                     break;
+                case "L":
+                    Core.MessageLogger.SetLogger(data);
+                    break;
                 default:
                     throw new ArgumentException("Do not understand type");
             }

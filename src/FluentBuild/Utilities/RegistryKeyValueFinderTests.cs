@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace FluentBuild.Utilities
@@ -13,7 +14,7 @@ namespace FluentBuild.Utilities
         private string[] _keysToCheck;
 
         ///<summary />
-	[SetUp]
+	    [SetUp]
         public void Setup()
         {
             _registryWrapper = MockRepository.GenerateMock<IRegistryWrapper>();
@@ -26,7 +27,7 @@ namespace FluentBuild.Utilities
         }
         
         ///<summary />
-	[Test]
+	    [Test]
         public void ShouldOpenLocalMachineKeyForSoftwareTwice()
         {
             _subject.FindFirstValue(_keysToCheck);

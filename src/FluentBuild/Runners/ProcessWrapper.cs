@@ -7,7 +7,7 @@ namespace FluentBuild.Runners
     internal interface IProcessWrapper : IDisposable
     {
         bool Start();
-        void BeginOutputReadLine();
+        void BeginOutputAndErrorReadLine();
         bool WaitForExit(int milliseconds);
         void Kill();
         int ExitCode { get; }
@@ -28,9 +28,10 @@ namespace FluentBuild.Runners
             return _process.Start();
         }
 
-        public void BeginOutputReadLine()
+        public void BeginOutputAndErrorReadLine()
         {
             _process.BeginOutputReadLine();
+            _process.BeginErrorReadLine();
         }
 
         public bool WaitForExit(int milliseconds)

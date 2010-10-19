@@ -49,10 +49,10 @@
     <list default="true" readonly="true" id="9cec1cca-0a2f-4e2c-b18b-341adf07bffd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-test/src/jetbrains/slow/plugins/rakerunner/AbstractRakeRunnerTest.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-test/src/jetbrains/slow/plugins/rakerunner/AbstractRakeRunnerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner.iws" afterPath="$PROJECT_DIR$/fluentbuild-runner.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTaskBuildService.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTaskBuildService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTasksBuildService.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTasksBuildService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" />
     </list>
     <list id="b20e2a97-2f69-4f89-b214-427ebd254dbc" name="upgrade xstream" comment="" />
     <ignored path="fluentbuild-runner.iws" />
@@ -586,7 +586,7 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="728" extended-state="0" />
+    <frame x="0" y="0" width="1366" height="728" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />

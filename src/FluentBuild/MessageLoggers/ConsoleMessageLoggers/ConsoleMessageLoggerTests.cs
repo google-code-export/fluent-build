@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentBuild.Core;
 using NUnit.Framework;
 
-namespace FluentBuild.MessageLoggers
+namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 {
     ///<summary />
     [TestFixture]
@@ -32,7 +31,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WrapText_ShouldHandleNewLines()
         {
-            _messageLogger.WindowWidth = 22;
+            ConsoleMessageLogger.WindowWidth = 22;
             List<string> wrapText = _messageLogger.WrapText(9, "  [exec] hello world how \r\nare you");
             Assert.That(wrapText[0], Is.EqualTo("  [exec] hello world "));
             Assert.That(wrapText[1], Is.EqualTo("         how"));
@@ -42,7 +41,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WrapText_ShouldHaveOneLine()
         {
-            _messageLogger.WindowWidth = 22;
+            ConsoleMessageLogger.WindowWidth = 22;
             List<string> wrapText = _messageLogger.WrapText(0, "hello");
             Assert.That(wrapText[0], Is.EqualTo("hello"));
         }
@@ -50,7 +49,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WrapText_ShouldHaveTwoLines()
         {
-            _messageLogger.WindowWidth = 22;
+            ConsoleMessageLogger.WindowWidth = 22;
             List<string> wrapText = _messageLogger.WrapText(9, "  [exec] hello world how are you");
             Assert.That(wrapText[0], Is.EqualTo("  [exec] hello world "));
             Assert.That(wrapText[1], Is.EqualTo("         how are you"));
@@ -68,7 +67,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void Write_ShouldCreateProperlyIndentedLines()
         {
-            _messageLogger.WindowWidth = 200;
+            ConsoleMessageLogger.WindowWidth = 200;
             _messageLogger.Write("TEST", "Content of message");
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [TEST] Content of message" + Environment.NewLine));
         }
@@ -76,7 +75,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WriteError_ShouldWriteErrorMessage()
         {
-            _messageLogger.WindowWidth = 200;
+            ConsoleMessageLogger.WindowWidth = 200;
             _messageLogger.WriteError("ERROR", "Content of message");
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [ERROR] Content of message" + Environment.NewLine));
         }
@@ -84,7 +83,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WriteDebug_ShouldWriteErrorMessage()
         {
-            _messageLogger.WindowWidth = 200;
+            ConsoleMessageLogger.WindowWidth = 200;
             _messageLogger.WriteDebugMessage("Content of message");
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [DEBUG] Content of message" + Environment.NewLine));
         }
@@ -92,7 +91,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WriteWarning_ShouldWriteMessage()
         {
-            _messageLogger.WindowWidth = 200;
+            ConsoleMessageLogger.WindowWidth = 200;
             _messageLogger.WriteWarning("CSC", "Content of message");
             Assert.That(_textMessageWriter.ToString(), Is.EqualTo("  [CSC] Content of message" + Environment.NewLine));
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace FluentBuild.Tests
 {
@@ -6,12 +7,12 @@ namespace FluentBuild.Tests
     {
         public static string PathToRootFolder
         {
-            get { return Environment.CurrentDirectory + "\\" + RelativePathToRootFolder; }
+            get { return Path.GetFullPath(Environment.CurrentDirectory + "\\" + RelativePathToRootFolder); }
         }
 
         public static string PathToSamplesFolder
         {
-            get { return Environment.CurrentDirectory + "\\" + RelativePathToSamplesFolder; }
+            get { return  Path.GetFullPath(Environment.CurrentDirectory + "\\" + RelativePathToSamplesFolder); }
         }
 
         public static string RelativePathToRootFolder

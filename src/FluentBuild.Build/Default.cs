@@ -133,6 +133,7 @@ namespace Build
 
         private void RunTests()
         {
+           //Run.Debugger();
            Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild_WithTests).Execute();
         }
 

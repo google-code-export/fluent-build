@@ -3,18 +3,23 @@ Build
 	-Message logger wrapping needs to handle when input has newline characters in it.
 	-Team City support added.
 	-Compiled for .NET 3.5 for better compatability
+	-Test logging for TeamCity
+
 
   This release    
-
-  Next Release
-    -Test logging for TeamCity
+	-Fileset bug
   	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
-	-ability to specify (or detect) compiler to use for build files (current default is c#)
-	-ability to reference (or detect) other assemblies in the build file
     -Build.dll should be output to a temp folder instead of current folder
-		
+	-TeamCity plugin should set logger to.... TEAMCITY
+	-TeamCity not passing additional args
+
   Future Releases
+    -ability to specify (or detect) compiler to use for build files (current default is c#)
+	-ability to reference (or detect) other assemblies in the build file
+    -One time tasks (only run the first time the script is run on that computer)
+	-SFTP lib: http://sourceforge.net/projects/dotnetssh/files/
+	-Command line FTP?
     -Start VS web server C:\Program Files (x86)\Common Files\microsoft shared\DevServer\9.0
     -Allow message verbosity to be changed from TeamCity
     -If tests are marked as Ignore() for too long then fail build
@@ -31,7 +36,7 @@ Build
 		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
 	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
 	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
-	-Add in support for publishing to GoogleCode/CodePlex/SourceForge/Etc.
+	-Add in support for publishing to CodePlex/SourceForge/Etc.
 	-It would be nice to have zip be able to output to the folder containing source. I.e. zip("c:\\temp\\).OutputTo("c:\\temp\\out.zip"). 
 	-For MSBuild might want to have Configuration.Debug .Release .Custom("myconfig")
 	-CopyBuildArtifact may want to have it return a new BuildArtifact with the folder.
@@ -39,8 +44,19 @@ Build
 	-Click once deployment manifest writing
     -MessageLogger: see if it can be detected by checking the standard handle (apparently 7) vs the current handle
 	-Gather usage data of functions used/success rates/ etc. Maybe have fb.exe and fb-nousagestats.exe
-
+	-SVCUtil: Run.Executeable(Defaults.FrameworkVersion.GetPathToSdk() + @"\bin\svcutil.exe")
+                    .WithArguments
+                    (
+                    "http://localhost:53555/Rapter2Service.svc",
+                    "/out:\"" + serviceProxyFile + "\""
+                    , "/language:VB"
+                    , "/namespace:*,Rapter2Service"
+                    , "/r:" + _dirCompile.File("Rapter2.DataContracts.dll")
+                    , "/collectionType:System.Collections.Generic.List`1"
+                    )
+                    .Execute();
 Database
+-Ability to force minimum SQL server version (prevent compat issues)
 -Have a local sql file folder that merges the changes in so you don't run your own SQL scripts on your own DB.
 i.e. scripts/
 			Create

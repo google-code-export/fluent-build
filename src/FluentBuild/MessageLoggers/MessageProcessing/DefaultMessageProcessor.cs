@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentBuild.Core;
+using FluentBuild.Runners;
 
 namespace FluentBuild.MessageLoggers.MessageProcessing
 {
@@ -33,6 +34,9 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
         {
             IList<Message> lines = Parse(prefix, output, error, exitCode);
             Display(lines);
+            if (exitCode !=0)
+                throw new ExecutableFailedException("Exectable returned non-zero exit code. Code Was: " + exitCode);
+
         }
 
         public IList<Message> Parse(string prefix, string output, string error, int processeExitCode)
