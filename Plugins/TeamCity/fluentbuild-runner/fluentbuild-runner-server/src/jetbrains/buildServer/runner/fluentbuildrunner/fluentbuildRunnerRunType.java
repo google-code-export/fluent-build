@@ -91,7 +91,7 @@ public class fluentbuildRunnerRunType extends RunType {
       result.append("FluentBuild file path: ").append(StringUtil.emptyIfNull(runnerParams.get("build-file-path")));
     }
     result.append("\n");
-    final String tasks = runnerParams.get(FluentBuildRunnerConstants.SERVER_UI_RAKE_TASKS_PROPERTY);
+    final String tasks = runnerParams.get(FluentBuildRunnerConstants.SERVER_UI_FLUENTBUILD_TASKS_PROPERTY);
     result.append("FluentBuild tasks: ").append(StringUtil.isEmpty(tasks) ? "default" : tasks);
     return result.toString();
   }
