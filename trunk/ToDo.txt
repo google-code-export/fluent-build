@@ -4,15 +4,14 @@ Build
 	-Team City support added.
 	-Compiled for .NET 3.5 for better compatability
 	-Test logging for TeamCity
-
+	-TeamCity plugin should set logger to.... TEAMCITY
+	-TeamCity not passing additional args
+	-Build.dll should be output to a temp folder instead of current folder
 
   This release    
 	-Fileset bug
   	-Add BuildArtifact.Move
 	-Add BuildFolder.Copy / .Move
-    -Build.dll should be output to a temp folder instead of current folder
-	-TeamCity plugin should set logger to.... TEAMCITY
-	-TeamCity not passing additional args
 
   Future Releases
     -ability to specify (or detect) compiler to use for build files (current default is c#)
