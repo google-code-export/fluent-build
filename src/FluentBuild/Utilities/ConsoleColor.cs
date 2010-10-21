@@ -29,11 +29,25 @@ namespace FluentBuild.Utilities
         //    //SetConsoleTextAttribute(hConsole, 007);
         //}
 
-        public static void SetColor(BuildColor color)
+        internal static void SetColor(BuildColor color)
         {
             //0xfffffff5 is the default handle for reasons unknown
             IntPtr hConsole = GetStdHandle(0xfffffff5);
             SetConsoleTextAttribute(hConsole, (int)color);
+        }
+
+        public static IDisposable SetTemporaryColor(BuildColor color)
+        {
+            SetColor(color);
+            return new ReturnColorToDefault();
+        }
+    }
+
+    internal class ReturnColorToDefault : IDisposable
+    {
+        public void Dispose()
+        {
+            ConsoleColor.SetColor(ConsoleColor.BuildColor.Default);
         }
     }
 }

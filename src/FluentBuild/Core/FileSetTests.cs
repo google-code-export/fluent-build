@@ -93,7 +93,7 @@ namespace FluentBuild.Core
         {
             var folder = new BuildFolder("c:\\windows");
 
-            BuildFolderChoices x = _subject.Exclude(folder).RecurseAllSubDirectories;
+            var x = _subject.Exclude(folder).RecurseAllSubDirectories;
             Assert.That(x.PendingExclude, Is.EqualTo("c:\\windows\\**\\"));
         }
 
@@ -101,7 +101,7 @@ namespace FluentBuild.Core
         public void Include_RecurseAllSubfolders_ShouldSetPending()
         {
             var folder = new BuildFolder("c:\\windows");
-            BuildFolderChoices x = _subject.Include(folder).RecurseAllSubDirectories;
+            var x = _subject.Include(folder).RecurseAllSubDirectories;
             Assert.That(x.PendingInclude, Is.EqualTo("c:\\windows\\**\\"));
         }
 

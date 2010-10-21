@@ -281,6 +281,17 @@
              Creates a new fileset
             </summary>
         </member>
+        <member name="M:FluentBuild.Core.FileSet.Filter(System.String)">
+            <summary>
+             Applies a filter to use when searching for files
+            </summary>
+            <param name="filter">A wildcard filter (e.g. *.cs)</param>
+        </member>
+        <member name="P:FluentBuild.Core.FileSet.RecurseAllSubDirectories">
+            <summary>
+             Modifies the current include to have a \\**\\ added to the end
+            </summary>
+        </member>
         <member name="T:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests">
             <summary />
         </member>
@@ -661,6 +672,29 @@
              The file that cruise control logs to
             </summary>
         </member>
+        <member name="T:FluentBuild.FilesAndDirectories.MoveBuildArtifact">
+            <summary>
+             Moves a build artifact to a destination
+            </summary>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.MoveBuildArtifact.To(System.String)">
+            <summary>
+             Moves a file to a destination
+            </summary>
+            <param name="destination">the new location of the file</param>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.MoveBuildArtifact.To(FluentBuild.Core.BuildArtifact)">
+            <summary>
+             Moves a file to a destination
+            </summary>
+            <param name="destination">the new location of the file</param>
+        </member>
+        <member name="M:FluentBuild.FilesAndDirectories.MoveBuildArtifact.To(FluentBuild.Core.BuildFolder)">
+            <summary>
+             Moves a file to a destination
+            </summary>
+            <param name="destination">the new location of the file</param>
+        </member>
         <member name="M:FluentBuild.Core.MessageLoggerTests.Setup">
             <summary />
         </member>
@@ -857,6 +891,12 @@
             <remarks>If the file does not exist no error will be thrown (even if OnError is set to fail)</remarks>
             </summary>
         </member>
+        <member name="M:FluentBuild.Core.BuildArtifact.FileName">
+            <summary>
+             Returns only the file name of the build artifact
+            </summary>
+            <returns>The filename of the artifact</returns>
+        </member>
         <member name="M:FluentBuild.Core.BuildArtifact.Delete(FluentBuild.Utilities.OnError)">
             <summary>
              Deletes the file 
@@ -869,6 +909,11 @@
             
             </summary>
             <returns>The build artifact path</returns>
+        </member>
+        <member name="P:FluentBuild.Core.BuildArtifact.Move">
+            <summary>
+             Moves a build artifact to a new location
+            </summary>
         </member>
         <member name="P:FluentBuild.Core.BuildArtifact.Rename">
             <summary>
@@ -1457,16 +1502,19 @@
         <member name="T:FluentBuild.Core.BuildArtifactTests">
             <summary />
         </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Copy_ShouldCreateCopyObject">
+            <summary />
+        </member>
         <member name="M:FluentBuild.Core.BuildArtifactTests.Delete_ShouldCallToFileSystemWrapper">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Core.BuildArtifactTests.Move_ShouldCreateMoveObject">
             <summary />
         </member>
         <member name="M:FluentBuild.Core.BuildArtifactTests.Rename_ShouldBuildRenameObject">
             <summary />
         </member>
         <member name="M:FluentBuild.Core.BuildArtifactTests.ToString_Should_Output_Path">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Core.BuildArtifactTests.Copy_ShouldCreateCopyObject">
             <summary />
         </member>
         <member name="T:FluentBuild.Core.Build_Tests">

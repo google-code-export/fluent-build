@@ -23,7 +23,13 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
         public void Display(string prefix, string output, string error, int exitCode)
         {
             //xml message is proceeded with some other console info
-            output = output.Substring(output.IndexOf("<?xml"));
+            var startIndex = output.IndexOf("<?xml");
+            if (startIndex < 0)
+            {
+                MessageLogger.WriteError("TEST", "nunit returned no xml output. Output was: " + output + " Error was: " + error);
+                return;
+            }
+            output = output.Substring(startIndex);
             XDocument xmlDoc = XDocument.Parse(output);
             if (xmlDoc.Root == null)
                 return;

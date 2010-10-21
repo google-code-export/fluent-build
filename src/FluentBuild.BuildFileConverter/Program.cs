@@ -22,6 +22,8 @@ namespace FluentBuild.BuildFileConverter
             }
             else
             {
+                var nantConverterStub = new NantConverterStub(args[0], args[1]);
+                nantConverterStub.Parse();
                 new ConvertFile(args[0], args[1]);
             }
             

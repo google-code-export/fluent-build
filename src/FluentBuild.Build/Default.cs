@@ -96,8 +96,8 @@ namespace Build
 
         private void CompileCoreSources()
         {
-            FileSet sourceFiles = new FileSet().Include(directory_src_core)
-                                    .RecurseAllSubDirectories.Filter("*.cs");
+            var sourceFiles = new FileSet();
+            sourceFiles.Include(directory_src_core).RecurseAllSubDirectories.Filter("*.cs");
 
             FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)

@@ -33,6 +33,7 @@ Build
 	-BuildArtifact.Execute().WithArgs()....etc. may be nice
 	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository).
 		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
+		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
 	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
 	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
 	-Add in support for publishing to CodePlex/SourceForge/Etc.
