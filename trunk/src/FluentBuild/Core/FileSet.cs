@@ -41,13 +41,13 @@ namespace FluentBuild.Core
         /// Sets the include to be a folder and opens additional options
         ///</summary>
         ///<param name="path">The buildfolder representing the path to be used</param>
-        BuildFolderChoices Include(BuildFolder path);
+        FileSet Include(BuildFolder path);
         
         ///<summary>
         /// Sets the exclude to be a folder and opens additional options
         ///</summary>
         ///<param name="path">The buildfolder representing the path to be used</param>
-        BuildFolderChoices Exclude(BuildFolder path);
+        FileSet Exclude(BuildFolder path);
     }
 
     ///<summary>
@@ -59,6 +59,7 @@ namespace FluentBuild.Core
         internal List<string> Inclusions = new List<string>();
         
         private readonly IFileSystemUtility _utility;
+        private bool _isInclusion;
 
         ///<summary>
         /// Creates a new fileset
@@ -113,21 +114,54 @@ namespace FluentBuild.Core
             }
         }
 
-        protected internal string PendingInclude;
-        protected internal string PendingExclude;
+        protected internal virtual string PendingInclude { get; set; }
+        protected internal virtual string PendingExclude { get; set; }
 
-        public BuildFolderChoices Include(BuildFolder path)
+
+        ///<summary>
+        /// Modifies the current include to have a \\**\\ added to the end
+        ///</summary>
+        public FileSet RecurseAllSubDirectories
         {
-            ProcessPendings();
-            PendingInclude = path.ToString();
-            return new BuildFolderChoices(this, _utility, true);
+            get
+            {
+                if (_isInclusion)
+                    PendingInclude = PendingInclude + "\\**\\";
+                else
+                    PendingExclude = PendingExclude + "\\**\\";
+                return this;
+            }
         }
 
-        public BuildFolderChoices Exclude(BuildFolder path)
+        ///<summary>
+        /// Applies a filter to use when searching for files
+        ///</summary>
+        ///<param name="filter">A wildcard filter (e.g. *.cs)</param>
+        public FileSet Filter(string filter)
         {
+            if (_isInclusion)
+                PendingInclude = PendingInclude + "\\" + filter;
+            else
+                PendingExclude = PendingExclude + "\\" + filter;
+            ProcessPendings();
+            return this;
+        }
+
+
+        public FileSet Include(BuildFolder path)
+        {
+            _isInclusion = true;
+            ProcessPendings();
+            PendingInclude = path.ToString();
+            return this;
+        }
+
+        public FileSet Exclude(BuildFolder path)
+        {
+            _isInclusion = false;
             ProcessPendings();
             PendingExclude = path.ToString();
-            return new BuildFolderChoices(this, _utility, false);
+            return this;
         }
 
 

@@ -1,4 +1,5 @@
-﻿using FluentBuild.Core;
+﻿using System;
+using FluentBuild.Core;
 
 namespace Build
 {
@@ -16,7 +17,8 @@ namespace Build
             AssemblyFluentBuildRelease_Merged = directory_compile.File("FluentBuild.dll");
             AssemblyFluentBuildRunnerRelease = directory_compile.File("fb.exe");
 
-            _finalFileName = "FluentBuild-Alpha-" + _version + ".zip";
+            _version = "1.0.0.0";
+            _finalFileName = "FluentBuild-Beta-" + _version + ".zip";
             ZipFilePath = directory_release.File(_finalFileName);
 
             AddTask(Clean);

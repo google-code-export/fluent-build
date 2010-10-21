@@ -102,5 +102,13 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
             var testSuiteMessageLogger = _messageLogger.WriteTestSuiteStared("test");
             Assert.That(testSuiteMessageLogger, Is.TypeOf<TestSuiteLogger>());
         }
+
+        [Test]
+        public void WrapText_ShouldWrapShortHeader()
+        {
+            ConsoleMessageLogger.WindowWidth = 40;
+            var wrapText = _messageLogger.WrapText(0, "short\r\nthis is the message body it is quite long and should wrap too");
+            Assert.That(wrapText[0], Is.EqualTo("short"));
+        }
     }
 }

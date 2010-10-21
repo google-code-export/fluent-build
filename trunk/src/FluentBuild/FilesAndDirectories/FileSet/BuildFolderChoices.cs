@@ -1,4 +1,6 @@
-﻿namespace FluentBuild.FilesAndDirectories.FileSet
+﻿using System;
+
+namespace FluentBuild.FilesAndDirectories.FileSet
 {
     ///<summary>
     /// Allows the user to pick certain attributes to add to a folder
@@ -6,14 +8,24 @@
     public class BuildFolderChoices : Core.FileSet
     {
         private readonly bool _isInclusion;
+        private Core.FileSet _fileset;
+
+        protected internal override string PendingInclude
+        {
+            get { return _fileset.PendingInclude; }
+            set { _fileset.PendingInclude = value; }
+        }
+
+        protected internal override string PendingExclude
+        {
+            get { return _fileset.PendingExclude; }
+            set { _fileset.PendingExclude = value; }
+        }
 
         internal BuildFolderChoices(Core.FileSet fileset, IFileSystemUtility utility, bool isInclusion) : base(utility)
         {
+            _fileset = fileset;
             _isInclusion = isInclusion;
-            PendingInclude = fileset.PendingInclude;
-            PendingExclude = fileset.PendingExclude;
-            Inclusions = fileset.Inclusions;
-            Exclusions = fileset.Exclusions;
         }
 
         ///<summary>
@@ -24,9 +36,9 @@
             get
             {
                 if (_isInclusion)
-                    PendingInclude = PendingInclude + "\\**\\";
+                    _fileset.PendingInclude = _fileset.PendingInclude + "\\**\\";
                 else
-                    PendingExclude = PendingExclude + "\\**\\";
+                    _fileset.PendingExclude = _fileset.PendingExclude + "\\**\\";
                 return this;
             }
         }
@@ -38,9 +50,9 @@
         public Core.FileSet Filter(string filter)
         {
             if (_isInclusion)
-                PendingInclude = PendingInclude + "\\" + filter;
+                _fileset.PendingInclude = _fileset.PendingInclude + "\\" + filter;
             else
-                PendingExclude = PendingExclude + "\\" + filter;
+                _fileset.PendingExclude = _fileset.PendingExclude + "\\" + filter;
             ProcessPendings();
             return this;
         }

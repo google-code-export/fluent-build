@@ -20,8 +20,14 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
                 string remainingText;
                 if (!headerWritten)
                 {
-                    lines.Add(linesInMessage.Substring(0, maxLengthOfMessage)); //add the line with the prefix
-                    remainingText = linesInMessage.Substring(maxLengthOfMessage); //cut out the string we already put into lines
+                    //if the string is shorter than the max length
+                    var length = linesInMessage.Length;
+                    if (length > maxLengthOfMessage)
+                    {
+                        length = maxLengthOfMessage;
+                    }
+                    lines.Add(linesInMessage.Substring(0, length)); //add the line with the prefix
+                    remainingText = linesInMessage.Substring(length); //cut out the string we already put into lines
                     headerWritten = true;
                 }
                 else
@@ -98,9 +104,10 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public void WriteError(string type, string message)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Red);
-            Write(type, message);
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+            using (Utilities.ConsoleColor.SetTemporaryColor(Utilities.ConsoleColor.BuildColor.Red))
+            {
+                Write(type, message);
+            }
         }
 
         public void WriteWarning(string type, string message)
