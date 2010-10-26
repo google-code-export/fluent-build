@@ -20,11 +20,13 @@ namespace Build
         private readonly BuildFolder directory_tools;
         private BuildFolder directory_src_core;
         private BuildFolder directory_src_runner;
+        private BuildFolder directory_src_converter;
 
         private readonly BuildArtifact thirdparty_nunit;
         private readonly BuildArtifact thirdparty_rhino;
         internal string _version;
         internal BuildArtifact thirdparty_sharpzip;
+        private BuildArtifact assembly_BuildFileConverter_WithTests;
 
 
         public Default()
@@ -35,7 +37,9 @@ namespace Build
             directory_tools = directory_base.SubFolder("tools");
             directory_src_core = directory_base.SubFolder("src").SubFolder("FluentBuild");
             directory_src_runner = directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe");
+            directory_src_converter = directory_base.SubFolder("src").SubFolder("FluentBuild.BuildFileConverter");
 
+            assembly_BuildFileConverter_WithTests = directory_compile.File("BuildFileConverter.exe");
             assembly_FluentBuild_WithTests = directory_compile.File("FluentBuildWithTests.dll");
             assembly_Functional_Tests = directory_compile.File("FluentBuild_Functional_Tests.dll");
 
@@ -57,6 +61,26 @@ namespace Build
             AddTask(RunTests);
             AddTask(CompileFunctionalTests);
             //AddTask(RunFunctionalTests);      
+            AddTask(CompileBuildFileConverter);
+            AddTask(TestBuildFileConverter);
+        }
+
+        private void TestBuildFileConverter()
+        {
+            Run.UnitTestFramework.NUnit.FileToTest(assembly_BuildFileConverter_WithTests).Execute();
+        }
+
+        private void CompileBuildFileConverter()
+        {
+            var sourceFiles = new FileSet();
+            sourceFiles.Include(directory_src_converter).RecurseAllSubDirectories.Filter("*.cs");
+
+            FluentBuild.Core.Build.UsingCsc.Target.Executable
+                .AddSources(sourceFiles)
+                .AddRefences(thirdparty_rhino, thirdparty_nunit)
+                .OutputFileTo(assembly_BuildFileConverter_WithTests)
+                .IncludeDebugSymbols
+                .Execute();
         }
 
         private void CopyDependantAssembliesToCompileDir()
@@ -153,3 +177,4 @@ namespace Build
         }
     }
 }
+

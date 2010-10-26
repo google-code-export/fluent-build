@@ -81,10 +81,10 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public void WriteHeader(string header)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Purple);
-            Console.WriteLine(header);
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
-
+            using (Utilities.ConsoleColor.SetTemporaryColor(Utilities.ConsoleColor.BuildColor.BrightPurple))
+            {
+                Console.WriteLine(header);
+            }
         }
 
         public void WriteDebugMessage(string message)
@@ -104,7 +104,7 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public void WriteError(string type, string message)
         {
-            using (Utilities.ConsoleColor.SetTemporaryColor(Utilities.ConsoleColor.BuildColor.Red))
+            using (Utilities.ConsoleColor.SetTemporaryColor(Utilities.ConsoleColor.BuildColor.BrightRed))
             {
                 Write(type, message);
             }
@@ -112,9 +112,10 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public void WriteWarning(string type, string message)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Yellow);
-            Write(type, message);
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+            using (Utilities.ConsoleColor.SetTemporaryColor(Utilities.ConsoleColor.BuildColor.BrightYellow))
+            {
+                Write(type, message);
+            }
         }
 
         public ITestSuiteMessageLogger WriteTestSuiteStared(string name)
