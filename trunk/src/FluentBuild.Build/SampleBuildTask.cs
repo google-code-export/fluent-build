@@ -75,9 +75,12 @@ namespace FluentBuild.BuildFile
 
             FileSet sourceFiles =
                 new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
-            Core.Build.UsingCsc.Target.Library.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit,
-                                                                    assembly_FluentBuild).OutputFileTo(
-                                                                        assembly_FluentBuild_Tests).Execute();
+            Core.Build.UsingCsc
+                .Target.Library
+                .AddSources(sourceFiles)
+                .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
+                .OutputFileTo(assembly_FluentBuild_Tests)
+                .Execute();
         }
 
         private void RunTests()

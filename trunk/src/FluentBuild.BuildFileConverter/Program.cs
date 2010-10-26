@@ -12,21 +12,17 @@ namespace FluentBuild.BuildFileConverter
 
         private static void Main(string[] args)
         {
-            Console.WriteLine("Does some initial conversion work on an nAnt build file to a fluent build file.");
-            Console.WriteLine();
-            Console.WriteLine("WARNING!! This is not a production tool. It is not meant to be used for anything more than testing");
-            Console.WriteLine();
             if (args.Length != 2)
             {
-                Console.WriteLine("Usage: BuildFileConverter.exe pathToNantFile pathToOutputFile");
+                Console.WriteLine("Attempts to convert nAnt build file to a preliminary fluent build file.");
+                Console.WriteLine();
+                Console.WriteLine("Usage: BuildFileConverter.exe pathToNantFile pathToOutputFolder");
             }
             else
             {
-                var nantConverterStub = new NantConverterStub(args[0], args[1]);
-                nantConverterStub.Parse();
-                new ConvertFile(args[0], args[1]);
+                var convertFile = new ConvertFile(args[0], args[1]);
+                convertFile.Generate();
             }
-            
         }
     }
 }

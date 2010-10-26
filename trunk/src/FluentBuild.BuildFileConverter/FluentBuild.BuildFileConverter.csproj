@@ -35,8 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAnt.Core">
-      <HintPath>..\..\..\Downloads\nant-0.91-alpha2-bin\nant-0.91-alpha2\bin\NAnt.Core.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\tools\nunit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\tools\rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,13 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Parsing\CscParser.cs" />
+    <Compile Include="Parsing\CscParserTests.cs" />
+    <Compile Include="Parsing\TargetParserTests.cs" />
+    <Compile Include="Structure\BuildProject.cs" />
     <Compile Include="ConvertFile.cs" />
-    <Compile Include="NantConverterStub.cs" />
+    <Compile Include="Parsing\ITaskParser.cs" />
+    <Compile Include="OutputGenerator.cs" />
+    <Compile Include="OutputGeneratorTests.cs" />
+    <Compile Include="Parsing\NantBuildFileParserTests.cs" />
+    <Compile Include="Parsing\ParserResolver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
+    <Compile Include="Parsing\NantBuildFileParser.cs" />
+    <Compile Include="Structure\Property.cs" />
+    <Compile Include="Structure\PropertyTests.cs" />
+    <Compile Include="Structure\PropertyType.cs" />
+    <Compile Include="Structure\Target.cs" />
+    <Compile Include="Parsing\TargetParser.cs" />
+    <Compile Include="Parsing\UnkownTypeParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

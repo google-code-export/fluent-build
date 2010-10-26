@@ -17,9 +17,9 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public void WriteTestPassed(TimeSpan duration)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Green);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.BrightGreen);
             WriteMessage(_testName, "Passed " + duration.TotalSeconds.ToString("N3") + "s");
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.White);
         }
 
         internal void WriteMessage(string name, string data)
@@ -34,18 +34,18 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 
         public void WriteTestIgnored(string message)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Yellow);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.BrightYellow);
             WriteMessage(_testName, "Ignored");
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.White);
         }
 
         public void WriteTestFailed(string message, string details)
         {
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Red);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.BrightRed);
             WriteMessage(_testName, "Failed");
             MessageLogger.Write("Details", message);
             MessageLogger.Write("StackTrace", details);
-            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.Default);
+            Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.White);
         }
     }
 }
