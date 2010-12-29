@@ -19,10 +19,13 @@ namespace FluentBuild.Core
             while (Tasks.Count > 0)
             {
                 Action task = Tasks.Dequeue();
-                MessageLogger.WriteHeader(task.Method.Name);
-                task.Invoke();
+                //do not run another task if a previous task has errored
+                if (Environment.ExitCode == 0)
+                {
+                    MessageLogger.WriteHeader(task.Method.Name);
+                    task.Invoke();
+                }
             }
-
            MessageLogger.WriteHeader("DONE");
         }
 

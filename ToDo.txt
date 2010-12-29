@@ -8,12 +8,15 @@ Build
 	-TeamCity not passing additional args
 	-Build.dll should be output to a temp folder instead of current folder
 	-Add BuildArtifact.Move
-
-  This release    
 	-Fileset bug
 
+  This release    
+	
+
   Future Releases
-    -Add BuildFolder.Copy / .Move
+    -GUI for running builds. Why do we need command line? 
+	-Plugin for VS to do builds
+	-Add BuildFolder.Copy / .Move
     -ability to specify (or detect) compiler to use for build files (current default is c#)
 	-ability to reference (or detect) other assemblies in the build file
     -One time tasks (only run the first time the script is run on that computer)

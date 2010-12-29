@@ -16,11 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildExe", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildFileConverter", "src\FluentBuild.BuildFileConverter\FluentBuild.BuildFileConverter.csproj", "{1F6A033C-B543-4540-9A5B-C9E55891E561}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildUI", "src\FluentBuild.BuildUI\FluentBuild.BuildUI.csproj", "{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -80,8 +78,22 @@ Global
 		{1F6A033C-B543-4540-9A5B-C9E55891E561}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1F6A033C-B543-4540-9A5B-C9E55891E561}.Release|x86.ActiveCfg = Release|x86
 		{1F6A033C-B543-4540-9A5B-C9E55891E561}.Release|x86.Build.0 = Release|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Debug|x86.ActiveCfg = Debug|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Debug|x86.Build.0 = Debug|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|Any CPU.ActiveCfg = Release|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|Mixed Platforms.Build.0 = Release|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|x86.ActiveCfg = Release|x86
+		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using FluentBuild.Core;
@@ -7,7 +9,46 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.BuildExe
 {
-    internal class Program
+    public class Compiler
+    {
+        /// <summary>
+        /// Builds an assembly from a source folder. Currently this only works with .cs files
+        /// </summary>
+        /// <param name="path">The path to the source files</param>
+        /// <returns>returns the path to the compiled assembly</returns>
+        public static string BuildAssemblyFromSources(string path)
+        {
+            MessageLogger.WriteDebugMessage("Sources found in: " + path);
+            var fileset = new FileSet();
+            fileset.Include(path + "\\**\\*.cs");
+
+            string startPath =
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
+
+            string dllReference = Path.Combine(startPath, "FluentBuild.dll");
+            MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
+            var tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks.ToString();
+            Directory.CreateDirectory(tempPath);
+            string outputAssembly = Path.Combine(tempPath, "build.dll");
+            MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
+            Build.UsingCsc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
+                IncludeDebugSymbols.Execute();
+            return outputAssembly;
+        }
+
+        public static IEnumerable<Type> FindBuildClasses(string path)
+        {
+            MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
+
+            MessageLogger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
+            Assembly assemblyInstance = Assembly.LoadFile(path);
+            Type[] types = assemblyInstance.GetTypes();
+            return types.Where(t => t.IsSubclassOf(typeof(BuildFile)));
+        }
+
+    }
+
+    public class Program
     {
         private static void Main(string[] args)
         {
@@ -78,7 +119,7 @@ namespace FluentBuild.BuildExe
         /// </summary>
         /// <param name="path">The path to the source files</param>
         /// <returns>returns the path to the compiled assembly</returns>
-        private static string BuildAssemblyFromSources(string path)
+        public static string BuildAssemblyFromSources(string path)
         {
             MessageLogger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();

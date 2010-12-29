@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using FluentBuild.BuildFileConverter.Structure;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -10,14 +11,39 @@ namespace FluentBuild.BuildFileConverter.Parsing
         private IParserResolver _resolver;
         private TargetParser _subject;
         private XElement _targetXml;
+        private ITargetRepository _targetRepository;
 
         [SetUp]
         public void Setup()
         {
             _resolver = MockRepository.GenerateStub<IParserResolver>();
-            _subject = new TargetParser(_resolver);
+            _targetRepository = MockRepository.GenerateStub<ITargetRepository>();
+            _subject = new TargetParser(_resolver, _targetRepository);
             _resolver.Stub(x => x.Resolve("call")).Return(new UnkownTypeParser());
-            _targetXml = XElement.Parse("<target name=\"basic\"><call target=\"mainbuild\"/></target>");   
+            _targetXml = XElement.Parse("<target name=\"basic\" depends=\"clean, compile\"><call target=\"mainbuild\"/></target>");   
+        }
+
+        [Test]
+        public void ShouldParseDependsSeperatedByCommas()
+        {
+            var targetXml = XElement.Parse("<target name=\"basic\" depends=\"clean compile\"><call target=\"mainbuild\"/></target>");   
+            var target = _subject.Parse(targetXml);
+            var mockDependancyTarget = MockRepository.GenerateStub<ITarget>();
+            _targetRepository.Stub(x => x.Resolve("clean")).Return(mockDependancyTarget);
+            _targetRepository.Stub(x => x.Resolve("compile")).Return(mockDependancyTarget);
+            Assert.That(target.DependsOn.Count, Is.EqualTo(2));
+            _targetRepository.AssertWasCalled(x => x.Register(target));
+        }
+
+        [Test]
+        public void ShouldParseDepends()
+        {
+            var target = _subject.Parse(_targetXml);
+            var mockDependancyTarget = MockRepository.GenerateStub<ITarget>();
+            _targetRepository.Stub(x => x.Resolve("clean")).Return(mockDependancyTarget);
+            _targetRepository.Stub(x => x.Resolve("compile")).Return(mockDependancyTarget);
+            Assert.That(target.DependsOn.Count, Is.EqualTo(2));
+            _targetRepository.AssertWasCalled(x=>x.Register(target));
         }
 
         [Test]

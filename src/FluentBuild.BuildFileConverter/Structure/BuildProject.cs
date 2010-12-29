@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Xml.Linq;
 
 namespace FluentBuild.BuildFileConverter.Structure
 {    
@@ -16,9 +18,14 @@ namespace FluentBuild.BuildFileConverter.Structure
             Unkown = new NameValueCollection();
         }
 
+        public string DefaultTarget { get; set; }
+
         public void AddProperty(Property property)
         {
-            Properties.Add(property.Name, property);
+            if (Properties.ContainsKey(property.Name))
+                Properties[property.Name] = property;
+            else
+                Properties.Add(property.Name, property);
         }
     }
 }

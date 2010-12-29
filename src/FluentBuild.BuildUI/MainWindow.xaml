@@ -1,0 +1,24 @@
+﻿<Window x:Class="FluentBuild.BuildUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:BuildUI="clr-namespace:FluentBuild.BuildUI" Title="MainWindow" Height="500" Width="700" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <TextBlock>Path To Build Source:</TextBlock>
+            <TextBox x:Name="Path" HorizontalAlignment="Stretch" />
+            <Button Content="Browse" Click="Button_Click" />
+            <TextBlock>Target:</TextBlock>
+            <ComboBox x:Name="Targets" />
+            <Button Content="Run" Click="RunCurrentBuild" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock>Working Dir:</TextBlock>
+            <TextBox x:Name="WorkingDirectory" HorizontalAlignment="Stretch" MinWidth="100" />
+        </StackPanel>
+        <BuildUI:BuildProgress x:Name="BuildProgress" Grid.Row="2" />
+    </Grid>
+</Window>

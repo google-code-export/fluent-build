@@ -31,7 +31,7 @@ namespace Build
 
         public Default()
         {
-            directory_base = new BuildFolder(Environment.CurrentDirectory);
+            directory_base = new BuildFolder(Directory.GetCurrentDirectory());
             directory_compile = directory_base.SubFolder("compile");
             directory_release = directory_base.SubFolder("release");
             directory_tools = directory_base.SubFolder("tools");

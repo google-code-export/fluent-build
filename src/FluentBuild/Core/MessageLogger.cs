@@ -80,6 +80,12 @@ namespace FluentBuild.Core
             InternalLogger.WriteWarning(prefix, message);
         }
 
+
+        public static void SetLogger(IMessageLogger logger)
+        {
+            InternalLogger = logger;
+        }
+
         public static void SetLogger(string logger)
         {
             switch (logger.ToUpper())
@@ -93,7 +99,6 @@ namespace FluentBuild.Core
                 default:
                     throw new ArgumentException("logger type " + logger + " unkown.");
             }
-            
         }
     }
 }

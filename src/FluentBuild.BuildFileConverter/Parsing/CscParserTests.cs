@@ -25,6 +25,9 @@ namespace FluentBuild.BuildFileConverter.Parsing
 
             var subject = new CscParser();
             subject.Parse(XElement.Parse(input.ToString()));
+//            Assert.That(subject.Sources, Is.Not.Null);
+            Assert.That(subject.References[0], Is.EqualTo("${thirdparty.windsor}"));
+            Assert.That(subject.References[1], Is.EqualTo("${thirdparty.castlecore}"));
         }
     }
 }
