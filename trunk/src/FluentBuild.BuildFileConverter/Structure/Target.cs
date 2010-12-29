@@ -5,15 +5,27 @@ using FluentBuild.BuildFileConverter.Parsing;
 
 namespace FluentBuild.BuildFileConverter.Structure
 {
-    public class Target
+    public interface ITarget
+    {
+        String Name { get; set; }
+        string Body { get; set; }
+        IList<ITaskParser> Tasks { get; set; }
+        IList<ITarget> DependsOn { get; set; }
+        string ToString();
+    }
+
+    public class Target : ITarget
     {
         public String Name { get; set; }
         public string Body { get; set; }
         public IList<ITaskParser> Tasks { get; set; }
 
+        public IList<ITarget> DependsOn { get; set; }
+
         public Target()
         {
             Tasks = new List<ITaskParser>();
+            DependsOn = new List<ITarget>();
         }
 
         public override string ToString()

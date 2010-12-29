@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace FluentBuild.BuildFileConverter.Parsing
@@ -14,9 +15,15 @@ namespace FluentBuild.BuildFileConverter.Parsing
     {
         #region ITaskParser Members
 
+        public IList<string> References { get; set; }
+
         public void Parse(XElement data)
         {
-            throw new NotImplementedException();
+            //var references = data.Element("References");
+            //if (references != null)
+            //{
+            //    references.Elements("includes");
+            //}
         }
 
         public string GererateString()

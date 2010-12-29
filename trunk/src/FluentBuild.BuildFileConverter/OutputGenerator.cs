@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using FluentBuild.BuildFileConverter.Structure;
+using System.Linq;
 
 namespace FluentBuild.BuildFileConverter
 {
@@ -136,12 +137,17 @@ namespace FluentBuild.BuildFileConverter
             sb.Append(
                 "\t\t\t//TODO: Correct Order. The task order is generated in the order they are found in the file (which is probably not the order they need to be run in)");
             sb.AppendLine();
-            foreach (var target in _project.Targets)
+
+            var defaultTarget = _project.Targets.Select(x => x).Where(x => x.Name == _project.DefaultTarget).First();
+            foreach (var target in TargetTreeBuilder.CreateTree(defaultTarget))
             {
                 sb.AppendFormat("\t\t\tAddTask({0});{1}", target.Name.ToVariableString(), Environment.NewLine);
             }
+
             sb.AppendLine("\t\t}");
             return sb.ToString();
         }    
+
+        
     }
 }

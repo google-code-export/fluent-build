@@ -2,7 +2,7 @@
 
 namespace FluentBuild.MessageLoggers
 {
-    internal interface IMessageLogger
+    public interface IMessageLogger
     {
         void WriteHeader(string header);
         void WriteDebugMessage(string message);

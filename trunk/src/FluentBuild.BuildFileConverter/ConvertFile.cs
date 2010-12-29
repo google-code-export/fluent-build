@@ -19,7 +19,19 @@ namespace FluentBuild.BuildFileConverter
         public void Generate()
         {
             var parser = new NantBuildFileParser();
-            BuildProject buildProject = parser.ParseDocument(XDocument.Load(_pathToNantFile));
+            var mainDocument = XDocument.Load(_pathToNantFile);
+            var rootDir = Path.GetDirectoryName(_pathToNantFile);
+
+            foreach(var includes in mainDocument.Root.Elements("include"))
+            {
+                var xdocToInclude = XDocument.Load(rootDir + "\\" + includes.Attribute("buildfile").Value);
+                foreach (var includeElement in xdocToInclude.Root.Elements())
+                {
+                    mainDocument.Root.AddFirst(includeElement);
+                }
+            }
+
+            BuildProject buildProject = parser.ParseDocument(mainDocument);
             var outputGenerator = new OutputGenerator(buildProject);
             string output = outputGenerator.CreateOutput();
             using (var fs = new StreamWriter(_pathToOutputFile + "\\default.cs"))

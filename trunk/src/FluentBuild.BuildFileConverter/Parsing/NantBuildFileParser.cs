@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using FluentBuild.BuildFileConverter.Structure;
@@ -13,13 +14,19 @@ namespace FluentBuild.BuildFileConverter.Parsing
             var parser = new TargetParser();
 
             XElement projectNode = document.Root; //get the project node
-            foreach (XElement childNode in projectNode.Elements("property"))
+            if (projectNode == null)
+                throw new ApplicationException("Could not open root node");
+
+            if (projectNode.Attribute("default") != null) 
+                buildProject.DefaultTarget = projectNode.Attribute("default").Value;
+
+            foreach (var childNode in projectNode.Elements("property"))
             {
                 var property = new Property(childNode.Attribute("name").Value, childNode.Attribute("value").Value);
                 buildProject.AddProperty(property);
             }
 
-            foreach (XElement childNode in projectNode.Elements("target"))
+            foreach (var childNode in projectNode.Elements("target"))
             {
                 buildProject.Targets.Add(parser.Parse(childNode));
                 //childNode.Attribute("name").Value.Replace(".", "_"), childNode.ToString());
