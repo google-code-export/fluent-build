@@ -13,7 +13,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
             var buildProject = new BuildProject();
             var parser = new TargetParser();
 
-            XElement projectNode = document.Root; //get the project node
+            var projectNode = document.Root; //get the project node
             if (projectNode == null)
                 throw new ApplicationException("Could not open root node");
 
@@ -28,7 +28,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
 
             foreach (var childNode in projectNode.Elements("target"))
             {
-                buildProject.Targets.Add(parser.Parse(childNode));
+                buildProject.Targets.Add(parser.Parse(childNode, buildProject));
                 //childNode.Attribute("name").Value.Replace(".", "_"), childNode.ToString());
             }
 

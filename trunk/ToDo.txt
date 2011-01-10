@@ -1,23 +1,18 @@
 Build
-  Completed
-	-Message logger wrapping needs to handle when input has newline characters in it.
-	-Team City support added.
-	-Compiled for .NET 3.5 for better compatability
-	-Test logging for TeamCity
-	-TeamCity plugin should set logger to.... TEAMCITY
-	-TeamCity not passing additional args
-	-Build.dll should be output to a temp folder instead of current folder
-	-Add BuildArtifact.Move
-	-Fileset bug
-
   This release    
-	
+	-GUI for running builds. Why do we need command line? 
+	-Add BuildFolder.Copy / .Move
+	-ability to specify (or detect) compiler to use for build files (current default is c#)
+    -version check that runs in the background and alerts on next run
+	-Token replacement should allow you to specify the delimiter around the token.
+	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository).
+		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
+		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
 
   Future Releases
-    -GUI for running builds. Why do we need command line? 
+	-Multithreaded builds
+	-remove the need for .Execute() methods?
 	-Plugin for VS to do builds
-	-Add BuildFolder.Copy / .Move
-    -ability to specify (or detect) compiler to use for build files (current default is c#)
 	-ability to reference (or detect) other assemblies in the build file
     -One time tasks (only run the first time the script is run on that computer)
 	-SFTP lib: http://sourceforge.net/projects/dotnetssh/files/
@@ -29,14 +24,9 @@ Build
     -Sandcastle generator
     -Ability to change default console colors
 	-CustomFrameworkVersion
-    -version check that runs in the background and alerts on next run
-    -Token replacement should allow you to specify the delimiter around the token.
 	-Add in architecture detection
 	-Zip might want to be Run.Zip.Compress.On(buildArtifact/BuildFolder).OutputTo(dest.zip)
 	-BuildArtifact.Execute().WithArgs()....etc. may be nice
-	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository).
-		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
-		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
 	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
 	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
 	-Add in support for publishing to CodePlex/SourceForge/Etc.

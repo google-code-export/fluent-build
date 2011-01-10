@@ -34,7 +34,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
             Assert.That(target, Is.TypeOf<UnregisteredTarget>());
         }
 
-        [Test, Ignore("need a checkin")]
+        [Test]
         public void ShouldHaveUnregisteredDependancyThenShouldHaveRegisteredDepenancy()
         {
             //create a "compile" target that depends on a "clean" target that has yet to be parsed
@@ -44,10 +44,15 @@ namespace FluentBuild.BuildFileConverter.Parsing
             
             //ensure that we get a proxy to unregisteredTarget
             Assert.That(compileTarget.DependsOn[0], Is.TypeOf<UnregisteredTarget>());
-            
+            Assert.That(compileTarget.DependsOn[0].Name, Is.EqualTo("clean"));
+
+            //ensure that when the actual target gets added that the target will now be the actual target
+            //(instead of the proxy)
             var cleanTarget = new Target() {Name = "clean"};
             _subject.Register(cleanTarget);
-            Assert.That(compileTarget.DependsOn[0], Is.TypeOf<Target>());
+            //Assert.That(compileTarget.DependsOn[0], Is.TypeOf<Target>());
+            Assert.That(compileTarget.DependsOn[0].Name, Is.EqualTo("clean"));
+            Assert.That(compileTarget.DependsOn[0].Body, Is.Null);
         }
     }
 }

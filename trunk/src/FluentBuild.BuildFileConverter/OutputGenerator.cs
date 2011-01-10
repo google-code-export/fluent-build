@@ -107,6 +107,7 @@ namespace FluentBuild.BuildFileConverter
 
             sb.AppendLine("\t}"); //finish class
             sb.AppendLine("}"); //finish namespace
+
             return sb.ToString();
         }
 
@@ -120,7 +121,9 @@ namespace FluentBuild.BuildFileConverter
                 sb.AppendLine(target.ToString());
                 sb.AppendLine("\t\t}");
             }
-            return sb.ToString();
+
+            var final = sb.ToString().Replace("\r", "\n").Replace("\n\n", "\n").Replace("\n\n", "\n");
+            return final;
         }
 
         public string CreateConstructor()

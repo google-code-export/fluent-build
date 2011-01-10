@@ -11,9 +11,12 @@
         {
             switch (name)
             {
-                //case "csc":
-                //    return new CSCParser();
-                //    break;
+                case "csc":
+                    return new CscParser();
+                case "call":
+                    return new CallParser();
+                case "asminfo":
+                    return new AsmInfoParser();
                 default:
                     return new UnkownTypeParser();
             }
