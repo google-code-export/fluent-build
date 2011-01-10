@@ -6,6 +6,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersionAttribute("0.0.0.0")]
 [assembly: AssemblyTitleAttribute("")]
 [assembly: AssemblyDescriptionAttribute("Core FluentBuild assembly")]
-[assembly: AssemblyCopyrightAttribute("Copyright 2009-2010")]
+[assembly: AssemblyCopyrightAttribute("Copyright 2009-2011")]
 [assembly: AssemblyCompany("Solidhouse")]
 [assembly: AssemblyProduct("FluentBuild")]

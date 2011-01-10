@@ -21,10 +21,15 @@ namespace FluentBuild.BuildFileConverter.Parsing
             
         }
 
-        public Target Parse(XElement element)
+        public static string GetNameOfTarget(string input)
+        {
+            return input.Replace(".", "_");
+        }
+
+        public Target Parse(XElement element, BuildProject buildProject)
         {
             var target = new Target();
-            target.Name = element.Attribute("name").Value.Replace(".", "_");
+            target.Name = GetNameOfTarget(element.Attribute("name").Value);
             target.Body = element.ToString();
 
             if (element.Attribute("depends") != null)
@@ -39,7 +44,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
             foreach (var childNode in element.Elements())
             {
                 var parser = _resolver.Resolve(childNode.Name.ToString());
-                parser.Parse(childNode);
+                parser.Parse(childNode, buildProject);
                 target.Tasks.Add(parser);
             }
 

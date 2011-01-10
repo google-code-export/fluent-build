@@ -27,7 +27,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
         public void ShouldParseDependsSeperatedByCommas()
         {
             var targetXml = XElement.Parse("<target name=\"basic\" depends=\"clean compile\"><call target=\"mainbuild\"/></target>");   
-            var target = _subject.Parse(targetXml);
+            var target = _subject.Parse(targetXml, null);
             var mockDependancyTarget = MockRepository.GenerateStub<ITarget>();
             _targetRepository.Stub(x => x.Resolve("clean")).Return(mockDependancyTarget);
             _targetRepository.Stub(x => x.Resolve("compile")).Return(mockDependancyTarget);
@@ -38,7 +38,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
         [Test]
         public void ShouldParseDepends()
         {
-            var target = _subject.Parse(_targetXml);
+            var target = _subject.Parse(_targetXml, null);
             var mockDependancyTarget = MockRepository.GenerateStub<ITarget>();
             _targetRepository.Stub(x => x.Resolve("clean")).Return(mockDependancyTarget);
             _targetRepository.Stub(x => x.Resolve("compile")).Return(mockDependancyTarget);
@@ -49,7 +49,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
         [Test]
         public void ShouldParseTarget()
         {
-            var target = _subject.Parse(_targetXml);
+            var target = _subject.Parse(_targetXml, null);
             
             Assert.That(target.Name, Is.EqualTo("basic"));
             Assert.That(target.Body, Is.EqualTo(_targetXml.ToString()));
@@ -58,7 +58,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
         [Test]
         public void ShouldResolveParser()
         {
-            var target = _subject.Parse(_targetXml);
+            var target = _subject.Parse(_targetXml, null);
             _resolver.AssertWasCalled(x=>x.Resolve("call"));
         }
 

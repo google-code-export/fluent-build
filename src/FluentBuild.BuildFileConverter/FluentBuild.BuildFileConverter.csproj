@@ -51,6 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Parsing\AsmInfoParser.cs" />
+    <Compile Include="Parsing\CallParser.cs" />
+    <Compile Include="Parsing\CallParserTests.cs" />
+    <Compile Include="Parsing\CompileSourcesParser.cs" />
+    <Compile Include="Parsing\CompileSourcesParserTests.cs" />
     <Compile Include="Parsing\CscParser.cs" />
     <Compile Include="Parsing\CscParserTests.cs" />
     <Compile Include="Parsing\TargetRepository.cs" />
@@ -75,6 +80,12 @@
     <Compile Include="Parsing\UnkownTypeParser.cs" />
     <Compile Include="TargetTreeBuilder.cs" />
     <Compile Include="TargetTreeBuilderTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentBuild\FluentBuild.csproj">
+      <Project>{71965190-338E-42CD-9D48-47955DB750E2}</Project>
+      <Name>FluentBuild</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

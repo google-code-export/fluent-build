@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Xml.Linq;
+using FluentBuild.BuildFileConverter.Structure;
 
 namespace FluentBuild.BuildFileConverter.Parsing
 {
@@ -8,7 +9,7 @@ namespace FluentBuild.BuildFileConverter.Parsing
     {
         private string _data;
 
-        public void Parse(XElement data)
+        public void Parse(XElement data, BuildProject buildProject)
         {
             _data = data.ToString();
         }
