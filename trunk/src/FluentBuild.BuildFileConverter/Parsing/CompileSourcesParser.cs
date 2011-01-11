@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using FluentBuild.BuildFileConverter.Structure;
-using NUnit.Framework;
 
 namespace FluentBuild.BuildFileConverter.Parsing
 {

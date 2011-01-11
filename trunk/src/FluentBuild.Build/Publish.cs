@@ -24,6 +24,7 @@ namespace Build
             AddTask(Clean);
             AddTask(CompileCoreWithOutTests);
             AddTask(CompileRunner);
+            AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
             AddTask(PublishToRepository);
@@ -51,6 +52,18 @@ namespace Build
                 .Summary("Alpha Release (v" + _version + ")")
                 .TargetFileName(_finalFileName)
                 .Upload();
+        }
+
+        private void CompileBuildFileConverterWithoutTests()
+        {
+            var sourceFiles = new FileSet();
+            sourceFiles.Include(directory_src_converter).RecurseAllSubDirectories.Filter("*.cs")
+                .Exclude(directory_src_converter).RecurseAllSubDirectories.Filter("*Tests.cs"); ;
+
+            FluentBuild.Core.Build.UsingCsc.Target.Executable
+                .AddSources(sourceFiles)
+                .OutputFileTo(assembly_BuildFileConverter_WithTests)
+                .Execute();
         }
 
         private void CompileCoreWithOutTests()
