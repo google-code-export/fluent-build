@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using System.Xml.Linq;
-using FluentBuild.Core;
 using NUnit.Framework;
 
 namespace FluentBuild.BuildFileConverter.Parsing
