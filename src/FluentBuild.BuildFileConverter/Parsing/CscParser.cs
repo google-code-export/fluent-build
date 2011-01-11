@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using FluentBuild.BuildFileConverter.Structure;
-using NUnit.Framework;
+
 
 namespace FluentBuild.BuildFileConverter.Parsing
 {
-    //call parser
-    //exec parser
-    //delete parser
-    //mkdir parser
-    //asminfo parser
-    //zipfile parser
-
     public class CscParser : ITaskParser
     {
         private XElement _originalData;

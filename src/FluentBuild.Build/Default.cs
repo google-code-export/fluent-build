@@ -20,13 +20,13 @@ namespace Build
         private readonly BuildFolder directory_tools;
         private BuildFolder directory_src_core;
         private BuildFolder directory_src_runner;
-        private BuildFolder directory_src_converter;
+        protected BuildFolder directory_src_converter;
 
         private readonly BuildArtifact thirdparty_nunit;
         private readonly BuildArtifact thirdparty_rhino;
         internal string _version;
         internal BuildArtifact thirdparty_sharpzip;
-        private BuildArtifact assembly_BuildFileConverter_WithTests;
+        protected BuildArtifact assembly_BuildFileConverter_WithTests;
 
 
         public Default()

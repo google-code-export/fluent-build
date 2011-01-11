@@ -34,8 +34,8 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
         {
             IList<Message> lines = Parse(prefix, output, error, exitCode);
             Display(lines);
-            if (exitCode !=0)
-                throw new ExecutableFailedException("Exectable returned non-zero exit code. Code Was: " + exitCode);
+         //   if (exitCode !=0)
+           //     throw new ExecutableFailedException("Exectable returned non-zero exit code. Code Was: " + exitCode);
 
         }
 
