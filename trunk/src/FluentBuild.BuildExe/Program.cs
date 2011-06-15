@@ -22,8 +22,7 @@ namespace FluentBuild.BuildExe
             var fileset = new FileSet();
             fileset.Include(path + "\\**\\*.cs");
 
-            string startPath =
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
+            string startPath =Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
 
             string dllReference = Path.Combine(startPath, "FluentBuild.dll");
             MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
@@ -54,13 +53,14 @@ namespace FluentBuild.BuildExe
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-p:property=value] [-p:property] -v:Verbosity");
+                Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-m:Method] [-p:property=value] [-p:property] -v:Verbosity");
                 Console.WriteLine();
                 Console.WriteLine(
                     "BuildFileOrSource: the dll that contains the precompiled build file OR the path to the source folder than contains build files (fb.exe will compile the build file for you)");
                 Console.WriteLine("c: The class to run. If none is specified then \"Default\" is assumed");
                 Console.WriteLine("p: properties to pass to the build script. These can be accessed via Properties.CommandLine in your build script. ");
                 Console.WriteLine("v: verbosity of output. Can be None, TaskNamesOnly, TaskDetails, Full");
+                Console.WriteLine("m: Method to run. Allows a user to execute specific methods in the build. If specified only the method will run. Multiple specifications are allowed.");
                 Environment.Exit(1);
             }
 
@@ -103,7 +103,7 @@ namespace FluentBuild.BuildExe
                 Environment.Exit(1);
             }
 
-            ExecuteBuildTask(pathToAssembly, parser.ClassToRun);
+            ExecuteBuildTask(pathToAssembly, parser.ClassToRun, parser.MethodsToRun);
         }
 
         private static void UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -144,7 +144,8 @@ namespace FluentBuild.BuildExe
         /// </summary>
         /// <param name="path">The path to the DLL that has a class that implements IBuild</param>
         /// <param name="classToRun"></param>
-        private static void ExecuteBuildTask(string path, string classToRun)
+        /// <param name="methodsToRun"></param>
+        private static void ExecuteBuildTask(string path, string classToRun, IList<string> methodsToRun)
         {
             MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
             
@@ -157,7 +158,7 @@ namespace FluentBuild.BuildExe
                 if ((t.Name == classToRun) && t.IsSubclassOf(typeof (BuildFile)))
                 {
                     classfound = true;
-                    StartRun(assemblyInstance, t);
+                    StartRun(assemblyInstance, t, methodsToRun);
                     return;
                 }
             }
@@ -172,18 +173,55 @@ namespace FluentBuild.BuildExe
             Environment.Exit(0);
         }
 
-        private static void StartRun(Assembly assemblyInstance, Type t)
+        private static void StartRun(Assembly assemblyInstance, Type t, IList<string> methodsToRun)
         {
             var build = (BuildFile) assemblyInstance.CreateInstance(t.FullName);
             MessageLogger.WriteHeader("Execute");
             MessageLogger.Write("EXECUTE", "Running Class: " + t.FullName);
             if (build.TaskCount == 0)
             {
-                Console.WriteLine(
-                    "No tasks were found. Make sure that you add a task in your build classes constructor via AddTask()");
+                Console.WriteLine("No tasks were found. Make sure that you add a task in your build classes constructor via AddTask()");
                 Environment.Exit(1);
             }
-            build.InvokeNextTask();
+            if (methodsToRun.Count != 0)
+            {
+                if (!DoAllMethodsExistInType(t, methodsToRun))
+                {
+                    Console.WriteLine("Methods that were specified could not be found in the build file. Ensure the method is Public and spelled correctly");
+                    Environment.Exit(1);
+                }
+                build.ClearTasks();
+
+                foreach (var method in methodsToRun)
+                {
+                    string methodToInvoke = method;
+                    var a = new Action(delegate
+                                           {
+                                               t.InvokeMember(methodToInvoke,  BindingFlags.Default | BindingFlags.InvokeMethod, null, build, null);
+                                           });
+                    build.AddTask(method, a);    
+                }
+                
+            }
+
+        build.InvokeNextTask();
+        }
+
+        public static bool DoAllMethodsExistInType(Type type, IList<string> methodsToRun)
+        {
+            var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var methodToRun in methodsToRun)
+            {
+                var found = false;
+                foreach (var method in methods)
+                {
+                    if (method.Name == methodToRun)
+                        found = true;
+                }
+                if (found == false)
+                    return false;
+            }
+            return true;
         }
     }
 }

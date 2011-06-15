@@ -111,7 +111,7 @@ namespace Build
                 .OutputTo(directory_base.SubFolder("src").SubFolder(folder).SubFolder("Properties").File("AssemblyInfo.cs"));
         }
 
-        internal void Clean()
+        public void Clean()
         {
             directory_compile.Delete(OnError.Continue).Create();
             directory_release.Delete(OnError.Continue).Create();

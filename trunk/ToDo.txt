@@ -10,8 +10,9 @@ Build
 		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
 
   Future Releases
+    -multiple targets. i.e. -C:MainBuild[Clean,Compile,Deploy]
 	-Multithreaded builds
-	-remove the need for .Execute() methods?
+	-remove the need for .Execute() methods? (i.e. delayed execution)
 	-Plugin for VS to do builds
 	-ability to reference (or detect) other assemblies in the build file
     -One time tasks (only run the first time the script is run on that computer)

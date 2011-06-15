@@ -8,7 +8,7 @@ namespace FluentBuild.Core
     ///</summary>
     public class BuildFile
     {
-        internal Queue<Action> Tasks;
+        internal Queue<NamedTask> Tasks;
 
         
         ///<summary>
@@ -18,12 +18,12 @@ namespace FluentBuild.Core
         {
             while (Tasks.Count > 0)
             {
-                Action task = Tasks.Dequeue();
+                NamedTask task = Tasks.Dequeue();
                 //do not run another task if a previous task has errored
                 if (Environment.ExitCode == 0)
                 {
-                    MessageLogger.WriteHeader(task.Method.Name);
-                    task.Invoke();
+                    MessageLogger.WriteHeader(task.Name);
+                    task.Task.Invoke();
                 }
             }
            MessageLogger.WriteHeader("DONE");
@@ -34,9 +34,16 @@ namespace FluentBuild.Core
         ///</summary>
         public BuildFile()
         {
-            Tasks = new Queue<Action>();
+            Tasks = new Queue<NamedTask>();
         }
 
+        ///<summary>
+        /// Clears the task list
+        ///</summary>
+        public void ClearTasks()
+        {
+            Tasks.Clear();
+        }
 
         ///<summary>
         /// Adds a task for fb.exe to run in the order that it should be run
@@ -44,8 +51,31 @@ namespace FluentBuild.Core
         ///<param name="task">The method to run</param>
         public void AddTask(Action task)
         {
-            Tasks.Enqueue(task);
+            Tasks.Enqueue(new NamedTask(task.Method.Name, task));
         }
+
+        ///<summary>
+        /// Adds a task for fb.exe to run in the order that it should be run
+        ///</summary>
+        ///<param name="task">The method to run</param>
+        ///<param name="name">The name of the task (will be displayed when the task is run)</param>
+        public void AddTask(string name, Action task)
+        {
+            Tasks.Enqueue(new NamedTask(name, task));
+        }
+
+        internal class NamedTask
+        {
+            public string Name { get; set; }
+            public Action Task { get; set; }
+
+            public NamedTask(string name, Action task)
+            {
+                Name = name;
+                Task = task;
+            }
+        }
+        
 
         ///<summary>
         /// Gets the number of tasks in the queue.

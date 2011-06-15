@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using FluentBuild.Core;
 
 namespace FluentBuild.BuildExe
 {
-    internal class CommandLineParser
+    public class CommandLineParser
     {
+        private IList<string> _methodsToRun;
+
         public CommandLineParser(string[] args)
         {
+            _methodsToRun = new List<string>();
             ClassToRun = "Default";
             //what about when build class is passed in
-            if (Path.GetExtension(args[0]).ToLower() != "dll")
+            if (Path.GetExtension(args[0]).ToLower() != ".dll")
             {
                 SourceBuild = true;
                 PathToBuildSources = GetFullPathIfRelative(args[0]);
@@ -30,6 +34,11 @@ namespace FluentBuild.BuildExe
         public string PathToBuildSources { get; set; }
         public bool SourceBuild { get; private set; }
         public string ClassToRun { get; set; }
+
+        public IList<String> MethodsToRun
+        {
+            get { return _methodsToRun; }
+        }
 
         public string GetFullPathIfRelative(string path)
         {
@@ -72,6 +81,9 @@ namespace FluentBuild.BuildExe
                     break;
                 case "L":
                     Core.MessageLogger.SetLogger(data);
+                    break;
+                case "M":
+                    MethodsToRun.Add(data);
                     break;
                 default:
                     throw new ArgumentException("Do not understand type");
