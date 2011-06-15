@@ -743,11 +743,23 @@
              Instantiates a build file and initializes the Tasks queue.
             </summary>
         </member>
+        <member name="M:FluentBuild.Core.BuildFile.ClearTasks">
+            <summary>
+             Clears the task list
+            </summary>
+        </member>
         <member name="M:FluentBuild.Core.BuildFile.AddTask(System.Action)">
             <summary>
              Adds a task for fb.exe to run in the order that it should be run
             </summary>
             <param name="task">The method to run</param>
+        </member>
+        <member name="M:FluentBuild.Core.BuildFile.AddTask(System.String,System.Action)">
+            <summary>
+             Adds a task for fb.exe to run in the order that it should be run
+            </summary>
+            <param name="task">The method to run</param>
+            <param name="name">The name of the task (will be displayed when the task is run)</param>
         </member>
         <member name="P:FluentBuild.Core.BuildFile.TaskCount">
             <summary>

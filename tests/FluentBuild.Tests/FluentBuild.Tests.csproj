@@ -79,6 +79,8 @@
     <Compile Include="AssemblyInfoTests.cs" />
     <Compile Include="BuildArtifact\BuildArtifactCopyTests.cs" />
     <Compile Include="BuildArtifact\BuildArtifactTests.cs" />
+    <Compile Include="BuildExeTexts\CommandLineParserTests.cs" />
+    <Compile Include="BuildExeTexts\ProgramTests.cs" />
     <Compile Include="BuildFolderTests.cs" />
     <Compile Include="Build\BuildTests.cs" />
     <Compile Include="Build\BuildUsingCscTests.cs" />
@@ -100,6 +102,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\FluentBuild.BuildExe\FluentBuild.BuildExe.csproj">
+      <Project>{4007AB9B-0AEA-419F-831B-4516F947F025}</Project>
+      <Name>FluentBuild.BuildExe</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\FluentBuild\FluentBuild.csproj">
       <Project>{71965190-338E-42CD-9D48-47955DB750E2}</Project>
       <Name>FluentBuild</Name>
