@@ -31,5 +31,59 @@ namespace FluentBuild.Tests
             string text = File.ReadAllText(outputLocation);
             Assert.That(text.Trim(), Is.EqualTo(expected.ToString().Trim()));
         }
+
+        [Test]
+        public void ShouldCompileAssemblyInfoToCSharp()
+        {
+            string outputLocation = rootFolder + "\\assemblyinfo.cs";
+            AssemblyInfo.Language.CSharp.Company("company")
+                .Copyright("copyright")
+                .Description("description")
+                .Product("product")
+                .Title("title")
+                .Version("1.0.0.0")
+                .Culture("culture")
+                .DelaySign(true)
+                .FileVersion("1.0.0.0")
+                .InformationalVersion("1.0.0.0")
+                //.KeyFile("c:\\temp\\nonexistant.snk")
+                //.KeyName("name of key")
+                .Trademark("trademark")
+                .OutputTo(outputLocation);
+
+            var fs = new FileSet();
+            fs.Include(outputLocation);
+            var outputFileLocation = rootFolder + "\\asminfo.dll";
+            Core.Build.UsingCsc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation).Execute();
+            Assert.That(File.Exists(outputFileLocation));
+
+        }
+
+        [Test]
+        public void ShouldCompileAssemblyInfoToVisualBasic()
+        {
+            string outputLocation = rootFolder + "\\assemblyinfo.cs";
+            AssemblyInfo.Language.VisualBasic.Company("company")
+                .Copyright("copyright")
+                .Description("description")
+                .Product("product")
+                .Title("title")
+                .Version("1.0.0.0")
+                .Culture("culture")
+                .DelaySign(true)
+                .FileVersion("1.0.0.0")
+                .InformationalVersion("1.0.0.0")
+                //.KeyFile("c:\\temp\\nonexistant.snk")
+                //.KeyName("name of key")
+                .Trademark("trademark")
+                .OutputTo(outputLocation);
+
+            var fs = new FileSet();
+            fs.Include(outputLocation);
+            var outputFileLocation = rootFolder + "\\asminfo.dll";
+            Core.Build.UsingVbc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation).Execute();
+            Assert.That(File.Exists(outputFileLocation));
+
+        }
     }
 }
