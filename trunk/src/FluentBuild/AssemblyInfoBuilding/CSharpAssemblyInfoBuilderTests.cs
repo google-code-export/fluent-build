@@ -7,12 +7,14 @@ namespace FluentBuild.AssemblyInfoBuilding
 {
     ///<summary>
     ///</summary>
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class CSharpAssemblyInfoBuilderTests
     {
         ///<summary>
         ///</summary>
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void ShouldBuildString()
         {
             var builder = new CSharpAssemblyInfoBuilder();
@@ -30,9 +32,12 @@ namespace FluentBuild.AssemblyInfoBuilding
             sb.AppendLine("[assembly: AssemblyTitleAttribute(\"asmTitle\")]");
             sb.AppendLine("[assembly: AssemblyDescriptionAttribute(\"asmDesc\")]");
             sb.AppendLine("[assembly: AssemblyCopyrightAttribute(\"asmCopyright\")]");
+            sb.AppendLine("[assembly: AssemblyCompanyAttribute(\"Company\")]");
+            sb.AppendLine("[assembly: AssemblyProductAttribute(\"My Product\")]");
+
             //sb.AppendFormat("[assembly: ApplicationNameAttribute(\"{0}\")]{1}", details._applicationName, Environment.NewLine);
-            sb.AppendFormat("[assembly: AssemblyCompany(\"{0}\")]{1}", details.AssemblyCompany, Environment.NewLine);
-            sb.AppendFormat("[assembly: AssemblyProduct(\"{0}\")]{1}", details.AssemblyProduct, Environment.NewLine);
+//            sb.AppendFormat("[assembly: AssemblyCompany(\"{0}\")]{1}", details.AssemblyCompany, Environment.NewLine);
+//            sb.AppendFormat("[assembly: AssemblyProduct(\"{0}\")]{1}", details.AssemblyProduct, Environment.NewLine);
             Assert.That(builder.Build(details).Trim(), Is.EqualTo(sb.ToString().Trim()));
         }
     }
