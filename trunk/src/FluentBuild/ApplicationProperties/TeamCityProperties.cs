@@ -42,6 +42,42 @@ namespace FluentBuild.ApplicationProperties
             get { return GetEnvironmentVariable("TEAMCITY_PROJECT_NAME"); }
         }
 
+        ///<summary>
+        /// The version of TeamCity
+        ///</summary>
+        public string TeamCityVersion
+        {
+            get { return GetEnvironmentVariable("TEAMCITY_VERSION"); }
+        }
+
+        ///<summary>
+        /// The current build configuration name
+        ///</summary>
+        public string BuildConfigurationName
+        {
+            get { return GetEnvironmentVariable("TEAMCITY_BUILDCONF_NAME "); }
+        }
+
+        ///<summary>
+        /// Gets the latest revision included in the build from the source control system.
+        ///</summary>
+        ///<param name="simplifiedVcsRootName">The version control root name with any non-alphanumeric characters replaced with a "_"</param>
+        ///<returns>The version from the source control system</returns>
+        public string BuildVersionControlSystemNumber(string simplifiedVcsRootName)
+        {
+            return GetEnvironmentVariable("BUILD_VCS_NUMBER_" + simplifiedVcsRootName);
+        }
+
+        /// <summary>
+        /// Gets a property by name
+        /// </summary>
+        /// <param name="propertyName">the name of the team city environment variable</param>
+        /// <returns>The value of the property</returns>
+        public string GetProperty(string propertyName)
+        {
+           return GetEnvironmentVariable(propertyName);
+        }
+
         private string GetEnvironmentVariable(string name)
         {
             return _environmentVariableWrapper.Get(name);
