@@ -92,7 +92,7 @@
     <Compile Include="DatabaseTests.cs" />
     <Compile Include="FilesetTests.cs" />
     <Compile Include="FileSystemFinderTests.cs" />
-    <Compile Include="Run\RunExecuteableTests.cs" />
+    <Compile Include="Run\RunExecutableTests.cs" />
     <Compile Include="Run\NunitTests.cs" />
     <Compile Include="Samples\Run\StdOutStdError\Program.cs" />
     <Compile Include="Settings.cs" />

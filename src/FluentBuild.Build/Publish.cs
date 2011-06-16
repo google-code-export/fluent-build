@@ -81,7 +81,7 @@ namespace Build
                 .Execute();
 
             Run.ILMerge
-                .ExecuteableLocatedAt(@"tools\ilmerge\ilmerge.exe")
+                .ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
                 .AddSource(AssemblyFluentBuildRelease_Partial)
                 .AddSource(thirdparty_sharpzip)
                 .OutputTo(AssemblyFluentBuildRelease_Merged)

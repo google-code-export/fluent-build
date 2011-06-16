@@ -6,17 +6,17 @@ namespace FluentBuild.Compilation
 {
     internal class Resgen
     {
-        private readonly IExecuteable _exeRunner;
+        private readonly IExecutable _exeRunner;
         internal FileSet Files;
         internal string OutputFolder;
         internal string Prefix;
 
-        internal Resgen(IExecuteable exeRunner)
+        internal Resgen(IExecutable exeRunner)
         {
             _exeRunner = exeRunner;
         }
 
-        public Resgen() : this(new Executeable())
+        public Resgen() : this(new Executable())
         {
         }
 
@@ -38,16 +38,16 @@ namespace FluentBuild.Compilation
             return this;
         }
 
-        internal string GetPathToResGenExecuteable()
+        internal string GetPathToResGenExecutable()
         {
-            string resGenExecuteable = Path.Combine(Defaults.FrameworkVersion.GetPathToSdk(), "bin\\resgen.exe");
-            MessageLogger.WriteDebugMessage("Found ResGen at: " + resGenExecuteable);
-            return resGenExecuteable;
+            string executable = Path.Combine(Defaults.FrameworkVersion.GetPathToSdk(), "bin\\resgen.exe");
+            MessageLogger.WriteDebugMessage("Found ResGen at: " + executable);
+            return executable;
         }
 
         public FileSet Execute()
         {
-            string resGenExecuteable = GetPathToResGenExecuteable();
+            string resGenExecutable = GetPathToResGenExecutable();
 
             var outputFiles = new FileSet();
             foreach (string resourceFileName in Files.Files)
@@ -56,9 +56,9 @@ namespace FluentBuild.Compilation
                 outputFileName = Path.Combine(OutputFolder, outputFileName);
                 outputFiles.Include(outputFileName);
 
-                IExecuteable executeable = _exeRunner.Executable(resGenExecuteable);
-                IExecuteable withArguments = executeable.WithArguments("\"" + resourceFileName + "\"");
-                IExecuteable arguments = withArguments.WithArguments("\"" + outputFileName + "\"");
+                IExecutable executable = _exeRunner.ExecutablePath(resGenExecutable);
+                IExecutable withArguments = executable.WithArguments("\"" + resourceFileName + "\"");
+                IExecutable arguments = withArguments.WithArguments("\"" + outputFileName + "\"");
                 arguments.Execute();
             }
             return outputFiles;

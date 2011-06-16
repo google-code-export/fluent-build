@@ -17,17 +17,17 @@ namespace FluentBuild.Runners.UnitTesting
         internal NameValueCollection _parameters;
         internal string _pathToConsoleRunner;
         internal string _workingDirectory;
-        private IExecuteable _executable;
+        private IExecutable _executable;
         private readonly IFileFinder _fileFinder;
 
-        internal NUnitRunner(IExecuteable executeable, IFileFinder fileFinder)
+        internal NUnitRunner(IExecutable executable, IFileFinder fileFinder)
         {
-            _executable = executeable;
+            _executable = executable;
             _fileFinder = fileFinder;
             _parameters = new NameValueCollection();
         }
 
-        internal NUnitRunner() : this (new Executeable(), new FileFinder())
+        internal NUnitRunner() : this (new Executable(), new FileFinder())
         {
 
         }
@@ -141,17 +141,17 @@ namespace FluentBuild.Runners.UnitTesting
                     throw new FileNotFoundException("Could not automatically find nunit-console.exe. Please specify it manually using NunitRunner.PathToNunitConsoleRunner");
             }
 
-            var executeable = _executable.Executable(_pathToConsoleRunner).WithArguments(BuildArgs());
+            var executable = _executable.ExecutablePath(_pathToConsoleRunner).WithArguments(BuildArgs());
             //if (OnError == OnError.Fail)
-            //    executeable = executeable.FailOnError;
+            //    executable = executable.FailOnError;
             //else if (OnError == OnError.Continue)
-            //    executeable = executeable.ContinueOnError;
+            //    executable = executable.ContinueOnError;
 
             if (!String.IsNullOrEmpty(_workingDirectory))
-                executeable = executeable.InWorkingDirectory(_workingDirectory);
+                executable = executable.InWorkingDirectory(_workingDirectory);
             
             //don't throw an errors
-            var returnCode = executeable.WithMessageProcessor(new NunitMessageProcessor()).Execute();
+            var returnCode = executable.WithMessageProcessor(new NunitMessageProcessor()).Execute();
 
             //if it returned non-zero then just exit (as a test failed)
             if (returnCode != 0 && OnError == OnError.Fail)

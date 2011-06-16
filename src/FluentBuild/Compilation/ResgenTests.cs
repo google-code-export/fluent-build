@@ -6,12 +6,14 @@ using Rhino.Mocks;
 
 namespace FluentBuild.Compilation
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class ResgenTests
     {
         #region Setup/Teardown
 
-        ///<summary />	    [SetUp]
+        ///<summary />
+	    [SetUp]
         public void SetUp()
         {
             var frameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();
@@ -21,16 +23,17 @@ namespace FluentBuild.Compilation
 
         #endregion
 
-        ///<summary />	    [Test]
+        ///<summary />
+	    [Test]
         public void Execute_ShouldRunAgainstMock()
         {
             var fileset = new FileSet();
             fileset.Include(@"c:\temp\nonexistant.txt");
 
-            var mockExe = MockRepository.GenerateStub<IExecuteable>();
+            var mockExe = MockRepository.GenerateStub<IExecutable>();
 
             Resgen subject = new Resgen(mockExe).GenerateFrom(fileset).OutputTo("c:\\");
-            mockExe.Stub(x => x.Executable("c:\\temp\\bin\\resgen.exe")).Return(mockExe);
+            mockExe.Stub(x => x.ExecutablePath("c:\\temp\\bin\\resgen.exe")).Return(mockExe);
             mockExe.Stub(x => x.WithArguments(Arg<string[]>.Is.Anything)).Return(mockExe);
             mockExe.Stub(x => x.WithArguments(Arg<string[]>.Is.Anything)).Return(mockExe);
 
@@ -38,7 +41,8 @@ namespace FluentBuild.Compilation
             mockExe.AssertWasCalled(x => x.Execute());
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void GenerateFrom_ShouldPopulateFiles()
         {
             var fileset = new FileSet();
@@ -50,7 +54,8 @@ namespace FluentBuild.Compilation
             Assert.That(subject, Is.Not.Null);
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void OutputTo_ShouldPopulatePathAndNotBeNull()
         {
             string folder = "c:\temp";
@@ -61,7 +66,8 @@ namespace FluentBuild.Compilation
         }
 
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void PrefixOutputsWith_ShouldSetPrefixProperly()
         {
             string prefix = "blah";

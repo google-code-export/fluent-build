@@ -20,26 +20,26 @@ namespace FluentBuild.Runners
         }
 
         [Test]
-        public void FindExecuteable_ShouldUseSetArg()
+        public void FindExecutable_ShouldUseSetArg()
         {
             var path = "c:\\temp\\ilmerge.exe";
-            _subject.ExecuteableLocatedAt(path);
-            Assert.That(_subject.FindExecuteable(), Is.EqualTo(path));
+            _subject.ExecutableLocatedAt(path);
+            Assert.That(_subject.FindExecutable(), Is.EqualTo(path));
         }
 
         [Test]
-        public void FindExecuteable_ShouldAutoFindIfNotSet()
+        public void FindExecutable_ShouldAutoFindIfNotSet()
         {
             _fileFinder.Stub(x => x.Find("ILMerge.exe")).Return("c:\\ilmerge.exe");
-            _subject.FindExecuteable();
+            _subject.FindExecutable();
             _fileFinder.AssertWasCalled(x=>x.Find("ILMerge.exe"));
         }
 
         [Test, ExpectedException(typeof(FileNotFoundException))]
-        public void FindExecuteable_ShouldThrowExecptionIfItCantBeFound()
+        public void FindExecutable_ShouldThrowExecptionIfItCantBeFound()
         {
             _fileFinder.Stub(x => x.Find("ILMerge.exe")).Return(null);
-            _subject.FindExecuteable();
+            _subject.FindExecutable();
 
         }
 

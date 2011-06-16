@@ -27,21 +27,21 @@ namespace FluentBuild.Core
         /// <summary>
         /// Creates an Executable object based on a string path
         /// </summary>
-        /// <param name="executeablePath">Path to the executable</param>
+        /// <param name="executablePath">Path to the executable</param>
         /// <returns>an Executable object</returns>
-        public static Executeable Executeable(string executeablePath)
+        public static Executable Executable(string executablePath)
         {
-            return new Executeable(executeablePath);
+            return new Executable(executablePath);
         }
 
         /// <summary>
         /// Builds an Executable object based on a build artifact
         /// </summary>
-        /// <param name="executeablePath">The build artifact</param>
+        /// <param name="executablePath">The build artifact</param>
         /// <returns>an Executable object</returns>
-        public static Executeable Executeable(BuildArtifact executeablePath)
+        public static Executable Executable(BuildArtifact executablePath)
         {
-            return new Executeable(executeablePath.ToString());
+            return new Executable(executablePath.ToString());
         }
 
         public static void Debugger()
