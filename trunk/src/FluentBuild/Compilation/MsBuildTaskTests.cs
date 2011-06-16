@@ -13,7 +13,7 @@ namespace FluentBuild.Compilation
     {
         private MsBuildTask _subject;
         private string _projectOrSolutionFilePath;
-        private IExecuteable _executable;
+        private IExecutable _executable;
 
 
         ///<summary>
@@ -23,7 +23,7 @@ namespace FluentBuild.Compilation
         public void Setup()
         {
             _projectOrSolutionFilePath = "c:\\temp.sln";
-            _executable = MockRepository.GenerateStub<IExecuteable>();
+            _executable = MockRepository.GenerateStub<IExecutable>();
             _subject = new MsBuildTask(_projectOrSolutionFilePath, _executable);            
         }
 
@@ -131,7 +131,7 @@ namespace FluentBuild.Compilation
         {
             Defaults.FrameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();
             //mock calls
-            _executable.Stub(x => x.Executable("")).IgnoreArguments().Return(_executable);
+            _executable.Stub(x => x.ExecutablePath("")).IgnoreArguments().Return(_executable);
             _executable.Stub(x => x.WithArguments("")).IgnoreArguments().Return(_executable);
 
             _subject.Execute();

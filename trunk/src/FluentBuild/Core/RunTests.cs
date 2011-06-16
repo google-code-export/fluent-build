@@ -21,8 +21,8 @@ namespace FluentBuild.Core
         public void Run_Should_Populate_Exe()
         {
             const string exe = "temp.exe";
-            Executeable executeable = Run.Executeable(exe);
-            Assert.That(executeable.ExecuteablePath, Is.EqualTo(exe));
+            Executable executable = Run.Executable(exe);
+            Assert.That(executable.Path, Is.EqualTo(exe));
         }
 
         ///<summary />
@@ -30,8 +30,8 @@ namespace FluentBuild.Core
         public void Run_Should_Populate_Exe_When_Using_Build_Artifact()
         {
             var exe = new BuildArtifact("temp.exe");
-            Executeable executeable = Run.Executeable(exe);
-            Assert.That(executeable.ExecuteablePath, Is.EqualTo(exe.ToString()));
+            Executable executable = Run.Executable(exe);
+            Assert.That(executable.Path, Is.EqualTo(exe.ToString()));
         }
 
         ///<summary />

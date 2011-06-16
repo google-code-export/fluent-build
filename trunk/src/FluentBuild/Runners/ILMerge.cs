@@ -35,13 +35,13 @@ namespace FluentBuild.Runners
         ///<summary>
         /// Executes the ILMerge assembly
         ///</summary>
-        ///<exception cref="FileNotFoundException">If the path to the executeable was not set or can not be found automatically.</exception>
+        ///<exception cref="FileNotFoundException">If the path to the executable was not set or can not be found automatically.</exception>
         public void Execute()
         {
-            Run.Executeable(FindExecuteable()).WithArguments(BuildArgs()).Execute();
+            Run.Executable(FindExecutable()).WithArguments(BuildArgs()).Execute();
         }
 
-        internal string FindExecuteable()
+        internal string FindExecutable()
         {
             if (!string.IsNullOrEmpty(_exePath))
                 return _exePath;
@@ -49,16 +49,16 @@ namespace FluentBuild.Runners
             var tmp =_fileFinder.Find("ILMerge.exe");
 
             if (tmp == null)
-                throw new FileNotFoundException("Could not automatically find ILMerge.exe. Please specify it manually using ILMerge.ExecuteableLocatedAt");
+                throw new FileNotFoundException("Could not automatically find ILMerge.exe. Please specify it manually using ILMerge.ExecutableLocatedAt");
 
             return tmp;
         }
 
         ///<summary>
-        /// Sets the path to the ILMerge.exe executeable
+        /// Sets the path to the ILMerge.exe executable
         ///</summary>
         ///<param name="path">path to ILMerge.exe</param>
-        public ILMerge ExecuteableLocatedAt(string path)
+        public ILMerge ExecutableLocatedAt(string path)
         {
             _exePath = path;
             return this;

@@ -186,7 +186,7 @@
     <Compile Include="Utilities\OnError.cs" />
     <Compile Include="ApplicationProperties\TeamCityProperties.cs" />
     <Compile Include="Runners\Executeable.cs" />
-    <Compile Include="Runners\ExecuteableTests.cs" />
+    <Compile Include="Runners\ExecutableTests.cs" />
     <Compile Include="Core\BuildArtifact.cs" />
     <Compile Include="Core\BuildArtifactTests.cs" />
     <Compile Include="Core\BuildFolderTests.cs" />

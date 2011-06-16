@@ -175,11 +175,11 @@ namespace FluentBuild.Compilation
                                     Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " + Args;
             MessageLogger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
-            var executeable =
-                (Executeable)
-                Run.Executeable(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" +
+            var executable =
+                (Executable)
+                Run.Executable(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" +
                                 Compiler).WithArguments(Args);
-            executeable.Execute(compilerWithoutExtentions);
+            executable.Execute(compilerWithoutExtentions);
             MessageLogger.WriteDebugMessage("Done Compiling");
         }
 

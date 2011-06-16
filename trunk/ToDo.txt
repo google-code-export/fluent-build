@@ -38,7 +38,7 @@ Build
 	-Click once deployment manifest writing
     -MessageLogger: see if it can be detected by checking the standard handle (apparently 7) vs the current handle
 	-Gather usage data of functions used/success rates/ etc. Maybe have fb.exe and fb-nousagestats.exe
-	-SVCUtil: Run.Executeable(Defaults.FrameworkVersion.GetPathToSdk() + @"\bin\svcutil.exe")
+	-SVCUtil: Run.Executable(Defaults.FrameworkVersion.GetPathToSdk() + @"\bin\svcutil.exe")
                     .WithArguments
                     (
                     "http://localhost:53555/Rapter2Service.svc",

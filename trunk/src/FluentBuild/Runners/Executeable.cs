@@ -13,25 +13,25 @@ namespace FluentBuild.Runners
     ///<summary>
     /// Represents an executable to be run
     ///</summary>
-    public interface IExecuteable : IFailable<IExecuteable>
+    public interface IExecutable : IFailable<IExecutable>
     {
         ///<summary>
         /// Sets the arguments to pass to the executable
         ///</summary>
         ///<param name="arguments">The arguments to pass</param>
-        IExecuteable WithArguments(params string[] arguments);
+        IExecutable WithArguments(params string[] arguments);
 
         ///<summary>
         /// Sets the working directory
         ///</summary>
         ///<param name="directory">path to the working directory</param>
-        IExecuteable InWorkingDirectory(string directory);
+        IExecutable InWorkingDirectory(string directory);
 
         ///<summary>
         /// Sets the working directory
         ///</summary>
         ///<param name="directory">path to the working directory</param>
-        IExecuteable InWorkingDirectory(BuildFolder directory);
+        IExecutable InWorkingDirectory(BuildFolder directory);
 
         ///<summary>
         /// Executes the executable with the provided options.
@@ -40,24 +40,24 @@ namespace FluentBuild.Runners
         int Execute();
 
         ///<summary>
-        /// Sets the executeable to run
+        /// Sets the executable to run
         ///</summary>
         ///<param name="path">path to the executable</param>
-        IExecuteable Executable(string path);
+        IExecutable ExecutablePath(string path);
 
 
         ///<summary>
         /// Allows you to override the default message parser. This is typically used for parsing a runners output (i.e. nunit outputs in xml so a different parser is used to transform messages)
         ///</summary>
         ///<param name="processor">The processor to use</param>
-        IExecuteable WithMessageProcessor(IMessageProcessor processor);
+        IExecutable WithMessageProcessor(IMessageProcessor processor);
 
     }
 
     ///<summary>
     /// An executable to be run
     ///</summary>
-    public class Executeable : Failable<IExecuteable>, IExecuteable
+    public class Executable : Failable<IExecutable>, IExecutable
     {
         private IMessageProcessor _messageProcessor;
         private readonly object _errorLock;
@@ -65,17 +65,17 @@ namespace FluentBuild.Runners
         private readonly List<String> _args;
         private readonly StringBuilder _error;
         private readonly StringBuilder _output;
-        internal string ExecuteablePath;
+        internal string Path;
         internal string WorkingDirectory;
 
         ///<summary>
         /// Instantiates a new executable
         ///</summary>
-        public Executeable() : this(new DefaultMessageProcessor())
+        public Executable() : this(new DefaultMessageProcessor())
         {
         }
 
-        internal Executeable(IMessageProcessor messageProcessor)
+        internal Executable(IMessageProcessor messageProcessor)
         {
             _messageProcessor = messageProcessor;
             _errorLock = new object();
@@ -87,35 +87,35 @@ namespace FluentBuild.Runners
         }
 
         ///<summary>
-        /// instantiates an executeable with the path to the assembly specified
+        /// instantiates an executable with the path to the assembly specified
         ///</summary>
-        ///<param name="executeablePath">Path to the executable to run</param>
-        public Executeable(string executeablePath) : this()
+        ///<param name="path">Path to the executable to run</param>
+        public Executable(string path) : this()
         {
-            ExecuteablePath = executeablePath;
+            Path = path;
         }
 
-        #region IExecuteable Members
+        #region IExecutable Members
 
-        public IExecuteable WithMessageProcessor(IMessageProcessor processor)
+        public IExecutable WithMessageProcessor(IMessageProcessor processor)
         {
             _messageProcessor = processor;
             return this;
         }
 
-        public IExecuteable WithArguments(params string[] arguments)
+        public IExecutable WithArguments(params string[] arguments)
         {
             _args.AddRange(arguments);
             return this;
         }
 
-        public IExecuteable InWorkingDirectory(string directory)
+        public IExecutable InWorkingDirectory(string directory)
         {
             WorkingDirectory = directory;
             return this;
         }
 
-        public IExecuteable InWorkingDirectory(BuildFolder directory)
+        public IExecutable InWorkingDirectory(BuildFolder directory)
         {
             WorkingDirectory = directory.ToString();
             return this;
@@ -126,9 +126,9 @@ namespace FluentBuild.Runners
             return Execute("exec");
         }
 
-        public IExecuteable Executable(string path)
+        public IExecutable ExecutablePath(string path)
         {
-            ExecuteablePath = path;
+            Path = path;
             return this;
         }
 
@@ -147,7 +147,7 @@ namespace FluentBuild.Runners
         internal IProcessWrapper CreateProcess()
         {
             var process = new Process();
-            process.StartInfo.FileName = ExecuteablePath;
+            process.StartInfo.FileName = Path;
             process.StartInfo.Arguments = CreateArgumentString();
 
             //redirect to a stream so we can parse it and display it
@@ -169,7 +169,7 @@ namespace FluentBuild.Runners
 
         internal int Execute(string prefix)
         {
-            MessageLogger.Write(prefix , ExecuteablePath + CreateArgumentString());
+            MessageLogger.Write(prefix , Path + CreateArgumentString());
             int exitCode = 0;
             using (IProcessWrapper process = CreateProcess())
             {

@@ -13,7 +13,7 @@ namespace FluentBuild.Compilation
     public class MsBuildTask
     {
         internal readonly string ProjectOrSolutionFilePath;
-        private readonly IExecuteable _executeable;
+        private readonly IExecutable _executable;
         internal readonly NameValueCollection Properties;
         internal readonly IList<string> Targets;
         internal string ConfigurationToUse;
@@ -21,15 +21,15 @@ namespace FluentBuild.Compilation
         
         
 
-        internal MsBuildTask(string projectOrSolutionFilePath, IExecuteable executeable)
+        internal MsBuildTask(string projectOrSolutionFilePath, IExecutable executable)
         {
             ProjectOrSolutionFilePath = projectOrSolutionFilePath;
-            _executeable = executeable;
+            _executable = executable;
             Targets = new List<string>();
             Properties = new NameValueCollection();
         }
 
-        internal MsBuildTask(string projectOrSolutionFilePath) : this(projectOrSolutionFilePath, new Executeable())
+        internal MsBuildTask(string projectOrSolutionFilePath) : this(projectOrSolutionFilePath, new Executable())
         {
         }
 
@@ -125,7 +125,7 @@ namespace FluentBuild.Compilation
         public void Execute()
         {
             string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";            
-            _executeable.Executable(pathToMsBuild).WithArguments(BuildArgs()).Execute();
+            _executable.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).Execute();
         }
     }
 }
