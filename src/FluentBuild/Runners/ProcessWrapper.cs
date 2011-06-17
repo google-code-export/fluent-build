@@ -8,7 +8,7 @@ namespace FluentBuild.Runners
     {
         bool Start();
         void BeginOutputAndErrorReadLine();
-        bool WaitForExit(int milliseconds);
+        bool WaitForExit(int? milliseconds);
         void Kill();
         int ExitCode { get; }
     }
@@ -34,9 +34,14 @@ namespace FluentBuild.Runners
             _process.BeginErrorReadLine();
         }
 
-        public bool WaitForExit(int milliseconds)
+        public bool WaitForExit(int? milliseconds)
         {
-            return _process.WaitForExit(milliseconds);
+			if( milliseconds == null )
+			{
+				_process.WaitForExit();
+				return true;
+			}
+            return _process.WaitForExit(milliseconds.Value);
         }
 
         public void Kill()

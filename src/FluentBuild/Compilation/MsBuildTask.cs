@@ -18,6 +18,7 @@ namespace FluentBuild.Compilation
         internal readonly IList<string> Targets;
         internal string ConfigurationToUse;
         internal string Outdir;
+		private readonly List<String> _args;
         
         
 
@@ -27,6 +28,7 @@ namespace FluentBuild.Compilation
             _executable = executable;
             Targets = new List<string>();
             Properties = new NameValueCollection();
+			_args = new List<string>();
         }
 
         internal MsBuildTask(string projectOrSolutionFilePath) : this(projectOrSolutionFilePath, new Executable())
@@ -83,7 +85,11 @@ namespace FluentBuild.Compilation
             return this;
         }
 
-        
+		public MsBuildTask WithArguments(string arg)
+		{
+			_args.Add( arg );
+			return this;
+		}        
         
         ///<summary>
         /// Sets the configuration to use for the msbuild task
@@ -125,7 +131,7 @@ namespace FluentBuild.Compilation
         public void Execute()
         {
             string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";            
-            _executable.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).Execute();
+            _executable.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()).Execute();
         }
     }
 }

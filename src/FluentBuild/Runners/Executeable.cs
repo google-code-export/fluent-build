@@ -52,6 +52,12 @@ namespace FluentBuild.Runners
         ///<param name="processor">The processor to use</param>
         IExecutable WithMessageProcessor(IMessageProcessor processor);
 
+        ///<summary>
+        /// Sets the timeout the process should run for.
+        ///</summary>
+        ///<param name="timeoutInMiliseconds">The timeout value in milliseconds</param>
+        IExecutable SetTimeout(int timeoutInMiliseconds);
+
     }
 
     ///<summary>
@@ -66,6 +72,8 @@ namespace FluentBuild.Runners
         private readonly StringBuilder _error;
         private readonly StringBuilder _output;
         internal string Path;
+		private bool _noErrorMessageWhenExitCodeZero = true;
+		private int? _timeoutInMiliSeconds = null;
         internal string WorkingDirectory;
 
         ///<summary>
@@ -120,6 +128,12 @@ namespace FluentBuild.Runners
             WorkingDirectory = directory.ToString();
             return this;
         }
+
+		public IExecutable SetTimeout(int timeoutInMiliseconds)
+		{
+			_timeoutInMiliSeconds = timeoutInMiliseconds;
+			return this;
+		}
 
         public int Execute()
         {
@@ -177,7 +191,7 @@ namespace FluentBuild.Runners
                 {
                     process.Start();
                     process.BeginOutputAndErrorReadLine();
-                    if (!process.WaitForExit(50000))
+					if (!process.WaitForExit(_timeoutInMiliSeconds))
                     {
                         MessageLogger.WriteDebugMessage("TIMEOUT!");
                         process.Kill();
@@ -187,7 +201,12 @@ namespace FluentBuild.Runners
                             //exit code should only be set if we want the application to fail on error
                             Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
                     }
-                    
+
+					if( _noErrorMessageWhenExitCodeZero && process.ExitCode == 0)
+					{
+						_output.Append( _error );
+						_error.Clear();
+					}
                     _messageProcessor.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode);
                     exitCode = process.ExitCode;
                 }
@@ -195,8 +214,7 @@ namespace FluentBuild.Runners
                 {
                     if (OnError == OnError.Fail)
                         throw;
-                    Debug.Write(prefix,
-                                "An error occurred running a process but FailOnError was set to false. Error: " + e);
+                    Debug.Write(prefix, "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
             }
             return exitCode;
