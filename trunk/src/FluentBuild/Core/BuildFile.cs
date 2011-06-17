@@ -23,10 +23,19 @@ namespace FluentBuild.Core
                 if (Environment.ExitCode == 0)
                 {
                     MessageLogger.WriteHeader(task.Name);
-                    task.Task.Invoke();
+					try
+					{
+						task.Task.Invoke();
+					}
+					catch( Exception ex )
+					{
+						MessageLogger.WriteError( ex.Message );
+						Environment.ExitCode = 1;
+					}
                 }
             }
-           MessageLogger.WriteHeader("DONE");
+			if(Environment.ExitCode == 0)
+				MessageLogger.WriteHeader("DONE");
         }
 
         ///<summary>
