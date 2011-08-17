@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
-using FluentBuild;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
 
@@ -9,24 +7,24 @@ namespace Build
 {
     public class Default : BuildFile
     {
+        private readonly BuildArtifact assembly_FluentBuild_Runner;
         private readonly BuildArtifact assembly_FluentBuild_WithTests;
         private readonly BuildArtifact assembly_Functional_Tests;
-        private readonly BuildArtifact assembly_FluentBuild_Runner;
 
         internal readonly BuildFolder directory_base;
         internal readonly BuildFolder directory_compile;
         internal readonly BuildFolder directory_release;
 
+        private readonly BuildFolder directory_src_core;
+        private readonly BuildFolder directory_src_runner;
         private readonly BuildFolder directory_tools;
-        private BuildFolder directory_src_core;
-        private BuildFolder directory_src_runner;
-        protected BuildFolder directory_src_converter;
 
         private readonly BuildArtifact thirdparty_nunit;
         private readonly BuildArtifact thirdparty_rhino;
         internal string _version;
-        internal BuildArtifact thirdparty_sharpzip;
         protected BuildArtifact assembly_BuildFileConverter_WithTests;
+        protected BuildFolder directory_src_converter;
+        internal BuildArtifact thirdparty_sharpzip;
 
 
         public Default()
@@ -101,7 +99,7 @@ namespace Build
 
         private void GenerateAssemblyInfoFor(string folder, string description)
         {
-             AssemblyInfo.Language.CSharp.ClsCompliant(true)
+            AssemblyInfo.Language.CSharp.ClsCompliant(true)
                 .Company("Solidhouse")
                 .ComVisible(false)
                 .Copyright("Copyright 2009-" + DateTime.Now.Year)
@@ -134,40 +132,39 @@ namespace Build
         private void CompileRunnerSources()
         {
             FileSet sourceFiles = new FileSet()
-                             .Include(directory_src_runner)
-                             .RecurseAllSubDirectories.Filter("*.cs");
+                .Include(directory_src_runner)
+                .RecurseAllSubDirectories.Filter("*.cs");
 
             FluentBuild.Core.Build.UsingCsc.Target.Executable
                 .AddSources(sourceFiles)
                 .AddRefences(assembly_FluentBuild_WithTests)
-                
                 .OutputFileTo(assembly_FluentBuild_Runner)
                 .Execute();
         }
 
         private void CompileFunctionalTests()
         {
-            FileSet sourceFiles =new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
+            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
             FluentBuild.Core.Build.UsingCsc.Target.Library
                 .AddSources(sourceFiles)
-                .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests)
+                .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests, assembly_FluentBuild_Runner)
                 .OutputFileTo(assembly_Functional_Tests)
                 .Execute();
         }
 
         private void RunTests()
         {
-           //Run.Debugger();
-           Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild_WithTests).Execute();
+            //Run.Debugger();
+            Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild_WithTests).Execute();
         }
 
         private void RunFunctionalTests()
         {
             //Copy sample folder to compile directory
-            var sampleData = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").SubFolder("Samples");
+            BuildFolder sampleData = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").SubFolder("Samples");
             Run.Executable(@"C:\Windows\System32\xcopy.exe").WithArguments(sampleData.ToString(), directory_compile.SubFolder("Samples").ToString(), "/E /I").Execute();
-            var configSource = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").File("app.config.template");
-            var configDestination = directory_compile.File("FluentBuild_Functional_Tests.dll.config");
+            BuildArtifact configSource = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").File("app.config.template");
+            BuildArtifact configDestination = directory_compile.File("FluentBuild_Functional_Tests.dll.config");
             configSource.Copy
                 .ReplaceToken("RelativeRoot").With("..\\")
                 .ReplaceToken("RelativeSamples").With(@"Samples")
@@ -177,4 +174,3 @@ namespace Build
         }
     }
 }
-

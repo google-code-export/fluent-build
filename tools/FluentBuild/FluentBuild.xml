@@ -68,11 +68,11 @@
             <summary>
              Executes the ILMerge assembly
             </summary>
-            <exception cref="T:System.IO.FileNotFoundException">If the path to the executeable was not set or can not be found automatically.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">If the path to the executable was not set or can not be found automatically.</exception>
         </member>
-        <member name="M:FluentBuild.Runners.ILMerge.ExecuteableLocatedAt(System.String)">
+        <member name="M:FluentBuild.Runners.ILMerge.ExecutableLocatedAt(System.String)">
             <summary>
-             Sets the path to the ILMerge.exe executeable
+             Sets the path to the ILMerge.exe executable
             </summary>
             <param name="path">path to ILMerge.exe</param>
         </member>
@@ -119,6 +119,55 @@
             If the attribute is missing then the assembly is COM visible.
             </summary>
             <param name="visible">sets com visibility</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.Culture(System.String)">
+            <summary>
+             Sets the culture
+            </summary>
+            <param name="culture">The culture of the assembly</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.DelaySign(System.Boolean)">
+            <summary>
+             Sets if to delay sign the assembly
+            </summary>
+            <param name="delaySign">Wether to delay sign the assembly</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.FileVersion(System.String)">
+            <summary>
+             Sets the file version
+            </summary>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.InformationalVersion(System.String)">
+            <summary>
+             Sets the informational version
+            </summary>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.KeyFile(System.String)">
+            <summary>
+             Sets teh path to the Strong Named Key for an assembly
+            </summary>
+            <param name="path">The path to the snk file</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.KeyName(System.String)">
+            <summary>
+             Sets the KeyName
+            </summary>
+            <param name="name">The name of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.Trademark(System.String)">
+            <summary>
+             Sets the trademark attribute
+            </summary>
+            <param name="trademark">The value representing the trademark</param>
             <returns></returns>
         </member>
         <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.ClsCompliant(System.Boolean)">
@@ -184,6 +233,15 @@
             </summary>
             <param name="value">The product to set</param>
             <returns></returns>
+        </member>
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.AddCustomAttribute(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+             Adds a custom attribute to the assemblyInfo file
+            </summary>
+            <param name="attributeNamespace">The namespace that the attribute exists in</param>
+            <param name="name">The name of the attribute</param>
+            <param name="isQuoted">Wether or not to quote the value when the file is generated</param>
+            <param name="value">The value of the attribute</param>
         </member>
         <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails.OutputTo(FluentBuild.Core.BuildArtifact)">
             <summary>
@@ -310,7 +368,7 @@
         <member name="M:FluentBuild.FilesAndDirectories.CopyBuildArtifactTests.PerformTokenReplacement">
             <summary />
         </member>
-        <member name="T:FluentBuild.Runners.IExecuteable">
+        <member name="T:FluentBuild.Runners.IExecutable">
             <summary>
              Represents an executable to be run
             </summary>
@@ -331,43 +389,55 @@
              Swallow exceptions and continue
             </summary>
         </member>
-        <member name="M:FluentBuild.Runners.IExecuteable.WithArguments(System.String[])">
+        <member name="M:FluentBuild.Runners.IExecutable.WithArguments(System.String[])">
             <summary>
              Sets the arguments to pass to the executable
             </summary>
             <param name="arguments">The arguments to pass</param>
         </member>
-        <member name="M:FluentBuild.Runners.IExecuteable.InWorkingDirectory(System.String)">
+        <member name="M:FluentBuild.Runners.IExecutable.InWorkingDirectory(System.String)">
             <summary>
              Sets the working directory
             </summary>
             <param name="directory">path to the working directory</param>
         </member>
-        <member name="M:FluentBuild.Runners.IExecuteable.InWorkingDirectory(FluentBuild.Core.BuildFolder)">
+        <member name="M:FluentBuild.Runners.IExecutable.InWorkingDirectory(FluentBuild.Core.BuildFolder)">
             <summary>
              Sets the working directory
             </summary>
             <param name="directory">path to the working directory</param>
         </member>
-        <member name="M:FluentBuild.Runners.IExecuteable.Execute">
+        <member name="M:FluentBuild.Runners.IExecutable.Execute">
             <summary>
              Executes the executable with the provided options.
             </summary>
              <returns>the return code of the process</returns>
         </member>
-        <member name="M:FluentBuild.Runners.IExecuteable.Executable(System.String)">
+        <member name="M:FluentBuild.Runners.IExecutable.ExecutablePath(System.String)">
             <summary>
-             Sets the executeable to run
+             Sets the executable to run
             </summary>
             <param name="path">path to the executable</param>
         </member>
-        <member name="M:FluentBuild.Runners.IExecuteable.WithMessageProcessor(FluentBuild.MessageLoggers.MessageProcessing.IMessageProcessor)">
+        <member name="M:FluentBuild.Runners.IExecutable.WithMessageProcessor(FluentBuild.MessageLoggers.MessageProcessing.IMessageProcessor)">
             <summary>
              Allows you to override the default message parser. This is typically used for parsing a runners output (i.e. nunit outputs in xml so a different parser is used to transform messages)
             </summary>
             <param name="processor">The processor to use</param>
         </member>
-        <member name="T:FluentBuild.Runners.Executeable">
+        <member name="M:FluentBuild.Runners.IExecutable.SetTimeout(System.Int32)">
+            <summary>
+             Sets the timeout the process should run for.
+            </summary>
+            <param name="timeoutInMiliseconds">The timeout value in milliseconds</param>
+        </member>
+        <member name="M:FluentBuild.Runners.IExecutable.SucceedOnNonZeroErrorCodes">
+            <summary>
+             Changes the bahavior of the executeable. If the executable returns a non-zero error code it will still be considered
+             a success.
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Runners.Executable">
             <summary>
              An executable to be run
             </summary>
@@ -378,16 +448,16 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:FluentBuild.Runners.Executeable.#ctor">
+        <member name="M:FluentBuild.Runners.Executable.#ctor">
             <summary>
              Instantiates a new executable
             </summary>
         </member>
-        <member name="M:FluentBuild.Runners.Executeable.#ctor(System.String)">
+        <member name="M:FluentBuild.Runners.Executable.#ctor(System.String)">
             <summary>
-             instantiates an executeable with the path to the assembly specified
+             instantiates an executable with the path to the assembly specified
             </summary>
-            <param name="executeablePath">Path to the executable to run</param>
+            <param name="path">Path to the executable to run</param>
         </member>
         <member name="T:FluentBuild.Database.MsSqlConnectionTests">
             <summary />
@@ -969,6 +1039,21 @@
         <member name="M:FluentBuild.Database.MsSqlCreateTests.ShouldSetPathOnEngine">
             <summary />
         </member>
+        <member name="T:FluentBuild.Utilities.ExecutableTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecutableTests.Executable_ShouldSetProperly">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecutableTests.ShouldConstructProperly">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecutableTests.ShouldPopulateWorkingDirectoryViaArtifact">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Utilities.ExecutableTests.CreateProcess_Should_Build_Process">
+            <summary />
+        </member>
         <member name="T:FluentBuild.Runners.Zip.Zip">
             <summary>
              Choice class that determines to compress or decompress
@@ -1014,18 +1099,18 @@
             Runs an execuable. It may later be expaned to have other run tasks (e.g. nunit, code analysis, etc.)
             </summary>
         </member>
-        <member name="M:FluentBuild.Core.Run.Executeable(System.String)">
+        <member name="M:FluentBuild.Core.Run.Executable(System.String)">
             <summary>
             Creates an Executable object based on a string path
             </summary>
-            <param name="executeablePath">Path to the executable</param>
+            <param name="executablePath">Path to the executable</param>
             <returns>an Executable object</returns>
         </member>
-        <member name="M:FluentBuild.Core.Run.Executeable(FluentBuild.Core.BuildArtifact)">
+        <member name="M:FluentBuild.Core.Run.Executable(FluentBuild.Core.BuildArtifact)">
             <summary>
             Builds an Executable object based on a build artifact
             </summary>
-            <param name="executeablePath">The build artifact</param>
+            <param name="executablePath">The build artifact</param>
             <returns>an Executable object</returns>
         </member>
         <member name="T:FluentBuild.Utilities.RegistryWrapper">
@@ -1160,21 +1245,6 @@
         <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguageTests.EnsureVisualBasicLanguageBuildsProperly">
             <summary>
             </summary>
-            <summary />
-        </member>
-        <member name="T:FluentBuild.Utilities.ExecuteableTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Utilities.ExecuteableTests.Executable_ShouldSetProperly">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Utilities.ExecuteableTests.ShouldConstructProperly">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Utilities.ExecuteableTests.ShouldPopulateWorkingDirectoryViaArtifact">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Utilities.ExecuteableTests.CreateProcess_Should_Build_Process">
             <summary />
         </member>
         <member name="T:FluentBuild.Utilities.FrameworkVersionTests">
@@ -1394,6 +1464,20 @@
              Access common properties set by team city
             </summary>
         </member>
+        <member name="M:FluentBuild.ApplicationProperties.TeamCityProperties.BuildVersionControlSystemNumber(System.String)">
+            <summary>
+             Gets the latest revision included in the build from the source control system.
+            </summary>
+            <param name="simplifiedVcsRootName">The version control root name with any non-alphanumeric characters replaced with a "_"</param>
+            <returns>The version from the source control system</returns>
+        </member>
+        <member name="M:FluentBuild.ApplicationProperties.TeamCityProperties.GetProperty(System.String)">
+            <summary>
+            Gets a property by name
+            </summary>
+            <param name="propertyName">the name of the team city environment variable</param>
+            <returns>The value of the property</returns>
+        </member>
         <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.BuildNumber">
             <summary>
              The BuildNumber that team city has determined for this build
@@ -1407,6 +1491,16 @@
         <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.ProjectName">
             <summary>
              The project being built
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.TeamCityVersion">
+            <summary>
+             The version of TeamCity
+            </summary>
+        </member>
+        <member name="P:FluentBuild.ApplicationProperties.TeamCityProperties.BuildConfigurationName">
+            <summary>
+             The current build configuration name
             </summary>
         </member>
         <member name="T:FluentBuild.Utilities.OnError">

@@ -43,6 +43,9 @@
     <option name="scrTextFileName" value="" />
     <option name="historyRevisionsNumber" value="4" />
   </component>
+  <component name="ClearCaseSharedConfig">
+    <option name="myUseUcmModel" value="true" />
+  </component>
   <component name="CodeStyleProjectProfileManger">
     <option name="PROJECT_PROFILE" />
     <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
@@ -74,143 +77,33 @@
     <module2copyright />
     <LanguageOptions name="CSS">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="GSP">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="Groovy">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="HTML">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="JAVA">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="JSP">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="JSPX">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="JavaScript">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="Properties">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
     <LanguageOptions name="XML">
       <option name="fileTypeOverride" value="1" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="block" value="true" />
-      <option name="separateBefore" value="false" />
-      <option name="separateAfter" value="false" />
-      <option name="prefixLines" value="true" />
-      <option name="lenBefore" value="80" />
-      <option name="lenAfter" value="80" />
-      <option name="box" value="false" />
-      <option name="filler" value=" " />
     </LanguageOptions>
   </component>
   <component name="DependenciesAnalyzeManager">
@@ -236,76 +129,8 @@
   </component>
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
-      <facet-type id="web">
-        <modules>
-          <module name="server">
-            <files>
-              <file url="file://$PROJECT_DIR$/server/web/WEB-INF/web.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
-      <facet-type id="Spring">
-        <modules>
-          <module name="server">
-            <files>
-              <file url="file://$PROJECT_DIR$/server/src/META-INF/build-server-plugin-fluentbuildrunner.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
       <facet-type id="JRUBY">
         <modules>
-          <module name="fluentbuildrunner">
-            <files>
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/FluentBuildfile" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/fluentbuild_exceptions.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/fluentbuildrunner_consts.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/runner_common.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/spec/runner/formatter/teamcity/formatter.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/logger_util.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/runner_utils.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/send_messages_util.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/service_message_factory.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/std_capture_helper.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/string_ext.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/url_formatter.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/autorunner.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/ui/teamcity/testrunner.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/ui/teamcity/testrunner_events.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/ui/testrunnermediator.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/ext/output_ext.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/fluentbuild_ext.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/fluentbuildrunner.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/runner_settings.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/specs_in_folder_runner.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/tunit_class_runner.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/tunit_in_folder_runner.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/sm_factory_provider_loader.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/event_queue/event_queue_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/ext/fluentbuild_ext_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/ext/string_ext_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/logger_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/teamcity_testrunner/message_factory_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/teamcity_testrunner/message_factory_xml_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/teamcity_testrunner/runner_utils_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/test_helper.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/FluentBuildfile" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/enclosed_behaviours_spec.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/fail_sample_spec.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/pass_sample_spec.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/pending_sample_spec.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/simple_scenario.fluentbuild" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/spec.fluentbuild" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/test.fluentbuild" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/tmp.fluentbuild" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/namespace_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/t1_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/t2_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/t3_test.rb" />
-              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/compilation_errors/compilation_error_test.rb" />
-            </files>
-          </module>
           <module name="fluentbuild-runner-agent">
             <files>
               <file url="file://$PROJECT_DIR$/agent/classes/rb/patch/teamcity/fluentbuild_exceptions.rb" />
@@ -376,6 +201,32 @@
               <file url="file://$PROJECT_DIR$/fluentbuild-runner-agent/src/rb/sm_factory_provider_loader.rb" />
             </files>
           </module>
+          <module name="fluentbuild-runner-root">
+            <files>
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/fluentbuild_exceptions.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/fluentbuildrunner_consts.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/runner_common.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/spec/runner/formatter/teamcity/formatter.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/logger_util.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/runner_utils.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/service_message_factory.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/std_capture_helper.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/string_ext.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/url_formatter.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/autorunner.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/ui/teamcity/testrunner.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/ui/teamcity/testrunner_events.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/ui/testrunnermediator.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/ext/output_ext.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/fluentbuild_ext.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/fluentbuildrunner.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/runner_settings.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/specs_in_folder_runner.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/tunit_class_runner.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/tunit_in_folder_runner.rb" />
+              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/sm_factory_provider_loader.rb" />
+            </files>
+          </module>
           <module name="fluentbuild-runner-test">
             <files>
               <file url="file://$PROJECT_DIR$/test/testData/plugins/fluentbuildRunner/app1/FluentBuildfile" />
@@ -411,30 +262,72 @@
               <file url="file://$PROJECT_DIR$/test/testData/plugins/fluentbuildRunner/app_testunit/tests/statistics/passed/passed2_test.rb" />
             </files>
           </module>
-          <module name="fluentbuild-runner-root">
+          <module name="fluentbuildrunner">
             <files>
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/fluentbuild_exceptions.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/fluentbuildrunner_consts.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/runner_common.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/spec/runner/formatter/teamcity/formatter.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/logger_util.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/runner_utils.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/service_message_factory.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/std_capture_helper.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/string_ext.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/teamcity/utils/url_formatter.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/autorunner.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/ui/teamcity/testrunner.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/ui/teamcity/testrunner_events.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/patch/test/unit/ui/testrunnermediator.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/ext/output_ext.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/fluentbuild_ext.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/fluentbuildrunner.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/runner_settings.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/specs_in_folder_runner.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/tunit_class_runner.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/runner/tunit_in_folder_runner.rb" />
-              <file url="file://$PROJECT_DIR$/lib/fluentbuildRunnerRuby/sm_factory_provider_loader.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/FluentBuildfile" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/fluentbuild_exceptions.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/fluentbuildrunner_consts.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/runner_common.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/spec/runner/formatter/teamcity/formatter.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/logger_util.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/runner_utils.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/send_messages_util.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/service_message_factory.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/std_capture_helper.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/string_ext.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/teamcity/utils/url_formatter.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/autorunner.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/ui/teamcity/testrunner.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/ui/teamcity/testrunner_events.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/patch/test/unit/ui/testrunnermediator.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/ext/output_ext.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/fluentbuild_ext.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/fluentbuildrunner.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/runner_settings.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/specs_in_folder_runner.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/tunit_class_runner.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/runner/tunit_in_folder_runner.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/src/sm_factory_provider_loader.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/event_queue/event_queue_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/ext/fluentbuild_ext_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/ext/string_ext_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/logger_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/teamcity_testrunner/message_factory_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/teamcity_testrunner/message_factory_xml_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/teamcity_testrunner/runner_utils_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test/test_helper.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/FluentBuildfile" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/enclosed_behaviours_spec.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/fail_sample_spec.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/pass_sample_spec.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/spec/common/pending_sample_spec.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/simple_scenario.fluentbuild" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/spec.fluentbuild" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/test.fluentbuild" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/tasks/tmp.fluentbuild" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/namespace_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/t1_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/t2_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/common/t3_test.rb" />
+              <file url="file://$PROJECT_DIR$/fluentbuildrunner/test_data/unit/compilation_errors/compilation_error_test.rb" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="Spring">
+        <modules>
+          <module name="server">
+            <files>
+              <file url="file://$PROJECT_DIR$/server/src/META-INF/build-server-plugin-fluentbuildrunner.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="web">
+        <modules>
+          <module name="server">
+            <files>
+              <file url="file://$PROJECT_DIR$/server/web/WEB-INF/web.xml" />
             </files>
           </module>
         </modules>
@@ -607,6 +500,9 @@
       <module fileurl="file://$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml" filepath="$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/fluentbuild-runner-test/fluentbuild-runner-test.iml" filepath="$PROJECT_DIR$/fluentbuild-runner-test/fluentbuild-runner-test.iml" />
     </modules>
+  </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

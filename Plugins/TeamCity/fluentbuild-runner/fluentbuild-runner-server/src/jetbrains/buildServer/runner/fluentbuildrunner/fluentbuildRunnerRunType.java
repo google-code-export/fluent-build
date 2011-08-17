@@ -45,12 +45,12 @@ public class fluentbuildRunnerRunType extends RunType {
 
   @Override
   public String getEditRunnerParamsJspFilePath() {
-    return "taskRunnerRunParams.jsp";
+    return "../FluentBuild-runner/taskRunnerRunParams.jsp";
   }
 
   @Override
   public String getViewRunnerParamsJspFilePath() {
-    return "viewTaskRunnerRunParams.jsp";
+    return "../FluentBuild-runner/viewTaskRunnerRunParams.jsp";
   }
 
   @Override

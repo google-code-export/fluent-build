@@ -45,8 +45,27 @@
       </PATH>
     </TreeState>
   </component>
+  <component name="CCaseConfig">
+    <option name="checkoutReserved" value="false" />
+    <option name="markExternalChangeAsUpToDate" value="true" />
+    <option name="checkInUseHijack" value="true" />
+    <option name="useUcmModel" value="true" />
+    <option name="synchOutside" value="false" />
+    <option name="isHistoryResticted" value="true" />
+    <option name="useIdenticalSwitch" value="true" />
+    <option name="synchActivitiesOnRefresh" value="true" />
+    <option name="lastScr" value="" />
+    <option name="scrTextFileName" value="" />
+    <option name="historyRevisionsNumber" value="4" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="9cec1cca-0a2f-4e2c-b18b-341adf07bffd" name="Default" comment="" />
+    <list default="true" readonly="true" id="9cec1cca-0a2f-4e2c-b18b-341adf07bffd" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-agent/fluentbuild-runner-agent.iml" afterPath="$PROJECT_DIR$/fluentbuild-runner-agent/fluentbuild-runner-agent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml" afterPath="$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" afterPath="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner.ipr" afterPath="$PROJECT_DIR$/fluentbuild-runner.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fluentbuild-runner.iws" afterPath="$PROJECT_DIR$/fluentbuild-runner.iws" />
+    </list>
     <list id="b20e2a97-2f69-4f89-b214-427ebd254dbc" name="upgrade xstream" comment="" />
     <ignored path="fluentbuild-runner.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,7 +139,76 @@
   <component name="FavoritesManager">
     <favorites_list name="fluentbuild-runner" />
   </component>
-  <component name="FileColors" enabled="true" enabledForTabs="true" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="FluentBuildTaskBuildService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTaskBuildService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="19" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fluentbuild-runner.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fluentbuild-runner.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="32" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FluentBuildRunnerConstants.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="49" selection-start="874" selection-end="874" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="teamcity-plugin.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/teamcity-plugin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="43" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fluentbuildRunnerRunType.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="33" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.3380682">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build-server-plugin-rakerunner.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/resources/META-INF/build-server-plugin-rakerunner.xml">
+          <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="85" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fluentbuild-runner-server.iml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="44" selection-start="471" selection-end="471" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
@@ -140,12 +228,13 @@
         <option value="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTasksBuildService.java" />
         <option value="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/utils/OSUtil.java" />
         <option value="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluendBuildTaskBuildService2.java" />
-        <option value="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" />
         <option value="$PROJECT_DIR$/fluentbuild-runner.xml" />
         <option value="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildRunnerCommandLineServiceFactory.java" />
         <option value="$PROJECT_DIR$/fluentbuild-runner-agent/resources/META-INF/build-agent-plugin.xml" />
-        <option value="$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java" />
         <option value="$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTaskBuildService.java" />
+        <option value="$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml" />
+        <option value="$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java" />
+        <option value="$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java" />
       </list>
     </option>
   </component>
@@ -161,13 +250,15 @@
       <profile-state />
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
+    <OptionsSetting value="true" id="Undo Check Out" />
+    <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
@@ -239,6 +330,10 @@
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -276,28 +371,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fluentbuild-runner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fluentbuild-runner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fluentbuild-runner-agent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fluentbuildrunner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -305,7 +378,7 @@
   <component name="PropertiesComponent">
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
@@ -332,6 +405,7 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -344,10 +418,20 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="snapshooter" />
+      <extension name="coverage" enabled="false" merge="false" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -377,6 +461,7 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -395,11 +480,11 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" />
-      <extension name="snapshooter" />
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
@@ -416,11 +501,11 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" />
-      <extension name="snapshooter" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -437,11 +522,13 @@
         <value defaultName="wholeProject" />
       </option>
       <envs />
+      <patterns />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
     <list size="0" />
@@ -454,8 +541,9 @@
   <component name="SvnConfiguration" maxAnnotateRevisions="500">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
     <option name="LAST_MERGED_REVISION" />
-    <option name="UPDATE_RUN_STATUS" value="false" />
     <option name="MERGE_DRY_RUN" value="false" />
     <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
@@ -464,6 +552,7 @@
     <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
     <configuration useDefault="true">C:\Users\Kudos\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
@@ -502,37 +591,61 @@
       </list>
     </option>
   </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9cec1cca-0a2f-4e2c-b18b-341adf07bffd" name="Default" comment="" />
+      <created>1313507544478</created>
+      <updated>1313507544478</updated>
+    </task>
+    <task id="LOCAL-00001" summary="upgrade xstream">
+      <changelist id="b20e2a97-2f69-4f89-b214-427ebd254dbc" name="upgrade xstream" comment="" />
+      <created>1313507524647</created>
+      <updated>1313507524647</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="728" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3282572" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33054712" sideWeight="0.6717428" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32828283" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3282572" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6717428" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
     <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
     <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
@@ -542,6 +655,9 @@
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
     <option name="ENABLE_BACKGROUND_PROCESSES" value="true" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
@@ -578,27 +694,13 @@
       <treeView value="true" />
       <verbose value="true" />
       <viewClosedWhenNoErrors value="false" />
+      <expanded value="true" />
     </buildFile>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/resources/buildServerResources/viewTaskRunnerRunParams.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="65" column="11" selection-start="3193" selection-end="3193" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/TeamCity/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/SimpleProgramCommandLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="9" selection-start="2744" selection-end="2744" vertical-scroll-proportion="0.8978979" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="21" selection-start="2466" selection-end="2466" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fluentbuild-runner.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="63" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTasksBuildService.java">
@@ -626,21 +728,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="jar://C:/TeamCity/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/FileUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="17" selection-start="8448" selection-end="8448" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_21/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="249" column="11" selection-start="10758" selection-end="10758" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/TeamCity/devPackage/src/openApi-source.jar!/jetbrains/buildServer/runner/BuildFileRunnerUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="92" selection-start="1817" selection-end="1905" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/resources/buildServerResources/taskRunnerRunParams.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="88" selection-start="2294" selection-end="2348" vertical-scroll-proportion="0.0" />
@@ -651,50 +738,125 @@
         <state line="31" column="54" selection-start="1005" selection-end="1005" vertical-scroll-proportion="-14.68" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="33" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.39763778" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fluentbuild-runner-agent/src/jetbrains/buildServer/agent/fluentbuildrunner/FluentBuildTaskBuildService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="0" selection-start="2331" selection-end="2331" vertical-scroll-proportion="0.5814394" />
+        <state line="27" column="19" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluentbuild-runner.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="32" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluentbuild-runner-common/src/jetbrains/buildServer/fluentbuildrunner/FluentBuildRunnerConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="49" selection-start="874" selection-end="874" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamcity-plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="43" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/resources/META-INF/build-server-plugin-rakerunner.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="85" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/fluentbuild-runner-server.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="44" selection-start="471" selection-end="471" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluentbuild-runner-server/src/jetbrains/buildServer/runner/fluentbuildrunner/fluentbuildRunnerRunType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="33" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.3380682">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
-        <UIState>
+        <settings>
+          <artifact-editor />
+          <last-edited>fluenbuildserver</last-edited>
           <splitter-proportions>
-            <SplitterProportionsDataImpl>
-              <option name="proportions">
-                <list>
-                  <option value="0.2" />
-                  <option value="0.5" />
-                </list>
-              </option>
-            </SplitterProportionsDataImpl>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
           </splitter-proportions>
-          <last-edited>fluentbuildagent</last-edited>
-          <settings />
-        </UIState>
+        </settings>
       </state>
-      <state key="Copyright.UI">
-        <UIState>
+      <state key="Copyright.UI" />
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android</last-edited>
           <splitter-proportions>
-            <SplitterProportionsDataImpl />
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
           </splitter-proportions>
-        </UIState>
+        </settings>
       </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <UIState>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
           <splitter-proportions>
-            <SplitterProportionsDataImpl />
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
           </splitter-proportions>
-          <settings />
-        </UIState>
+        </settings>
       </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>fluentbuild-runner-test</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>TeamCity-agentAPI</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI" />
     </states>
   </component>
 </project>
