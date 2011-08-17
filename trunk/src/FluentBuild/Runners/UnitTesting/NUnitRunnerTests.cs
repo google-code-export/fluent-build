@@ -120,6 +120,7 @@ namespace FluentBuild.Runners.UnitTesting
             
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
             mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
             
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
@@ -141,6 +142,7 @@ namespace FluentBuild.Runners.UnitTesting
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
             mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
@@ -163,6 +165,7 @@ namespace FluentBuild.Runners.UnitTesting
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
             mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
@@ -187,6 +190,7 @@ namespace FluentBuild.Runners.UnitTesting
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
             mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.InWorkingDirectory(workingDirectory)).Return(mockExecutable);
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
@@ -212,6 +216,8 @@ namespace FluentBuild.Runners.UnitTesting
             mockFileFinder.Stub(x => x.Find("nunit-console.exe")).Return("c:\\temp\nunit-console.exe");
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
+
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);

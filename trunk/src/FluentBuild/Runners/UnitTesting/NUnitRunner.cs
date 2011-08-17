@@ -141,7 +141,11 @@ namespace FluentBuild.Runners.UnitTesting
                     throw new FileNotFoundException("Could not automatically find nunit-console.exe. Please specify it manually using NunitRunner.PathToNunitConsoleRunner");
             }
 
-            var executable = _executable.ExecutablePath(_pathToConsoleRunner).WithArguments(BuildArgs());
+            var executable = _executable.ExecutablePath(_pathToConsoleRunner);
+            executable = executable.WithArguments(BuildArgs());
+            executable = executable.SucceedOnNonZeroErrorCodes();
+
+            //var executable = executablePath.SucceedOnNonZeroErrorCodes();
             //if (OnError == OnError.Fail)
             //    executable = executable.FailOnError;
             //else if (OnError == OnError.Continue)

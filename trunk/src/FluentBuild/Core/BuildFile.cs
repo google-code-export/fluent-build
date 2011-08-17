@@ -31,11 +31,19 @@ namespace FluentBuild.Core
 					{
 						MessageLogger.WriteError( ex.Message );
 						Environment.ExitCode = 1;
+					    
 					}
                 }
+                
+                if (Environment.ExitCode != 0) 
+                {
+                    return; //stop executing tasks if non-zero error code
+                }
             }
-			if(Environment.ExitCode == 0)
-				MessageLogger.WriteHeader("DONE");
+            if (Environment.ExitCode == 0)
+                MessageLogger.WriteHeader("DONE");
+            
+
         }
 
         ///<summary>

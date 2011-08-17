@@ -120,6 +120,11 @@ namespace FluentBuild.Compilation
             if (!String.IsNullOrEmpty(ConfigurationToUse))
                 args.Add("/p:Configuration=" + ConfigurationToUse);
 
+            foreach (var propertyName in Properties.Keys)
+            {
+                args.Add("/p:" + propertyName + "=" + Properties.GetValues(propertyName.ToString())[0]);
+            }
+
             args.AddRange(Targets.Select(target => "/target:" + target));
             return args.ToArray();
         }

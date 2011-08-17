@@ -10,6 +10,7 @@ Build
 		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
 
   Future Releases
+    -Persistant variable storage. I.e. be able to store a variable in a build then have it accessable on the next run. Usefull for counters for local build scripts
     -multiple targets. i.e. -C:MainBuild[Clean,Compile,Deploy]
 	-Multithreaded builds
 	-remove the need for .Execute() methods? (i.e. delayed execution)

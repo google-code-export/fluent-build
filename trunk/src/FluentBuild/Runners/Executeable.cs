@@ -58,6 +58,11 @@ namespace FluentBuild.Runners
         ///<param name="timeoutInMiliseconds">The timeout value in milliseconds</param>
         IExecutable SetTimeout(int timeoutInMiliseconds);
 
+        ///<summary>
+        /// Changes the bahavior of the executeable. If the executable returns a non-zero error code it will still be considered
+        /// a success.
+        ///</summary>
+        IExecutable SucceedOnNonZeroErrorCodes();
     }
 
     ///<summary>
@@ -72,9 +77,11 @@ namespace FluentBuild.Runners
         private readonly StringBuilder _error;
         private readonly StringBuilder _output;
         internal string Path;
-		private bool _noErrorMessageWhenExitCodeZero = true;
+		//private bool _noErrorMessageWhenExitCodeZero = true;
 		private int? _timeoutInMiliSeconds = null;
         internal string WorkingDirectory;
+
+        private bool _succeedOnNonZeroErrorCodes;
 
         ///<summary>
         /// Instantiates a new executable
@@ -90,8 +97,7 @@ namespace FluentBuild.Runners
             _outputLock = new object();
             _args = new List<string>();
             _error = new StringBuilder();
-            _output = new StringBuilder();
-            
+            _output = new StringBuilder(); 
         }
 
         ///<summary>
@@ -108,6 +114,12 @@ namespace FluentBuild.Runners
         public IExecutable WithMessageProcessor(IMessageProcessor processor)
         {
             _messageProcessor = processor;
+            return this;
+        }
+
+        public IExecutable SucceedOnNonZeroErrorCodes()
+        {
+            _succeedOnNonZeroErrorCodes = true;
             return this;
         }
 
@@ -192,23 +204,28 @@ namespace FluentBuild.Runners
                     process.Start();
                     process.BeginOutputAndErrorReadLine();
 					if (!process.WaitForExit(_timeoutInMiliSeconds))
-                    {
-                        MessageLogger.WriteDebugMessage("TIMEOUT!");
-                        process.Kill();
-                        Thread.Sleep(1000); //wait one second so that the process has time to exit
-
-                        if (OnError == OnError.Fail)
-                            //exit code should only be set if we want the application to fail on error
-                            Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
-                    }
-
-					if( _noErrorMessageWhenExitCodeZero && process.ExitCode == 0)
 					{
-						_output.Append( _error );
-						_error.Clear();
+					    HandleTimeout(process);
 					}
+
+//					if( _noErrorMessageWhenExitCodeZero && process.ExitCode == 0)
+//					{
+//						_output.Append( _error );
+//						_error.Clear();
+//					}
+
                     _messageProcessor.Display(prefix, _output.ToString(), _error.ToString(), process.ExitCode);
                     exitCode = process.ExitCode;
+
+                    //if we are supposed to fail on errors
+                    //and there was an error
+                    //and the calling code has decided not to deal with the error code (by setting SucceedOnNonZeroErrorCodes
+                    //then set the environment exit code
+                    if (OnError == OnError.Fail && exitCode != 0 && _succeedOnNonZeroErrorCodes == false)
+                    {
+                        Environment.ExitCode = exitCode;
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -217,7 +234,20 @@ namespace FluentBuild.Runners
                     Debug.Write(prefix, "An error occurred running a process but FailOnError was set to false. Error: " + e);
                 }
             }
+
+
             return exitCode;
+        }
+
+        private void HandleTimeout(IProcessWrapper process)
+        {
+            MessageLogger.WriteDebugMessage("TIMEOUT!");
+            process.Kill();
+            Thread.Sleep(1000); //wait one second so that the process has time to exit
+
+            if (OnError == OnError.Fail)
+                //exit code should only be set if we want the application to fail on error
+                Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
         }
 
         //lock objects in case events fire out of order
