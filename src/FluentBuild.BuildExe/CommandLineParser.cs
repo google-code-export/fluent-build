@@ -14,14 +14,15 @@ namespace FluentBuild.BuildExe
             _methodsToRun = new List<string>();
             ClassToRun = "Default";
             //what about when build class is passed in
-            if (Path.GetExtension(args[0]).ToLower() != ".dll")
+            var extension = Path.GetExtension(args[0]).ToLower();
+            if (extension == ".dll" || extension == ".exe")
             {
-                SourceBuild = true;
-                PathToBuildSources = GetFullPathIfRelative(args[0]);
+                PathToBuildDll = GetFullPathIfRelative(args[0]);
             }
             else
             {
-                PathToBuildDll = GetFullPathIfRelative(args[0]);
+                SourceBuild = true;
+                PathToBuildSources = GetFullPathIfRelative(args[0]);
             }
 
             for (int i = 1; i < args.Length; i++)
