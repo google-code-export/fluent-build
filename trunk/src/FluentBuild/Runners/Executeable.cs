@@ -224,6 +224,7 @@ namespace FluentBuild.Runners
                     if (OnError == OnError.Fail && exitCode != 0 && _succeedOnNonZeroErrorCodes == false)
                     {
                         Environment.ExitCode = exitCode;
+                        throw new ApplicationException("Executable returned an error code of " + exitCode);
                     }
 
                 }

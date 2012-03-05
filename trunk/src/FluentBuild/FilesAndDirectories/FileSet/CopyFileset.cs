@@ -43,6 +43,7 @@ namespace FluentBuild.FilesAndDirectories.FileSet
             MessageLogger.Write("copy", String.Format("Copying {0} files to '{1}'", _fileSet.Files.Count, destination));
             foreach (string file in _fileSet.Files)
             {
+                MessageLogger.WriteDebugMessage(String.Format("Path: {0}\\{1}", destination, Path.GetFileName(file)));
                 string destinationPath = Path.Combine(destination.ToString(), Path.GetFileName(file));
                 FailableActionExecutor.DoAction<string, string>(this.OnError, _fileSystemWrapper.Copy, file, destinationPath);
             }

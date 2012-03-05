@@ -88,7 +88,7 @@ namespace FluentBuild.Runners.Zip
             if (!string.IsNullOrEmpty(_file))
                 return new List<String> {_file};
 
-            return Directory.GetFiles(_path).ToList();
+            return Directory.GetFiles(_path, "*.*", SearchOption.AllDirectories).ToList();
         }
 
 
@@ -115,7 +115,13 @@ namespace FluentBuild.Runners.Zip
                 foreach (string fileName in GetFiles())
                 {
                     var fileInfo = new FileInfo(fileName);
-                    var entry = new ZipEntry(fileInfo.Name);
+                    //strip of the base folder 
+                    //this will keep folders preserved
+                    var path = fileName.Replace(_path, "");
+                    if (path.StartsWith("\\"))
+                        path = path.Substring(1); //removes the leading \
+
+                    var entry = new ZipEntry(path);
                     FileStream sReader = File.OpenRead(fileName);
                     var buff = new byte[Convert.ToInt32(sReader.Length)];
                     sReader.Read(buff, 0, (int) sReader.Length);

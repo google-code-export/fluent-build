@@ -27,5 +27,12 @@ namespace FluentBuild.Tests.Run
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\afilethatdoesnotexist.exe";
             Core.Run.Executable(pathtocmd).ContinueOnError.Execute();
         }
+
+        [Test, ExpectedException(typeof(ApplicationException))]
+        public void ShouldFailOnNonZeroErrorCode()
+        {
+            string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
+            Core.Run.Executable(pathtocmd).WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").Execute();
+        }
     }
 }
