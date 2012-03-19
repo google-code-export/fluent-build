@@ -34,8 +34,7 @@ namespace FluentBuild.Tests
 
         [Test, ExpectedException(typeof(ExecutableFailedException))]
         public void ShouldFailIfErrorOccurs()
-        {
-            
+        {   
             //test fail/continue on error
             Core.Run.UnitTestFramework.NUnit
                 .FileToTest("nonexistant.dll")

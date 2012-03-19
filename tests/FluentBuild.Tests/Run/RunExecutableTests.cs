@@ -34,5 +34,19 @@ namespace FluentBuild.Tests.Run
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
             Core.Run.Executable(pathtocmd).WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").Execute();
         }
+
+        [Test]
+        public void ShouldContinueOnNonZeroErrorCode()
+        {
+            string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
+            Core.Run.Executable(pathtocmd).ContinueOnError.WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").Execute();
+        }
+
+        [Test]
+        public void ShouldContinueOnErrorCodeOne()
+        {
+            string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
+            Core.Run.Executable(pathtocmd).WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").SucceedOnNonZeroErrorCodes().Execute();
+        }
     }
 }
