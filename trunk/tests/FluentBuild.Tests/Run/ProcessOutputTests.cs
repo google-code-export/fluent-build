@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using FluentBuild.Core;
 using FluentBuild.Tests.Samples.Run.StdOutStdError;
+using FluentFs.Core;
 using NUnit.Framework;
 
 namespace FluentBuild.Tests.Run
@@ -13,11 +14,10 @@ namespace FluentBuild.Tests.Run
         [TestFixtureSetUp]
         public void InitialSetup()
         {
-            BuildFolder sourceFolder =
-                new BuildFolder(Settings.PathToSamplesFolder).SubFolder("run").SubFolder("StdOutStdError");
+            FluentFs.Core.Directory sourceFolder = new FluentFs.Core.Directory(Settings.PathToSamplesFolder).SubFolder("run").SubFolder("StdOutStdError");
             FileSet fs = new FileSet().Include(sourceFolder).Filter("*.cs");
             _outputFileLocation = rootFolder + "\\stdoutstderror.exe";
-            Core.Build.UsingCsc.Target.Executable.AddSources(fs).OutputFileTo(_outputFileLocation).Execute();
+            Task.Build(Using.Csc.Target.Executable.AddSources(fs).OutputFileTo(_outputFileLocation));
         }
 
         private void ExecuteProcess(string args)

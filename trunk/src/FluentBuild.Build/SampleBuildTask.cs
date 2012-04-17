@@ -1,23 +1,24 @@
 using FluentBuild.Core;
-using FluentBuild.Utilities;
+using FluentBuild.Runners.UnitTesting;
+using FluentFs.Core;
 
 namespace FluentBuild.BuildFile
 {
     public class Default : Core.BuildFile
     {
-        private readonly BuildArtifact assembly_FluentBuild;
-        private readonly BuildArtifact assembly_FluentBuild_Tests;
-        private readonly BuildFolder directory_base;
-        private readonly BuildFolder directory_compile;
-        private readonly BuildFolder directory_release;
-        private readonly BuildFolder directory_tools;
+        private readonly File assembly_FluentBuild;
+        private readonly File assembly_FluentBuild_Tests;
+        private readonly Directory directory_base;
+        private readonly Directory directory_compile;
+        private readonly Directory directory_release;
+        private readonly Directory directory_tools;
 
-        private readonly BuildArtifact thirdparty_nunit;
-        private readonly BuildArtifact thirdparty_rhino;
+        private readonly File thirdparty_nunit;
+        private readonly File thirdparty_rhino;
 
         public Default()
         {
-            directory_base = new BuildFolder(Properties.CurrentDirectory);
+            directory_base = new Directory(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_release = directory_base.SubFolder("release");
             directory_tools = directory_base.SubFolder("tools");
@@ -39,21 +40,21 @@ namespace FluentBuild.BuildFile
 
         private void Clean()
         {
-            directory_compile.Delete(OnError.Continue).Create();
+            directory_compile.Delete(FluentFs.Core.OnError.Continue).Create();
 
             //Turn on debugging messages for only this step
             using (MessageLogger.ShowDebugMessages)
             {
-                directory_release.Delete(OnError.Continue).Create();
+                directory_release.Delete(FluentFs.Core.OnError.Continue).Create();
             }
         }
 
         private void Package()
         {
-                Run.Zip.Compress
+              Task.Run.Zip(x=>x.Compress
                     .SourceFolder(directory_compile)
                     .UsingCompressionLevel.Nine
-                    .To(directory_release.File("release.zip"));
+                    .To(directory_release.File("release.zip")));
         }
 
         private void CompileSources()
@@ -61,9 +62,7 @@ namespace FluentBuild.BuildFile
             FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src"))
                 .RecurseAllSubDirectories
                 .Filter("*.cs");
-
-            Core.Build.UsingCsc.Target.Library.AddSources(sourceFiles)
-                .OutputFileTo(assembly_FluentBuild).Execute();
+            Task.Build(Using.Csc.Target.Library.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
         }
 
         private void CompileTests()
@@ -73,19 +72,17 @@ namespace FluentBuild.BuildFile
                 .Include(directory_tools).RecurseAllSubDirectories.Filter("rhino.mocks.dll")
                 .Copy.To(directory_compile);
 
-            FileSet sourceFiles =
-                new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
-            Core.Build.UsingCsc
+           var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
+           Task.Build(Using.Csc
                 .Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
-                .OutputFileTo(assembly_FluentBuild_Tests)
-                .Execute();
+                .OutputFileTo(assembly_FluentBuild_Tests));
         }
 
         private void RunTests()
         {
-            Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
+          Task.Run.UnitTestFramework.Nunit(x=>x.FileToTest(assembly_FluentBuild.ToString()));
         }
     }
 }

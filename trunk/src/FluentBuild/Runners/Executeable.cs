@@ -31,7 +31,7 @@ namespace FluentBuild.Runners
         /// Sets the working directory
         ///</summary>
         ///<param name="directory">path to the working directory</param>
-        IExecutable InWorkingDirectory(BuildFolder directory);
+        IExecutable InWorkingDirectory(FluentFs.Core.Directory directory);
 
         ///<summary>
         /// Executes the executable with the provided options.
@@ -135,7 +135,7 @@ namespace FluentBuild.Runners
             return this;
         }
 
-        public IExecutable InWorkingDirectory(BuildFolder directory)
+        public IExecutable InWorkingDirectory(FluentFs.Core.Directory directory)
         {
             WorkingDirectory = directory.ToString();
             return this;
@@ -147,7 +147,13 @@ namespace FluentBuild.Runners
 			return this;
 		}
 
+        [Obsolete("This is replaced with Task.Run.Executable()")]
         public int Execute()
+        {
+            return InternalExecute();
+        }
+        
+        internal int InternalExecute()
         {
             return Execute("exec");
         }

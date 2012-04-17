@@ -298,7 +298,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// Execute the generation of the assembly info file and output it.
         /// </summary>
         /// <param name="artifactLocation">The destination artifact location</param>
-        public void OutputTo(BuildArtifact artifactLocation)
+        public void OutputTo(FluentFs.Core.File artifactLocation)
         {
             OutputTo(artifactLocation.ToString());
         }

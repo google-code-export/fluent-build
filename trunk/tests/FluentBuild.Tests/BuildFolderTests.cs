@@ -9,12 +9,12 @@ namespace FluentBuild.Tests
     [TestFixture]
     public class BuildFolderTests : TestBase
     {
-        private BuildFolder _subject;
+        private FluentFs.Core.Directory _subject;
 
         [SetUp]
         public void Setup()
         {
-            _subject = new FluentBuild.Core.BuildFolder(rootFolder).SubFolder("Test");
+            _subject = new FluentFs.Core.Directory(rootFolder).SubFolder("Test");
         }
         
         [Test]
@@ -27,13 +27,13 @@ namespace FluentBuild.Tests
         [Test, ExpectedException(typeof(ArgumentException))]
         public void Create_ShouldFailIfImproperCharactersInPath()
         {
-            _subject.SubFolder("invalidzzz@#$&&@$#%*").Create(OnError.Fail);
+            _subject.SubFolder("invalidzzz@#$&&@$#%*").Create(FluentFs.Core.OnError.Fail);
         }
 
         [Test]
         public void Create_ShouldContinueIfContinueOnErrorIsSet()
         {
-            _subject.SubFolder("invalidzzz@#$&&@$#%*").Create(OnError.Continue);
+            _subject.SubFolder("invalidzzz@#$&&@$#%*").Create(FluentFs.Core.OnError.Continue);
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace FluentBuild.Tests
         {
             _subject.Create();
             Assert.That(Directory.Exists(_subject.ToString()));
-            _subject.SubFolder("invalidzzz@#$&&@$#%*").Delete(OnError.Fail);
+            _subject.SubFolder("invalidzzz@#$&&@$#%*").Delete(FluentFs.Core.OnError.Fail);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace FluentBuild.Tests
         {
             _subject.Create();
             Assert.That(Directory.Exists(_subject.ToString()));
-            _subject.SubFolder("invalidzzz@#$&&@$#%*").Delete(OnError.Continue);
+            _subject.SubFolder("invalidzzz@#$&&@$#%*").Delete(FluentFs.Core.OnError.Continue);
         }
     }
 }

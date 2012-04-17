@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using FluentBuild.Core;
 using FluentBuild.Runners;
+using FluentFs.Core;
 
 namespace FluentBuild.Compilation
 {
@@ -95,7 +96,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         /// <param name="artifact">The BuildArtifact to output the file to</param>
         /// <returns></returns>
-        public BuildTask OutputFileTo(BuildArtifact artifact)
+        public BuildTask OutputFileTo(File artifact)
         {
             return OutputFileTo(artifact.ToString());
         }
@@ -116,9 +117,9 @@ namespace FluentBuild.Compilation
         /// </summary>
         /// <param name="artifacts">a param array of BuildArtifacts to the reference</param>
         /// <returns></returns>
-        public BuildTask AddRefences(params BuildArtifact[] artifacts)
+        public BuildTask AddRefences(params File[] artifacts)
         {
-            foreach (BuildArtifact buildArtifact in artifacts)
+            foreach (var buildArtifact in artifacts)
             {
                 _references.Add(buildArtifact.ToString());
             }
@@ -162,11 +163,18 @@ namespace FluentBuild.Compilation
             return this;
         }
 
+        
 
         ///<summary>
         /// Executes the compliation with the provided parameters
         ///</summary>
+        [Obsolete("This has been replaced with Task.Build(Using.[Compiler]). This method will dissapear in future versions.", false)]
         public void Execute()
+        {
+            InternalExecute();
+        }
+
+        internal void InternalExecute()
         {
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
             MessageLogger.Write(compilerWithoutExtentions,
@@ -175,10 +183,7 @@ namespace FluentBuild.Compilation
                                     Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " + Args;
             MessageLogger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
-            var executable =
-                (Executable)
-                Run.Executable(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" +
-                                Compiler).WithArguments(Args);
+            var executable = (Executable)new Executable().ExecutablePath(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler).WithArguments(Args);
             executable.Execute(compilerWithoutExtentions);
             MessageLogger.WriteDebugMessage("Done Compiling");
         }

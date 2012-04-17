@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Forms;
 
 using FluentBuild.Core;
+using FluentFs.Core;
+using Directory = System.IO.Directory;
 
 namespace FluentBuild.BuildUI
 {
@@ -94,8 +96,8 @@ namespace FluentBuild.BuildUI
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
             MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Build.UsingCsc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
-                IncludeDebugSymbols.Execute();
+            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
+                IncludeDebugSymbols);
             return outputAssembly;
         }
 

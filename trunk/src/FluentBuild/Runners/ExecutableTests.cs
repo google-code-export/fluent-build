@@ -36,7 +36,7 @@ namespace FluentBuild.Utilities
         public void ShouldPopulateWorkingDirectoryViaArtifact()
         {
             const string workingDirectory = @"c:\";
-            var workingFolder = new BuildFolder(workingDirectory);
+            var workingFolder = new FluentFs.Core.Directory(workingDirectory);
             var executable = (Executable) new Executable(_executablePath).InWorkingDirectory(workingFolder);
             Assert.That(executable.WorkingDirectory, Is.EqualTo(workingDirectory));
         }
