@@ -55,6 +55,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentFs">
+      <HintPath>..\..\lib\FluentFs\FluentFs.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib-net2.0\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -99,8 +102,6 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
     <Compile Include="Core\MessageLoggerTests.cs" />
-    <Compile Include="FilesAndDirectories\MoveBuildArtifact.cs" />
-    <Compile Include="FilesAndDirectories\MoveBuildArtifactTests.cs" />
     <Compile Include="FrameworkFinders\DefaultFinderTests.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\TestLogger.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\TestSuiteLogger.cs" />
@@ -114,16 +115,20 @@
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestSuiteMessageLogger.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestSuiteMessageLoggerTests.cs" />
     <Compile Include="Publishing\GoogleCodeTests.cs" />
+    <Compile Include="RunArgs.cs" />
     <Compile Include="Runners\ExecutableFailedExceptionTests.cs" />
     <Compile Include="Runners\ILMergeTests.cs" />
+    <Compile Include="Task.cs" />
+    <Compile Include="UnitTestFrameworkArgs.cs" />
+    <Compile Include="Using.cs" />
+    <Compile Include="Utilities\FileFinder.cs" />
+    <Compile Include="Utilities\FileFinderTests.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleMessageLogger.cs" />
     <Compile Include="MessageLoggers\IMessageLogger.cs" />
     <Compile Include="Core\PublishTests.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\MessageLogger.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\BuildFolderChoices.cs" />
-    <Compile Include="Core\Build_Tests.cs" />
-    <Compile Include="Core\Build.cs" />
+    <Compile Include="Core\Obsolete\Build.cs" />
     <Compile Include="Compilation\MsBuildTask.cs" />
     <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\ResgenTests.cs" />
@@ -142,7 +147,6 @@
     <Compile Include="Runners\ILMerge.cs" />
     <Compile Include="MessageLoggers\MessageProcessing\DefaultMessageProcessor.cs" />
     <Compile Include="MessageLoggers\MessageProcessing\DefaultMessageProcessorTests.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\FileSetFactory.cs" />
     <Compile Include="FrameworkFinders\DefaultFinder.cs" />
     <Compile Include="FrameworkFinders\Desktop2_0Finder.cs" />
     <Compile Include="FrameworkFinders\Desktop3_0Finder.cs" />
@@ -180,54 +184,30 @@
     <Compile Include="Utilities\DesktopFrameworkType.cs" />
     <Compile Include="Utilities\EnvironmentVariableWrapper.cs" />
     <Compile Include="Utilities\Failable.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\CopyFilesetTests.cs" />
     <Compile Include="Utilities\FrameworkNotFoundException.cs" />
     <Compile Include="Utilities\FrameworkVersionTests.cs" />
     <Compile Include="Utilities\OnError.cs" />
     <Compile Include="ApplicationProperties\TeamCityProperties.cs" />
     <Compile Include="Runners\Executeable.cs" />
     <Compile Include="Runners\ExecutableTests.cs" />
-    <Compile Include="Core\BuildArtifact.cs" />
-    <Compile Include="Core\BuildArtifactTests.cs" />
-    <Compile Include="Core\BuildFolderTests.cs" />
-    <Compile Include="FilesAndDirectories\CopyBuildArtifactTests.cs" />
-    <Compile Include="FilesAndDirectories\CopyBuildArtifcat.cs" />
-    <Compile Include="Core\FileSet.cs" />
-    <Compile Include="Core\FileSetTests.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\FileSystemUtility.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\FileSystemUtilityTests.cs" />
-    <Compile Include="Core\BuildFolder.cs" />
     <Compile Include="Runners\ProcessWrapper.cs" />
     <Compile Include="Utilities\ConsoleColor.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\CopyFileset.cs" />
-    <Compile Include="FilesAndDirectories\FileSystemWrapper.cs" />
-    <Compile Include="FilesAndDirectories\RenameBuildArtifact.cs" />
-    <Compile Include="FilesAndDirectories\RenameBuildArtifactTests.cs" />
     <Compile Include="Utilities\FrameworkVersion.cs" />
     <Compile Include="Core\BuildFile.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleMessageLoggerTests.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunner.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunnerTests.cs" />
-    <Compile Include="Utilities\FileFinder.cs" />
-    <Compile Include="Utilities\FileFinderTests.cs" />
     <Compile Include="Utilities\FailableActionExecutor.cs" />
     <Compile Include="Utilities\RegistryKeyValueFinder.cs" />
     <Compile Include="Utilities\RegistryKeyValueFinderTests.cs" />
     <Compile Include="Utilities\RegistryWrapper.cs" />
     <Compile Include="Utilities\RegistryKeyWrapper.cs" />
-    <Compile Include="Tokenization\TokenWith.cs" />
-    <Compile Include="Core\Run.cs" />
+    <Compile Include="Core\Obsolete\Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\SearchPatternParser.cs" />
-    <Compile Include="FilesAndDirectories\FileSet\SearchPatternParserTests.cs" />
     <Compile Include="Compilation\Target.cs" />
     <Compile Include="Core\MessageLogger.cs" />
-    <Compile Include="Core\RunTests.cs" />
-    <Compile Include="Tokenization\TokenReplacerTests.cs" />
-    <Compile Include="Tokenization\TokenReplacer.cs" />
-    <Compile Include="Runners\UnitTesting\UnitTestFrameworkRun.cs" />
-    <Compile Include="Runners\UnitTesting\UnitTestFrameworkRunTests.cs" />
     <Compile Include="Utilities\SdkNotFoundException.cs" />
+    <Compile Include="ZipOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

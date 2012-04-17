@@ -1,7 +1,8 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 using FluentBuild.Core;
+using FluentFs.Core;
 using NUnit.Framework;
+using File = System.IO.File;
 
 namespace FluentBuild.Tests
 {
@@ -54,7 +55,7 @@ namespace FluentBuild.Tests
             var fs = new FileSet();
             fs.Include(outputLocation);
             var outputFileLocation = rootFolder + "\\asminfo.dll";
-            Core.Build.UsingCsc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation).Execute();
+            Task.Build(Using.Csc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
 
         }
@@ -81,7 +82,7 @@ namespace FluentBuild.Tests
             var fs = new FileSet();
             fs.Include(outputLocation);
             var outputFileLocation = rootFolder + "\\asminfo.dll";
-            Core.Build.UsingVbc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation).Execute();
+            Task.Build(Using.Vbc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
 
         }

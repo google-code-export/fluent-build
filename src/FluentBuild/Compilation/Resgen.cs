@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using FluentBuild.Core;
 using FluentBuild.Runners;
+using FluentFs.Core;
 
 namespace FluentBuild.Compilation
 {

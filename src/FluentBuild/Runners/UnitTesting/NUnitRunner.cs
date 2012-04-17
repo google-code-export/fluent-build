@@ -8,10 +8,66 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners.UnitTesting
 {
+    public interface INUnitRunner
+    {
+        ///<summary>
+        /// Sets the working directory
+        ///</summary>
+        ///<param name="path">The working directory for nunit-console</param>
+        ///<returns></returns>
+        NUnitRunner WorkingDirectory(string path);
+
+        ///<summary>
+        /// The assembly to run nunit against
+        ///</summary>
+        ///<param name="path">path to the assembly</param>
+        ///<returns></returns>
+        NUnitRunner FileToTest(string path);
+
+        ///<summary>
+        /// The assembly to run nunit against
+        ///</summary>
+        ///<param name="File">build artifact that represents the path to the assembly to test</param>
+        ///<returns></returns>
+        NUnitRunner FileToTest(FluentFs.Core.File buildArtifact);
+
+        /// <summary>
+        /// Manually sets the path to nunit-console.exe. If this is not set then the runner will try and find the file on its own by searching the current folder and its subfolders.
+        /// </summary>
+        /// <param name="path">Path to nunit-console.exe</param>
+        /// <returns></returns>
+        NUnitRunner PathToNunitConsoleRunner(string path);
+
+        ///<summary>
+        /// Allows you to set the output to be an xml file.
+        ///</summary>
+        ///<param name="path">path for the output</param>
+        ///<returns></returns>
+        NUnitRunner XmlOutputTo(string path);
+
+        ///<summary>
+        /// Adds a parameter for nunit
+        ///</summary>
+        ///<param name="name">The name of the parameter</param>
+        ///<param name="value">The value of the parameter</param>
+        ///<returns></returns>
+        NUnitRunner AddParameter(string name, string value);
+
+        ///<summary>
+        /// Adds a named parameter to nunit
+        ///</summary>
+        ///<param name="name">The name of the parameter</param>
+        ///<returns></returns>
+        NUnitRunner AddParameter(string name);
+
+        NUnitRunner FailOnError { get; }
+        NUnitRunner ContinueOnError { get; }
+    }
+
     ///<summary>
     /// Runs nunit against an assembly
     ///</summary>
-    public class NUnitRunner : Failable<NUnitRunner>
+    public class NUnitRunner : Failable<NUnitRunner>, INUnitRunner
     {
         internal string _fileToTest;
         internal NameValueCollection _parameters;
@@ -27,7 +83,7 @@ namespace FluentBuild.Runners.UnitTesting
             _parameters = new NameValueCollection();
         }
 
-        internal NUnitRunner() : this (new Executable(), new FileFinder())
+        public NUnitRunner() : this (new Executable(), new FileFinder())
         {
 
         }
@@ -57,9 +113,9 @@ namespace FluentBuild.Runners.UnitTesting
         ///<summary>
         /// The assembly to run nunit against
         ///</summary>
-        ///<param name="buildArtifact">build artifact that represents the path to the assembly to test</param>
+        ///<param name="File">build artifact that represents the path to the assembly to test</param>
         ///<returns></returns>
-        public NUnitRunner FileToTest(BuildArtifact buildArtifact)
+        public NUnitRunner FileToTest(FluentFs.Core.File buildArtifact)
         {
             return FileToTest(buildArtifact.ToString());
         }
@@ -132,7 +188,13 @@ namespace FluentBuild.Runners.UnitTesting
         /// Attempts to find and then run nunit-console
         ///</summary>
         ///<exception cref="FileNotFoundException">Occurs when nunit-console.exe can not be found</exception>
+        [Obsolete("This is replaced by Tasks.Run.UnitTestFramework(args)", false)]
         public void Execute()
+        {
+            InternalExecute();    
+        }
+
+        internal void InternalExecute()
         {
             if (String.IsNullOrEmpty(_pathToConsoleRunner))
             {

@@ -120,7 +120,7 @@ namespace FluentBuild.Compilation
         public void OutputDirectory_ShouldSetDir()
         {
             var path = "c:\\temp";
-            var folder = new BuildFolder(path);
+            var folder = new FluentFs.Core.Directory(path);
             _subject.OutputDirectory(folder);
             Assert.That(_subject.Outdir, Is.EqualTo(path));
         }

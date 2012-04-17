@@ -79,7 +79,7 @@ namespace FluentBuild.Compilation
         /// <remarks>Sets the OutDir property (i.e. /p:OutDir)</remarks>
         ///<param name="path">the output folder</param>
         ///<returns></returns>
-        public MsBuildTask OutputDirectory(BuildFolder path)
+        public MsBuildTask OutputDirectory(FluentFs.Core.Directory path)
         {
             OutputDirectory(path.ToString());
             return this;

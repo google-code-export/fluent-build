@@ -1,6 +1,6 @@
 ﻿using System;
 using FluentBuild.Core;
-using FluentBuild.FilesAndDirectories;
+using FluentFs.Support;
 using NUnit.Framework;
 
 using Rhino.Mocks;

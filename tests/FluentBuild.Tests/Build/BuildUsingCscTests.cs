@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentBuild.Compilation;
 using FluentBuild.Core;
+using FluentFs.Core;
 using NUnit.Framework;
 
 namespace FluentBuild.Tests.Build
@@ -24,7 +25,7 @@ namespace FluentBuild.Tests.Build
 
         public override TargetType CreateBuildTask()
         {
-            return Core.Build.UsingCsc;
+            return Using.Csc;
         }
 
         [Test]

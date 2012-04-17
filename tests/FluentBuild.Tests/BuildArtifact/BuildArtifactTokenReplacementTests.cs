@@ -28,7 +28,7 @@ namespace FluentBuild.Tests
         [Test]
         public void ReplaceToken()
         {
-            var artifact = new BuildArtifact(Path.Combine(rootFolder, "test.txt"));
+            var artifact = new FluentFs.Core.File(Path.Combine(rootFolder, "test.txt"));
             string destination = Path.Combine(rootFolder, "test2.txt");
             artifact.Copy.ReplaceToken("LastName").With("Smith").ReplaceToken("FirstName").With("John").To(destination);
 

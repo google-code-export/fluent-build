@@ -24,23 +24,20 @@ namespace FluentBuild.Tests
         [Test]
         public void ShouldRunProperly()
         {
-            Core.Run.UnitTestFramework.NUnit
-                .FileToTest(Settings.PathToSamplesFolder  + @"\\Run\SimpleTestAssembly\Sample.Test.dll")
+            Task.Run.UnitTestFramework.Nunit(x => x.FileToTest(Settings.PathToSamplesFolder + @"\\Run\SimpleTestAssembly\Sample.Test.dll")
                 .XmlOutputTo(_outputFile)
-                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
-                .Execute();
+                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe"));
             Assert.That(File.Exists(_outputFile));
         }
+
 
         [Test, ExpectedException(typeof(ExecutableFailedException))]
         public void ShouldFailIfErrorOccurs()
         {   
             //test fail/continue on error
-            Core.Run.UnitTestFramework.NUnit
-                .FileToTest("nonexistant.dll")
+           Task.Run.UnitTestFramework.Nunit(x=>x.FileToTest("nonexistant.dll")
                 .XmlOutputTo(_outputFile)
-                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
-                .Execute();
+                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe"));
             Assert.That(File.Exists(_outputFile));
         }
 
@@ -48,12 +45,10 @@ namespace FluentBuild.Tests
         public void ShouldSucceedIfFailOnErrorIsContinue()
         {
             //test fail/continue on error
-            Core.Run.UnitTestFramework.NUnit
-                .FileToTest("nonexistant.dll")
+            Task.Run.UnitTestFramework.Nunit(x=>x.FileToTest("nonexistant.dll")
                 .XmlOutputTo(_outputFile)
-                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe")
                 .ContinueOnError
-                .Execute();
+                .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe"));
         }
 
     }

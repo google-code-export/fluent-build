@@ -6,6 +6,9 @@ using System.Reflection;
 using System.Text;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
+using FluentFs.Core;
+using Directory = System.IO.Directory;
+using File = System.IO.File;
 
 namespace FluentBuild.BuildExe
 {
@@ -30,8 +33,7 @@ namespace FluentBuild.BuildExe
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
             MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Build.UsingCsc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
-                IncludeDebugSymbols.Execute();
+            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).IncludeDebugSymbols);
             return outputAssembly;
         }
 
@@ -134,8 +136,8 @@ namespace FluentBuild.BuildExe
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
             MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Build.UsingCsc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
-                IncludeDebugSymbols.Execute();
+            
+            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).IncludeDebugSymbols);
             return outputAssembly;
         }
 

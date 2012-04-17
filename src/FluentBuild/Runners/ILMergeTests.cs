@@ -73,7 +73,7 @@ namespace FluentBuild.Runners
         [Test]
         public void AddBuildArtifactSource_ShouldSetSource()
         {
-            var source = new BuildArtifact("c:\\test.dll");
+            var source = new FluentFs.Core.File("c:\\test.dll");
             _subject.AddSource(source);
             Assert.That(_subject.Sources[0], Is.EqualTo(source.ToString()));
         }
@@ -81,7 +81,7 @@ namespace FluentBuild.Runners
         [Test]
         public void OutputToWithBuildArtifact_ShouldOutpt()
         {
-            var source = new BuildArtifact("c:\\test.dll");
+            var source = new FluentFs.Core.File("c:\\test.dll");
             _subject.OutputTo(source);
             Assert.That(_subject.Destination, Is.EqualTo(source.ToString()));
         }

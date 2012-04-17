@@ -1,6 +1,9 @@
 ﻿using System.IO;
 using FluentBuild.Core;
+using FluentFs.Core;
 using NUnit.Framework;
+using Directory = System.IO.Directory;
+using File = System.IO.File;
 
 namespace FluentBuild.Tests
 {

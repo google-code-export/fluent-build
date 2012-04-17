@@ -1,8 +1,9 @@
 ﻿using System;
-using System.IO;
 using FluentBuild.Compilation;
 using FluentBuild.Core;
+using FluentFs.Core;
 using NUnit.Framework;
+using File = System.IO.File;
 
 namespace FluentBuild.Tests.Build
 {

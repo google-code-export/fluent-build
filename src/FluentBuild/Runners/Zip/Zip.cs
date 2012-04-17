@@ -1,10 +1,12 @@
-﻿using FluentBuild.Core;
+﻿using System;
+using FluentBuild.Core;
 
 namespace FluentBuild.Runners.Zip
 {
     ///<summary>
     /// Choice class that determines to compress or decompress
     ///</summary>
+    [Obsolete("",true)]
     public class Zip
     {
         internal Zip()

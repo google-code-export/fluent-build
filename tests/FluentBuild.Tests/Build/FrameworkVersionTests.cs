@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using FluentBuild.Core;
 using FluentBuild.Utilities;
+using FluentFs.Core;
 using NUnit.Framework;
+using File = System.IO.File;
 
 namespace FluentBuild.Tests.Build
 {
@@ -55,11 +56,10 @@ namespace FluentBuild.Tests.Build
             sources.Include(Settings.PathToSamplesFolder + "\\Build\\Simple\\C#\\*.cs");
 
             var outputFileLocation = rootFolder + "\\temp.dll";
-            Core.Build.UsingCsc
+            Task.Build(Using.Csc
                 .Target.Library
                 .AddSources(sources)
-                .OutputFileTo(outputFileLocation)
-                .Execute();
+                .OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
     }

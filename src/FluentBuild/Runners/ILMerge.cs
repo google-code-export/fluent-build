@@ -8,10 +8,43 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners
 {
+    public interface IILMerge
+    {
+        ///<summary>
+        /// Sets the path to the ILMerge.exe executable
+        ///</summary>
+        ///<param name="path">path to ILMerge.exe</param>
+        ILMerge ExecutableLocatedAt(string path);
+
+        ///<summary>
+        /// Sets the output location
+        ///</summary>
+        ///<param name="destination">path to output file</param>
+        ILMerge OutputTo(string destination);
+
+        ///<summary>
+        /// Sets the output location
+        ///</summary>
+        ///<param name="destination">path to output file</param>
+        ILMerge OutputTo(FluentFs.Core.File destination);
+
+        ///<summary>
+        /// Adds a source file to merge in
+        ///</summary>
+        ///<param name="source">path to the file to merge in</param>
+        ILMerge AddSource(string source);
+
+        ///<summary>
+        /// Adds a source file to merge in
+        ///</summary>
+        ///<param name="source">path to the file to merge in</param>
+        ILMerge AddSource(FluentFs.Core.File source);
+    }
+
     ///<summary>
     /// Merges assemblies together
     ///</summary>
-    public class ILMerge
+    public class ILMerge : IILMerge
     {
         internal string Destination;
         internal IList<String> Sources;
@@ -36,9 +69,15 @@ namespace FluentBuild.Runners
         /// Executes the ILMerge assembly
         ///</summary>
         ///<exception cref="FileNotFoundException">If the path to the executable was not set or can not be found automatically.</exception>
-        public void Execute()
+        [Obsolete("This has been replaced with Task.Run.ILMerge(args)")]
+         public void Execute()
+         {
+            InternalExecute();
+         }
+
+        internal void InternalExecute()
         {
-            Run.Executable(FindExecutable()).WithArguments(BuildArgs()).Execute();
+            Task.Run.Executable(new Executable().ExecutablePath(FindExecutable()).WithArguments(BuildArgs()));
         }
 
         internal string FindExecutable()
@@ -70,7 +109,7 @@ namespace FluentBuild.Runners
             Sources = new List<string>();
         }
 
-        internal ILMerge() : this(new FileFinder())
+        public ILMerge() : this(new FileFinder())
         {
             
         }
@@ -90,7 +129,7 @@ namespace FluentBuild.Runners
         /// Sets the output location
         ///</summary>
         ///<param name="destination">path to output file</param>
-        public ILMerge OutputTo(BuildArtifact destination)
+        public ILMerge OutputTo(FluentFs.Core.File destination)
         {
             return OutputTo(destination.ToString());
         }
@@ -109,7 +148,7 @@ namespace FluentBuild.Runners
         /// Adds a source file to merge in
         ///</summary>
         ///<param name="source">path to the file to merge in</param>
-        public ILMerge AddSource(BuildArtifact source)
+        public ILMerge AddSource(FluentFs.Core.File source)
         {
             return AddSource(source.ToString());
         }

@@ -1,14 +1,18 @@
 ﻿using System;
+using FluentBuild;
 using FluentBuild.Core;
+using FluentBuild.Runners;
+using FluentFs.Core;
+
 
 namespace Build
 {
     public class Publish : Default
     {
-        internal readonly BuildArtifact AssemblyFluentBuildRelease_Merged;
-        internal readonly BuildArtifact AssemblyFluentBuildRelease_Partial;
-        internal readonly BuildArtifact AssemblyFluentBuildRunnerRelease;
-        internal BuildArtifact ZipFilePath;
+        internal readonly File AssemblyFluentBuildRelease_Merged;
+        internal readonly File AssemblyFluentBuildRelease_Partial;
+        internal readonly File AssemblyFluentBuildRunnerRelease;
+        internal File ZipFilePath;
         internal string _finalFileName;
 
         public Publish()
@@ -36,11 +40,10 @@ namespace Build
                 .Include(directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe"))
                 .RecurseAllSubDirectories.Filter("*.cs");
 
-            FluentBuild.Core.Build.UsingCsc.Target.Executable
+          Task.Build(Using.Csc.Target.Executable
                 .AddSources(sourceFiles)
                 .AddRefences(AssemblyFluentBuildRelease_Merged)
-                .OutputFileTo(AssemblyFluentBuildRunnerRelease)
-                .Execute();
+                .OutputFileTo(AssemblyFluentBuildRunnerRelease));
         }
 
         private void PublishToRepository()
@@ -60,10 +63,9 @@ namespace Build
             sourceFiles.Include(directory_src_converter).RecurseAllSubDirectories.Filter("*.cs")
                 .Exclude(directory_src_converter).RecurseAllSubDirectories.Filter("*Tests.cs"); ;
 
-            FluentBuild.Core.Build.UsingCsc.Target.Executable
+           Task.Build(Using.Csc.Target.Executable
                 .AddSources(sourceFiles)
-                .OutputFileTo(assembly_BuildFileConverter_WithTests)
-                .Execute();
+                .OutputFileTo(assembly_BuildFileConverter_WithTests));
         }
 
         private void CompileCoreWithOutTests()
@@ -74,18 +76,15 @@ namespace Build
                 .Exclude(directory_base.SubFolder("src").SubFolder("FluentBuild"))
                 .RecurseAllSubDirectories.Filter("*Tests.cs");
 
-            FluentBuild.Core.Build.UsingCsc.Target.Library
+            Task.Build(Using.Csc.Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_sharpzip)
-                .OutputFileTo(AssemblyFluentBuildRelease_Partial)
-                .Execute();
+                .OutputFileTo(AssemblyFluentBuildRelease_Partial));
 
-            Run.ILMerge
-                .ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
+           Task.Run.ILMerge(x=>x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
                 .AddSource(AssemblyFluentBuildRelease_Partial)
                 .AddSource(thirdparty_sharpzip)
-                .OutputTo(AssemblyFluentBuildRelease_Merged)
-                .Execute();
+                .OutputTo(AssemblyFluentBuildRelease_Merged));
 
             //now that it is merged delete the partial file
             AssemblyFluentBuildRelease_Partial.Delete();
@@ -93,7 +92,7 @@ namespace Build
 
         private void Compress()
         {
-            Run.Zip.Compress.SourceFolder(directory_compile).To(ZipFilePath);
+            Task.Run.Zip(x=>x.Compress.SourceFolder(directory_compile).To(ZipFilePath));
         }
     }
 }
