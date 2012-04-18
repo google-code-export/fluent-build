@@ -35,7 +35,7 @@ namespace FluentBuild.BuildFile
             AddTask(Package);
 
             //set the verbosity. Can also be set via command line
-            MessageLogger.Verbosity = VerbosityLevel.TaskNamesOnly;
+            Defaults.Logger.Verbosity = VerbosityLevel.TaskNamesOnly;
         }
 
         private void Clean()
@@ -43,7 +43,7 @@ namespace FluentBuild.BuildFile
             directory_compile.Delete(FluentFs.Core.OnError.Continue).Create();
 
             //Turn on debugging messages for only this step
-            using (MessageLogger.ShowDebugMessages)
+            using (Defaults.Logger.ShowDebugMessages)
             {
                 directory_release.Delete(FluentFs.Core.OnError.Continue).Create();
             }

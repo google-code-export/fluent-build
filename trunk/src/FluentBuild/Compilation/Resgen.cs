@@ -42,7 +42,7 @@ namespace FluentBuild.Compilation
         internal string GetPathToResGenExecutable()
         {
             string executable = Path.Combine(Defaults.FrameworkVersion.GetPathToSdk(), "bin\\resgen.exe");
-            MessageLogger.WriteDebugMessage("Found ResGen at: " + executable);
+            Defaults.Logger.WriteDebugMessage("Found ResGen at: " + executable);
             return executable;
         }
 

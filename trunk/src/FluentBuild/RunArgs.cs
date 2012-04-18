@@ -11,9 +11,11 @@ namespace FluentBuild
             args(implementation);
         }
 
-        public object Executable( object args)
+        public int Executable(Action<Executable> args)
         {
-            return null;
+            var implementation = new Executable();
+            args(implementation);
+            return implementation.InternalExecute();
         }
 
         public void Debugger()

@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentBuild.Core;
 
 namespace FluentBuild.MessageLoggers
 {
@@ -9,7 +10,9 @@ namespace FluentBuild.MessageLoggers
         void Write(string type, string message);
         void WriteError(string type, string message);
         void WriteWarning(string type, string message);
-        ITestSuiteMessageLogger WriteTestSuiteStared(string name);
+        IDisposable ShowDebugMessages { get; }
+        ITestSuiteMessageLogger WriteTestSuiteStarted(string name);
+        VerbosityLevel Verbosity { get; set; }
     }
 
     public interface  ITestSuiteMessageLogger

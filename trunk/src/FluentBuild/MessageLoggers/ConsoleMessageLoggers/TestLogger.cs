@@ -29,7 +29,7 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
             {
                 remainingWidth = 0;
             }
-            MessageLogger.Write("TEST", "".PadRight(_indentation, ' ') + name + "".PadRight(remainingWidth, '.')  + " " + data);
+            Defaults.Logger.Write("TEST", "".PadRight(_indentation, ' ') + name + "".PadRight(remainingWidth, '.') + " " + data);
         }
 
         public void WriteTestIgnored(string message)
@@ -43,8 +43,8 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
         {
             Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.BrightRed);
             WriteMessage(_testName, "Failed");
-            MessageLogger.Write("Details", message);
-            MessageLogger.Write("StackTrace", details);
+            Defaults.Logger.Write("Details", message);
+            Defaults.Logger.Write("StackTrace", details);
             Utilities.ConsoleColor.SetColor(Utilities.ConsoleColor.BuildColor.White);
         }
     }

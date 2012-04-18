@@ -14,13 +14,15 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
         [SetUp]
         public void Setup()
         {
-            MessageLogger.InternalLogger = MockRepository.GenerateStub<IMessageLogger>();
+            _internalLogger = MockRepository.GenerateStub<IMessageLogger>();
+           ((MessageLoggerProxy)Defaults.Logger).InternalLogger = _internalLogger;
             _subject = new DefaultMessageProcessor();
         }
 
         #endregion
 
         private DefaultMessageProcessor _subject;
+        private IMessageLogger _internalLogger;
 
         [Test]
         public void ShouldProcessErrorMessage()
@@ -28,7 +30,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             var messages = new List<Message>();
             messages.Add(new Message("TEST", MessageType.Error));
             _subject.Display(messages);
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+           _internalLogger.AssertWasCalled(x => x.WriteError(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
         }
 
         [Test]
@@ -37,7 +39,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             var messages = new List<Message>();
             messages.Add(new Message("TEST", MessageType.Warning));
             _subject.Display(messages);
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteWarning(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+            _internalLogger.AssertWasCalled(x => x.WriteWarning(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
         }
 
         [Test]
@@ -46,7 +48,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             var messages = new List<Message>();
             messages.Add(new Message("TEST", MessageType.Regular));
             _subject.Display(messages);
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+            _internalLogger.AssertWasCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
         }
 
         [Test, ExpectedException(typeof(NotImplementedException))]
@@ -55,7 +57,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             var messages = new List<Message>();
             messages.Add(new Message("TEST", (MessageType)999));
             _subject.Display(messages);
-            MessageLogger.InternalLogger.AssertWasNotCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+            _internalLogger.AssertWasNotCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
         }
 
         [Test]

@@ -177,15 +177,15 @@ namespace FluentBuild.Compilation
         internal void InternalExecute()
         {
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
-            MessageLogger.Write(compilerWithoutExtentions,
+            Defaults.Logger.Write(compilerWithoutExtentions,
                                 String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
             string compileMessage = "Compile Using: " + 
                                     Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " + Args;
-            MessageLogger.WriteDebugMessage(compileMessage);
+            Defaults.Logger.WriteDebugMessage(compileMessage);
             //necessary to cast currently as method is internal so can not be exposed via an interface
             var executable = (Executable)new Executable().ExecutablePath(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler).WithArguments(Args);
             executable.Execute(compilerWithoutExtentions);
-            MessageLogger.WriteDebugMessage("Done Compiling");
+            Defaults.Logger.WriteDebugMessage("Done Compiling");
         }
 
         ///<summary>

@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using FluentBuild.Core;
 
 namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
 {
     internal class ConsoleMessageLogger : IMessageLogger
     {
+        public VerbosityLevel Verbosity
+        {
+            get { throw new NotImplementedException("implemented by proxy"); }
+            set { throw new NotImplementedException("implemented by proxy"); }
+        }
+
         internal List<string> WrapText(int leftColumnStartsAtPostion, string message)
         {
             var maxLengthOfMessage = WindowWidth - 1; //add some padding on the right
@@ -118,7 +125,12 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
             }
         }
 
-        public ITestSuiteMessageLogger WriteTestSuiteStared(string name)
+        public IDisposable ShowDebugMessages
+        {
+            get { throw new NotImplementedException("This should only be handled from a proxy wrapping this logger"); }
+        }
+
+        public ITestSuiteMessageLogger WriteTestSuiteStarted(string name)
         {
             return new TestSuiteLogger(0, name);
         }

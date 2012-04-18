@@ -201,7 +201,7 @@ namespace FluentBuild.Runners
 
         internal int Execute(string prefix)
         {
-            MessageLogger.Write(prefix , Path + CreateArgumentString());
+            Defaults.Logger.Write(prefix, Path + CreateArgumentString());
             int exitCode = 0;
             using (IProcessWrapper process = CreateProcess())
             {
@@ -248,7 +248,7 @@ namespace FluentBuild.Runners
 
         private void HandleTimeout(IProcessWrapper process)
         {
-            MessageLogger.WriteDebugMessage("TIMEOUT!");
+            Defaults.Logger.WriteDebugMessage("TIMEOUT!");
             process.Kill();
             Thread.Sleep(1000); //wait one second so that the process has time to exit
 

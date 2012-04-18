@@ -9,7 +9,7 @@ namespace FluentBuild.Core
     /// <summary>
     /// Runs an execuable. It may later be expaned to have other run tasks (e.g. nunit, code analysis, etc.)
     /// </summary>
-    [Obsolete("This has been replaced with Task.Run.[Action]", false)]
+    [Obsolete("This has been replaced with Task.Run.[Action]", true)]
     public class Run
     {
         [Obsolete("Replaced with Task.Run.UnitTestFramework", true)]
@@ -35,6 +35,7 @@ namespace FluentBuild.Core
         /// </summary>
         /// <param name="executablePath">Path to the executable</param>
         /// <returns>an Executable object</returns>
+        [Obsolete("Replaced with Task.Run.Executable(x=>x.[Options]", true)]
         public static Executable Executable(string executablePath)
         {
             return new Executable(executablePath);
@@ -45,6 +46,7 @@ namespace FluentBuild.Core
         /// </summary>
         /// <param name="executablePath">The build artifact</param>
         /// <returns>an Executable object</returns>
+        [Obsolete("Replaced with Task.Run.Executable(x=>x.[Options]", true)]
         public static Executable Executable(File executablePath)
         {
             return new Executable(executablePath.ToString());

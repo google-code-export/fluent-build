@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentBuild.Core;
 
 namespace FluentBuild.MessageLoggers.TeamCityMessageLoggers
 {
@@ -39,9 +40,20 @@ namespace FluentBuild.MessageLoggers.TeamCityMessageLoggers
             WriteMessage(outputMessage, string.Empty, "WARNING");
         }
 
-        public ITestSuiteMessageLogger WriteTestSuiteStared(string name)
+        public IDisposable ShowDebugMessages
+        {
+            get { throw new NotImplementedException("This should only be handled from a proxy wrapping this logger"); }
+        }
+
+        public ITestSuiteMessageLogger WriteTestSuiteStarted(string name)
         {
             return new TestSuiteMessageLogger(name);
+        }
+
+        public VerbosityLevel Verbosity
+        {
+            get { throw new NotImplementedException("implemented by proxy"); }
+            set { throw new NotImplementedException("implemented by proxy"); }
         }
 
         #endregion

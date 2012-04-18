@@ -15,13 +15,13 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
                 switch (message.MessageType)
                 {
                     case MessageType.Regular:
-                        MessageLogger.Write(message.Prefix, message.Contents);
+                        Defaults.Logger.Write(message.Prefix, message.Contents);
                         break;
                     case MessageType.Warning:
-                        MessageLogger.WriteWarning(message.Prefix, message.Contents);
+                        Defaults.Logger.WriteWarning(message.Prefix, message.Contents);
                         break;
                     case MessageType.Error:
-                        MessageLogger.WriteError(message.Prefix, message.Contents);
+                        Defaults.Logger.WriteError(message.Prefix, message.Contents);
                         break;
                     default:
                         throw new NotImplementedException("Message type has not been implemented. Type: " +

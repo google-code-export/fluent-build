@@ -22,14 +22,14 @@ namespace FluentBuild.Core
                 //do not run another task if a previous task has errored
                 if (Environment.ExitCode == 0)
                 {
-                    MessageLogger.WriteHeader(task.Name);
+                    Defaults.Logger.WriteHeader(task.Name);
 					try
 					{
 						task.Task.Invoke();
 					}
 					catch( Exception ex )
 					{
-						MessageLogger.WriteError( ex.Message );
+                        Defaults.Logger.WriteError("ERROR", ex.Message);
 						Environment.ExitCode = 1;
 					    
 					}
@@ -41,7 +41,7 @@ namespace FluentBuild.Core
                 }
             }
             if (Environment.ExitCode == 0)
-                MessageLogger.WriteHeader("DONE");
+                Defaults.Logger.WriteHeader("DONE");
             
 
         }
