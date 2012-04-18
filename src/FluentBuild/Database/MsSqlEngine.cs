@@ -82,7 +82,7 @@ namespace FluentBuild.Database
                         {
                             if (useTransactions)
                                 command.Transaction = transaction;
-                            MessageLogger.WriteDebugMessage("Executing:" + command.CommandText);
+                            Defaults.Logger.WriteDebugMessage("Executing:" + command.CommandText);
                             command.ExecuteNonQuery();
                         }
                     }
@@ -135,7 +135,7 @@ namespace FluentBuild.Database
             catch (Exception ex)
             {
                 Environment.ExitCode = 1;
-                MessageLogger.Write("ERROR", ex.ToString());
+                Defaults.Logger.Write("ERROR", ex.ToString());
             }
         }
 
@@ -146,7 +146,7 @@ namespace FluentBuild.Database
 
         private void UpdateDatabase()
         {
-            MessageLogger.WriteDebugMessage("Executing database updates");
+            Defaults.Logger.WriteDebugMessage("Executing database updates");
             //determine current version
             int currentVersion = 0;
             using (IDbConnection con = new SqlConnection(_connectionString.ConnectionString))
@@ -163,7 +163,7 @@ namespace FluentBuild.Database
                 int fileVersion = int.Parse(fileName.Substring(0, fileName.IndexOf("_")));
                 if (fileVersion > currentVersion)
                 {
-                    MessageLogger.Write("DATABASE", "Upgrading database to version " + fileVersion);
+                    Defaults.Logger.Write("DATABASE", "Upgrading database to version " + fileVersion);
                     using (var x = new StreamReader(upgradeFile))
                     {
                         ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null, true);
@@ -176,20 +176,20 @@ namespace FluentBuild.Database
 
         private void CreateDatabase()
         {
-            MessageLogger.WriteDebugMessage("Database does not exist, creating it");
+            Defaults.Logger.WriteDebugMessage("Database does not exist, creating it");
             //create database
-            MessageLogger.WriteDebugMessage("creating database " + _connectionString.InitialCatalog);
+            Defaults.Logger.WriteDebugMessage("creating database " + _connectionString.InitialCatalog);
             ExecuteNonQueryCommandAgainstDatabase(_masterDatabaseConnectionString, "CREATE DATABASE " + _connectionString.InitialCatalog, null, false);
 
             //execute create script
-            MessageLogger.WriteDebugMessage("Executing create script");
+            Defaults.Logger.WriteDebugMessage("Executing create script");
             using (var x = new StreamReader(PathToCreateScript))
             {
                 ExecuteNonQueryCommandAgainstDatabase(_connectionString, x.ReadToEnd(), null, true);
             }
 
             //create version table
-            MessageLogger.WriteDebugMessage("Creating version table");
+            Defaults.Logger.WriteDebugMessage("Creating version table");
             ExecuteNonQueryCommandAgainstDatabase(_connectionString, "create table " + VersionTable + " (version int)", null, true);
 
             //insert version 0

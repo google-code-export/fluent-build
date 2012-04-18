@@ -20,8 +20,8 @@ namespace FluentBuild.BuildUI
 
         private void DoRun()
         {
-            MessageLogger.SetLogger(_logger);
-            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
+            Defaults.SetLogger(_logger);
+            Defaults.Logger.Verbosity = VerbosityLevel.TaskDetails;
 
             Assembly assemblyInstance = Assembly.LoadFile(_assemblyPath);
             var build = (BuildFile)assemblyInstance.CreateInstance(_target);

@@ -83,7 +83,7 @@ namespace FluentBuild.BuildUI
         /// <returns>returns the path to the compiled assembly</returns>
         public static string BuildAssemblyFromSources(string path)
         {
-            MessageLogger.WriteDebugMessage("Sources found in: " + path);
+            Defaults.Logger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();
             fileset.Include(path + "\\**\\*.cs");
 
@@ -91,11 +91,11 @@ namespace FluentBuild.BuildUI
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
 
             string dllReference = Path.Combine(startPath, "FluentBuild.dll");
-            MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
+            Defaults.Logger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
             var tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks.ToString();
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
-            MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
+            Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
             Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
                 IncludeDebugSymbols);
             return outputAssembly;
@@ -103,9 +103,9 @@ namespace FluentBuild.BuildUI
 
         public static IEnumerable<Type> FindBuildClasses(string path)
         {
-            MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
+            Defaults.Logger.WriteDebugMessage("Executing DLL build from " + path);
 
-            MessageLogger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
+            Defaults.Logger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
             Assembly assemblyInstance = Assembly.LoadFile(path);
             Type[] types = assemblyInstance.GetTypes();
             return types.Where(t => t.IsSubclassOf(typeof(BuildFile)));

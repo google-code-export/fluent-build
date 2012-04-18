@@ -81,7 +81,7 @@ namespace FluentBuild.BuildExe
                     DetermineVerbosity(data);
                     break;
                 case "L":
-                    Core.MessageLogger.SetLogger(data);
+                    Defaults.SetLogger(data);
                     break;
                 case "M":
                     MethodsToRun.Add(data);
@@ -96,16 +96,16 @@ namespace FluentBuild.BuildExe
             switch (data.ToUpper())
             {
                 case "FULL":
-                    MessageLogger.Verbosity = VerbosityLevel.Full;
+                    Defaults.Logger.Verbosity = VerbosityLevel.Full;
                     break;
                 case "NONE":
-                    MessageLogger.Verbosity = VerbosityLevel.None;
+                    Defaults.Logger.Verbosity = VerbosityLevel.None;
                     break;
                 case "TASKDETAILS":
-                    MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
+                    Defaults.Logger.Verbosity = VerbosityLevel.TaskDetails;
                     break;
                 case "TASKNAMESONLY":
-                    MessageLogger.Verbosity = VerbosityLevel.TaskNamesOnly;
+                    Defaults.Logger.Verbosity = VerbosityLevel.TaskNamesOnly;
                     break;
                 default:
                     Console.WriteLine("Could not determine verbosity level");

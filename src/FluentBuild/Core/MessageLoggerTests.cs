@@ -10,129 +10,133 @@ namespace FluentBuild.Core
     [TestFixture]
     public class MessageLoggerTests
     {
+        private IMessageLogger _internalLogger;
+        private MessageLoggerProxy _messageLoggerProxy;
+
         ///<summary />
         [SetUp]
         public void Setup()
         {
-            MessageLogger.InternalLogger = MockRepository.GenerateMock<IMessageLogger>();
+            _internalLogger = MockRepository.GenerateMock<IMessageLogger>();
+            _messageLoggerProxy = ((MessageLoggerProxy)Defaults.Logger);
+            _messageLoggerProxy.InternalLogger = _internalLogger;
         }
 
-        
 
         [Test]
         public void UsingDebug_ShouldOnlyWriteOneDebugMessage()
         {
-            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
-            MessageLogger.WriteDebugMessage("test1");
-            using (MessageLogger.ShowDebugMessages)
+            _messageLoggerProxy.Verbosity = VerbosityLevel.TaskDetails;
+            _messageLoggerProxy.WriteDebugMessage("test1");
+            using (_messageLoggerProxy.ShowDebugMessages)
             {
-                MessageLogger.WriteDebugMessage("test2");
+                _messageLoggerProxy.WriteDebugMessage("test2");
             }
-            MessageLogger.InternalLogger.AssertWasCalled(x=>x.WriteDebugMessage("test2"));
+            _messageLoggerProxy.InternalLogger.AssertWasCalled(x=>x.WriteDebugMessage("test2"));
         }
 
         [Test]
         public void UsingDebug_DebugLevelsSholdChange()
         {
-            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
-            using (MessageLogger.ShowDebugMessages)
+            _messageLoggerProxy.Verbosity = VerbosityLevel.TaskDetails;
+            using (_messageLoggerProxy.ShowDebugMessages)
             {
-                Assert.That(MessageLogger.Verbosity, Is.EqualTo(VerbosityLevel.Full));
+                Assert.That(_messageLoggerProxy.Verbosity, Is.EqualTo(VerbosityLevel.Full));
             }
-            Assert.That(MessageLogger.Verbosity, Is.EqualTo(VerbosityLevel.TaskDetails));
+            Assert.That(_messageLoggerProxy.Verbosity, Is.EqualTo(VerbosityLevel.TaskDetails));
         }
 
         ///<summary />
         [Test]
         public void WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull()
         {
-            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
-            MessageLogger.WriteDebugMessage("test");
-            MessageLogger.InternalLogger.AssertWasNotCalled(x=>x.WriteDebugMessage(Arg<String>.Is.Anything));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.TaskDetails;
+            _messageLoggerProxy.WriteDebugMessage("test");
+            _messageLoggerProxy.InternalLogger.AssertWasNotCalled(x=>x.WriteDebugMessage(Arg<String>.Is.Anything));
         }
 
         ///<summary />
         [Test]
         public void WriteDebugMessage_ShouldWriteIfVerbosityIsFull()
         {
-            MessageLogger.Verbosity = VerbosityLevel.Full;
-            MessageLogger.WriteDebugMessage("test");
-            MessageLogger.InternalLogger.AssertWasCalled(x=>x.WriteDebugMessage("test"));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.Full;
+            _messageLoggerProxy.WriteDebugMessage("test");
+            _internalLogger.AssertWasCalled(x=>x.WriteDebugMessage("test"));
         }
 
         [Test]
         public void WriteHeader_ShouldWriteIfVerbosityIsFull()
         {
-            MessageLogger.Verbosity = VerbosityLevel.Full;
-            MessageLogger.WriteHeader("test");
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteHeader("test"));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.Full;
+            _messageLoggerProxy.WriteHeader("test");
+            _messageLoggerProxy.InternalLogger.AssertWasCalled(x => x.WriteHeader("test"));
         }
 
         [Test]
         public void WriteHeader_ShouldNotWriteIfVerbosityIsNone()
         {
-            MessageLogger.Verbosity = VerbosityLevel.None;
-            MessageLogger.WriteHeader("test");
-            MessageLogger.InternalLogger.AssertWasNotCalled(x => x.WriteHeader("test"));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.None;
+            _messageLoggerProxy.WriteHeader("test");
+            _messageLoggerProxy.InternalLogger.AssertWasNotCalled(x => x.WriteHeader("test"));
         }
 
         [Test]
         public void WriteError_ShouldWriteIfVerbosityIsNone()
         {
-            MessageLogger.Verbosity = VerbosityLevel.None;
-            MessageLogger.WriteError("test");
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("ERROR", "test"));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.None;
+            _messageLoggerProxy.WriteError("ERROR", "test");
+            _internalLogger.AssertWasCalled(x => x.WriteError("ERROR", "test"));
         }
 
         [Test]
         public void WriteError_ShouldWriteCustomPrefix()
         {
-            MessageLogger.Verbosity = VerbosityLevel.None;
-            MessageLogger.WriteError("ERR", "test");
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteError("ERR", "test"));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.None;
+            _messageLoggerProxy.WriteError("ERR", "test");
+            _messageLoggerProxy.InternalLogger.AssertWasCalled(x => x.WriteError("ERR", "test"));
         }
 
 
         [Test]
         public void WriteWarning_ShouldWriteCustomPrefix()
         {
-            MessageLogger.Verbosity = VerbosityLevel.Full;
-            MessageLogger.WriteWarning("WRN", "test");
-            MessageLogger.InternalLogger.AssertWasCalled(x => x.WriteWarning("WRN", "test"));
+            _messageLoggerProxy.Verbosity = VerbosityLevel.Full;
+            _messageLoggerProxy.WriteWarning("WRN", "test");
+            _messageLoggerProxy.InternalLogger.AssertWasCalled(x => x.WriteWarning("WRN", "test"));
         }
 
         [Test]
         public void SetLogger_ShouldSetLoggerToConsoleLogger()
         {
-            MessageLogger.SetLogger("console");
-            Assert.That(MessageLogger.InternalLogger, Is.TypeOf<ConsoleMessageLogger>());
+            Defaults.SetLogger("console");
+            Assert.That(((MessageLoggerProxy)Defaults.Logger).InternalLogger, Is.TypeOf<ConsoleMessageLogger>());
         }
 
         [Test]
         public void SetLogger_ShouldSetLoggerToTeamCityLogger()
         {
-            MessageLogger.SetLogger("TeamCity");
-            Assert.That(MessageLogger.InternalLogger, Is.TypeOf<MessageLoggers.TeamCityMessageLoggers.MessageLogger>());
+            Defaults.SetLogger("TeamCity");
+            Assert.That(((MessageLoggerProxy)Defaults.Logger).InternalLogger, Is.TypeOf<MessageLoggers.TeamCityMessageLoggers.MessageLogger>());
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void SetLogger_ShouldThrowExceptionIfUnkownType()
         {
-            MessageLogger.SetLogger("garbage");
+            Defaults.SetLogger("garbage");
         }
 
         [Test]
         public void WriteTestStarted_ShouldCallInternalLogger()
         {
             var name = "test";
-            MessageLogger.WriteTestSuiteStarted(name);
-            MessageLogger.InternalLogger.AssertWasCalled(x=>x.WriteTestSuiteStared(name));
+            _messageLoggerProxy.WriteTestSuiteStarted(name);
+            _messageLoggerProxy.InternalLogger.AssertWasCalled(x=>x.WriteTestSuiteStarted(name));
         }
 
         [TearDown]
         public void ResetLogger()
         {
-            MessageLogger.SetLogger("CONSOLE");
+            Defaults.SetLogger("CONSOLE");
         }
     }
 }

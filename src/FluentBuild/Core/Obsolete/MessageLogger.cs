@@ -5,6 +5,7 @@ using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
 
 namespace FluentBuild.Core
 {
+    [Obsolete("Replaced by Defaults.Logger factory", true)]
     public class MessageLogger
     {
         internal static IMessageLogger InternalLogger;
@@ -18,30 +19,17 @@ namespace FluentBuild.Core
         /// Gets or sets the message logging verbosity level
         ///</summary>
         public static VerbosityLevel Verbosity { get; set; }
-        internal class DebugMessages : IDisposable
-        {
-            private VerbosityLevel _originalVerbosity;
 
-            public DebugMessages()
-            {
-                _originalVerbosity = MessageLogger.Verbosity;
-                MessageLogger.Verbosity = VerbosityLevel.Full;
-            }
-
-            public void Dispose()
-            {
-                MessageLogger.Verbosity = _originalVerbosity;
-            }
-        }
+        
 
         public static IDisposable ShowDebugMessages
         {
-            get { return new DebugMessages(); }
+            get { return new DebugMessages(null); }
         }
 
         public static ITestSuiteMessageLogger WriteTestSuiteStarted(string name)
         {
-            return InternalLogger.WriteTestSuiteStared(name);
+            return InternalLogger.WriteTestSuiteStarted(name);
         }
 
         public static void WriteHeader(string header)

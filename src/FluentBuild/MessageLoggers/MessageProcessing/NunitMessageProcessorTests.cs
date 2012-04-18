@@ -32,7 +32,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             _logger = MockRepository.GenerateMock<IMessageLogger>();
             _suiteLogger = MockRepository.GenerateMock<ITestSuiteMessageLogger>();
             _testLogger = MockRepository.GenerateMock<ITestLogger>();
-            _logger.Stub(x => x.WriteTestSuiteStared(Arg<string>.Is.Anything)).Return(_suiteLogger);
+            _logger.Stub(x => x.WriteTestSuiteStarted(Arg<string>.Is.Anything)).Return(_suiteLogger);
             _suiteLogger.Stub(x => x.WriteTestStarted(Arg<string>.Is.Anything)).Return(_testLogger);
             _subject = new NunitMessageProcessor(_logger);
         }
@@ -51,7 +51,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
         public void DisplayShouldLogTestSuiteStartedAndFinished()
         {
             _subject.Display("", _xml.ToString(), null, 0);
-            _logger.AssertWasCalled(x => x.WriteTestSuiteStared(_rootSuiteName));
+            _logger.AssertWasCalled(x => x.WriteTestSuiteStarted(_rootSuiteName));
             _suiteLogger.AssertWasCalled(x => x.WriteTestSuiteFinished());
         }
 

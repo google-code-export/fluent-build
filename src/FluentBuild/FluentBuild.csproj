@@ -101,6 +101,8 @@
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="Core\BuildFileTests.cs" />
+    <Compile Include="Core\DebugMessages.cs" />
+    <Compile Include="Core\MessageLoggerProxy.cs" />
     <Compile Include="Core\MessageLoggerTests.cs" />
     <Compile Include="FrameworkFinders\DefaultFinderTests.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\TestLogger.cs" />
@@ -205,7 +207,7 @@
     <Compile Include="Core\Obsolete\Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Compilation\Target.cs" />
-    <Compile Include="Core\MessageLogger.cs" />
+    <Compile Include="Core\Obsolete\MessageLogger.cs" />
     <Compile Include="Utilities\SdkNotFoundException.cs" />
     <Compile Include="ZipOptions.cs" />
   </ItemGroup>

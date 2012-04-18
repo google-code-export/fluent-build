@@ -15,7 +15,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
 
         public NunitMessageProcessor()
         {
-            _logger = MessageLogger.InternalLogger;
+            _logger = Defaults.Logger; //It was this. Not sure why: ((MessageLoggerProxy)Defaults.Logger).InternalLogger;
         }
 
         #region IMessageProcessor Members
@@ -26,7 +26,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             var startIndex = output.IndexOf("<?xml");
             if (startIndex < 0)
             {
-                MessageLogger.WriteError("TEST", "nunit returned no xml output. Output was: " + output + " Error was: " + error);
+                _logger.WriteError("TEST", "nunit returned no xml output. Output was: " + output + " Error was: " + error);
                 return;
             }
             output = output.Substring(startIndex);
@@ -50,7 +50,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
 
         internal void ProcessTestSuite(XElement testSuite)
         {
-            ITestSuiteMessageLogger testSuiteMessageLogger =_logger.WriteTestSuiteStared((string) testSuite.Attribute("name"));
+            ITestSuiteMessageLogger testSuiteMessageLogger =_logger.WriteTestSuiteStarted((string) testSuite.Attribute("name"));
             foreach (var results in testSuite.Elements("results"))
             {
                 foreach (var testCase in results.Elements("test-case"))

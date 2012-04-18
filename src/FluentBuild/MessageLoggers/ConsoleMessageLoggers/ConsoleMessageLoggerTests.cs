@@ -99,7 +99,7 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
         [Test]
         public void WriteTestSuiteStarted_ShouldCreateTestSuiteObject()
         {
-            var testSuiteMessageLogger = _messageLogger.WriteTestSuiteStared("test");
+            var testSuiteMessageLogger = _messageLogger.WriteTestSuiteStarted("test");
             Assert.That(testSuiteMessageLogger, Is.TypeOf<TestSuiteLogger>());
         }
 

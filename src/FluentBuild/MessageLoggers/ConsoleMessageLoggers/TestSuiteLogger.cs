@@ -9,7 +9,7 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
         public TestSuiteLogger(int indentation, string name)
         {
             _indentation = indentation;
-           MessageLogger.Write("TEST", "".PadLeft(indentation, ' ') + name);
+           Defaults.Logger.Write("TEST", "".PadLeft(indentation, ' ') + name);
         }
 
         public ITestSuiteMessageLogger WriteTestSuiteStared(string name)

@@ -21,27 +21,27 @@ namespace FluentBuild.BuildExe
         /// <returns>returns the path to the compiled assembly</returns>
         public static string BuildAssemblyFromSources(string path)
         {
-            MessageLogger.WriteDebugMessage("Sources found in: " + path);
+            Defaults.Logger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();
             fileset.Include(path + "\\**\\*.cs");
 
             string startPath =Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
 
             string dllReference = Path.Combine(startPath, "FluentBuild.dll");
-            MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
+            Defaults.Logger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
             var tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks.ToString();
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
-            MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
+            Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
             Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).IncludeDebugSymbols);
             return outputAssembly;
         }
 
         public static IEnumerable<Type> FindBuildClasses(string path)
         {
-            MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
+            Defaults.Logger.WriteDebugMessage("Executing DLL build from " + path);
 
-            MessageLogger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
+            Defaults.Logger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
             Assembly assemblyInstance = Assembly.LoadFile(path);
             Type[] types = assemblyInstance.GetTypes();
             return types.Where(t => t.IsSubclassOf(typeof(BuildFile)));
@@ -69,7 +69,7 @@ namespace FluentBuild.BuildExe
             
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
-            MessageLogger.Verbosity = VerbosityLevel.TaskDetails;
+            Defaults.Logger.Verbosity = VerbosityLevel.TaskDetails;
 
             //creates a new parser and parses args
             var parser = new CommandLineParser(args);
@@ -80,15 +80,15 @@ namespace FluentBuild.BuildExe
                 argString.Append(" /" + s);
             }
 
-            MessageLogger.Write("INIT", "running fb.exe " + argString.ToString());
+            Defaults.Logger.Write("INIT", "running fb.exe " + argString.ToString());
 
             string pathToAssembly;
             if (parser.SourceBuild)
             {
-                MessageLogger.Write("INIT", "building task from sources");
+                Defaults.Logger.Write("INIT", "building task from sources");
                 if (!Directory.Exists(parser.PathToBuildSources))
                 {
-                    MessageLogger.WriteError("Could not find sources at: " + parser.PathToBuildSources);
+                    Defaults.Logger.WriteError("ERROR", "Could not find sources at: " + parser.PathToBuildSources);
                     Environment.Exit(1);
                 }
                 pathToAssembly = BuildAssemblyFromSources(parser.PathToBuildSources);
@@ -112,7 +112,7 @@ namespace FluentBuild.BuildExe
         {
             Environment.ExitCode = 1;
             var exceptionObject = e.ExceptionObject as Exception;
-            MessageLogger.WriteError("An unexpected error has occurred. Details:" + exceptionObject.ToString());
+            Defaults.Logger.WriteError("ERROR", "An unexpected error has occurred. Details:" + exceptionObject.ToString());
             Environment.Exit(1);
         }
 
@@ -123,7 +123,7 @@ namespace FluentBuild.BuildExe
         /// <returns>returns the path to the compiled assembly</returns>
         public static string BuildAssemblyFromSources(string path)
         {
-            MessageLogger.WriteDebugMessage("Sources found in: " + path);
+            Defaults.Logger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();
             fileset.Include(path + "\\**\\*.cs");
 
@@ -131,11 +131,11 @@ namespace FluentBuild.BuildExe
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
 
             string dllReference = Path.Combine(startPath, "FluentBuild.dll");
-            MessageLogger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
+            Defaults.Logger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
             var tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks.ToString();
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
-            MessageLogger.WriteDebugMessage("Output Assembly: " + outputAssembly);
+            Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
             
             Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).IncludeDebugSymbols);
             return outputAssembly;
@@ -149,9 +149,9 @@ namespace FluentBuild.BuildExe
         /// <param name="methodsToRun"></param>
         private static void ExecuteBuildTask(string path, string classToRun, IList<string> methodsToRun)
         {
-            MessageLogger.WriteDebugMessage("Executing DLL build from " + path);
-            
-            MessageLogger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
+            Defaults.Logger.WriteDebugMessage("Executing DLL build from " + path);
+
+            Defaults.Logger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
             Assembly assemblyInstance = Assembly.LoadFile(path);
             Type[] types = assemblyInstance.GetTypes();
             bool classfound = false;
@@ -178,8 +178,8 @@ namespace FluentBuild.BuildExe
         private static void StartRun(Assembly assemblyInstance, Type t, IList<string> methodsToRun)
         {
             var build = (BuildFile) assemblyInstance.CreateInstance(t.FullName);
-            MessageLogger.WriteHeader("Execute");
-            MessageLogger.Write("EXECUTE", "Running Class: " + t.FullName);
+            Defaults.Logger.WriteHeader("Execute");
+            Defaults.Logger.Write("EXECUTE", "Running Class: " + t.FullName);
             if (build.TaskCount == 0)
             {
                 Console.WriteLine("No tasks were found. Make sure that you add a task in your build classes constructor via AddTask()");

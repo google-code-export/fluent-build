@@ -26,7 +26,7 @@ namespace FluentBuild.MessageLoggers
         [Test]
         public void WriteTestSuiteStarted_ShouldCreateNewLoggingObject()
         {
-            var testSuiteMessageLogger = _subject.WriteTestSuiteStared("na");
+            var testSuiteMessageLogger = _subject.WriteTestSuiteStarted("na");
             Assert.That(testSuiteMessageLogger, Is.TypeOf<TeamCityMessageLoggers.TestSuiteMessageLogger>());
         }
 

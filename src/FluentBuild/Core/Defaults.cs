@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using FluentBuild.MessageLoggers;
+using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
 using FluentBuild.Utilities;
 
 namespace FluentBuild.Core
@@ -35,6 +38,29 @@ namespace FluentBuild.Core
                     return;
                 }
             }
+        }
+
+        private static IMessageLogger _logger = new MessageLoggerProxy(new ConsoleMessageLogger());
+        public static IMessageLogger Logger { get { return _logger;  } }
+
+        public static void SetLogger(string logger)
+        {
+            switch (logger.ToUpper())
+            {
+                case "CONSOLE":
+                    _logger = new MessageLoggerProxy(new ConsoleMessageLogger());
+                    break;
+                case "TEAMCITY":
+                    _logger = new MessageLoggerProxy(new MessageLoggers.TeamCityMessageLoggers.MessageLogger());
+                    break;
+                default:
+                    throw new ArgumentException("logger type " + logger + " unkown.");
+            }
+        }
+
+        public static void SetLogger(IMessageLogger logger)
+        {
+            _logger = new MessageLoggerProxy(logger);
         }
     }
 }

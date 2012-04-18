@@ -77,7 +77,7 @@ namespace FluentBuild.Runners
 
         internal void InternalExecute()
         {
-            Task.Run.Executable(new Executable().ExecutablePath(FindExecutable()).WithArguments(BuildArgs()));
+            Task.Run.Executable(x=>x.ExecutablePath(FindExecutable()).WithArguments(BuildArgs()));
         }
 
         internal string FindExecutable()
