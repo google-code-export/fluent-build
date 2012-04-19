@@ -152,12 +152,13 @@ namespace Build
             var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
             Task.Build(Using.Csc.Target.Library
                            .AddSources(sourceFiles)
-                           .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests, assembly_FluentBuild_Runner)
+                           .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests, assembly_FluentBuild_Runner, thirdparty_fluentFs)
                            .OutputFileTo(assembly_Functional_Tests));
         }
 
         private void RunTests()
         {
+            thirdparty_fluentFs.Copy.To(directory_compile);
             Task.Run.UnitTestFramework.Nunit(x => x.FileToTest(assembly_FluentBuild_WithTests));
         }
 
