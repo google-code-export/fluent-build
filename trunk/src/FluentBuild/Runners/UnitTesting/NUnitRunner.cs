@@ -222,7 +222,7 @@ namespace FluentBuild.Runners.UnitTesting
             //if it returned non-zero then just exit (as a test failed)
             if (returnCode != 0 && OnError == OnError.Fail)
             {
-                Environment.ExitCode=1;
+                BuildFile.SetErrorState();
                 Defaults.Logger.WriteError("ERROR", "Nunit returned non-zero error code");
             }
         }

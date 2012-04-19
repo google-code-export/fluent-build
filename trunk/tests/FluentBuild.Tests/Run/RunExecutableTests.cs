@@ -26,7 +26,7 @@ namespace FluentBuild.Tests.Run
         public void ShouldNotThrowErrorIfFileDoesNotExistAndContinueOnErrorIsSet()
         {
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\afilethatdoesnotexist.exe";
-           //Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).ContinueOnError);
+            Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).ContinueOnError2());
             Assert.Fail("This needs to be fixed");
         }
 

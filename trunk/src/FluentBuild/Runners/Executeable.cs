@@ -37,7 +37,10 @@ namespace FluentBuild.Runners
         /// Executes the executable with the provided options.
         ///</summary>
         /// <returns>the return code of the process</returns>
+        [Obsolete("Replaced with Task.Run.Executable", false)]
         int Execute();
+
+     
 
         ///<summary>
         /// Sets the executable to run
@@ -147,7 +150,7 @@ namespace FluentBuild.Runners
 			return this;
 		}
 
-        [Obsolete("This is replaced with Task.Run.Executable()")]
+        [Obsolete("This is replaced with Task.Run.Executable()", true)]
         public int Execute()
         {
             return InternalExecute();
@@ -229,7 +232,7 @@ namespace FluentBuild.Runners
                     //then set the environment exit code
                     if (OnError == OnError.Fail && exitCode != 0 && _succeedOnNonZeroErrorCodes == false)
                     {
-                        Environment.ExitCode = exitCode;
+                        BuildFile.SetErrorState();
                         throw new ApplicationException("Executable returned an error code of " + exitCode);
                     }
 
@@ -253,8 +256,10 @@ namespace FluentBuild.Runners
             Thread.Sleep(1000); //wait one second so that the process has time to exit
 
             if (OnError == OnError.Fail)
+            {
                 //exit code should only be set if we want the application to fail on error
-                Environment.ExitCode = 1; //set our ExitCode to non-zero so consumers know we errored
+                BuildFile.SetErrorState(); //set our ExitCode to non-zero so consumers know we errored
+            }
         }
 
         //lock objects in case events fire out of order

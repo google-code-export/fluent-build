@@ -124,20 +124,5 @@ namespace FluentBuild.Compilation
             _subject.OutputDirectory(folder);
             Assert.That(_subject.Outdir, Is.EqualTo(path));
         }
-
-        ///<summary />
-	[Test]
-        public void Execute_ShouldExecuteMsBuild()
-        {
-            Defaults.FrameworkVersion = MockRepository.GenerateStub<IFrameworkVersion>();
-            //mock calls
-            _executable.Stub(x => x.ExecutablePath("")).IgnoreArguments().Return(_executable);
-            _executable.Stub(x => x.WithArguments("")).IgnoreArguments().Return(_executable);
-
-            _subject.Execute();
-            _executable.AssertWasCalled(x=>x.Execute());
-        }
-
-
     }
 }

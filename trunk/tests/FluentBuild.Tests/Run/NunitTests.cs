@@ -31,14 +31,14 @@ namespace FluentBuild.Tests
         }
 
 
-        [Test, ExpectedException(typeof(ExecutableFailedException))]
+        [Test]
         public void ShouldFailIfErrorOccurs()
         {   
             //test fail/continue on error
            Task.Run.UnitTestFramework.Nunit(x=>x.FileToTest("nonexistant.dll")
                 .XmlOutputTo(_outputFile)
                 .PathToNunitConsoleRunner(_pathToProjectRoot + "\\tools\\nunit\\nunit-console.exe"));
-            Assert.That(File.Exists(_outputFile));
+            Assert.That(BuildFile.IsInErrorState);
         }
 
         [Test]
