@@ -19,6 +19,11 @@ namespace FluentBuild
             args.InternalExecute();
         }
 
+        public static void Build(MsBuildTask args)
+        {
+            args.InternalExecute();
+        }
+
         public static RunArgs Run
         {
             get { return new RunArgs();  }

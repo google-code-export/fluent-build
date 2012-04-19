@@ -130,13 +130,19 @@ namespace FluentBuild.Compilation
         }
 
 
+        internal void InternalExecute()
+        {
+            string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";
+            Task.Run.Executable(x => x.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()));
+        }
+
         ///<summary>
         /// Executes MSBuild with the provided parameters
         ///</summary>
+        [Obsolete("Replaced with Task.Build(Using.MsBuild)", true)]
         public void Execute()
         {
-            string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";            
-            Task.Run.Executable(x=>x.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()));
+            InternalExecute();
         }
     }
 }

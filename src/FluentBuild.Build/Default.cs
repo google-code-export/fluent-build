@@ -25,7 +25,7 @@ namespace Build
 
         private readonly File thirdparty_nunit;
         private readonly File thirdparty_rhino;
-        private readonly File thirdparty_fluentFs;
+        protected readonly File thirdparty_fluentFs;
         
         internal string _version;
         protected File assembly_BuildFileConverter_WithTests;

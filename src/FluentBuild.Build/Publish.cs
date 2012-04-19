@@ -84,6 +84,7 @@ namespace Build
            Task.Run.ILMerge(x=>x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
                 .AddSource(AssemblyFluentBuildRelease_Partial)
                 .AddSource(thirdparty_sharpzip)
+                .AddSource(thirdparty_fluentFs)
                 .OutputTo(AssemblyFluentBuildRelease_Merged));
 
             //now that it is merged delete the partial file
