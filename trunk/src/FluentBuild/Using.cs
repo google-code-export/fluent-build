@@ -24,7 +24,7 @@ namespace FluentBuild
         /// <summary>
         /// Creates a BuildTask using MSBuild
         /// </summary>
-        public static MsBuildTask UsingMsBuild(string projectOrSolutionFilePath)
+        public static MsBuildTask MsBuild(string projectOrSolutionFilePath)
         {
             return new MsBuildTask(projectOrSolutionFilePath);
         }
