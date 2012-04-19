@@ -25,6 +25,8 @@ namespace Build
 
         private readonly File thirdparty_nunit;
         private readonly File thirdparty_rhino;
+        private readonly File thirdparty_fluentFs;
+        
         internal string _version;
         protected File assembly_BuildFileConverter_WithTests;
         protected Directory directory_src_converter;
@@ -50,6 +52,7 @@ namespace Build
             thirdparty_nunit = directory_tools.SubFolder("nunit").File("nunit.framework.dll");
             thirdparty_rhino = directory_tools.SubFolder("rhino").File("rhino.mocks.dll");
             thirdparty_sharpzip = directory_base.SubFolder("lib").SubFolder("SharpZipLib-net2.0").File("ICSharpCode.SharpZipLib.dll");
+            thirdparty_fluentFs = directory_base.SubFolder("lib").SubFolder("FluentFs").File("FluentFs.dll");
 
             _version = "0.0.0.0";
 
@@ -127,7 +130,7 @@ namespace Build
 
             Task.Build(Using.Csc.Target.Library
                 .AddSources(sourceFiles)
-                .AddRefences(thirdparty_rhino, thirdparty_nunit, thirdparty_sharpzip)
+                .AddRefences(thirdparty_rhino, thirdparty_nunit, thirdparty_sharpzip, thirdparty_fluentFs)
                 .OutputFileTo(assembly_FluentBuild_WithTests)
                 .IncludeDebugSymbols);
         }
@@ -140,7 +143,7 @@ namespace Build
 
              Task.Build(Using.Csc.Target.Executable
                 .AddSources(sourceFiles)
-                .AddRefences(assembly_FluentBuild_WithTests)
+                .AddRefences(assembly_FluentBuild_WithTests, thirdparty_fluentFs)
                 .OutputFileTo(assembly_FluentBuild_Runner));
         }
 

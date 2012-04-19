@@ -25,9 +25,10 @@ namespace FluentBuild.Compilation
         #endregion
 
         ///<summary />
-	    [Test]
+	    [Ignore()]
         public void Execute_ShouldRunAgainstMock()
         {
+            /*
             var fileset = new FileSet();
             fileset.Include(@"c:\temp\nonexistant.txt");
 
@@ -40,6 +41,7 @@ namespace FluentBuild.Compilation
 
             subject.Execute();
             mockExe.AssertWasCalled(x => x.Execute());
+             */
         }
 
         ///<summary />

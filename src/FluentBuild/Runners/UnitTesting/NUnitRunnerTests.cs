@@ -125,7 +125,8 @@ namespace FluentBuild.Runners.UnitTesting
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.ContinueOnError).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.WithMessageProcessor(Arg<IMessageProcessor>.Is.Anything)).Return(mockExecutable);
-            subject.PathToNunitConsoleRunner(pathToExe).Execute();
+            
+            subject.PathToNunitConsoleRunner(pathToExe).InternalExecute();
 
             mockExecutable.AssertWasCalled(x=>x.Execute());
 

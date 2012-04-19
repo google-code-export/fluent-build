@@ -1,4 +1,5 @@
-﻿using FluentBuild.Core;
+﻿using System;
+using FluentBuild.Core;
 
 namespace FluentBuild.Utilities
 {
@@ -17,6 +18,8 @@ namespace FluentBuild.Utilities
         /// Swallow exceptions and continue
         ///</summary>
         T ContinueOnError { get; }
+
+        T ContinueOnError2();
     }
 
     ///<summary>
@@ -50,5 +53,10 @@ namespace FluentBuild.Utilities
             }
         }
 
+        public T ContinueOnError2()
+        {
+            OnError = OnError.Continue;
+            return (T)(object)this;
+        }
     }
 }

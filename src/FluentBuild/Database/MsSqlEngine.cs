@@ -120,9 +120,6 @@ namespace FluentBuild.Database
 
         public void Execute()
         {
-            if (Environment.ExitCode != 0)
-                return;
-
             try
             {
                 if (!DoesDatabaseAlreadyExist())
@@ -134,7 +131,7 @@ namespace FluentBuild.Database
             }
             catch (Exception ex)
             {
-                Environment.ExitCode = 1;
+                BuildFile.SetErrorState();
                 Defaults.Logger.Write("ERROR", ex.ToString());
             }
         }

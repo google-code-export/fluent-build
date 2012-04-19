@@ -8,9 +8,33 @@ namespace FluentBuild.Core
     ///</summary>
     public class BuildFile
     {
+        //TODO: make this a readonly wrapper. It only needs to be exposed for testing at this point
+        public static bool IsInErrorState;
         internal Queue<NamedTask> Tasks;
 
-        
+        ///<summary>
+        /// Instantiates a build file and initializes the Tasks queue.
+        ///</summary>
+        public BuildFile()
+        {
+            Tasks = new Queue<NamedTask>();
+        }
+
+        internal static void SetErrorState()
+        {
+                IsInErrorState = true;
+                Environment.ExitCode = 1;
+        }
+
+        ///<summary>
+        /// Gets the number of tasks in the queue.
+        ///</summary>
+        ///<returns>The number of tasks in the queue</returns>
+        public int TaskCount
+        {
+            get { return Tasks.Count; }
+        }
+
         ///<summary>
         /// Invokes the next task in the queue
         ///</summary>
@@ -20,38 +44,23 @@ namespace FluentBuild.Core
             {
                 NamedTask task = Tasks.Dequeue();
                 //do not run another task if a previous task has errored
-                if (Environment.ExitCode == 0)
+                Defaults.Logger.WriteHeader(task.Name);
+                try
                 {
-                    Defaults.Logger.WriteHeader(task.Name);
-					try
-					{
-						task.Task.Invoke();
-					}
-					catch( Exception ex )
-					{
-                        Defaults.Logger.WriteError("ERROR", ex.Message);
-						Environment.ExitCode = 1;
-					    
-					}
+                    task.Task.Invoke();
                 }
-                
-                if (Environment.ExitCode != 0) 
+                catch (Exception ex)
                 {
+                    Defaults.Logger.WriteError("ERROR", ex.Message);
+                    BuildFile.SetErrorState();
+                }
+
+                if (IsInErrorState) 
                     return; //stop executing tasks if non-zero error code
-                }
             }
-            if (Environment.ExitCode == 0)
+
+            if (IsInErrorState == false)
                 Defaults.Logger.WriteHeader("DONE");
-            
-
-        }
-
-        ///<summary>
-        /// Instantiates a build file and initializes the Tasks queue.
-        ///</summary>
-        public BuildFile()
-        {
-            Tasks = new Queue<NamedTask>();
         }
 
         ///<summary>
@@ -81,26 +90,20 @@ namespace FluentBuild.Core
             Tasks.Enqueue(new NamedTask(name, task));
         }
 
+        #region Nested type: NamedTask
+
         internal class NamedTask
         {
-            public string Name { get; set; }
-            public Action Task { get; set; }
-
             public NamedTask(string name, Action task)
             {
                 Name = name;
                 Task = task;
             }
-        }
-        
 
-        ///<summary>
-        /// Gets the number of tasks in the queue.
-        ///</summary>
-        ///<returns>The number of tasks in the queue</returns>
-        public int TaskCount
-        {
-            get { return Tasks.Count; } 
+            public string Name { get; set; }
+            public Action Task { get; set; }
         }
+
+        #endregion
     }
 }
