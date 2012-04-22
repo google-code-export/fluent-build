@@ -154,7 +154,7 @@ namespace FluentBuild.Database
             }
 
             //execute updates higher than that version
-            foreach (string upgradeFile in Directory.GetFiles(PathToUpdateScripts))
+            foreach (string upgradeFile in System.IO.Directory.GetFiles(PathToUpdateScripts))
             {
                 string fileName = Path.GetFileName(upgradeFile);
                 int fileVersion = int.Parse(fileName.Substring(0, fileName.IndexOf("_")));

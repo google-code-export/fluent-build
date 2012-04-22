@@ -138,7 +138,7 @@ namespace FluentBuild.Runners.Zip
             if (!string.IsNullOrEmpty(_file))
                 return new List<String> {_file};
 
-            return Directory.GetFiles(_path, "*.*", SearchOption.AllDirectories).ToList();
+            return System.IO.Directory.GetFiles(_path, "*.*", SearchOption.AllDirectories).ToList();
         }
 
 
@@ -157,7 +157,7 @@ namespace FluentBuild.Runners.Zip
         ///<param name="zipFilePath">path to the output file</param>
         public void To(string zipFilePath)
         {
-            using (var zipOut = new ZipOutputStream(File.Create(zipFilePath)))
+            using (var zipOut = new ZipOutputStream(System.IO.File.Create(zipFilePath)))
             {
                 zipOut.SetLevel(CompressionLevel);
                 zipOut.Password = _password;
@@ -177,7 +177,7 @@ namespace FluentBuild.Runners.Zip
                         path = path.Substring(1); //removes the leading \
 
                     var entry = new ZipEntry(path);
-                    FileStream sReader = File.OpenRead(fileName);
+                    FileStream sReader = System.IO.File.OpenRead(fileName);
                     var buff = new byte[Convert.ToInt32(sReader.Length)];
                     sReader.Read(buff, 0, (int) sReader.Length);
                     entry.DateTime = fileInfo.LastWriteTime;
