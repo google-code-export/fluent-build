@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using FluentBuild.Compilation;
 using FluentBuild.Core;
 using FluentFs.Core;
 using NUnit.Framework;
@@ -13,11 +14,10 @@ namespace FluentBuild.Tests
         public void ShouldGenerateAssemblyInfoFile()
         {
             string outputLocation = rootFolder + "\\assemblyinfo.cs";
-            AssemblyInfo
-                .Language.CSharp
+            Task.CreateAssemblyInfo(x=>x.Language.CSharp
                 .Import("non.existant.namespace")
                 .Version("1.0.0.0")
-                .OutputTo(outputLocation);
+                .OutputPath(outputLocation));
 
             var expected = new StringBuilder();
             expected.AppendLine("using non.existant.namespace;");
@@ -37,7 +37,7 @@ namespace FluentBuild.Tests
         public void ShouldCompileAssemblyInfoToCSharp()
         {
             string outputLocation = rootFolder + "\\assemblyinfo.cs";
-            AssemblyInfo.Language.CSharp.Company("company")
+            Task.CreateAssemblyInfo(x=>x.Language.CSharp.Company("company")
                 .Copyright("copyright")
                 .Description("description")
                 .Product("product")
@@ -50,7 +50,7 @@ namespace FluentBuild.Tests
                 //.KeyFile("c:\\temp\\nonexistant.snk")
                 //.KeyName("name of key")
                 .Trademark("trademark")
-                .OutputTo(outputLocation);
+                .OutputPath(outputLocation));
 
             var fs = new FileSet();
             fs.Include(outputLocation);
@@ -64,7 +64,7 @@ namespace FluentBuild.Tests
         public void ShouldCompileAssemblyInfoToVisualBasic()
         {
             string outputLocation = rootFolder + "\\assemblyinfo.cs";
-            AssemblyInfo.Language.VisualBasic.Company("company")
+            Task.CreateAssemblyInfo(x=>x.Language.VisualBasic.Company("company")
                 .Copyright("copyright")
                 .Description("description")
                 .Product("product")
@@ -77,7 +77,7 @@ namespace FluentBuild.Tests
                 //.KeyFile("c:\\temp\\nonexistant.snk")
                 //.KeyName("name of key")
                 .Trademark("trademark")
-                .OutputTo(outputLocation);
+                .OutputPath(outputLocation));
 
             var fs = new FileSet();
             fs.Include(outputLocation);

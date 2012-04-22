@@ -1,7 +1,6 @@
 ﻿using System;
-using FluentBuild.MessageLoggers;
 
-namespace FluentBuild.Core
+namespace FluentBuild.MessageLoggers
 {
     public class MessageLoggerProxy : IMessageLogger
     {

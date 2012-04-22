@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace FluentBuild.Core
+namespace FluentBuild
 {
     ///<summary />
     [TestFixture]

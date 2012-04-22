@@ -1,6 +1,4 @@
-﻿using FluentBuild.Compilation;
-
-namespace FluentBuild.Core
+﻿namespace FluentBuild.Compilation
 {
     ///<summary>
     /// Picks the Target Type

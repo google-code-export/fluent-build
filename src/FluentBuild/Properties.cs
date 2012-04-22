@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentBuild.ApplicationProperties;
 
-namespace FluentBuild.Core
+namespace FluentBuild
 {
     /// <summary>
     /// Deletes the folder if it exists. If it does not exist then no action is taken

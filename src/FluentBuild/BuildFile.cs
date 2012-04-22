@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FluentBuild.Core
+namespace FluentBuild
 {
     ///<summary>
     /// Represents a Build file that can be run

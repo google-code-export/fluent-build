@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
-
+using FluentBuild.Compilation;
 using FluentBuild.Core;
 using FluentFs.Core;
 using Directory = System.IO.Directory;

@@ -88,11 +88,10 @@
     <Compile Include="ApplicationProperties\TeamCityPropertiesTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
     <Compile Include="Compilation\MsBuildTaskTests.cs" />
-    <Compile Include="Core\AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfoBuilding\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetails.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoLanguage.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoLanguageTests.cs" />
-    <Compile Include="Core\AssemblyInfoTests.cs" />
     <Compile Include="AssemblyInfoBuilding\VisualBasicAssemblyInfoBuilderTests.cs" />
     <Compile Include="AssemblyInfoBuilding\CSharpAssemblyInfoBuilder.cs" />
     <Compile Include="AssemblyInfoBuilding\CSharpAssemblyInfoBuilderTests.cs" />
@@ -100,10 +99,10 @@
     <Compile Include="AssemblyInfoBuilding\VisualBasicAssemblyInfoBuilder.cs" />
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
-    <Compile Include="Core\BuildFileTests.cs" />
-    <Compile Include="Core\DebugMessages.cs" />
-    <Compile Include="Core\MessageLoggerProxy.cs" />
-    <Compile Include="Core\MessageLoggerTests.cs" />
+    <Compile Include="BuildFileTests.cs" />
+    <Compile Include="MessageLoggers\DebugMessages.cs" />
+    <Compile Include="MessageLoggers\MessageLoggerProxy.cs" />
+    <Compile Include="MessageLoggers\MessageLoggerProxyTests.cs" />
     <Compile Include="FrameworkFinders\DefaultFinderTests.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\TestLogger.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\TestSuiteLogger.cs" />
@@ -117,18 +116,17 @@
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestSuiteMessageLogger.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestSuiteMessageLoggerTests.cs" />
     <Compile Include="Publishing\GoogleCodeTests.cs" />
-    <Compile Include="RunArgs.cs" />
+    <Compile Include="Runners\RunArgs.cs" />
     <Compile Include="Runners\ExecutableFailedExceptionTests.cs" />
     <Compile Include="Runners\ILMergeTests.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="UnitTestFrameworkArgs.cs" />
-    <Compile Include="Using.cs" />
+    <Compile Include="Runners\UnitTestFrameworkArgs.cs" />
+    <Compile Include="Compilation\Using.cs" />
     <Compile Include="Utilities\FileFinder.cs" />
     <Compile Include="Utilities\FileFinderTests.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleMessageLogger.cs" />
     <Compile Include="MessageLoggers\IMessageLogger.cs" />
-    <Compile Include="Core\PublishTests.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\MessageLogger.cs" />
     <Compile Include="Core\Obsolete\Build.cs" />
     <Compile Include="Compilation\MsBuildTask.cs" />
@@ -139,11 +137,11 @@
     <Compile Include="Compilation\TargetTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlProperties.cs" />
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
-    <Compile Include="Core\PropertiesTests.cs" />
-    <Compile Include="Core\Publish.cs" />
+    <Compile Include="PropertiesTests.cs" />
+    <Compile Include="Publishing\Publish.cs" />
     <Compile Include="Compilation\TargetType.cs" />
-    <Compile Include="Core\VerbosityLevel.cs" />
-    <Compile Include="CustomAssemblyInfo.cs" />
+    <Compile Include="VerbosityLevel.cs" />
+    <Compile Include="Properties\CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
     <Compile Include="Runners\ExecutableFailedException.cs" />
     <Compile Include="Runners\ILMerge.cs" />
@@ -176,8 +174,8 @@
     <Compile Include="Database\MsSqlUtilitiesTests.cs" />
     <Compile Include="Database\MsSqlVersionTable.cs" />
     <Compile Include="Database\MsSqlVersionTableTests.cs" />
-    <Compile Include="Core\Defaults.cs" />
-    <Compile Include="Core\Properties.cs" />
+    <Compile Include="Defaults.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="Runners\Zip\ZipCompress.cs" />
     <Compile Include="Runners\Zip\ZipCompressTests.cs" />
     <Compile Include="Runners\Zip\ZipDecompress.cs" />
@@ -195,7 +193,7 @@
     <Compile Include="Runners\ProcessWrapper.cs" />
     <Compile Include="Utilities\ConsoleColor.cs" />
     <Compile Include="Utilities\FrameworkVersion.cs" />
-    <Compile Include="Core\BuildFile.cs" />
+    <Compile Include="BuildFile.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleMessageLoggerTests.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunner.cs" />
     <Compile Include="Runners\UnitTesting\NUnitRunnerTests.cs" />
@@ -209,7 +207,7 @@
     <Compile Include="Compilation\Target.cs" />
     <Compile Include="Core\Obsolete\MessageLogger.cs" />
     <Compile Include="Utilities\SdkNotFoundException.cs" />
-    <Compile Include="ZipOptions.cs" />
+    <Compile Include="Runners\ZipOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

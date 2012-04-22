@@ -27,6 +27,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
         internal readonly List<String> Imports = new List<string>();
         internal IList<AssemblyInfoItem> LineItems = new List<AssemblyInfoItem>();
+        private string _outputPath;
 
 //        internal string AssemblyCopyright;
 //        internal string AssemblyDescription;
@@ -298,6 +299,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// Execute the generation of the assembly info file and output it.
         /// </summary>
         /// <param name="artifactLocation">The destination artifact location</param>
+        [Obsolete("Replaced to be used with Task.CreateAssemblyInfo(). OutputTo is set with OutputPath", true)]
         public void OutputTo(FluentFs.Core.File artifactLocation)
         {
             OutputTo(artifactLocation.ToString());
@@ -307,9 +309,30 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// Execute the generation of the assembly info file and output it.
         /// </summary>
         /// <param name="filePath">The destination file path location</param>
+        [Obsolete("Replaced to be used with Task.CreateAssemblyInfo(). OutputTo is set with OutputPath", true)]
         public void OutputTo(string filePath)
         {
             using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            using (var sw = new StreamWriter(fs))
+            {
+                sw.Write(AssemblyInfoBuilder.Build(this));
+            }
+        }
+
+        public AssemblyInfoDetails OutputPath(string path)
+        {
+            this._outputPath = path;
+            return this;
+        }
+
+        public AssemblyInfoDetails OutputPath(FluentFs.Core.File path)
+        {
+            return OutputPath(path.ToString());
+        }
+
+        internal void InternalExecute()
+        {
+            using (var fs = new FileStream(_outputPath, FileMode.Create, FileAccess.Write))
             using (var sw = new StreamWriter(fs))
             {
                 sw.Write(AssemblyInfoBuilder.Build(this));

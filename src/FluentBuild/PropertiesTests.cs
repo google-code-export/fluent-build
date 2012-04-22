@@ -2,30 +2,35 @@
 using FluentBuild.ApplicationProperties;
 using NUnit.Framework;
 
-namespace FluentBuild.Core
+namespace FluentBuild
 {
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class PropertiesTests
     {
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void TeamCityShouldReturnProperObject()
         {
             Assert.That(Properties.TeamCity, Is.TypeOf<TeamCityProperties>());
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void CruiseControlShouldReturnProperObject()
         {
             Assert.That(Properties.CruiseControl, Is.TypeOf<CruiseControlProperties>());
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void CommandLineShouldReturnProperObject()
         {
             Assert.That(Properties.CommandLineProperties, Is.TypeOf<CommandLineProperties>());
         }
 
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void CurrentDirectoryShouldBeProper()
         {
             Assert.That(Properties.CurrentDirectory, Is.EqualTo(Environment.CurrentDirectory));

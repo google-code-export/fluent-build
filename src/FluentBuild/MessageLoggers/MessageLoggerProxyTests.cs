@@ -1,14 +1,12 @@
 ﻿using System;
-using FluentBuild.MessageLoggers;
 using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
-using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
 using NUnit.Framework;
 using Rhino.Mocks;
 
-namespace FluentBuild.Core
+namespace FluentBuild.MessageLoggers
 {
     [TestFixture]
-    public class MessageLoggerTests
+    public class MessageLoggerProxyTests
     {
         private IMessageLogger _internalLogger;
         private MessageLoggerProxy _messageLoggerProxy;

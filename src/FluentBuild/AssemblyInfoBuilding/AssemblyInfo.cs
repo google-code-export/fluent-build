@@ -1,6 +1,4 @@
-using FluentBuild.AssemblyInfoBuilding;
-
-namespace FluentBuild.Core
+namespace FluentBuild.AssemblyInfoBuilding
 {
     /// <summary>
     /// Allows the creation of assembly info files
@@ -10,7 +8,7 @@ namespace FluentBuild.Core
         /// <summary>
         /// select the language used to generate the assembly info file
         /// </summary>
-        public static AssemblyInfoLanguage Language
+        public AssemblyInfoLanguage Language
         {
             get { return new AssemblyInfoLanguage(); }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
-using FluentBuild.Runners;
 
-namespace FluentBuild
+namespace FluentBuild.Runners
 {
     public class RunArgs
     {

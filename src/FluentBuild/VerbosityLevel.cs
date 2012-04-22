@@ -1,4 +1,4 @@
-﻿namespace FluentBuild.Core
+﻿namespace FluentBuild
 {
     ///<summary>
     /// The verbosity of messages

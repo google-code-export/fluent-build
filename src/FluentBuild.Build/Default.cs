@@ -1,18 +1,18 @@
 ﻿using System;
 using FluentBuild;
-using FluentBuild.Core;
-using FluentBuild.Runners;
-using FluentBuild.Runners.UnitTesting;
+using FluentBuild.Compilation;
 using FluentBuild.Utilities;
 using FluentFs.Core;
 using OnError = FluentFs.Core.OnError;
+
 
 namespace Build
 {
     public class Default : BuildFile
     {
         private readonly File assembly_FluentBuild_Runner;
-        private readonly File assembly_FluentBuild_WithTests;
+        private readonly File assembly_FluentBuild_WithTests_Partial;
+        private readonly File assembly_FluentBuild_WithTests_Merged;
         private readonly File assembly_Functional_Tests;
 
         internal readonly Directory directory_base;
@@ -44,7 +44,8 @@ namespace Build
             directory_src_converter = directory_base.SubFolder("src").SubFolder("FluentBuild.BuildFileConverter");
 
             assembly_BuildFileConverter_WithTests = directory_compile.File("BuildFileConverter.exe");
-            assembly_FluentBuild_WithTests = directory_compile.File("FluentBuildWithTests.dll");
+            assembly_FluentBuild_WithTests_Partial = directory_compile.File("FluentBuildWithTests_partial.dll");
+            assembly_FluentBuild_WithTests_Merged = directory_compile.File("FluentBuild.dll");
             assembly_Functional_Tests = directory_compile.File("FluentBuild_Functional_Tests.dll");
 
             assembly_FluentBuild_Runner = directory_compile.File("fb.exe");
@@ -57,7 +58,7 @@ namespace Build
             _version = "0.0.0.0";
 
             Defaults.FrameworkVersion = FrameworkVersion.NET4_0.Full;
-
+            
             AddTask(Clean);
             AddTask(GenerateAssemblyInfoFiles);
             AddTask(CopyDependantAssembliesToCompileDir);
@@ -106,14 +107,15 @@ namespace Build
 
         private void GenerateAssemblyInfoFor(string folder, string description)
         {
-            AssemblyInfo.Language.CSharp.ClsCompliant(true)
+            var outputLocation = directory_base.SubFolder("src").SubFolder(folder).SubFolder("Properties").File("AssemblyInfo.cs");
+            Task.CreateAssemblyInfo(x=>x.Language.CSharp.ClsCompliant(true)
                 .Company("Solidhouse")
                 .ComVisible(false)
                 .Copyright("Copyright 2009-" + DateTime.Now.Year)
                 .Description(description)
                 .Product("FluentBuild")
                 .Version(_version)
-                .OutputTo(directory_base.SubFolder("src").SubFolder(folder).SubFolder("Properties").File("AssemblyInfo.cs"));
+                .OutputPath(outputLocation));
         }
 
         public void Clean()
@@ -131,8 +133,18 @@ namespace Build
             Task.Build(Using.Csc.Target.Library
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, thirdparty_sharpzip, thirdparty_fluentFs)
-                .OutputFileTo(assembly_FluentBuild_WithTests)
+                .OutputFileTo(assembly_FluentBuild_WithTests_Partial)
                 .IncludeDebugSymbols);
+
+           
+            Task.Run.ILMerge(x => x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
+              .AddSource(assembly_FluentBuild_WithTests_Partial)
+              .AddSource(thirdparty_sharpzip)
+              .AddSource(thirdparty_fluentFs)
+              .OutputTo(assembly_FluentBuild_WithTests_Merged));
+
+            //.TargetPlatform("/targetplatform:v4,c:\Windows\Microsoft.NET\Framework\v4.0.30319")
+            assembly_FluentBuild_WithTests_Partial.Delete();
         }
 
         private void CompileRunnerSources()
@@ -143,7 +155,7 @@ namespace Build
 
              Task.Build(Using.Csc.Target.Executable
                 .AddSources(sourceFiles)
-                .AddRefences(assembly_FluentBuild_WithTests, thirdparty_fluentFs)
+                .AddRefences(assembly_FluentBuild_WithTests_Merged)
                 .OutputFileTo(assembly_FluentBuild_Runner));
         }
 
@@ -152,14 +164,14 @@ namespace Build
             var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
             Task.Build(Using.Csc.Target.Library
                            .AddSources(sourceFiles)
-                           .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests, assembly_FluentBuild_Runner, thirdparty_fluentFs)
+                           .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests_Merged, assembly_FluentBuild_Runner)
                            .OutputFileTo(assembly_Functional_Tests));
         }
 
         private void RunTests()
         {
             thirdparty_fluentFs.Copy.To(directory_compile);
-            Task.Run.UnitTestFramework.Nunit(x => x.FileToTest(assembly_FluentBuild_WithTests));
+            Task.Run.UnitTestFramework.Nunit(x => x.FileToTest(assembly_FluentBuild_WithTests_Merged));
         }
 
         private void RunFunctionalTests()

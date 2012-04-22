@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentBuild;
+using FluentBuild.Compilation;
 using FluentBuild.Core;
 using FluentBuild.Runners;
 using FluentFs.Core;
@@ -31,7 +32,7 @@ namespace Build
             AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
-            AddTask(PublishToRepository);
+            //AddTask(PublishToRepository);
         }
 
         private void CompileRunner()
@@ -48,13 +49,12 @@ namespace Build
 
         private void PublishToRepository()
         {
-            FluentBuild.Core.Publish.ToGoogleCode.LocalFileName(ZipFilePath.ToString())
+            Task.Publish(x=>x.ToGoogleCode.LocalFileName(ZipFilePath.ToString())
                 .UserName(Properties.CommandLineProperties.GetProperty("GoogleCodeUsername"))
                 .Password(Properties.CommandLineProperties.GetProperty("GoogleCodePassword"))
                 .ProjectName("fluent-build")
                 .Summary("Alpha Release (v" + _version + ")")
-                .TargetFileName(_finalFileName)
-                .Upload();
+                .TargetFileName(_finalFileName));
         }
 
         private void CompileBuildFileConverterWithoutTests()
@@ -78,7 +78,7 @@ namespace Build
 
             Task.Build(Using.Csc.Target.Library
                 .AddSources(sourceFiles)
-                .AddRefences(thirdparty_sharpzip)
+                .AddRefences(thirdparty_sharpzip, thirdparty_fluentFs)
                 .OutputFileTo(AssemblyFluentBuildRelease_Partial));
 
            Task.Run.ILMerge(x=>x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")

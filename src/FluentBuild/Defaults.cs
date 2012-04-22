@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentBuild.Core;
 using FluentBuild.MessageLoggers;
 using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
 using FluentBuild.Utilities;
 
-namespace FluentBuild.Core
+namespace FluentBuild
 {
     ///<summary>
     /// Defaults for the fluent build runner

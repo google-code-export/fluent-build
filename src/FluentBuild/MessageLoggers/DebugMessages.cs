@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FluentBuild.Core
+namespace FluentBuild.MessageLoggers
 {
     public class DebugMessages : IDisposable
     {
