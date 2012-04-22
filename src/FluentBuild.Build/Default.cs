@@ -5,7 +5,6 @@ using FluentBuild.Utilities;
 using FluentFs.Core;
 using OnError = FluentFs.Core.OnError;
 
-
 namespace Build
 {
     public class Default : BuildFile

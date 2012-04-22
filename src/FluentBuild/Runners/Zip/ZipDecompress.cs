@@ -32,14 +32,14 @@ namespace FluentBuild.Runners.Zip
         ///<param name="outputPath">The path you would like the file(s) outputed to</param>
         public void To(string outputPath)
         {
-            using (var zipInputStream = new ZipInputStream(File.OpenRead(_pathToArchive)))
+            using (var zipInputStream = new ZipInputStream(System.IO.File.OpenRead(_pathToArchive)))
             {
                 zipInputStream.Password = _password;
 
                 ZipEntry entry;
                 while ((entry = zipInputStream.GetNextEntry()) != null)
                 {
-                    FileStream streamWriter = File.Create(Path.Combine(outputPath + "\\", entry.Name));
+                    FileStream streamWriter = System.IO.File.Create(Path.Combine(outputPath + "\\", entry.Name));
                     long size = entry.Size;
                     var data = new byte[size];
                     while (true)
