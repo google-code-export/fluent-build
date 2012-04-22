@@ -2,6 +2,7 @@
 using FluentBuild.MessageLoggers;
 using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
 using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.Core
 {

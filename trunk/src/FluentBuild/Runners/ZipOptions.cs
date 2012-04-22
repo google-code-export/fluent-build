@@ -1,6 +1,6 @@
 ﻿using FluentBuild.Runners.Zip;
 
-namespace FluentBuild
+namespace FluentBuild.Runners
 {
     public interface IZipOptions
     {

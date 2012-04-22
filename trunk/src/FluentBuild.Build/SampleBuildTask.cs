@@ -1,10 +1,10 @@
-using FluentBuild.Core;
-using FluentBuild.Runners.UnitTesting;
+using FluentBuild;
+using FluentBuild.Compilation;
 using FluentFs.Core;
 
-namespace FluentBuild.BuildFile
+namespace Build
 {
-    public class Default : Core.BuildFile
+    public class DefaultSample : BuildFile
     {
         private readonly File assembly_FluentBuild;
         private readonly File assembly_FluentBuild_Tests;
@@ -16,7 +16,7 @@ namespace FluentBuild.BuildFile
         private readonly File thirdparty_nunit;
         private readonly File thirdparty_rhino;
 
-        public Default()
+        public DefaultSample()
         {
             directory_base = new Directory(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");

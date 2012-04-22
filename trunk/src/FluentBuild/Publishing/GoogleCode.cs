@@ -102,7 +102,13 @@ namespace FluentBuild.Publishing
         ///<summary>
         /// Executes the upload of the file via a http post
         ///</summary>
+        [Obsolete("Replaced with Task.Publish", true)]
         public void Upload()
+        {
+            Execute();
+        }
+
+        internal void Execute()
         {
             Validate();
             var request= CreateRequest();

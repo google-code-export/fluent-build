@@ -50,6 +50,7 @@ namespace FluentBuild.Runners
         internal IList<String> Sources;
         private string _exePath;
         private readonly IFileFinder _fileFinder;
+        private string _framework;
 
         internal string[] BuildArgs()
         {
@@ -152,5 +153,19 @@ namespace FluentBuild.Runners
         {
             return AddSource(source.ToString());
         }
+
+        /*
+        /// <summary>
+        /// Sets the target platform for ILMerge to set the outputed assembly to
+        /// </summary>
+        /// <param name="framework"></param>
+        /// <returns></returns>
+        /// <examle>v4,c:\Windows\Microsoft.NET\Framework\v4.0.30319</examle>
+        public ILMerge TargetPlatform(string framework)
+        {
+            _framework = framework;
+            return this;
+        }
+       */
     }
 }

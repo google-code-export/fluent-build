@@ -1,7 +1,6 @@
-﻿using FluentBuild.Compilation;
-using FluentBuild.Core;
+﻿using FluentBuild.Core;
 
-namespace FluentBuild
+namespace FluentBuild.Compilation
 {
     public static class Using
     {

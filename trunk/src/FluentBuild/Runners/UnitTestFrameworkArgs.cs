@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentBuild.Runners.UnitTesting;
 
-namespace FluentBuild
+namespace FluentBuild.Runners
 {
     public class UnitTestFrameworkArgs
     {

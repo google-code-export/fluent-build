@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using FluentBuild.Compilation;
 using FluentBuild.Core;
 using FluentFs.Core;
 using Directory = System.IO.Directory;
@@ -134,11 +135,18 @@ namespace FluentBuild.BuildExe
             string tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks;
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
-            fluentFs.Copy.To(tempPath);
+            
+            
             Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
 
-
-            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(fluentBuilddll, fluentFs.ToString()).OutputFileTo(outputAssembly).IncludeDebugSymbols);
+            var references = new List<String>() { fluentBuilddll};
+            if (File.Exists(fluentFs.ToString()))
+            {
+                fluentFs.Copy.To(tempPath);
+                references.Add(fluentFs.ToString());
+            }
+            
+            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(references.ToArray()).OutputFileTo(outputAssembly).IncludeDebugSymbols);
             return outputAssembly;
         }
 

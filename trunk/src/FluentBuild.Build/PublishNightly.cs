@@ -1,4 +1,5 @@
-﻿using FluentBuild.Core;
+﻿using FluentBuild;
+using FluentBuild.Core;
 
 namespace Build
 {

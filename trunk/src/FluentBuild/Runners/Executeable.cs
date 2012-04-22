@@ -7,6 +7,8 @@ using FluentBuild.Core;
 using FluentBuild.MessageLoggers.MessageProcessing;
 using FluentBuild.Utilities;
 using System.Linq;
+using FluentFs.Core;
+using OnError = FluentBuild.Utilities.OnError;
 
 namespace FluentBuild.Runners
 {
@@ -48,6 +50,12 @@ namespace FluentBuild.Runners
         ///<param name="path">path to the executable</param>
         IExecutable ExecutablePath(string path);
 
+        /// <summary>
+        /// Sets the executable to run
+        /// </summary>
+        /// <param name="path">path to the executable</param>
+        /// <returns></returns>
+        IExecutable ExecutablePath(File path);
 
         ///<summary>
         /// Allows you to override the default message parser. This is typically used for parsing a runners output (i.e. nunit outputs in xml so a different parser is used to transform messages)
@@ -113,6 +121,11 @@ namespace FluentBuild.Runners
         }
 
         #region IExecutable Members
+
+        public IExecutable ExecutablePath(File path)
+        {
+            return ExecutablePath(path.ToString());
+        }
 
         public IExecutable WithMessageProcessor(IMessageProcessor processor)
         {
