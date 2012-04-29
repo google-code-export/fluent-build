@@ -142,7 +142,6 @@ namespace Build
               .AddSource(thirdparty_fluentFs)
               .OutputTo(assembly_FluentBuild_WithTests_Merged));
 
-            //.TargetPlatform("/targetplatform:v4,c:\Windows\Microsoft.NET\Framework\v4.0.30319")
             assembly_FluentBuild_WithTests_Partial.Delete();
         }
 
