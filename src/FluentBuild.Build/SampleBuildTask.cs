@@ -4,6 +4,7 @@ using FluentFs.Core;
 
 namespace Build
 {
+    
     public class DefaultSample : BuildFile
     {
         private readonly File assembly_FluentBuild;
@@ -25,8 +26,8 @@ namespace Build
 
             assembly_FluentBuild = directory_compile.File("FluentBuild.dll");
             assembly_FluentBuild_Tests = directory_compile.File("FluentBuild.Tests.dll");
-            thirdparty_nunit = directory_compile.File("nunit.framework.dll");
-            thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
+            thirdparty_nunit = directory_tools.File("nunit.framework.dll");
+            thirdparty_rhino = directory_tools.File("rhino.mocks.dll");
 
             AddTask(Clean);
             AddTask(CompileSources);
@@ -59,10 +60,10 @@ namespace Build
 
         private void CompileSources()
         {
-            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src"))
-                .RecurseAllSubDirectories
-                .Filter("*.cs");
-            Task.Build(Using.Csc.Target.Library.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
+            var sourceFiles = new FluentFs.Core.FileSet().Include(directory_base.SubFolder("src"))
+                                                         .RecurseAllSubDirectories
+                                                         .Filter("*.cs");
+            FluentBuild.Task.Build(Using.Csc.Target.Library.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
         }
 
         private void CompileTests()
