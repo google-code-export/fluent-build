@@ -99,9 +99,10 @@ namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers
             Write("DEBUG", message);
         }
 
-        public void Write(string type, string message)
+        public void Write(string type, string message, params string[] items)
         {
-            string outputMessage = String.Format("  [{0}] {1}", type, message);
+            var data = string.Format(message, items);
+            string outputMessage = String.Format("  [{0}] {1}", type, data);
             var wrapText = WrapText(5 + type.Length, outputMessage);
             foreach (var text in wrapText)
             {

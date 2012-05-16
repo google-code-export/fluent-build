@@ -7,7 +7,7 @@ namespace FluentBuild.MessageLoggers
     {
         void WriteHeader(string header);
         void WriteDebugMessage(string message);
-        void Write(string type, string message);
+        void Write(string type, string message, params string[] items);
         void WriteError(string type, string message);
         void WriteWarning(string type, string message);
         IDisposable ShowDebugMessages { get; }

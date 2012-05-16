@@ -143,6 +143,21 @@
         <member name="M:FluentBuild.Runners.Zip.ZipTests.TestSomething">
             <summary />
         </member>
+        <member name="T:FluentBuild.PropertiesTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.PropertiesTests.TeamCityShouldReturnProperObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.PropertiesTests.CruiseControlShouldReturnProperObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.PropertiesTests.CommandLineShouldReturnProperObject">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.PropertiesTests.CurrentDirectoryShouldBeProper">
+            <summary />
+        </member>
         <member name="T:FluentBuild.ApplicationProperties.CommandLineProperties">
             <summary>
              Accesses properties passed in via the command line
@@ -161,6 +176,15 @@
             </summary>
             <param name="name">The name of the property</param>
             <param name="value">The value of the property</param>
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.MessageLoggerProxyTests.Setup">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.MessageLoggerProxyTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.MessageLoggers.MessageLoggerProxyTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
+            <summary />
         </member>
         <member name="T:FluentBuild.ApplicationProperties.TeamCityPropertiesTests">
             <summary>
@@ -377,6 +401,12 @@
             </summary>
             <param name="message">message text to include in the error</param>
         </member>
+        <member name="T:FluentBuild.BuildFileTests">
+            <summary />
+        </member>
+        <member name="M:FluentBuild.BuildFileTests.TestThatQueueGetsProcessed">
+            <summary />
+        </member>
         <member name="P:FluentBuild.Core.MessageLogger.Verbosity">
             <summary>
              Gets or sets the message logging verbosity level
@@ -465,6 +495,12 @@
              Sets the output path
             </summary>
             <param name="outputPath">The path you would like the file(s) outputed to</param>
+        </member>
+        <member name="T:FluentBuild.Properties">
+            <summary>
+            Deletes the folder if it exists. If it does not exist then no action is taken
+            </summary>
+            <returns>The current FluentFs.Core.Directory</returns>
         </member>
         <member name="M:FluentBuild.Runners.IILMerge.ExecutableLocatedAt(System.String)">
             <summary>
@@ -776,6 +812,21 @@
              Executes MSBuild with the provided parameters
             </summary>
         </member>
+        <member name="M:FluentBuild.Compilation.Using.MsBuild(System.String)">
+            <summary>
+            Creates a BuildTask using MSBuild
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Compilation.Using.Csc">
+            <summary>
+            Creates a BuildTask using the C# compiler
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Compilation.Using.Vbc">
+            <summary>
+            Creates a BuildTask using the VB compiler
+            </summary>
+        </member>
         <member name="T:FluentBuild.Compilation.BuildTaskTests">
             <summary>
             </summary>
@@ -1004,6 +1055,45 @@
         <member name="M:FluentBuild.Runners.Zip.ZipCompressTests.TestSomething">
             <summary />
         </member>
+        <member name="T:FluentBuild.BuildFile">
+            <summary>
+             Represents a Build file that can be run
+            </summary>
+        </member>
+        <member name="M:FluentBuild.BuildFile.#ctor">
+            <summary>
+             Instantiates a build file and initializes the Tasks queue.
+            </summary>
+        </member>
+        <member name="M:FluentBuild.BuildFile.InvokeNextTask">
+            <summary>
+             Invokes the next task in the queue
+            </summary>
+        </member>
+        <member name="M:FluentBuild.BuildFile.ClearTasks">
+            <summary>
+             Clears the task list
+            </summary>
+        </member>
+        <member name="M:FluentBuild.BuildFile.AddTask(System.Action)">
+            <summary>
+             Adds a task for fb.exe to run in the order that it should be run
+            </summary>
+            <param name="task">The method to run</param>
+        </member>
+        <member name="M:FluentBuild.BuildFile.AddTask(System.String,System.Action)">
+            <summary>
+             Adds a task for fb.exe to run in the order that it should be run
+            </summary>
+            <param name="task">The method to run</param>
+            <param name="name">The name of the task (will be displayed when the task is run)</param>
+        </member>
+        <member name="P:FluentBuild.BuildFile.TaskCount">
+            <summary>
+             Gets the number of tasks in the queue.
+            </summary>
+            <returns>The number of tasks in the queue</returns>
+        </member>
         <member name="T:FluentBuild.Utilities.DesktopFrameworkType">
             <summary>
              Indicates if the type is client or full (used in .NET 4.0 and higher)
@@ -1168,6 +1258,21 @@
         <member name="T:FluentBuild.Utilities.FrameworkVersion">
             <summary>
              The .NET Framework version
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Defaults">
+            <summary>
+             Defaults for the fluent build runner
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Defaults.OnError">
+            <summary>
+             Sets the behavior of what to do when an error occurs. The default is to fail.
+            </summary>
+        </member>
+        <member name="F:FluentBuild.Defaults.FrameworkVersion">
+            <summary>
+             Sets the .NET Framework version to use. The default is the highest desktop framework found.
             </summary>
         </member>
         <member name="T:FluentBuild.Database.DatabaseTests">
@@ -1557,6 +1662,16 @@
             </summary>
             <summary />
         </member>
+        <member name="T:FluentBuild.AssemblyInfoBuilding.AssemblyInfo">
+            <summary>
+            Allows the creation of assembly info files
+            </summary>
+        </member>
+        <member name="P:FluentBuild.AssemblyInfoBuilding.AssemblyInfo.Language">
+            <summary>
+            select the language used to generate the assembly info file
+            </summary>
+        </member>
         <member name="T:FluentBuild.Utilities.RegistryWrapper">
             <summary>
             Wrapper around registry access to provide testability
@@ -1572,29 +1687,39 @@
              Creates the finder.
             </summary>
         </member>
-        <member name="T:FluentBuild.Core.TargetType">
+        <member name="T:FluentBuild.VerbosityLevel">
+            <summary>
+             The verbosity of messages
+            </summary>
+        </member>
+        <member name="F:FluentBuild.VerbosityLevel.None">
+            <summary>
+             Nothing should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.VerbosityLevel.TaskNamesOnly">
+            <summary>
+             Only task names should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.VerbosityLevel.TaskDetails">
+            <summary>
+             Task names and their details should be output
+            </summary>
+        </member>
+        <member name="F:FluentBuild.VerbosityLevel.Full">
+            <summary>
+             Output everything possible.
+            </summary>
+        </member>
+        <member name="T:FluentBuild.Compilation.TargetType">
             <summary>
              Picks the Target Type
             </summary>
         </member>
-        <member name="P:FluentBuild.Core.TargetType.Target">
+        <member name="P:FluentBuild.Compilation.TargetType.Target">
             <summary>
              Pick the target
-            </summary>
-        </member>
-        <member name="M:FluentBuild.Using.MsBuild(System.String)">
-            <summary>
-            Creates a BuildTask using MSBuild
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Using.Csc">
-            <summary>
-            Creates a BuildTask using the C# compiler
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Using.Vbc">
-            <summary>
-            Creates a BuildTask using the VB compiler
             </summary>
         </member>
         <member name="T:FluentBuild.Compilation.MsBuildTaskTests">
@@ -1662,131 +1787,6 @@
             <summary>
             </summary>
             <summary />
-        </member>
-        <member name="T:FluentBuild.BuildFile">
-            <summary>
-             Represents a Build file that can be run
-            </summary>
-        </member>
-        <member name="M:FluentBuild.BuildFile.#ctor">
-            <summary>
-             Instantiates a build file and initializes the Tasks queue.
-            </summary>
-        </member>
-        <member name="M:FluentBuild.BuildFile.InvokeNextTask">
-            <summary>
-             Invokes the next task in the queue
-            </summary>
-        </member>
-        <member name="M:FluentBuild.BuildFile.ClearTasks">
-            <summary>
-             Clears the task list
-            </summary>
-        </member>
-        <member name="M:FluentBuild.BuildFile.AddTask(System.Action)">
-            <summary>
-             Adds a task for fb.exe to run in the order that it should be run
-            </summary>
-            <param name="task">The method to run</param>
-        </member>
-        <member name="M:FluentBuild.BuildFile.AddTask(System.String,System.Action)">
-            <summary>
-             Adds a task for fb.exe to run in the order that it should be run
-            </summary>
-            <param name="task">The method to run</param>
-            <param name="name">The name of the task (will be displayed when the task is run)</param>
-        </member>
-        <member name="P:FluentBuild.BuildFile.TaskCount">
-            <summary>
-             Gets the number of tasks in the queue.
-            </summary>
-            <returns>The number of tasks in the queue</returns>
-        </member>
-        <member name="T:FluentBuild.Defaults">
-            <summary>
-             Defaults for the fluent build runner
-            </summary>
-        </member>
-        <member name="F:FluentBuild.Defaults.OnError">
-            <summary>
-             Sets the behavior of what to do when an error occurs. The default is to fail.
-            </summary>
-        </member>
-        <member name="F:FluentBuild.Defaults.FrameworkVersion">
-            <summary>
-             Sets the .NET Framework version to use. The default is the highest desktop framework found.
-            </summary>
-        </member>
-        <member name="T:FluentBuild.Properties">
-            <summary>
-            Deletes the folder if it exists. If it does not exist then no action is taken
-            </summary>
-            <returns>The current FluentFs.Core.Directory</returns>
-        </member>
-        <member name="T:FluentBuild.VerbosityLevel">
-            <summary>
-             The verbosity of messages
-            </summary>
-        </member>
-        <member name="F:FluentBuild.VerbosityLevel.None">
-            <summary>
-             Nothing should be output
-            </summary>
-        </member>
-        <member name="F:FluentBuild.VerbosityLevel.TaskNamesOnly">
-            <summary>
-             Only task names should be output
-            </summary>
-        </member>
-        <member name="F:FluentBuild.VerbosityLevel.TaskDetails">
-            <summary>
-             Task names and their details should be output
-            </summary>
-        </member>
-        <member name="F:FluentBuild.VerbosityLevel.Full">
-            <summary>
-             Output everything possible.
-            </summary>
-        </member>
-        <member name="T:FluentBuild.BuildFileTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.BuildFileTests.TestThatQueueGetsProcessed">
-            <summary />
-        </member>
-        <member name="T:FluentBuild.PropertiesTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.PropertiesTests.TeamCityShouldReturnProperObject">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.PropertiesTests.CruiseControlShouldReturnProperObject">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.PropertiesTests.CommandLineShouldReturnProperObject">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.PropertiesTests.CurrentDirectoryShouldBeProper">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggerTests.Setup">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggerTests.WriteDebugMessage_ShouldNotWriteIfVerbosityIsLessThanFull">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.MessageLoggerTests.WriteDebugMessage_ShouldWriteIfVerbosityIsFull">
-            <summary />
-        </member>
-        <member name="T:FluentBuild.AssemblyInfo">
-            <summary>
-            Allows the creation of assembly info files
-            </summary>
-        </member>
-        <member name="P:FluentBuild.AssemblyInfo.Language">
-            <summary>
-            select the language used to generate the assembly info file
-            </summary>
         </member>
     </members>
 </doc>
