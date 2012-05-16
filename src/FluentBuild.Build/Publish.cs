@@ -49,7 +49,7 @@ namespace Build
 
         private void PublishToRepository()
         {
-            Task.Publish(x=>x.ToGoogleCode.LocalFileName(ZipFilePath.ToString())
+            Task.Publish.ToGoogleCode(x=>x.LocalFileName(ZipFilePath.ToString())
                 .UserName(Properties.CommandLineProperties.GetProperty("GoogleCodeUsername"))
                 .Password(Properties.CommandLineProperties.GetProperty("GoogleCodePassword"))
                 .ProjectName("fluent-build")

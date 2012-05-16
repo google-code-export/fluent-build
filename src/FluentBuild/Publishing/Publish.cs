@@ -1,10 +1,21 @@
-﻿namespace FluentBuild.Publishing
+﻿using System;
+
+namespace FluentBuild.Publishing
 {
     public class Publish
     {
-        public GoogleCode ToGoogleCode
+        public void ToGoogleCode(Action<GoogleCode> args)
         {
-            get { return new GoogleCode(); }
+            var concrete = new GoogleCode();
+            args(concrete);
+            concrete.Execute();
+        }
+
+        public void Ftp(Action<Ftp> args)
+        {
+            var concrete = new Ftp();
+            args(concrete);
+            concrete.Execute();
         }
     }
 }

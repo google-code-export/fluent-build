@@ -51,7 +51,7 @@ namespace FluentBuild
                 }
                 catch (Exception ex)
                 {
-                    Defaults.Logger.WriteError("ERROR", ex.Message);
+                    Defaults.Logger.WriteError("ERROR", ex.ToString());
                     BuildFile.SetErrorState();
                 }
 

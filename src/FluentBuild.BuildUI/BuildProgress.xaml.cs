@@ -49,7 +49,14 @@ namespace FluentBuild.BuildUI
             Dispatcher.BeginInvoke(new Action(() => BuildNotices.Last().AddItem(message, TaskState.Normal)));
         }
 
-        public void Write(string type, string message)
+
+        public void Write(string type, string message, params string[] items)
+        {
+            var data = string.Format(message, items);
+            Dispatcher.BeginInvoke(new Action(() => BuildNotices.Last().AddItem(data, TaskState.Normal)));
+        }
+
+        public void Write(string type, string message, string statusDescription)
         {
             Dispatcher.BeginInvoke(new Action(() => BuildNotices.Last().AddItem(message, TaskState.Normal)));
         }

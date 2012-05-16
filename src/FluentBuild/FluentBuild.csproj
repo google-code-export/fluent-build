@@ -115,6 +115,8 @@
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestMessageLoggerTests.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestSuiteMessageLogger.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\TestSuiteMessageLoggerTests.cs" />
+    <Compile Include="Publishing\Ftp.cs" />
+    <Compile Include="Publishing\FtpTests.cs" />
     <Compile Include="Publishing\GoogleCodeTests.cs" />
     <Compile Include="Runners\RunArgs.cs" />
     <Compile Include="Runners\ExecutableFailedExceptionTests.cs" />

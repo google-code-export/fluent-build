@@ -48,7 +48,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
             var messages = new List<Message>();
             messages.Add(new Message("TEST", MessageType.Regular));
             _subject.Display(messages);
-            _internalLogger.AssertWasCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything));
+            _internalLogger.AssertWasCalled(x => x.Write(Arg<String>.Is.Anything, Arg<String>.Is.Anything, Arg<String[]>.Is.Anything));
         }
 
         [Test, ExpectedException(typeof(NotImplementedException))]

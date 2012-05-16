@@ -26,9 +26,14 @@ namespace FluentBuild.MessageLoggers
                 InternalLogger.WriteDebugMessage(message);
         }
 
-        public void Write(string type, string message)
+        public void Write(string type, string message, params string[] items)
         {
-            InternalLogger.Write(type, message);
+            InternalLogger.Write(type,message, items);
+        }
+
+        public void Write(string type, string message, string statusDescription)
+        {
+            InternalLogger.Write(type, message, statusDescription);
         }
 
         public void WriteError(string type, string message)

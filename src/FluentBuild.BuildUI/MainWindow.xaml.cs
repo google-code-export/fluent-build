@@ -105,7 +105,7 @@ namespace FluentBuild.BuildUI
         {
             Defaults.Logger.WriteDebugMessage("Executing DLL build from " + path);
 
-            Defaults.Logger.Write("INFO", "Using framework " + Defaults.FrameworkVersion.ToString());
+            Defaults.Logger.Write("INFO", "Using framework {0}", Defaults.FrameworkVersion.ToString());
             Assembly assemblyInstance = Assembly.LoadFile(path);
             Type[] types = assemblyInstance.GetTypes();
             return types.Where(t => t.IsSubclassOf(typeof(BuildFile)));

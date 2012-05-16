@@ -33,11 +33,9 @@ namespace FluentBuild
             get { return new RunArgs();  }
         }
 
-        public static void Publish(Action<Publish> args)
+        public static Publish Publish
         {
-            var concrete = new Publish();
-            args(concrete);
-            concrete.ToGoogleCode.Execute();
+            get { return new Publish();}
         }
 
         public static void CreateAssemblyInfo(Action<AssemblyInfo> args)
