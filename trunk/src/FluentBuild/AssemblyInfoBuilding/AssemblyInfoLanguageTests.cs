@@ -5,15 +5,17 @@ namespace FluentBuild.AssemblyInfoBuilding
 {
     ///<summary>
     ///</summary>
-    ///<summary />	[TestFixture]
+    ///<summary />
+	[TestFixture]
     public class AssemblyInfoLanguageTests
     {
         ///<summary>
         ///</summary>
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void EnsureCSharpLanguageBuildsProperly()
         {
-            AssemblyInfoDetails details = new AssemblyInfoLanguage().CSharp;
+            AssemblyInfoDetails details = new AssemblyInfoDetails(new CSharpAssemblyInfoBuilder()); 
             Assert.That(details, Is.Not.Null);
             Assert.That(details.AssemblyInfoBuilder, Is.Not.Null);
             Assert.That(details.AssemblyInfoBuilder, Is.TypeOf(typeof(CSharpAssemblyInfoBuilder)));
@@ -21,10 +23,11 @@ namespace FluentBuild.AssemblyInfoBuilding
 
         ///<summary>
         ///</summary>
-        ///<summary />	[Test]
+        ///<summary />
+	[Test]
         public void EnsureVisualBasicLanguageBuildsProperly()
         {
-            AssemblyInfoDetails details = new AssemblyInfoLanguage().VisualBasic;
+            AssemblyInfoDetails details = new AssemblyInfoDetails(new VisualBasicAssemblyInfoBuilder()); 
             Assert.That(details, Is.Not.Null);
             Assert.That(details.AssemblyInfoBuilder, Is.Not.Null);
             Assert.That(details.AssemblyInfoBuilder, Is.TypeOf(typeof(VisualBasicAssemblyInfoBuilder)));

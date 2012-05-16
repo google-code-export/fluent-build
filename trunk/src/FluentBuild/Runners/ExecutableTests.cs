@@ -1,3 +1,4 @@
+using System;
 using FluentBuild.Core;
 using FluentBuild.Runners;
 using NUnit.Framework;
@@ -51,5 +52,12 @@ namespace FluentBuild.Utilities
             Assert.That(processWrapper, Is.Not.Null);
         }
 
+        [Test, ExpectedException(typeof(ApplicationException))]
+        public void ShouldFailWhenErrorCodeIsNonZero()
+        {
+            string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
+            Task.Run.Executable(x => x.ExecutablePath(pathtocmd)
+                                      .WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt"));
+        }
     }
 }
