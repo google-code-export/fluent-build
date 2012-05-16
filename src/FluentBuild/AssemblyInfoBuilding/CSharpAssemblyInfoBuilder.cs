@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FluentBuild.AssemblyInfoBuilding
 {
-    internal class CSharpAssemblyInfoBuilder : IAssemblyInfoBuilder
+    public class CSharpAssemblyInfoBuilder : IAssemblyInfoBuilder
     {
         #region IAssemblyInfoBuilder Members
 

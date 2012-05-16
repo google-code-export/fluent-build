@@ -107,7 +107,7 @@ namespace Build
         private void GenerateAssemblyInfoFor(string folder, string description)
         {
             var outputLocation = directory_base.SubFolder("src").SubFolder(folder).SubFolder("Properties").File("AssemblyInfo.cs");
-            Task.CreateAssemblyInfo(x=>x.Language.CSharp.ClsCompliant(true)
+            Task.CreateAssemblyInfo.Language.CSharp(x=>x.ClsCompliant(true)
                 .Company("Solidhouse")
                 .ComVisible(false)
                 .Copyright("Copyright 2009-" + DateTime.Now.Year)

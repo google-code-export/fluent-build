@@ -38,12 +38,9 @@ namespace FluentBuild
             get { return new Publish();}
         }
 
-        public static void CreateAssemblyInfo(Action<AssemblyInfo> args)
+        public static AssemblyInfo CreateAssemblyInfo
         {
-            var concrete = new AssemblyInfo();
-            args(concrete);
-            
-            
+            get { return new AssemblyInfo(); }
         }
     }
 }

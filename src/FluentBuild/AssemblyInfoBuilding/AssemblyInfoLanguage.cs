@@ -1,3 +1,5 @@
+using System;
+
 namespace FluentBuild.AssemblyInfoBuilding
 {
     ///<summary>
@@ -12,17 +14,21 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// <summary>
         /// Generate using C#
         /// </summary>
-        public AssemblyInfoDetails CSharp
+        public void CSharp(Action<AssemblyInfoDetails> args)
         {
-            get { return new AssemblyInfoDetails(new CSharpAssemblyInfoBuilder());  }
+            var concrete = new AssemblyInfoDetails(new CSharpAssemblyInfoBuilder());
+            args(concrete);
+            concrete.InternalExecute();
         }
 
         /// <summary>
         /// Generate using Visual Basic
         /// </summary>
-        public AssemblyInfoDetails VisualBasic
+        public void VisualBasic(Action<AssemblyInfoDetails> args)
         {
-            get { return new AssemblyInfoDetails(new VisualBasicAssemblyInfoBuilder()); }
+            var concrete = new AssemblyInfoDetails(new VisualBasicAssemblyInfoBuilder());
+            args(concrete);
+            concrete.InternalExecute();
         }
     }
 }

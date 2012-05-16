@@ -14,8 +14,7 @@ namespace FluentBuild.Tests
         public void ShouldGenerateAssemblyInfoFile()
         {
             string outputLocation = rootFolder + "\\assemblyinfo.cs";
-            Task.CreateAssemblyInfo(x=>x.Language.CSharp
-                .Import("non.existant.namespace")
+            Task.CreateAssemblyInfo.Language.CSharp(x=>x.Import("non.existant.namespace")
                 .Version("1.0.0.0")
                 .OutputPath(outputLocation));
 
@@ -37,7 +36,7 @@ namespace FluentBuild.Tests
         public void ShouldCompileAssemblyInfoToCSharp()
         {
             string outputLocation = rootFolder + "\\assemblyinfo.cs";
-            Task.CreateAssemblyInfo(x=>x.Language.CSharp.Company("company")
+            Task.CreateAssemblyInfo.Language.CSharp(x=>x.Company("company")
                 .Copyright("copyright")
                 .Description("description")
                 .Product("product")
@@ -64,7 +63,7 @@ namespace FluentBuild.Tests
         public void ShouldCompileAssemblyInfoToVisualBasic()
         {
             string outputLocation = rootFolder + "\\assemblyinfo.cs";
-            Task.CreateAssemblyInfo(x=>x.Language.VisualBasic.Company("company")
+            Task.CreateAssemblyInfo.Language.VisualBasic(x=>x.Company("company")
                 .Copyright("copyright")
                 .Description("description")
                 .Product("product")
