@@ -18,7 +18,7 @@ namespace FluentBuild.Tests.Run
             FluentFs.Core.Directory sourceFolder = new FluentFs.Core.Directory(Settings.PathToSamplesFolder).SubFolder("run").SubFolder("StdOutStdError");
             FileSet fs = new FileSet().Include(sourceFolder).Filter("*.cs");
             _outputFileLocation = rootFolder + "\\stdoutstderror.exe";
-            Task.Build(Using.Csc.Target.Executable.AddSources(fs).OutputFileTo(_outputFileLocation));
+            Task.Build.Csc.Target.Executable(x => x.AddSources(fs).OutputFileTo(_outputFileLocation));
         }
 
         private void ExecuteProcess(string args)

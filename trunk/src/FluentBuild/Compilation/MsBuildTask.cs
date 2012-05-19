@@ -10,9 +10,9 @@ namespace FluentBuild.Compilation
     ///<summary>
     /// Executes MsBuild to create an assembly (or multiple assemblies)
     ///</summary>
-    public class MsBuildTask
+    public class MsBuildTask : InternalExecuatable
     {
-        internal readonly string ProjectOrSolutionFilePath;
+        internal string _projectOrSolutionFilePath;
         private readonly IExecutable _executable;
         internal readonly NameValueCollection Properties;
         internal readonly IList<string> Targets;
@@ -22,19 +22,23 @@ namespace FluentBuild.Compilation
         
         
 
-        internal MsBuildTask(string projectOrSolutionFilePath, IExecutable executable)
+        internal MsBuildTask(IExecutable executable)
         {
-            ProjectOrSolutionFilePath = projectOrSolutionFilePath;
             _executable = executable;
             Targets = new List<string>();
             Properties = new NameValueCollection();
 			_args = new List<string>();
         }
 
-        internal MsBuildTask(string projectOrSolutionFilePath) : this(projectOrSolutionFilePath, new Executable())
+        public MsBuildTask() : this(new Executable())
         {
         }
 
+        public MsBuildTask ProjectOrSolutionFilePath(string path)
+        {
+            _projectOrSolutionFilePath = path;
+            return this;
+        }
 
         ///<summary>
         /// Adds a target to run
@@ -107,7 +111,7 @@ namespace FluentBuild.Compilation
 
         internal string[] BuildArgs()
         {
-            var args = new List<String> {ProjectOrSolutionFilePath};
+            var args = new List<String> {_projectOrSolutionFilePath};
             if (!String.IsNullOrEmpty(Outdir))
             {
                 //output dir must have trailing slash. Might as well do it for the user
@@ -130,8 +134,11 @@ namespace FluentBuild.Compilation
         }
 
 
-        internal void InternalExecute()
+        internal override void InternalExecute()
         {
+            if (String.IsNullOrEmpty(_projectOrSolutionFilePath))
+                throw new ArgumentException("ProjectOrSolutionFilePath was not set");
+
             string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";
             Task.Run.Executable(x => x.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()));
         }

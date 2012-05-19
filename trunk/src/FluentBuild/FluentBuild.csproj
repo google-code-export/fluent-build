@@ -87,6 +87,7 @@
     <Compile Include="ApplicationProperties\CruiseControlPropertiesTests.cs" />
     <Compile Include="ApplicationProperties\TeamCityPropertiesTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
+    <Compile Include="ActionExcecutor.cs" />
     <Compile Include="Compilation\MsBuildTaskTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetails.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="BuildFileTests.cs" />
+    <Compile Include="IInternalExecuatable.cs" />
     <Compile Include="MessageLoggers\DebugMessages.cs" />
     <Compile Include="MessageLoggers\MessageLoggerProxy.cs" />
     <Compile Include="MessageLoggers\MessageLoggerProxyTests.cs" />
@@ -123,7 +125,7 @@
     <Compile Include="Runners\ILMergeTests.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="Runners\UnitTestFrameworkArgs.cs" />
-    <Compile Include="Compilation\Using.cs" />
+    <Compile Include="Compilation\Compilers.cs" />
     <Compile Include="Utilities\FileFinder.cs" />
     <Compile Include="Utilities\FileFinderTests.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
@@ -136,7 +138,6 @@
     <Compile Include="Compilation\ResgenTests.cs" />
     <Compile Include="Compilation\Resource.cs" />
     <Compile Include="Compilation\ResourceTests.cs" />
-    <Compile Include="Compilation\TargetTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlProperties.cs" />
     <Compile Include="ApplicationProperties\CommandLineProperties.cs" />
     <Compile Include="PropertiesTests.cs" />

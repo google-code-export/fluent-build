@@ -24,14 +24,14 @@ namespace FluentBuild.Compilation
         {
             _projectOrSolutionFilePath = "c:\\temp.sln";
             _executable = MockRepository.GenerateStub<IExecutable>();
-            _subject = new MsBuildTask(_projectOrSolutionFilePath, _executable);            
+            _subject = new MsBuildTask(_executable).ProjectOrSolutionFilePath(_projectOrSolutionFilePath);            
         }
 
         ///<summary />
 	[Test]
         public void ShouldSetSolutionPath()
         {
-            Assert.That(_subject.ProjectOrSolutionFilePath, Is.EqualTo(_projectOrSolutionFilePath));
+            Assert.That(_subject._projectOrSolutionFilePath, Is.EqualTo(_projectOrSolutionFilePath));
         }
 
         ///<summary />
@@ -72,7 +72,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void BuildArgs_ShouldHaveTarget()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).AddTarget("mytarget").BuildArgs();
+            var buildArgs = new MsBuildTask().ProjectOrSolutionFilePath(_projectOrSolutionFilePath).AddTarget("mytarget").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/target:mytarget"));
         }
 
@@ -80,7 +80,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void BuildArgs_ShouldAddConfigurationIfSpecified()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).Configuration("DEBUG").BuildArgs();
+            var buildArgs = new MsBuildTask().ProjectOrSolutionFilePath(_projectOrSolutionFilePath).Configuration("DEBUG").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:Configuration=DEBUG"));
         }
 
@@ -88,7 +88,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void BuildArgs_ShouldNotHaveConfigurationIfNoneSpecified()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).BuildArgs();
+            var buildArgs = new MsBuildTask().ProjectOrSolutionFilePath(_projectOrSolutionFilePath).BuildArgs();
             Assert.That(buildArgs.Length, Is.EqualTo(1));
         }
 
@@ -96,7 +96,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsNotSet()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp").BuildArgs();
+            var buildArgs = new MsBuildTask().ProjectOrSolutionFilePath(_projectOrSolutionFilePath).OutputDirectory("c:\\temp").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
@@ -104,7 +104,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void BuildArgs_ShouldSetOutDirIfTrailingSlashIsSet()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).OutputDirectory("c:\\temp\\").BuildArgs();
+            var buildArgs = new MsBuildTask().ProjectOrSolutionFilePath(_projectOrSolutionFilePath).OutputDirectory("c:\\temp\\").BuildArgs();
             Assert.That(buildArgs[1], Is.EqualTo("/p:OutDir=c:\\temp\\"));
         }
 
@@ -112,7 +112,7 @@ namespace FluentBuild.Compilation
 	[Test]
         public void BuildArgs_ShouldHaveFirstArgAsProjectOrSolution()
         {
-            var buildArgs = new MsBuildTask(_projectOrSolutionFilePath).BuildArgs();
+            var buildArgs = new MsBuildTask().ProjectOrSolutionFilePath(_projectOrSolutionFilePath).BuildArgs();
             Assert.That(buildArgs[0], Is.EqualTo(_projectOrSolutionFilePath));
         }
 

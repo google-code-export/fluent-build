@@ -63,7 +63,8 @@ namespace Build
             var sourceFiles = new FluentFs.Core.FileSet().Include(directory_base.SubFolder("src"))
                                                          .RecurseAllSubDirectories
                                                          .Filter("*.cs");
-            FluentBuild.Task.Build(Using.Csc.Target.Library.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
+            
+            FluentBuild.Task.Build.Csc.Target.Library(x=>x.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
         }
 
         private void CompileTests()
@@ -74,8 +75,7 @@ namespace Build
                 .Copy.To(directory_compile);
 
            var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
-           Task.Build(Using.Csc
-                .Target.Library
+           Task.Build.Csc.Target.Library(x => x
                 .AddSources(sourceFiles)
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
                 .OutputFileTo(assembly_FluentBuild_Tests));

@@ -1,3 +1,5 @@
+using System;
+
 namespace FluentBuild.Compilation
 {
     /// <summary>
@@ -15,49 +17,41 @@ namespace FluentBuild.Compilation
         /// <summary>
         /// Builds a library assembly (i.e. a dll)
         /// </summary>
-        public BuildTask Library
+        public void Library(Action<BuildTask> args)
         {
-            get
-            {
-                _buildTask.TargetType = "library";
-                return _buildTask;
-            }
+            args(_buildTask);
+            _buildTask.TargetType = "library";
+            _buildTask.InternalExecute();
         }
 
         /// <summary>
         /// Builds a windows executable
         /// </summary>
-        public BuildTask WindowsExecutable
+        public void WindowsExecutable(Action<BuildTask> args)
         {
-            get
-            {
-                _buildTask.TargetType = "winexe";
-                return _buildTask;
-            }
+            args(_buildTask);
+            _buildTask.TargetType = "winexe";
+            _buildTask.InternalExecute();
         }
 
         /// <summary>
         /// Builds a console application
         /// </summary>
-        public BuildTask Executable
+        public void Executable(Action<BuildTask> args)
         {
-            get
-            {
-                _buildTask.TargetType = "exe";
-                return _buildTask;
-            }
+            args(_buildTask);
+            _buildTask.TargetType = "exe";
+            _buildTask.InternalExecute();
         }
 
         /// <summary>
         /// Builds a module
         /// </summary>
-        public BuildTask Module
+        public void Module(Action<BuildTask> args)
         {
-            get
-            {
-                _buildTask.TargetType = "module";
-                return _buildTask;
-            }
+            args(_buildTask);
+            _buildTask.TargetType = "module";
+            _buildTask.InternalExecute();
         }
     }
 }

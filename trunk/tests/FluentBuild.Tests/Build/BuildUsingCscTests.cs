@@ -23,10 +23,10 @@ namespace FluentBuild.Tests.Build
             return fileSet;
         }
 
-        public override TargetType CreateBuildTask()
-        {
-            return Using.Csc;
-        }
+//        public override TargetType CreateBuildTask()
+//        {
+//            return new TargetType(new BuildTask("csc.exe"));
+//        }
 
         [Test]
         public override void ShouldCompileBasicAssembly()

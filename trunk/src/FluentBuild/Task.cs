@@ -14,18 +14,9 @@ namespace FluentBuild
 {
     public static class Task
     {
-        /// <summary>
-        /// Executes a build task
-        /// </summary>
-        /// <param name="args">The compiler to use. e.g. Using.Csc.Target.Library.</param>
-        public static void Build(BuildTask args)
+        public static Compilers Build
         {
-            args.InternalExecute();
-        }
-
-        public static void Build(MsBuildTask args)
-        {
-            args.InternalExecute();
+            get { return new Compilers(); }
         }
 
         public static RunArgs Run
