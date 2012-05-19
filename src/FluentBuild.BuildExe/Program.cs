@@ -33,7 +33,7 @@ namespace FluentBuild.BuildExe
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
             Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).IncludeDebugSymbols);
+            Task.Build.Csc.Target.Library(x => x.AddSources(fileset).AddRefences(dllReference).IncludeDebugSymbols.OutputFileTo(outputAssembly));
             return outputAssembly;
         }
 
@@ -145,8 +145,8 @@ namespace FluentBuild.BuildExe
                 fluentFs.Copy.To(tempPath);
                 references.Add(fluentFs.ToString());
             }
-            
-            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(references.ToArray()).OutputFileTo(outputAssembly).IncludeDebugSymbols);
+
+            Task.Build.Csc.Target.Library(x => x.AddSources(fileset).AddRefences(references.ToArray()).IncludeDebugSymbols.OutputFileTo(outputAssembly));
             return outputAssembly;
         }
 

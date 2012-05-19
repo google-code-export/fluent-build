@@ -6,6 +6,7 @@
     public class TargetType
     {
         private readonly BuildTask _buildTask;
+        private Target _target;
 
         internal TargetType(BuildTask buildTask)
         {
@@ -17,7 +18,11 @@
         ///</summary>
         public Target Target
         {
-            get { return new Target(_buildTask); }
+            get
+            {
+                _target = new Target(_buildTask);
+                return _target;
+            }
         }
     }
 }

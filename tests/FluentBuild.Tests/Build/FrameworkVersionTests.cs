@@ -57,8 +57,7 @@ namespace FluentBuild.Tests.Build
             sources.Include(Settings.PathToSamplesFolder + "\\Build\\Simple\\C#\\*.cs");
 
             var outputFileLocation = rootFolder + "\\temp.dll";
-            Task.Build(Using.Csc
-                .Target.Library
+            Task.Build.Csc.Target.Library(x => x
                 .AddSources(sources)
                 .OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));

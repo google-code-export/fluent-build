@@ -16,14 +16,14 @@ namespace FluentBuild.Tests.Build
     {
         public abstract FileSet GetBasicSources();
         public abstract FileSet GetWithReferenceSources();
-        public abstract TargetType CreateBuildTask();
+        //public abstract TargetType CreateBuildTask();
 
         public abstract void ShouldCompileBasicAssembly();
         internal void Actual_ShouldCompileBasicAssembly()
         {
             //Using Resource
             var outputFileLocation = rootFolder + "\\temp.dll";
-            CreateBuildTask().Target.Library.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation).Execute();
+            Task.Build.Csc.Target.Library(x => x.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
 
@@ -31,7 +31,7 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileBasicAssemblyWithDebugSymbols()
         {
             var outputFileLocation = rootFolder + "\\temp.dll";
-            CreateBuildTask().Target.Library.AddSources(GetBasicSources()).IncludeDebugSymbols.OutputFileTo(outputFileLocation).Execute();
+            Task.Build.Csc.Target.Library(x => x.AddSources(GetBasicSources()).IncludeDebugSymbols.OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
             Assert.That(File.Exists(rootFolder + "\\temp.pdb"));
         }
@@ -40,7 +40,7 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileConsoleApplication()
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
-            CreateBuildTask().Target.Executable.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation).Execute();
+            Task.Build.Csc.Target.Executable(x => x.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
 
@@ -48,7 +48,7 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileModule()
         {
             var outputFileLocation = rootFolder + "\\temp.netmodule";
-            CreateBuildTask().Target.Module.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation).Execute();
+            Task.Build.Csc.Target.Module(x=>x.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
 
@@ -56,7 +56,7 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileWindowsExe()
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
-            CreateBuildTask().Target.WindowsExecutable.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation).Execute();
+            Task.Build.Csc.Target.WindowsExecutable(x=>x.AddSources(GetBasicSources()).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
 
@@ -64,9 +64,9 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileWithReference()
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
-            CreateBuildTask().Target.Library.AddSources(GetBasicSources())
+            Task.Build.Csc.Target.Library(x => x.AddSources(GetBasicSources())
                 .AddRefences(Settings.PathToRootFolder + "\\Tools\\nunit\\nunit.framework.dll")
-                .OutputFileTo(outputFileLocation).Execute();
+                .OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
 
@@ -74,9 +74,9 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileWithResource()
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
-            CreateBuildTask().Target.Library.AddSources(GetBasicSources())
+            Task.Build.Csc.Target.Library(x => x.AddSources(GetBasicSources())
                 .AddResource(Settings.PathToRootFolder + "\\WithReference\\C#\\test.resource")
-                .OutputFileTo(outputFileLocation).Execute();
+                .OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
         }
     }

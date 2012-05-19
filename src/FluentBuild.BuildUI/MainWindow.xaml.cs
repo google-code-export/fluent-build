@@ -96,8 +96,7 @@ namespace FluentBuild.BuildUI
             Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
             Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Task.Build(Using.Csc.Target.Library.AddSources(fileset).AddRefences(dllReference).OutputFileTo(outputAssembly).
-                IncludeDebugSymbols);
+            Task.Build.Csc.Target.Library(x => x.AddSources(fileset).AddRefences(dllReference).IncludeDebugSymbols.OutputFileTo(outputAssembly));
             return outputAssembly;
         }
 

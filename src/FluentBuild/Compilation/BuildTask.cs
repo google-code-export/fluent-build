@@ -10,7 +10,7 @@ namespace FluentBuild.Compilation
     ///<summary>
     /// A task around builds that will execute a compiler to generate an assembly.
     ///</summary>
-    public class BuildTask
+    public class BuildTask :InternalExecuatable
     {
         private readonly List<string> _references = new List<string>();
         internal readonly List<Resource> Resources = new List<Resource>();
@@ -174,7 +174,7 @@ namespace FluentBuild.Compilation
             InternalExecute();
         }
 
-        internal void InternalExecute()
+        internal override void InternalExecute()
         {
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
             Defaults.Logger.Write(compilerWithoutExtentions,

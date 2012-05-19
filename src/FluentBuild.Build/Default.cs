@@ -80,12 +80,12 @@ namespace Build
             var sourceFiles = new FileSet();
             sourceFiles.Include(directory_src_converter).RecurseAllSubDirectories.Filter("*.cs");
 
-            Task.Build(Using.Csc.Target.Executable
+            Task.Build.Csc.Target.Executable(x => x
                         .AddSources(sourceFiles)
+                        .IncludeDebugSymbols
                         .AddRefences(thirdparty_rhino, thirdparty_nunit)
                         .OutputFileTo(assembly_BuildFileConverter_WithTests)
-                        .IncludeDebugSymbols);
-
+                        );
         }
 
         private void CopyDependantAssembliesToCompileDir()
@@ -129,11 +129,12 @@ namespace Build
             var sourceFiles = new FileSet();
             sourceFiles.Include(directory_src_core).RecurseAllSubDirectories.Filter("*.cs");
 
-            Task.Build(Using.Csc.Target.Library
+            Task.Build.Csc.Target.Library(x => x
                 .AddSources(sourceFiles)
+                .IncludeDebugSymbols
                 .AddRefences(thirdparty_rhino, thirdparty_nunit, thirdparty_sharpzip, thirdparty_fluentFs)
                 .OutputFileTo(assembly_FluentBuild_WithTests_Partial)
-                .IncludeDebugSymbols);
+                );
 
            
             Task.Run.ILMerge(x => x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
@@ -151,8 +152,7 @@ namespace Build
                 .Include(directory_src_runner)
                 .RecurseAllSubDirectories.Filter("*.cs");
 
-             Task.Build(Using.Csc.Target.Executable
-                .AddSources(sourceFiles)
+             Task.Build.Csc.Target.Executable(x=>x.AddSources(sourceFiles)
                 .AddRefences(assembly_FluentBuild_WithTests_Merged)
                 .OutputFileTo(assembly_FluentBuild_Runner));
         }
@@ -160,7 +160,7 @@ namespace Build
         private void CompileFunctionalTests()
         {
             var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
-            Task.Build(Using.Csc.Target.Library
+            Task.Build.Csc.Target.Library(x=>x
                            .AddSources(sourceFiles)
                            .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild_WithTests_Merged, assembly_FluentBuild_Runner)
                            .OutputFileTo(assembly_Functional_Tests));

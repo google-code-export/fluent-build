@@ -40,9 +40,7 @@ namespace Build
             FileSet sourceFiles = new FileSet()
                 .Include(directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe"))
                 .RecurseAllSubDirectories.Filter("*.cs");
-
-          Task.Build(Using.Csc.Target.Executable
-                .AddSources(sourceFiles)
+            Task.Build.Csc.Target.Executable(x=>x.AddSources(sourceFiles)
                 .AddRefences(AssemblyFluentBuildRelease_Merged)
                 .OutputFileTo(AssemblyFluentBuildRunnerRelease));
         }
@@ -63,9 +61,7 @@ namespace Build
             sourceFiles.Include(directory_src_converter).RecurseAllSubDirectories.Filter("*.cs")
                 .Exclude(directory_src_converter).RecurseAllSubDirectories.Filter("*Tests.cs"); ;
 
-           Task.Build(Using.Csc.Target.Executable
-                .AddSources(sourceFiles)
-                .OutputFileTo(assembly_BuildFileConverter_WithTests));
+            Task.Build.Csc.Target.Executable(x => x.AddSources(sourceFiles).OutputFileTo(assembly_BuildFileConverter_WithTests));
         }
 
         private void CompileCoreWithOutTests()
@@ -76,10 +72,9 @@ namespace Build
                 .Exclude(directory_base.SubFolder("src").SubFolder("FluentBuild"))
                 .RecurseAllSubDirectories.Filter("*Tests.cs");
 
-            Task.Build(Using.Csc.Target.Library
-                .AddSources(sourceFiles)
-                .AddRefences(thirdparty_sharpzip, thirdparty_fluentFs)
-                .OutputFileTo(AssemblyFluentBuildRelease_Partial));
+            Task.Build.Csc.Target.Library(x => x.AddSources(sourceFiles)
+                                                .AddRefences(thirdparty_sharpzip, thirdparty_fluentFs)
+                                                .OutputFileTo(AssemblyFluentBuildRelease_Partial));
 
            Task.Run.ILMerge(x=>x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
                 .AddSource(AssemblyFluentBuildRelease_Partial)

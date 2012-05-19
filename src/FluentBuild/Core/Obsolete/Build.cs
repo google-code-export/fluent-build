@@ -30,7 +30,7 @@ namespace FluentBuild.Core
         /// </summary>
         public static MsBuildTask UsingMsBuild(string projectOrSolutionFilePath)
         {
-            return new MsBuildTask(projectOrSolutionFilePath);
+            return new MsBuildTask().ProjectOrSolutionFilePath(projectOrSolutionFilePath);
         }
     }
 }

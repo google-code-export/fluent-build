@@ -54,7 +54,7 @@ namespace FluentBuild.Tests
             var fs = new FileSet();
             fs.Include(outputLocation);
             var outputFileLocation = rootFolder + "\\asminfo.dll";
-            Task.Build(Using.Csc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation));
+            Task.Build.Csc.Target.Library(x => x.AddSources(fs).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
 
         }
@@ -81,7 +81,7 @@ namespace FluentBuild.Tests
             var fs = new FileSet();
             fs.Include(outputLocation);
             var outputFileLocation = rootFolder + "\\asminfo.dll";
-            Task.Build(Using.Vbc.Target.Library.AddSources(fs).OutputFileTo(outputFileLocation));
+            Task.Build.Vbc.Target.Library(x=>x.AddSources(fs).OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
 
         }
