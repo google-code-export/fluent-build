@@ -7,4 +7,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyrightAttribute("Copyright 2009-2012")]
 [assembly: AssemblyDescriptionAttribute("FluentBuild Build Runner")]
 [assembly: AssemblyProductAttribute("FluentBuild")]
-[assembly: AssemblyVersionAttribute("1.0.1.0")]
+[assembly: AssemblyVersionAttribute("1.1.0.0")]
