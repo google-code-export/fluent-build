@@ -2,34 +2,35 @@
 
 = Sample =
 {{{
-using FluentBuild.Core;
-using FluentBuild.Utilities;
 
-namespace FluentBuild.BuildFile
+using FluentBuild;
+using FluentFs.Core;
+
+namespace Build
 {
-    public class Default : Core.BuildFile
+    public class Default : BuildFile
     {
-        private readonly BuildArtifact assembly_FluentBuild;
-        private readonly BuildArtifact assembly_FluentBuild_Tests;
-        private readonly BuildFolder directory_base;
-        private readonly BuildFolder directory_compile;
-        private readonly BuildFolder directory_release;
-        private readonly BuildFolder directory_tools;
+        private readonly File assembly_FluentBuild;
+        private readonly File assembly_FluentBuild_Tests;
+        private readonly Directory directory_base;
+        private readonly Directory directory_compile;
+        private readonly Directory directory_release;
+        private readonly Directory directory_tools;
 
-        private readonly BuildArtifact thirdparty_nunit;
-        private readonly BuildArtifact thirdparty_rhino;
+        private readonly File thirdparty_nunit;
+        private readonly File thirdparty_rhino;
 
-        public Default()
+        public DefaultSample()
         {
-            directory_base = new BuildFolder(Properties.CurrentDirectory);
+            directory_base = new Directory(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_release = directory_base.SubFolder("release");
             directory_tools = directory_base.SubFolder("tools");
 
             assembly_FluentBuild = directory_compile.File("FluentBuild.dll");
             assembly_FluentBuild_Tests = directory_compile.File("FluentBuild.Tests.dll");
-            thirdparty_nunit = directory_compile.File("nunit.framework.dll");
-            thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
+            thirdparty_nunit = directory_tools.File("nunit.framework.dll");
+            thirdparty_rhino = directory_tools.File("rhino.mocks.dll");
 
             AddTask(Clean);
             AddTask(CompileSources);
@@ -38,36 +39,35 @@ namespace FluentBuild.BuildFile
             AddTask(Package);
 
             //set the verbosity. Can also be set via command line
-            MessageLogger.Verbosity = VerbosityLevel.TaskNamesOnly;
+            Defaults.Logger.Verbosity = VerbosityLevel.TaskNamesOnly;
         }
 
         private void Clean()
         {
-            directory_compile.Delete(OnError.Continue).Create();
+            directory_compile.Delete(FluentFs.Core.OnError.Continue).Create();
 
             //Turn on debugging messages for only this step
-            using (MessageLogger.ShowDebugMessages)
+            using (Defaults.Logger.ShowDebugMessages)
             {
-                directory_release.Delete(OnError.Continue).Create();
+                directory_release.Delete(FluentFs.Core.OnError.Continue).Create();
             }
         }
 
         private void Package()
         {
-                Run.Zip.Compress
-                    .SourceFolder(directory_compile)
-                    .UsingCompressionLevel.Nine
-                    .To(directory_release.File("release.zip"));
+              Task.Run.Zip(x=>x.Compress
+                               .SourceFolder(directory_compile)
+                               .UsingCompressionLevel.Nine
+                               .To(directory_release.File("release.zip")));
         }
 
         private void CompileSources()
         {
-            FileSet sourceFiles = new FileSet().Include(directory_base.SubFolder("src"))
-                .RecurseAllSubDirectories
-                .Filter("*.cs");
-
-            Core.Build.UsingCsc.Target.Library.AddSources(sourceFiles)
-                .OutputFileTo(assembly_FluentBuild).Execute();
+            var sourceFiles = new FluentFs.Core.FileSet().Include(directory_base.SubFolder("src"))
+                                                         .RecurseAllSubDirectories
+                                                         .Filter("*.cs");
+            
+            FluentBuild.Task.Build.Csc.Target.Library(compiler=>compiler.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
         }
 
         private void CompileTests()
@@ -77,19 +77,17 @@ namespace FluentBuild.BuildFile
                 .Include(directory_tools).RecurseAllSubDirectories.Filter("rhino.mocks.dll")
                 .Copy.To(directory_compile);
 
-            FileSet sourceFiles =
-                new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
-            Core.Build.UsingCsc
-                .Target.Library
-                .AddSources(sourceFiles)
-                .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
-                .OutputFileTo(assembly_FluentBuild_Tests)
-                .Execute();
+           var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
+           Task.Build.Csc.Target.Library(compiler => compiler.AddSources(sourceFiles)
+                                               .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
+                                               .OutputFileTo(assembly_FluentBuild_Tests));
         }
 
         private void RunTests()
         {
-            Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
+          Task.Run.UnitTestFramework.Nunit(nUnitRunner=>nUnitRunner.FileToTest(assembly_FluentBuild.ToString()));
         }
     }
-}}}}
+}
+
+}}}
