@@ -442,12 +442,6 @@
         <member name="M:FluentBuild.Database.MsSqlCreateOrUpdateTests.ShouldSetPropertyOnEngine">
             <summary />
         </member>
-        <member name="M:FluentBuild.Task.Build(FluentBuild.Compilation.BuildTask)">
-            <summary>
-            Executes a build task
-            </summary>
-            <param name="args">The compiler to use. e.g. Using.Csc.Target.Library.</param>
-        </member>
         <member name="T:FluentBuild.AssemblyInfoBuilding.VisualBasicAssemblyInfoBuilderTests">
             <summary />
         </member>
@@ -459,22 +453,22 @@
             Determines the type of assembly to build
             </summary>
         </member>
-        <member name="P:FluentBuild.Compilation.Target.Library">
+        <member name="M:FluentBuild.Compilation.Target.Library(System.Action{FluentBuild.Compilation.BuildTask})">
             <summary>
             Builds a library assembly (i.e. a dll)
             </summary>
         </member>
-        <member name="P:FluentBuild.Compilation.Target.WindowsExecutable">
+        <member name="M:FluentBuild.Compilation.Target.WindowsExecutable(System.Action{FluentBuild.Compilation.BuildTask})">
             <summary>
             Builds a windows executable
             </summary>
         </member>
-        <member name="P:FluentBuild.Compilation.Target.Executable">
+        <member name="M:FluentBuild.Compilation.Target.Executable(System.Action{FluentBuild.Compilation.BuildTask})">
             <summary>
             Builds a console application
             </summary>
         </member>
-        <member name="P:FluentBuild.Compilation.Target.Module">
+        <member name="M:FluentBuild.Compilation.Target.Module(System.Action{FluentBuild.Compilation.BuildTask})">
             <summary>
             Builds a module
             </summary>
@@ -768,6 +762,11 @@
              Executes MsBuild to create an assembly (or multiple assemblies)
             </summary>
         </member>
+        <member name="T:FluentBuild.InternalExecuatable">
+            <summary>
+             This is a marker class for items that can be executed by being passed via a lambda (e.g. Task.Run(x=>x.ExecutablePath)
+            </summary>
+        </member>
         <member name="M:FluentBuild.Compilation.MsBuildTask.AddTarget(System.String)">
             <summary>
              Adds a target to run
@@ -812,21 +811,6 @@
              Executes MSBuild with the provided parameters
             </summary>
         </member>
-        <member name="M:FluentBuild.Compilation.Using.MsBuild(System.String)">
-            <summary>
-            Creates a BuildTask using MSBuild
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Compilation.Using.Csc">
-            <summary>
-            Creates a BuildTask using the C# compiler
-            </summary>
-        </member>
-        <member name="P:FluentBuild.Compilation.Using.Vbc">
-            <summary>
-            Creates a BuildTask using the VB compiler
-            </summary>
-        </member>
         <member name="T:FluentBuild.Compilation.BuildTaskTests">
             <summary>
             </summary>
@@ -837,22 +821,7 @@
             </summary>
             <summary />
         </member>
-        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Sources">
-            <summary>
-            </summary>
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperReferences">
-            <summary>
-            </summary>
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Sources_And_Debug_Symbols">
-            <summary>
-            </summary>
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.BuildTaskTests.OutputFileTo_ShouldWorkWithBuildArtifact">
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Fileset_Resources">
             <summary>
             </summary>
             <summary />
@@ -862,7 +831,22 @@
             </summary>
             <summary />
         </member>
-        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Fileset_Resources">
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Sources">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperArgs_With_Sources_And_Debug_Symbols">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.Args_ShouldCreateProperReferences">
+            <summary>
+            </summary>
+            <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.BuildTaskTests.OutputFileTo_ShouldWorkWithBuildArtifact">
             <summary>
             </summary>
             <summary />
@@ -1177,24 +1161,6 @@
         <member name="M:FluentBuild.Database.MsSqlUpdateTests.VersionTable_ShouldSetVersionOnEngine">
             <summary />
         </member>
-        <member name="T:FluentBuild.Compilation.TargetTests">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.TargetTests.Setup">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.TargetTests.CreateExe">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.TargetTests.CreateLibrary">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.TargetTests.CreateModule">
-            <summary />
-        </member>
-        <member name="M:FluentBuild.Compilation.TargetTests.CreateWindowsExe">
-            <summary />
-        </member>
         <member name="T:FluentBuild.Compilation.Resource">
             <summary>
              Represents a resource file
@@ -1326,12 +1292,12 @@
              Determines which language to use to generate an assembly info file
             </summary>
         </member>
-        <member name="P:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguage.CSharp">
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguage.CSharp(System.Action{FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails})">
             <summary>
             Generate using C#
             </summary>
         </member>
-        <member name="P:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguage.VisualBasic">
+        <member name="M:FluentBuild.AssemblyInfoBuilding.AssemblyInfoLanguage.VisualBasic(System.Action{FluentBuild.AssemblyInfoBuilding.AssemblyInfoDetails})">
             <summary>
             Generate using Visual Basic
             </summary>
@@ -1787,6 +1753,21 @@
             <summary>
             </summary>
             <summary />
+        </member>
+        <member name="M:FluentBuild.Compilation.Compilers.MsBuild(System.Action{FluentBuild.Compilation.MsBuildTask})">
+            <summary>
+            Creates a BuildTask using MSBuild
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Compilation.Compilers.Csc">
+            <summary>
+            Creates a BuildTask using the C# compiler
+            </summary>
+        </member>
+        <member name="P:FluentBuild.Compilation.Compilers.Vbc">
+            <summary>
+            Creates a BuildTask using the VB compiler
+            </summary>
         </member>
     </members>
 </doc>

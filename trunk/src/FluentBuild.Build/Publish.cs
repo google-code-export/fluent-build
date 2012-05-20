@@ -22,7 +22,7 @@ namespace Build
             AssemblyFluentBuildRelease_Merged = directory_compile.File("FluentBuild.dll");
             AssemblyFluentBuildRunnerRelease = directory_compile.File("fb.exe");
 
-            _version = "1.0.1.0";
+            _version = "1.1.0.0";
             _finalFileName = "FluentBuild-Beta-" + _version + ".zip";
             ZipFilePath = directory_release.File(_finalFileName);
 
@@ -32,7 +32,7 @@ namespace Build
             AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
-            //AddTask(PublishToRepository);
+            AddTask(PublishToRepository);
         }
 
         private void CompileRunner()
