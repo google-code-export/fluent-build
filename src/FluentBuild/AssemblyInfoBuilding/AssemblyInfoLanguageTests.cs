@@ -1,4 +1,6 @@
+using System;
 using NUnit.Framework;
+using Rhino.Mocks;
 
 
 namespace FluentBuild.AssemblyInfoBuilding
@@ -12,25 +14,27 @@ namespace FluentBuild.AssemblyInfoBuilding
         ///<summary>
         ///</summary>
         ///<summary />
-	[Test]
+	    [Test]
         public void EnsureCSharpLanguageBuildsProperly()
         {
-            AssemblyInfoDetails details = new AssemblyInfoDetails(new CSharpAssemblyInfoBuilder()); 
-            Assert.That(details, Is.Not.Null);
-            Assert.That(details.AssemblyInfoBuilder, Is.Not.Null);
-            Assert.That(details.AssemblyInfoBuilder, Is.TypeOf(typeof(CSharpAssemblyInfoBuilder)));
+            var mock = MockRepository.GenerateStub<IActionExcecutor>();
+            var subject = new AssemblyInfoLanguage(mock);
+            Action<AssemblyInfoDetails> action = x=>x.OutputPath("c:\test.cs");
+            subject.CSharp(action);
+            mock.AssertWasCalled(x => x.Execute(Arg<Action<AssemblyInfoDetails>>.Is.Equal(action), Arg<CSharpAssemblyInfoBuilder>.Is.Anything));
         }
 
         ///<summary>
         ///</summary>
         ///<summary />
-	[Test]
+	    [Test]
         public void EnsureVisualBasicLanguageBuildsProperly()
         {
-            AssemblyInfoDetails details = new AssemblyInfoDetails(new VisualBasicAssemblyInfoBuilder()); 
-            Assert.That(details, Is.Not.Null);
-            Assert.That(details.AssemblyInfoBuilder, Is.Not.Null);
-            Assert.That(details.AssemblyInfoBuilder, Is.TypeOf(typeof(VisualBasicAssemblyInfoBuilder)));
+            var mock = MockRepository.GenerateStub<IActionExcecutor>();
+            var subject = new AssemblyInfoLanguage(mock);
+            Action<AssemblyInfoDetails> action = x => x.OutputPath("c:\test.cs");
+            subject.VisualBasic(action);
+            mock.AssertWasCalled(x => x.Execute(Arg<Action<AssemblyInfoDetails>>.Is.Equal(action), Arg<VisualBasicAssemblyInfoBuilder>.Is.Anything));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public void MsBuild(Action<MsBuildTask> args)
         {
-            var executor = new ActionExcecutor<MsBuildTask>();
+            var executor = new ActionExcecutor();
             executor.Execute(args);
         }
     }

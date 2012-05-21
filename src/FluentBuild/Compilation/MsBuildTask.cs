@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using FluentBuild.Core;
 using FluentBuild.Runners;
+using FluentFs.Core;
 
 namespace FluentBuild.Compilation
 {
@@ -38,6 +39,11 @@ namespace FluentBuild.Compilation
         {
             _projectOrSolutionFilePath = path;
             return this;
+        }
+
+        public MsBuildTask ProjectOrSolutionFilePath(File path)
+        {
+            return ProjectOrSolutionFilePath(path.ToString());
         }
 
         ///<summary>

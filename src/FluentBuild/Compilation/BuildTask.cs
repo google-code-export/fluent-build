@@ -15,17 +15,24 @@ namespace FluentBuild.Compilation
         private readonly List<string> _references = new List<string>();
         internal readonly List<Resource> Resources = new List<Resource>();
         private readonly List<string> _sources = new List<string>();
+        private readonly IActionExcecutor _actionExcecutor;
         internal readonly string Compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
 
-        internal BuildTask() : this("")
+        public BuildTask() : this(new ActionExcecutor(), "")
         {
+            
         }
 
-        protected internal BuildTask(string compiler)
+        protected internal BuildTask(IActionExcecutor actionExcecutor, string compiler)
         {
+            _actionExcecutor = actionExcecutor;
             Compiler = compiler;
+        }
+
+        public BuildTask(string compiler) : this(new ActionExcecutor(), compiler)
+        {
         }
 
         /// <summary>
@@ -177,14 +184,11 @@ namespace FluentBuild.Compilation
         internal override void InternalExecute()
         {
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
-            Defaults.Logger.Write(compilerWithoutExtentions,
-                                String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
-            string compileMessage = "Compile Using: " + 
-                                    Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler + " " + Args;
+            Defaults.Logger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
+            var pathToCompiler = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler;
+            string compileMessage = "Compile Using: " + pathToCompiler+ " " + Args;
             Defaults.Logger.WriteDebugMessage(compileMessage);
-            //necessary to cast currently as method is internal so can not be exposed via an interface
-            var executable = (Executable)new Executable().ExecutablePath(Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler).WithArguments(Args);
-            executable.Execute(compilerWithoutExtentions);
+            _actionExcecutor.Execute((Action<Executable>) (x => x.ExecutablePath(pathToCompiler).WithArguments(Args)));
             Defaults.Logger.WriteDebugMessage("Done Compiling");
         }
 

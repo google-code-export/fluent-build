@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using FluentBuild.Runners;
 using FluentFs.Core;
 using NUnit.Framework;
+using Rhino.Mocks;
 using File = FluentFs.Core.File;
 
 namespace FluentBuild.Compilation
@@ -148,5 +150,16 @@ namespace FluentBuild.Compilation
             BuildTask build =  new BuildTask("vbc.exe");
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("vbc.exe"));
         }
+
+        [Test]
+        public void ShouldExecute()
+        {
+            var mock = MockRepository.GenerateStub<IActionExcecutor>();
+            BuildTask build = new BuildTask(mock,"vbc.exe");
+            build.InternalExecute();
+            mock.AssertWasCalled(x=>x.Execute(Arg<Action<Executable>>.Is.Anything));
+        }
+
     }
+
 }

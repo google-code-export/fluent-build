@@ -1,5 +1,4 @@
 using FluentBuild;
-using FluentBuild.Compilation;
 using FluentFs.Core;
 
 namespace Build
@@ -53,9 +52,9 @@ namespace Build
         private void Package()
         {
               Task.Run.Zip(x=>x.Compress
-                    .SourceFolder(directory_compile)
-                    .UsingCompressionLevel.Nine
-                    .To(directory_release.File("release.zip")));
+                               .SourceFolder(directory_compile)
+                               .UsingCompressionLevel.Nine
+                               .To(directory_release.File("release.zip")));
         }
 
         private void CompileSources()
@@ -64,7 +63,7 @@ namespace Build
                                                          .RecurseAllSubDirectories
                                                          .Filter("*.cs");
             
-            FluentBuild.Task.Build.Csc.Target.Library(x=>x.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
+            FluentBuild.Task.Build.Csc.Target.Library(compiler=>compiler.AddSources(sourceFiles).OutputFileTo(assembly_FluentBuild));
         }
 
         private void CompileTests()
@@ -75,15 +74,14 @@ namespace Build
                 .Copy.To(directory_compile);
 
            var sourceFiles = new FileSet().Include(directory_base.SubFolder("tests")).RecurseAllSubDirectories.Filter("*.cs");
-           Task.Build.Csc.Target.Library(x => x
-                .AddSources(sourceFiles)
-                .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
-                .OutputFileTo(assembly_FluentBuild_Tests));
+           Task.Build.Csc.Target.Library(compiler => compiler.AddSources(sourceFiles)
+                                               .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
+                                               .OutputFileTo(assembly_FluentBuild_Tests));
         }
 
         private void RunTests()
         {
-          Task.Run.UnitTestFramework.Nunit(x=>x.FileToTest(assembly_FluentBuild.ToString()));
+          Task.Run.UnitTestFramework.Nunit(nUnitRunner=>nUnitRunner.FileToTest(assembly_FluentBuild.ToString()));
         }
     }
 }

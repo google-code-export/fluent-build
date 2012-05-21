@@ -22,12 +22,12 @@ namespace FluentBuild.AssemblyInfoBuilding
     /// <summary>
     /// Sets the lines for an assembly info file
     /// </summary>
-    public class AssemblyInfoDetails
+    public class AssemblyInfoDetails : InternalExecuatable
     {
         internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
         internal readonly List<String> Imports = new List<string>();
         internal IList<AssemblyInfoItem> LineItems = new List<AssemblyInfoItem>();
-        private string _outputPath;
+        internal string _outputPath;
 
 //        internal string AssemblyCopyright;
 //        internal string AssemblyDescription;
@@ -330,7 +330,7 @@ namespace FluentBuild.AssemblyInfoBuilding
             return OutputPath(path.ToString());
         }
 
-        internal void InternalExecute()
+        internal override void InternalExecute()
         {
             using (var fs = new FileStream(_outputPath, FileMode.Create, FileAccess.Write))
             using (var sw = new StreamWriter(fs))
