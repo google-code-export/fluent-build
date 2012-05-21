@@ -5,6 +5,8 @@ namespace FluentBuild.Compilation
 {
     public class Compilers
     {
+        private readonly IActionExcecutor _actionExcecutor;
+
         /// <summary>
         /// Creates a BuildTask using the C# compiler
         /// </summary>
@@ -21,13 +23,21 @@ namespace FluentBuild.Compilation
             get { return new TargetType(new BuildTask("vbc.exe")); }
         }
 
+        internal Compilers() : this(new ActionExcecutor())
+        {
+        }
+
+        internal Compilers(IActionExcecutor actionExcecutor)
+        {
+            _actionExcecutor = actionExcecutor;
+        }
+
         /// <summary>
         /// Creates a BuildTask using MSBuild
         /// </summary>
         public void MsBuild(Action<MsBuildTask> args)
         {
-            var executor = new ActionExcecutor();
-            executor.Execute(args);
+            _actionExcecutor.Execute(args);
         }
     }
 }

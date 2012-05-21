@@ -90,6 +90,7 @@
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
     <Compile Include="ActionExcecutor.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemvblyInfoTests.cs" />
+    <Compile Include="Compilation\CompilersTests.cs" />
     <Compile Include="Compilation\MsBuildTaskTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetails.cs" />
