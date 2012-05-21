@@ -5,7 +5,7 @@
     ///</summary>
     public class TargetType
     {
-        private readonly BuildTask _buildTask;
+        internal readonly BuildTask _buildTask;
         private Target _target;
 
         internal TargetType(BuildTask buildTask)
