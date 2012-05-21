@@ -22,6 +22,41 @@ namespace FluentBuild.Utilities
         T ContinueOnError2();
     }
 
+    public abstract class InternalFailable<T>: InternalExecuatable, IFailable<T>
+    {
+        protected internal OnError OnError;
+
+        protected InternalFailable()
+        {
+            OnError = Defaults.OnError;
+        }
+
+        public T FailOnError
+        {
+            get
+            {
+                OnError = OnError.Fail;
+                return (T)(object)this;
+            }
+        }
+
+        public T ContinueOnError
+        {
+            get
+            {
+                OnError = OnError.Continue;
+                return (T)(object)this;
+            }
+        }
+
+        public T ContinueOnError2()
+        {
+            OnError = OnError.Continue;
+            return (T)(object)this;
+        }
+        
+    }
+
     ///<summary>
     /// Represents a class that has continue/fail on error behavior
     ///</summary>

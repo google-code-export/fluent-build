@@ -83,11 +83,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionExecutorTests.cs" />
     <Compile Include="ApplicationProperties\CommandLinePropertiesTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlPropertiesTests.cs" />
     <Compile Include="ApplicationProperties\TeamCityPropertiesTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
     <Compile Include="ActionExcecutor.cs" />
+    <Compile Include="AssemblyInfoBuilding\AssemvblyInfoTests.cs" />
     <Compile Include="Compilation\MsBuildTaskTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetails.cs" />

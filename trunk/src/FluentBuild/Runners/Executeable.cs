@@ -79,8 +79,9 @@ namespace FluentBuild.Runners
     ///<summary>
     /// An executable to be run
     ///</summary>
-    public class Executable : Failable<IExecutable>, IExecutable
+    public class Executable : InternalFailable<IExecutable>, IExecutable
     {
+        private readonly IActionExcecutor _actionExcecutor;
         private IMessageProcessor _messageProcessor;
         private readonly object _errorLock;
         private readonly object _outputLock;
@@ -97,18 +98,20 @@ namespace FluentBuild.Runners
         ///<summary>
         /// Instantiates a new executable
         ///</summary>
-        public Executable() : this(new DefaultMessageProcessor())
+        public Executable() : this(new DefaultMessageProcessor(), new ActionExcecutor())
         {
+            
         }
 
-        internal Executable(IMessageProcessor messageProcessor)
+        internal Executable(IMessageProcessor messageProcessor, IActionExcecutor actionExcecutor)
         {
             _messageProcessor = messageProcessor;
             _errorLock = new object();
             _outputLock = new object();
             _args = new List<string>();
             _error = new StringBuilder();
-            _output = new StringBuilder(); 
+            _output = new StringBuilder();
+            _actionExcecutor = actionExcecutor;
         }
 
         ///<summary>
@@ -166,12 +169,13 @@ namespace FluentBuild.Runners
         [Obsolete("This is replaced with Task.Run.Executable()", true)]
         public int Execute()
         {
-            return InternalExecute();
+            InternalExecute();
+            return ExitCode;
         }
         
-        internal int InternalExecute()
+        internal override void InternalExecute()
         {
-            return Execute("exec");
+            Execute("exec");
         }
 
         public IExecutable ExecutablePath(string path)
@@ -258,9 +262,11 @@ namespace FluentBuild.Runners
                 }
             }
 
-
+            this.ExitCode = exitCode;
             return exitCode;
         }
+
+        public int ExitCode { get; set; }
 
         private void HandleTimeout(IProcessWrapper process)
         {

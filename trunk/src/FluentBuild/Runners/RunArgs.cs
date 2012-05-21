@@ -14,7 +14,8 @@ namespace FluentBuild.Runners
         {
             var implementation = new Executable();
             args(implementation);
-            return implementation.InternalExecute();
+            implementation.InternalExecute();
+            return implementation.ExitCode;
         }
 
         public void Debugger()

@@ -7,7 +7,14 @@ namespace FluentBuild.AssemblyInfoBuilding
     ///</summary>
     public class AssemblyInfoLanguage
     {
-        internal AssemblyInfoLanguage()
+        private readonly IActionExcecutor _executor;
+
+        internal AssemblyInfoLanguage(IActionExcecutor executor)
+        {
+            _executor = executor;
+        }
+
+        internal AssemblyInfoLanguage() : this(new ActionExcecutor())
         {
         }
 
@@ -16,9 +23,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// </summary>
         public void CSharp(Action<AssemblyInfoDetails> args)
         {
-            var concrete = new AssemblyInfoDetails(new CSharpAssemblyInfoBuilder());
-            args(concrete);
-            concrete.InternalExecute();
+            _executor.Execute(args, new CSharpAssemblyInfoBuilder());
         }
 
         /// <summary>
@@ -26,9 +31,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// </summary>
         public void VisualBasic(Action<AssemblyInfoDetails> args)
         {
-            var concrete = new AssemblyInfoDetails(new VisualBasicAssemblyInfoBuilder());
-            args(concrete);
-            concrete.InternalExecute();
+            _executor.Execute(args, new VisualBasicAssemblyInfoBuilder());
         }
     }
 }
