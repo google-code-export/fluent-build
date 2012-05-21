@@ -19,7 +19,7 @@ namespace FluentBuild.Compilation
         public void AddResource_ShouldAddSingleFileResource()
         {
             var fileName = "blah.txt";
-            var build = new BuildTask("csc.exe").AddResource(fileName);
+            var build = new BuildTask("csc.exe", "library").AddResource(fileName);
             var resrouce = build.Resources[0];
             Assert.That(resrouce, Is.Not.Null);
             Assert.That(resrouce.FilePath, Is.EqualTo(fileName));
@@ -34,8 +34,7 @@ namespace FluentBuild.Compilation
         public void Args_ShouldCreateProperArgs()
         {
             string outputAssembly = "myapp.dll";
-            BuildTask build = new BuildTask("csc.exe").OutputFileTo(outputAssembly);
-            build.TargetType = "library";
+            BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}", outputAssembly, "library")));
         }
 
@@ -49,8 +48,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
-            BuildTask build = new BuildTask("").OutputFileTo(outputAssembly).AddResources(sources);
-            build.TargetType = "library";
+            BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddResources(sources);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"myfile.cs\" /target:{1}", outputAssembly, "library")));
         }
 
@@ -63,8 +61,7 @@ namespace FluentBuild.Compilation
             string reference = "external.dll";
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
-            BuildTask build = new BuildTask("").OutputFileTo(outputAssembly).AddResource("Test", "ResName");
-            build.TargetType = "library";
+            BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddResource("Test", "ResName");
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"Test\",ResName /target:{1}", outputAssembly, "library", reference, source)));
         }
 
@@ -78,8 +75,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
-             BuildTask build =  new BuildTask("").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources);
-             build.TargetType = "library";
+             BuildTask build =  new BuildTask("","library").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources);
              Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\"", outputAssembly, "library", reference, source)));
         }
 
@@ -93,8 +89,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
-            BuildTask build = new BuildTask("").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
-            build.TargetType = "library";
+            BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
         }
 
@@ -111,8 +106,7 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
-            BuildTask build = new BuildTask("").OutputFileTo(outputAssembly).AddRefences(references.ToArray()).AddSources(sources);
-            build.TargetType = "library";
+            BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddRefences(references.ToArray()).AddSources(sources);
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\" /reference:\"{3}\"  \"{4}\"", outputAssembly, "library", references[0], references[1], source)));
         }
 
@@ -126,8 +120,7 @@ namespace FluentBuild.Compilation
             var outputAssembly = new File("myapp.dll");
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
-            BuildTask build = new BuildTask("").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
-            build.TargetType = "library";
+            BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
         }
 
@@ -137,7 +130,7 @@ namespace FluentBuild.Compilation
         [Test]
         public void UsingCsc_Compiler_Should_Be_CSC()
         {
-            BuildTask build = new BuildTask("csc.exe");
+            BuildTask build = new BuildTask("csc.exe", "library");
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("csc.exe"));
         }
 
@@ -147,7 +140,7 @@ namespace FluentBuild.Compilation
         [Test]
         public void UsingCsc_Compiler_Should_Be_VBC()
         {
-            BuildTask build =  new BuildTask("vbc.exe");
+            BuildTask build =  new BuildTask("vbc.exe","library");
             Assert.That(Path.GetFileName(build.Compiler), Is.EqualTo("vbc.exe"));
         }
 
@@ -155,7 +148,7 @@ namespace FluentBuild.Compilation
         public void ShouldExecute()
         {
             var mock = MockRepository.GenerateStub<IActionExcecutor>();
-            BuildTask build = new BuildTask(mock,"vbc.exe");
+            BuildTask build = new BuildTask(mock,"vbc.exe", "library");
             build.InternalExecute();
             mock.AssertWasCalled(x=>x.Execute(Arg<Action<Executable>>.Is.Anything));
         }

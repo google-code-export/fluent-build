@@ -104,6 +104,7 @@
     <Compile Include="Compilation\BuildTask.cs" />
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="BuildFileTests.cs" />
+    <Compile Include="Compilation\TargetTests.cs" />
     <Compile Include="IInternalExecuatable.cs" />
     <Compile Include="MessageLoggers\DebugMessages.cs" />
     <Compile Include="MessageLoggers\MessageLoggerProxy.cs" />

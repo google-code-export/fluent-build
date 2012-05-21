@@ -12,7 +12,7 @@ namespace FluentBuild.Compilation
         {
             var subject = new Compilers();
             TargetType targetType = subject.Csc;
-            Assert.That(targetType._buildTask.Compiler, Is.EqualTo("csc.exe"));
+            Assert.That(targetType._compiler, Is.EqualTo("csc.exe"));
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace FluentBuild.Compilation
         {
             var subject = new Compilers();
             TargetType targetType = subject.Vbc;
-            Assert.That(targetType._buildTask.Compiler, Is.EqualTo("vbc.exe"));
+            Assert.That(targetType._compiler, Is.EqualTo("vbc.exe"));
         }
 
         [Test]

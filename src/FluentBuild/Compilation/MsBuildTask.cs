@@ -13,25 +13,26 @@ namespace FluentBuild.Compilation
     ///</summary>
     public class MsBuildTask : InternalExecuatable
     {
+        private readonly IActionExcecutor _actionExcecutor;
         internal string _projectOrSolutionFilePath;
         private readonly IExecutable _executable;
         internal readonly NameValueCollection Properties;
         internal readonly IList<string> Targets;
         internal string ConfigurationToUse;
         internal string Outdir;
-		private readonly List<String> _args;
+        internal readonly List<String> _args;
         
         
 
-        internal MsBuildTask(IExecutable executable)
+        internal MsBuildTask(IActionExcecutor actionExcecutor)
         {
-            _executable = executable;
+            _actionExcecutor = actionExcecutor;
             Targets = new List<string>();
             Properties = new NameValueCollection();
 			_args = new List<string>();
         }
 
-        public MsBuildTask() : this(new Executable())
+        public MsBuildTask() : this(new ActionExcecutor())
         {
         }
 
@@ -146,7 +147,7 @@ namespace FluentBuild.Compilation
                 throw new ArgumentException("ProjectOrSolutionFilePath was not set");
 
             string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";
-            Task.Run.Executable(x => x.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()));
+            _actionExcecutor.Execute<Executable>(x => x.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()));
         }
 
         ///<summary>

@@ -7,11 +7,18 @@ namespace FluentBuild.Compilation
     /// </summary>
     public class Target
     {
+        private readonly string _compiler;
+        private readonly IActionExcecutor _actionExcecutor;
         private readonly BuildTask _buildTask;
 
-        protected internal Target(BuildTask buildTask)
+        internal Target(IActionExcecutor actionExcecutor, string compiler)
         {
-            _buildTask = buildTask;
+            _actionExcecutor = actionExcecutor;
+            _compiler = compiler;
+        }
+
+        protected internal Target(string compiler) : this(new ActionExcecutor(), compiler)
+        {
         }
 
         /// <summary>
@@ -19,9 +26,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public void Library(Action<BuildTask> args)
         {
-            args(_buildTask);
-            _buildTask.TargetType = "library";
-            _buildTask.InternalExecute();
+            _actionExcecutor.Execute(args, _compiler, "library");
         }
 
         /// <summary>
@@ -29,9 +34,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public void WindowsExecutable(Action<BuildTask> args)
         {
-            args(_buildTask);
-            _buildTask.TargetType = "winexe";
-            _buildTask.InternalExecute();
+            _actionExcecutor.Execute(args, _compiler, "winexe");
         }
 
         /// <summary>
@@ -39,9 +42,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public void Executable(Action<BuildTask> args)
         {
-            args(_buildTask);
-            _buildTask.TargetType = "exe";
-            _buildTask.InternalExecute();
+            _actionExcecutor.Execute(args, _compiler, "exe");
         }
 
         /// <summary>
@@ -49,9 +50,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public void Module(Action<BuildTask> args)
         {
-            args(_buildTask);
-            _buildTask.TargetType = "module";
-            _buildTask.InternalExecute();
+            _actionExcecutor.Execute(args, _compiler, "module");
         }
     }
 }

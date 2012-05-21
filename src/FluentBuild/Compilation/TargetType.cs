@@ -5,12 +5,12 @@
     ///</summary>
     public class TargetType
     {
-        internal readonly BuildTask _buildTask;
+        internal readonly string _compiler;
         private Target _target;
 
-        internal TargetType(BuildTask buildTask)
+        internal TargetType(string compiler)
         {
-            _buildTask = buildTask;
+            _compiler = compiler;
         }
 
         ///<summary>
@@ -20,7 +20,7 @@
         {
             get
             {
-                _target = new Target(_buildTask);
+                _target = new Target(_compiler);
                 return _target;
             }
         }

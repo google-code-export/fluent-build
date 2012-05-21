@@ -1,4 +1,5 @@
-﻿using FluentBuild.Core;
+﻿using System;
+using FluentBuild.Core;
 using FluentBuild.Runners;
 using FluentBuild.Utilities;
 using FluentFs.Core;
@@ -24,24 +25,24 @@ namespace FluentBuild.Compilation
 
         #endregion
 
-        ///<summary />
-	    [Ignore()]
-        public void Execute_ShouldRunAgainstMock()
+
+        [Test]
+        public void GetPath()
         {
-            /*
+            var subject = new Resgen();
+            Assert.That(subject.GetPathToResGenExecutable(), Is.Not.Null);
+        }
+
+        [Test]
+        public void ExecuteShouldRunExe()
+        {
+            var mock = MockRepository.GenerateStub<IActionExcecutor>();
             var fileset = new FileSet();
             fileset.Include(@"c:\temp\nonexistant.txt");
 
-            var mockExe = MockRepository.GenerateStub<IExecutable>();
-
-            Resgen subject = new Resgen(mockExe).GenerateFrom(fileset).OutputTo("c:\\");
-            mockExe.Stub(x => x.ExecutablePath("c:\\temp\\bin\\resgen.exe")).Return(mockExe);
-            mockExe.Stub(x => x.WithArguments(Arg<string[]>.Is.Anything)).Return(mockExe);
-            mockExe.Stub(x => x.WithArguments(Arg<string[]>.Is.Anything)).Return(mockExe);
-
+            Resgen subject = new Resgen(mock).GenerateFrom(fileset).OutputTo(@"c:\temp\");
             subject.Execute();
-            mockExe.AssertWasCalled(x => x.Execute());
-             */
+            mock.AssertWasCalled(x=>x.Execute(Arg<Action<Executable>>.Is.Anything));
         }
 
         ///<summary />
