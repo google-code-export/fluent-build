@@ -12,7 +12,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public TargetType Csc
         {
-            get { return new TargetType(new BuildTask("csc.exe")); }
+            get { return new TargetType("csc.exe"); }
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace FluentBuild.Compilation
         /// </summary>
         public TargetType Vbc
         {
-            get { return new TargetType(new BuildTask("vbc.exe")); }
+            get { return new TargetType("vbc.exe"); }
         }
 
         internal Compilers() : this(new ActionExcecutor())

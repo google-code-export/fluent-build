@@ -7,11 +7,20 @@ namespace FluentBuild.Compilation
 {
     internal class Resgen
     {
+        private readonly IActionExcecutor _actionExcecutor;
         internal FileSet Files;
         internal string OutputFolder;
         internal string Prefix;
 
-    
+        public Resgen(IActionExcecutor actionExcecutor)
+        {
+            _actionExcecutor = actionExcecutor;
+        }
+
+        public Resgen() : this(new ActionExcecutor())
+        {
+        }
+
         public Resgen GenerateFrom(FileSet fileset)
         {
             Files = fileset;
@@ -47,9 +56,7 @@ namespace FluentBuild.Compilation
                 string outputFileName = Prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
                 outputFileName = Path.Combine(OutputFolder, outputFileName);
                 outputFiles.Include(outputFileName);
-
-                Task.Run.Executable(x=>x.ExecutablePath(resGenExecutable).WithArguments("\"" + resourceFileName + "\"").WithArguments("\"" + outputFileName + "\""));
-                
+                _actionExcecutor.Execute<Executable>(x=>x.ExecutablePath(resGenExecutable).WithArguments("\"" + resourceFileName + "\"").WithArguments("\"" + outputFileName + "\""));
             }
             return outputFiles;
         }

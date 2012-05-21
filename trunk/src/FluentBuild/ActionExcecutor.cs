@@ -7,6 +7,7 @@ namespace FluentBuild
     {
         void Execute<T>(Action<T> args) where T : InternalExecuatable, new();
         void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecuatable;
+        void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecuatable;
     }
 
     internal class ActionExcecutor : IActionExcecutor
@@ -16,6 +17,22 @@ namespace FluentBuild
             var concrete = new T();
             args(concrete);
             concrete.InternalExecute();
+        }
+
+        public ConstructorInfo FindConstructor<T,TParams,TParam2>()
+        {
+            BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
+            //try for a concrete implementation
+            var constructor = typeof(T).GetConstructor(bindingFlags, null, new[] { typeof(TParams), typeof(TParam2) }, null);
+
+            //If that did not work check the base type for a concrete match
+            if (constructor == null)
+                constructor = typeof(T).GetConstructor(bindingFlags, null, new[] { typeof(TParams).BaseType, typeof(TParam2).BaseType }, null);
+
+            //no matches found
+            if (constructor == null)
+                throw new ApplicationException("Could not find a matching constructor");
+            return constructor;
         }
 
         public ConstructorInfo FindConstructor<T,TParams>()
@@ -49,6 +66,13 @@ namespace FluentBuild
         public void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecuatable
         {
             var concrete = (T)FindConstructor<T,TParams>().Invoke(new object[] { constructorParms });
+            args(concrete);
+            concrete.InternalExecute();
+        }
+
+        public void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecuatable
+        {
+            var concrete = (T)FindConstructor<T, TParam, TParam2>().Invoke(new object[] { constructorParam1, constructorParam2 });
             args(concrete);
             concrete.InternalExecute();
         }

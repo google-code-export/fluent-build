@@ -20,18 +20,19 @@ namespace FluentBuild.Compilation
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
 
-        public BuildTask() : this(new ActionExcecutor(), "")
+        public BuildTask() : this(new ActionExcecutor(), "", "")
         {
             
         }
 
-        protected internal BuildTask(IActionExcecutor actionExcecutor, string compiler)
+        protected internal BuildTask(IActionExcecutor actionExcecutor, string compiler, string targetType)
         {
             _actionExcecutor = actionExcecutor;
             Compiler = compiler;
+            TargetType = targetType;
         }
 
-        public BuildTask(string compiler) : this(new ActionExcecutor(), compiler)
+        public BuildTask(string compiler, string targetType) : this(new ActionExcecutor(), compiler, targetType)
         {
         }
 

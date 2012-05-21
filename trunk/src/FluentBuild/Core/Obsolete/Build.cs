@@ -14,7 +14,7 @@ namespace FluentBuild.Core
         /// </summary>
         public static TargetType UsingCsc
         {
-            get { return new TargetType(new BuildTask("csc.exe")); }
+            get { return new TargetType("csc.exe"); }
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace FluentBuild.Core
         /// </summary>
         public static TargetType UsingVbc
         {
-            get { return new TargetType(new BuildTask("vbc.exe")); }
+            get { return new TargetType("vbc.exe"); }
         }
 
         /// <summary>
