@@ -1,7 +1,7 @@
 @Echo Off
 
 set pathtorar="C:\Program Files\WinRAR\winrar.exe"
-set basepath="C:\Users\Kudos\Desktop\fluent-build\Plugins\TeamCity\fluentbuild-runner\out\artifacts"
+set basepath="C:\Projects\fluent-build\Plugins\TeamCity\fluentbuild-runner\out\artifacts"
 set plugindir="C:\Users\Kudos\.BuildServer\plugins"
 
 echo "Delete old zips"

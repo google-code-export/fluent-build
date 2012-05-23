@@ -7,7 +7,7 @@ namespace FluentBuild.AssemblyInfoBuilding
     {
         #region IAssemblyInfoBuilder Members
 
-        public string Build(AssemblyInfoDetails details)
+        public string Build(IAssemblyInfoDetails details)
         {
             var sb = new StringBuilder();
             details.Imports.Sort();

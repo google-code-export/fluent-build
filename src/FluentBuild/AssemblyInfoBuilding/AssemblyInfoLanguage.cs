@@ -1,4 +1,5 @@
 using System;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.AssemblyInfoBuilding
 {
@@ -21,17 +22,17 @@ namespace FluentBuild.AssemblyInfoBuilding
         /// <summary>
         /// Generate using C#
         /// </summary>
-        public void CSharp(Action<AssemblyInfoDetails> args)
+        public void CSharp(Action<IAssemblyInfoDetails> args)
         {
-            _executor.Execute(args, new CSharpAssemblyInfoBuilder());
+            _executor.Execute<AssemblyInfoDetails, CSharpAssemblyInfoBuilder>(args, new CSharpAssemblyInfoBuilder());
         }
 
         /// <summary>
         /// Generate using Visual Basic
         /// </summary>
-        public void VisualBasic(Action<AssemblyInfoDetails> args)
+        public void VisualBasic(Action<IAssemblyInfoDetails> args)
         {
-            _executor.Execute(args, new VisualBasicAssemblyInfoBuilder());
+            _executor.Execute<AssemblyInfoDetails, VisualBasicAssemblyInfoBuilder>(args, new VisualBasicAssemblyInfoBuilder());
         }
     }
 }

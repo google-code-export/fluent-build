@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentBuild.Core;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.Compilation
 {

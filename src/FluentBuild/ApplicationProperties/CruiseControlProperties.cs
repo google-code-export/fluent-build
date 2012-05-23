@@ -3,10 +3,63 @@ using FluentBuild.Core;
 
 namespace FluentBuild.ApplicationProperties
 {
+    public interface ICruiseControlProperties
+    {
+        ///<summary>
+        /// Gets the project name
+        ///</summary>
+        string ProjectName { get; }
+
+        ///<summary>
+        /// Gets the ID number of the last build
+        ///</summary>
+        string LastBuild { get; }
+
+        ///<summary>
+        /// Gets the ID of the last successful build
+        ///</summary>
+        string LastSuccessfulBuild { get; }
+
+        ///<summary>
+        /// Returns the build date
+        ///</summary>
+        DateTime BuildDate { get; }
+
+        ///<summary>
+        /// Gets the cctimestamp property
+        ///</summary>
+        string Timestamp { get; }
+
+        ///<summary>
+        /// Gets the cruise control label
+        ///</summary>
+        string Label { get; }
+
+        ///<summary>
+        /// Gets the interval property
+        ///</summary>
+        int Interval { get; }
+
+        ///<summary>
+        /// Wether the last build that was run was successful
+        ///</summary>
+        bool LastBuildSuccessful { get; }
+
+        ///<summary>
+        /// The directory that cruise control logs to
+        ///</summary>
+        string LogDirectory { get; }
+
+        ///<summary>
+        /// The file that cruise control logs to
+        ///</summary>
+        string LogFile { get; }
+    }
+
     ///<summary>
     /// Accesses a set list of cruise control properties.
     ///</summary>
-    public class CruiseControlProperties
+    internal class CruiseControlProperties : ICruiseControlProperties
     {
         
         ///<summary>

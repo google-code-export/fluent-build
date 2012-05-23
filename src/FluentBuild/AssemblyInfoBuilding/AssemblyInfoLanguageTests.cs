@@ -1,4 +1,5 @@
 using System;
+using FluentBuild.Utilities;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -19,7 +20,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         {
             var mock = MockRepository.GenerateStub<IActionExcecutor>();
             var subject = new AssemblyInfoLanguage(mock);
-            Action<AssemblyInfoDetails> action = x=>x.OutputPath("c:\test.cs");
+            Action<IAssemblyInfoDetails> action = x=>x.OutputPath("c:\test.cs");
             subject.CSharp(action);
             mock.AssertWasCalled(x => x.Execute(Arg<Action<AssemblyInfoDetails>>.Is.Equal(action), Arg<CSharpAssemblyInfoBuilder>.Is.Anything));
         }
@@ -32,7 +33,7 @@ namespace FluentBuild.AssemblyInfoBuilding
         {
             var mock = MockRepository.GenerateStub<IActionExcecutor>();
             var subject = new AssemblyInfoLanguage(mock);
-            Action<AssemblyInfoDetails> action = x => x.OutputPath("c:\test.cs");
+            Action<IAssemblyInfoDetails> action = x => x.OutputPath("c:\test.cs");
             subject.VisualBasic(action);
             mock.AssertWasCalled(x => x.Execute(Arg<Action<AssemblyInfoDetails>>.Is.Equal(action), Arg<VisualBasicAssemblyInfoBuilder>.Is.Anything));
         }

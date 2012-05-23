@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using FluentBuild.Runners;
+using FluentBuild.Utilities;
 using FluentFs.Core;
 using NUnit.Framework;
 using Rhino.Mocks;
