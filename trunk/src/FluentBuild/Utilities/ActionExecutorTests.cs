@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentBuild.Utilities;
+using NUnit.Framework;
 
 namespace FluentBuild
 {
@@ -30,10 +31,9 @@ namespace FluentBuild
             subject.Execute<InternalExecutableTester, string>(x => x.SetTestValue(value), constructorParms);
             Assert.That(InternalExecutableTester.OutputValue, Is.EqualTo(value));
             Assert.That(InternalExecutableTester.ConstructorValue, Is.EqualTo(constructorParms));
-
         }
 
-        public class InternalExecutableTester : InternalExecuatable
+        internal class InternalExecutableTester : InternalExecuatable
         {
             public string TestValue { get; set; }
             public static string OutputValue { get; set; }

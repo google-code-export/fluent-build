@@ -5,7 +5,7 @@ namespace FluentBuild.AssemblyInfoBuilding
 {
     public class VisualBasicAssemblyInfoBuilder : IAssemblyInfoBuilder
     {
-        public string Build(AssemblyInfoDetails details)
+        public string Build(IAssemblyInfoDetails details)
         {
             var sb = new StringBuilder();
             details.Imports.Sort();

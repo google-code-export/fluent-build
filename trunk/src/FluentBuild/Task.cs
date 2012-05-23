@@ -29,7 +29,7 @@ namespace FluentBuild
             get { return new Publish();}
         }
 
-        public static AssemblyInfo CreateAssemblyInfo
+        public static IAssemblyInfo CreateAssemblyInfo
         {
             get { return new AssemblyInfo(); }
         }

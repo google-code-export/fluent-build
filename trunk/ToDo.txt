@@ -1,19 +1,21 @@
 Build
   This release    
+	-Fix teamcity plugin to pass the build class properly
+	-Method visiblity cleanup!
 	-GUI for running builds. Why do we need command line? 
-	-Add BuildFolder.Copy / .Move
+
 	-ability to specify (or detect) compiler to use for build files (current default is c#)
-    -version check that runs in the background and alerts on next run
 	-Token replacement should allow you to specify the delimiter around the token.
 	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository).
 		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
 		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
 
   Future Releases
+	-Add Direcotr.Copy / .Move
+	-Expand .NET framework versions by the user in an easy fashion
     -Persistant variable storage. I.e. be able to store a variable in a build then have it accessable on the next run. Usefull for counters for local build scripts
     -multiple targets. i.e. -C:MainBuild[Clean,Compile,Deploy]
 	-Multithreaded builds
-	-remove the need for .Execute() methods? (i.e. delayed execution)
 	-Plugin for VS to do builds
 	-ability to reference (or detect) other assemblies in the build file
     -One time tasks (only run the first time the script is run on that computer)
@@ -25,9 +27,7 @@ Build
 	-Xml MessageLogger
     -Sandcastle generator
     -Ability to change default console colors
-	-CustomFrameworkVersion
 	-Add in architecture detection
-	-Zip might want to be Run.Zip.Compress.On(buildArtifact/BuildFolder).OutputTo(dest.zip)
 	-BuildArtifact.Execute().WithArgs()....etc. may be nice
 	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
 	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]

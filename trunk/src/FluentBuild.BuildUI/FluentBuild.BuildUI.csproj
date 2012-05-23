@@ -41,6 +41,7 @@
       <HintPath>..\..\lib\FluentFs\FluentFs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -65,7 +66,9 @@
     <Compile Include="BuildTask.xaml.cs">
       <DependentUpon>BuildTask.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Compiler.xaml.cs" />
     <Compile Include="Runner.xaml.cs" />
+    <Compile Include="SettingHelper.xaml.cs" />
     <Compile Include="TaskTypeDataSelector.cs" />
     <Compile Include="StateToColorConverter.cs" />
     <Compile Include="TaskMessages.xaml.cs">
@@ -95,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\GradientButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TaskMessages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +137,9 @@
       <Project>{71965190-338E-42CD-9D48-47955DB750E2}</Project>
       <Name>FluentBuild</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="header-bkg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

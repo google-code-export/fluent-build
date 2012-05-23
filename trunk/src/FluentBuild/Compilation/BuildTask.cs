@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using FluentBuild.Core;
 using FluentBuild.Runners;
+using FluentBuild.Utilities;
 using FluentFs.Core;
 
 namespace FluentBuild.Compilation

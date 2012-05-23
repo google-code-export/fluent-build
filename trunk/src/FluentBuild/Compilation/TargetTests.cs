@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentBuild.Utilities;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -45,6 +46,12 @@ namespace FluentBuild.Compilation
         {
             _subject.Module(_action);
             _actionExcecutor.AssertWasCalled(x => x.Execute(_action, "csc.exe", "module"));
+        }
+
+        [Test]
+        public void DefaultConstructor()
+        {
+            var subject = new Target("csc.exe");
         }
     }
 }

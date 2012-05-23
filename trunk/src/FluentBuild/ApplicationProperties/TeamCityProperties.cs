@@ -3,10 +3,52 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.ApplicationProperties
 {
+    public interface ITeamCityProperties
+    {
+        ///<summary>
+        /// The BuildNumber that team city has determined for this build
+        ///</summary>
+        string BuildNumber { get; }
+
+        ///<summary>
+        /// The configuration being used for this build
+        ///</summary>
+        string ConfigurationName { get; }
+
+        ///<summary>
+        /// The project being built
+        ///</summary>
+        string ProjectName { get; }
+
+        ///<summary>
+        /// The version of TeamCity
+        ///</summary>
+        string TeamCityVersion { get; }
+
+        ///<summary>
+        /// The current build configuration name
+        ///</summary>
+        string BuildConfigurationName { get; }
+
+        ///<summary>
+        /// Gets the latest revision included in the build from the source control system.
+        ///</summary>
+        ///<param name="simplifiedVcsRootName">The version control root name with any non-alphanumeric characters replaced with a "_"</param>
+        ///<returns>The version from the source control system</returns>
+        string BuildVersionControlSystemNumber(string simplifiedVcsRootName);
+
+        /// <summary>
+        /// Gets a property by name
+        /// </summary>
+        /// <param name="propertyName">the name of the team city environment variable</param>
+        /// <returns>The value of the property</returns>
+        string GetProperty(string propertyName);
+    }
+
     ///<summary>
     /// Access common properties set by team city
     ///</summary>
-    public class TeamCityProperties
+    internal class TeamCityProperties : ITeamCityProperties
     {
         private readonly IEnvironmentVariableWrapper _environmentVariableWrapper;
 

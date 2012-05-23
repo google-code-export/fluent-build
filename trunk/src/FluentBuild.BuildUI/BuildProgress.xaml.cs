@@ -11,7 +11,7 @@ namespace FluentBuild.BuildUI
     /// <summary>
     /// Interaction logic for BuildProgress.xaml
     /// </summary>
-    public partial class BuildProgress : UserControl, IMessageLogger
+    public partial class BuildProgress : UserControl, IMessageLogger, INotifyPropertyChanged
     {
         public VerbosityLevel Verbosity
         {
@@ -46,23 +46,32 @@ namespace FluentBuild.BuildUI
 
         public void WriteDebugMessage(string message)
         {
+          
             Dispatcher.BeginInvoke(new Action(() => BuildNotices.Last().AddItem(message, TaskState.Normal)));
         }
 
 
         public void Write(string type, string message, params string[] items)
         {
+            if (BuildNotices.Count == 0)
+                return;
+
             var data = string.Format(message, items);
+            
             Dispatcher.BeginInvoke(new Action(() => BuildNotices.Last().AddItem(data, TaskState.Normal)));
         }
 
         public void Write(string type, string message, string statusDescription)
         {
+            if (BuildNotices.Count == 0)
+                return;
             Dispatcher.BeginInvoke(new Action(() => BuildNotices.Last().AddItem(message, TaskState.Normal)));
         }
 
         public void WriteError(string type, string message)
         {
+            if (BuildNotices.Count == 0)
+                return;
             Dispatcher.BeginInvoke(new Action(delegate { BuildNotices.Last().AddItem(message, TaskState.Error);
                                                            BuildNotices.Last().State = TaskState.Error;
             }));
@@ -70,6 +79,8 @@ namespace FluentBuild.BuildUI
 
         public void WriteWarning(string type, string message)
         {
+            if (BuildNotices.Count == 0)
+                return;
             Dispatcher.BeginInvoke(new Action(delegate { BuildNotices.Last().AddItem(message, TaskState.Warning);
                                                            BuildNotices.Last().State = TaskState.Warning;
             }));
@@ -88,5 +99,18 @@ namespace FluentBuild.BuildUI
 
         #endregion
 
+        public void Reset()
+        {
+            this.BuildNotices.Clear();
+            InvokePropertyChanged("BuildNotices");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void InvokePropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

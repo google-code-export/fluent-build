@@ -7,14 +7,14 @@ namespace FluentBuild
     /// Deletes the folder if it exists. If it does not exist then no action is taken
     /// </summary>
     /// <returns>The current FluentFs.Core.Directory</returns>
-    public class Properties
+    public static class Properties
     {
-        public static TeamCityProperties TeamCity
+        public static ITeamCityProperties TeamCity
         {
             get { return new TeamCityProperties(); }
         }
 
-        public static CruiseControlProperties CruiseControl
+        public static ICruiseControlProperties CruiseControl
         {
             get { return new CruiseControlProperties(); }
         }

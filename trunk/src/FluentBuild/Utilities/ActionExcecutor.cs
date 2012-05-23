@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace FluentBuild
+namespace FluentBuild.Utilities
 {
     public interface IActionExcecutor
     {

@@ -83,12 +83,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionExecutorTests.cs" />
+    <Compile Include="Utilities\ActionExecutorTests.cs" />
     <Compile Include="ApplicationProperties\CommandLinePropertiesTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlPropertiesTests.cs" />
     <Compile Include="ApplicationProperties\TeamCityPropertiesTests.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemblyInfoDetailsTests.cs" />
-    <Compile Include="ActionExcecutor.cs" />
+    <Compile Include="Utilities\ActionExcecutor.cs" />
     <Compile Include="AssemblyInfoBuilding\AssemvblyInfoTests.cs" />
     <Compile Include="Compilation\CompilersTests.cs" />
     <Compile Include="Compilation\MsBuildTaskTests.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="BuildFileTests.cs" />
     <Compile Include="Compilation\TargetTests.cs" />
-    <Compile Include="IInternalExecuatable.cs" />
+    <Compile Include="Utilities\InternalExecuatable.cs" />
     <Compile Include="MessageLoggers\DebugMessages.cs" />
     <Compile Include="MessageLoggers\MessageLoggerProxy.cs" />
     <Compile Include="MessageLoggers\MessageLoggerProxyTests.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Compilation\Compilers.cs" />
     <Compile Include="Utilities\FileFinder.cs" />
     <Compile Include="Utilities\FileFinderTests.cs" />
+    <Compile Include="Utilities\SdkNotFoundExceptionTests.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleMessageLogger.cs" />
     <Compile Include="MessageLoggers\IMessageLogger.cs" />
