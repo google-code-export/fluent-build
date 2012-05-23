@@ -26,14 +26,14 @@ namespace FluentBuild.BuildUI
 
         private void ShowHideDetails(object sender, MouseButtonEventArgs e)
         {
-            var data = new TaskMessages();
-            data.DataContext = this.DataContext;
-            data.ShowDialog();
+//            var data = new TaskMessages();
+//            data.DataContext = this.DataContext;
+//            data.ShowDialog();
 
-            //if (this.Details.Visibility == System.Windows.Visibility.Collapsed)
-            //    this.Details.Visibility = System.Windows.Visibility.Visible;
-            //else
-            //    this.Details.Visibility = System.Windows.Visibility.Collapsed;
+            if (this.Details.Visibility == System.Windows.Visibility.Collapsed)
+                this.Details.Visibility = System.Windows.Visibility.Visible;
+            else
+                this.Details.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

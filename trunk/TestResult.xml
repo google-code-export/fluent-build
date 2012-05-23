@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Projects\fluent-build\compile\BuildFileConverter.exe" total="35" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-05-22" time="21:48:47">
+<test-results name="C:\Projects\fluent-build\compile\BuildFileConverter.exe" total="35" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-05-23" time="09:46:56">
   <environment nunit-version="2.5.7.10213" clr-version="2.0.50727.5456" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Projects\fluent-build" machine-name="KUDOS-LAPTOP2" user="Kudos" user-domain="Kudos-Laptop2" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="C:\Projects\fluent-build\compile\BuildFileConverter.exe" executed="True" result="Success" success="True" time="0.840" asserts="0">
+  <test-suite type="Assembly" name="C:\Projects\fluent-build\compile\BuildFileConverter.exe" executed="True" result="Success" success="True" time="1.045" asserts="0">
     <results>
-      <test-suite type="Namespace" name="FluentBuild" executed="True" result="Success" success="True" time="0.825" asserts="0">
+      <test-suite type="Namespace" name="FluentBuild" executed="True" result="Success" success="True" time="1.015" asserts="0">
         <results>
-          <test-suite type="Namespace" name="BuildFileConverter" executed="True" result="Success" success="True" time="0.825" asserts="0">
+          <test-suite type="Namespace" name="BuildFileConverter" executed="True" result="Success" success="True" time="1.015" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="OutputGeneratorTests" executed="True" result="Success" success="True" time="0.060" asserts="0">
+              <test-suite type="TestFixture" name="OutputGeneratorTests" executed="True" result="Success" success="True" time="0.085" asserts="0">
                 <results>
-                  <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.BuildPropertyShouldBuildCommentOnUnkownType" executed="True" result="Success" success="True" time="0.030" asserts="1" />
+                  <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.BuildPropertyShouldBuildCommentOnUnkownType" executed="True" result="Success" success="True" time="0.045" asserts="1" />
                   <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.BuildPropertyShouldBuildFileOnExistingVariable" executed="True" result="Success" success="True" time="0.005" asserts="1" />
                   <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.BuildPropertyShouldBuildSubFolderOnExistingVariable" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.BuildPropertyShouldOutputNewBuildFolder" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.BuildPropertyShouldRegisterVariableName" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.ShouldDetermineThatThereIsAStringSubFolder" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.ShouldGenerateSubFoldersForFile" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                  <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.ShouldNotGenerateSubFolders" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                  <test-case name="FluentBuild.BuildFileConverter.OutputGeneratorTests.ShouldNotGenerateSubFolders" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                 </results>
               </test-suite>
-              <test-suite type="Namespace" name="Parsing" executed="True" result="Success" success="True" time="0.740" asserts="0">
+              <test-suite type="Namespace" name="Parsing" executed="True" result="Success" success="True" time="0.900" asserts="0">
                 <results>
-                  <test-suite type="TestFixture" name="AsmInfoParserTests" executed="True" result="Success" success="True" time="0.065" asserts="0">
+                  <test-suite type="TestFixture" name="AsmInfoParserTests" executed="True" result="Success" success="True" time="0.090" asserts="0">
                     <results>
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.AsmInfoParserTests.GenerateString" executed="True" result="Success" success="True" time="0.060" asserts="1" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.AsmInfoParserTests.GenerateString" executed="True" result="Success" success="True" time="0.085" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.AsmInfoParserTests.Parse" executed="True" result="Success" success="True" time="0.005" asserts="7" />
                     </results>
                   </test-suite>
@@ -37,33 +37,33 @@
                   <test-suite type="TestFixture" name="CompileSourcesParserTests" executed="True" result="Success" success="True" time="0.010" asserts="0">
                     <results>
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.CompileSourcesParserTests.ShouldParse" executed="True" result="Success" success="True" time="0.005" asserts="6" />
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.CompileSourcesParserTests.ShouldParseOneLine" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.CompileSourcesParserTests.ShouldParseOneLine" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite type="TestFixture" name="CscParserTests" executed="True" result="Success" success="True" time="0.090" asserts="0">
+                  <test-suite type="TestFixture" name="CscParserTests" executed="True" result="Success" success="True" time="0.125" asserts="0">
                     <results>
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.CscParserTests.ShouldGenerateStringWithComments" executed="True" result="Success" success="True" time="0.085" asserts="23" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.CscParserTests.ShouldGenerateStringWithComments" executed="True" result="Success" success="True" time="0.120" asserts="23" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.CscParserTests.ShouldParseOutput" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.CscParserTests.ShouldParseReferences" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.CscParserTests.ShouldParseTarget" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite type="TestFixture" name="NantBuildFileParserTests" executed="True" result="Success" success="True" time="0.040" asserts="0">
+                  <test-suite type="TestFixture" name="NantBuildFileParserTests" executed="True" result="Success" success="True" time="0.050" asserts="0">
                     <results>
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.NantBuildFileParserTests.ShouldParseItems" executed="True" result="Success" success="True" time="0.040" asserts="7" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.NantBuildFileParserTests.ShouldParseItems" executed="True" result="Success" success="True" time="0.050" asserts="7" />
                     </results>
                   </test-suite>
-                  <test-suite type="TestFixture" name="TargetParserTests" executed="True" result="Success" success="True" time="0.515" asserts="0">
+                  <test-suite type="TestFixture" name="TargetParserTests" executed="True" result="Success" success="True" time="0.600" asserts="0">
                     <results>
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldParseDepends" executed="True" result="Success" success="True" time="0.505" asserts="1" />
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldParseDependsSeperatedByCommas" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldParseDepends" executed="True" result="Success" success="True" time="0.585" asserts="1" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldParseDependsSeperatedByCommas" executed="True" result="Success" success="True" time="0.010" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldParseTarget" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldResolveParser" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetParserTests.ShouldResolveParser" executed="True" result="Success" success="True" time="0.005" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite type="TestFixture" name="TargetRepositoryTests" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                  <test-suite type="TestFixture" name="TargetRepositoryTests" executed="True" result="Success" success="True" time="0.010" asserts="0">
                     <results>
-                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetRepositoryTests.ShouldFindByName" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                      <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetRepositoryTests.ShouldFindByName" executed="True" result="Success" success="True" time="0.005" asserts="2" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetRepositoryTests.ShouldHaveUnregisteredDependancyThenShouldHaveRegisteredDepenancy" executed="True" result="Success" success="True" time="0.005" asserts="4" />
                       <test-case name="FluentBuild.BuildFileConverter.Parsing.TargetRepositoryTests.ShouldReturnProxyToTarget" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                     </results>
@@ -72,24 +72,24 @@
               </test-suite>
               <test-suite type="Namespace" name="Structure" executed="True" result="Success" success="True" time="0.010" asserts="0">
                 <results>
-                  <test-suite type="TestFixture" name="PropertyTests" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                  <test-suite type="TestFixture" name="PropertyTests" executed="True" result="Success" success="True" time="0.010" asserts="0">
                     <results>
                       <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldDeterminePropertyIsADirectory" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldDeterminePropertyIsAFile" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldDeterminePropertyIsAFileWhenPartOfADirectory" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldDeterminePropertyIsAFileWithShortExtension" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldDeterminePropertyIsAFolderWhenParentFoldersHaveDots" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                      <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldParseLongProperty" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldParseLongProperty" executed="True" result="Success" success="True" time="0.005" asserts="1" />
                       <test-case name="FluentBuild.BuildFileConverter.Structure.PropertyTests.ShouldRegisterDependancyOnOtherProperty" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="TargetTreeBuilderTests" executed="True" result="Success" success="True" time="0.010" asserts="0">
+              <test-suite type="TestFixture" name="TargetTreeBuilderTests" executed="True" result="Success" success="True" time="0.005" asserts="0">
                 <results>
                   <test-case name="FluentBuild.BuildFileConverter.TargetTreeBuilderTests.NestedDepencanciesShouldWork" executed="True" result="Success" success="True" time="0.000" asserts="3" />
-                  <test-case name="FluentBuild.BuildFileConverter.TargetTreeBuilderTests.TestSimpleDependancy" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                  <test-case name="FluentBuild.BuildFileConverter.TargetTreeBuilderTests.TwoDepencanciesOnCleanShouldWork" executed="True" result="Success" success="True" time="0.005" asserts="3" />
+                  <test-case name="FluentBuild.BuildFileConverter.TargetTreeBuilderTests.TestSimpleDependancy" executed="True" result="Success" success="True" time="0.005" asserts="2" />
+                  <test-case name="FluentBuild.BuildFileConverter.TargetTreeBuilderTests.TwoDepencanciesOnCleanShouldWork" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                 </results>
               </test-suite>
             </results>
