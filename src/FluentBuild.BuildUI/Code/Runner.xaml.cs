@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading;
 using FluentBuild.Core;
 using FluentBuild.MessageLoggers;
@@ -20,10 +21,18 @@ namespace FluentBuild.BuildUI
         private void DoRun()
         {
             Defaults.Logger.Verbosity = VerbosityLevel.TaskDetails;
-
-            Assembly assemblyInstance = Assembly.LoadFile(_assemblyPath);
-            var build = (BuildFile)assemblyInstance.CreateInstance(_target);
-            if (build != null) build.InvokeNextTask();
+            try
+            {
+                Assembly assemblyInstance = Assembly.LoadFile(_assemblyPath);
+                var build = (BuildFile)assemblyInstance.CreateInstance(_target);
+                if (build != null) build.InvokeNextTask();
+            }
+            catch (Exception e)
+            {
+                Defaults.Logger.WriteError("ERROR", e.ToString());
+                throw;
+            }
+            
         }
 
         public void Run()

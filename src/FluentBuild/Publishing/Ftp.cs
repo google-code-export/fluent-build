@@ -69,13 +69,21 @@ namespace FluentBuild.Publishing
 
             request.KeepAlive = false;
 
-            byte[] fileContents;
-            using (var sourceStream = new StreamReader(_localFilePath))
-            {
-                fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                request.ContentLength = fileContents.Length;
-                sourceStream.Close();
-            }
+            byte[] fileContents= new byte[0];
+            
+
+        using(var s = new FileStream(_localFilePath, FileMode.Open, FileAccess.Read))
+        {
+            Array.Resize(ref fileContents, (int) (s.Length));
+            s.Read(fileContents, 0, (int) s.Length);
+        }
+
+//            using (var sourceStream = new StreamReader(_localFilePath))
+//            {
+//                fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+//                request.ContentLength = fileContents.Length;
+//                sourceStream.Close();
+//            }
 
             using (var requestStream = request.GetRequestStream())
             {
