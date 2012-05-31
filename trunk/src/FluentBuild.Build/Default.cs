@@ -155,6 +155,8 @@ namespace Build
              Task.Build.Csc.Target.Executable(x=>x.AddSources(sourceFiles)
                 .AddRefences(assembly_FluentBuild_WithTests_Merged)
                 .OutputFileTo(assembly_FluentBuild_Runner));
+
+            
         }
 
         private void CompileFunctionalTests()

@@ -32,7 +32,7 @@ namespace Build
             AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
-            AddTask(PublishToRepository);
+            //AddTask(PublishToRepository);
         }
 
         private void CompileRunner()
