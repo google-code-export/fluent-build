@@ -6,48 +6,13 @@ using System.Reflection;
 using System.Text;
 using FluentBuild.Compilation;
 using FluentBuild.Core;
+using FluentBuild.UtilitySupport;
 using FluentFs.Core;
 using Directory = System.IO.Directory;
 using File = System.IO.File;
 
 namespace FluentBuild.BuildExe
 {
-    public class Compiler
-    {
-        /// <summary>
-        /// Builds an assembly from a source folder. Currently this only works with .cs files
-        /// </summary>
-        /// <param name="path">The path to the source files</param>
-        /// <returns>returns the path to the compiled assembly</returns>
-        public static string BuildAssemblyFromSources(string path)
-        {
-            Defaults.Logger.WriteDebugMessage("Sources found in: " + path);
-            var fileset = new FileSet();
-            fileset.Include(path + "\\**\\*.cs");
-
-            string startPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
-
-            string dllReference = Path.Combine(startPath, "FluentBuild.dll");
-            Defaults.Logger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + dllReference);
-            string tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks;
-            Directory.CreateDirectory(tempPath);
-            string outputAssembly = Path.Combine(tempPath, "build.dll");
-            Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-            Task.Build.Csc.Target.Library(x => x.AddSources(fileset).AddRefences(dllReference).IncludeDebugSymbols.OutputFileTo(outputAssembly));
-            return outputAssembly;
-        }
-
-        public static IEnumerable<Type> FindBuildClasses(string path)
-        {
-            Defaults.Logger.WriteDebugMessage("Executing DLL build from " + path);
-
-            Defaults.Logger.Write("INFO", "Using framework " + Defaults.FrameworkVersion);
-            Assembly assemblyInstance = Assembly.LoadFile(path);
-            Type[] types = assemblyInstance.GetTypes();
-            return types.Where(t => t.IsSubclassOf(typeof (BuildFile)));
-        }
-    }
-
     public class Program
     {
         private static void Main(string[] args)
@@ -89,7 +54,7 @@ namespace FluentBuild.BuildExe
                     Defaults.Logger.WriteError("ERROR", "Could not find sources at: " + parser.PathToBuildSources);
                     Environment.Exit(1);
                 }
-                pathToAssembly = BuildAssemblyFromSources(parser.PathToBuildSources);
+                pathToAssembly = CompilerService.BuildAssemblyFromSources(parser.PathToBuildSources);
             }
             else
             {
@@ -102,7 +67,14 @@ namespace FluentBuild.BuildExe
                 Environment.Exit(1);
             }
 
-            ExecuteBuildTask(pathToAssembly, parser.ClassToRun, parser.MethodsToRun);
+
+            var output = CompilerService.ExecuteBuildTask(pathToAssembly, parser.ClassToRun, parser.MethodsToRun);
+            if (output != string.Empty)
+            {
+                Console.WriteLine(output);
+                Environment.Exit(1);
+            }
+            Environment.Exit(0);
         }
 
         private static void UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -113,122 +85,9 @@ namespace FluentBuild.BuildExe
             Environment.Exit(1);
         }
 
-        /// <summary>
-        /// Builds an assembly from a source folder. Currently this only works with .cs files
-        /// </summary>
-        /// <param name="path">The path to the source files</param>
-        /// <returns>returns the path to the compiled assembly</returns>
-        public static string BuildAssemblyFromSources(string path)
-        {
-            //TODO: once FluentFs is merged it can be removed here
-            //but look at what is done so that we can have external DLLs referenced from the command line?
-            Defaults.Logger.WriteDebugMessage("Sources found in: " + path);
-            var fileset = new FileSet();
-            fileset.Include(path + "\\**\\*.cs");
+       
 
-            string startPath =
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
-
-            string fluentBuilddll = Path.Combine(startPath, "FluentBuild.dll");
-            var fluentFs = new FluentFs.Core.File(Path.Combine(startPath, "FluentFs.dll"));
-            Defaults.Logger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + fluentBuilddll);
-            string tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks;
-            Directory.CreateDirectory(tempPath);
-            string outputAssembly = Path.Combine(tempPath, "build.dll");
-            
-            
-            Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
-
-            var references = new List<String>() { fluentBuilddll};
-            if (File.Exists(fluentFs.ToString()))
-            {
-                fluentFs.Copy.To(tempPath);
-                references.Add(fluentFs.ToString());
-            }
-
-            Task.Build.Csc.Target.Library(x => x.AddSources(fileset).AddRefences(references.ToArray()).IncludeDebugSymbols.OutputFileTo(outputAssembly));
-            return outputAssembly;
-        }
-
-        /// <summary>
-        /// Executes a DLL.
-        /// </summary>
-        /// <param name="path">The path to the DLL that has a class that implements IBuild</param>
-        /// <param name="classToRun"></param>
-        /// <param name="methodsToRun"></param>
-        private static void ExecuteBuildTask(string path, string classToRun, IList<string> methodsToRun)
-        {
-            Defaults.Logger.WriteDebugMessage("Executing DLL build from " + path);
-
-            Defaults.Logger.Write("INFO", "Using framework " + Defaults.FrameworkVersion);
-            Assembly assemblyInstance = Assembly.LoadFile(path);
-            Type[] types = assemblyInstance.GetTypes();
-            bool classfound = false;
-            foreach (Type t in types)
-            {
-                if ((t.Name == classToRun) && t.IsSubclassOf(typeof (BuildFile)))
-                {
-                    classfound = true;
-                    StartRun(assemblyInstance, t, methodsToRun);
-                    return;
-                }
-            }
-
-            if (!classfound)
-            {
-                Console.WriteLine(String.Format("Could not find class {0} that inherits from FluentBuild.BuildFile",
-                                                classToRun));
-                Environment.Exit(1);
-            }
-
-            Environment.Exit(0);
-        }
-
-        private static void StartRun(Assembly assemblyInstance, Type t, IList<string> methodsToRun)
-        {
-            var build = (BuildFile) assemblyInstance.CreateInstance(t.FullName);
-            Defaults.Logger.WriteHeader("Execute");
-            Defaults.Logger.Write("EXECUTE", "Running Class: " + t.FullName);
-            if (build.TaskCount == 0)
-            {
-                Console.WriteLine("No tasks were found. Make sure that you add a task in your build classes constructor via AddTask()");
-                Environment.Exit(1);
-            }
-            if (methodsToRun.Count != 0)
-            {
-                if (!DoAllMethodsExistInType(t, methodsToRun))
-                {
-                    Console.WriteLine("Methods that were specified could not be found in the build file. Ensure the method is Public and spelled correctly");
-                    Environment.Exit(1);
-                }
-                build.ClearTasks();
-
-                foreach (string method in methodsToRun)
-                {
-                    string methodToInvoke = method;
-                    var a = new Action(delegate { t.InvokeMember(methodToInvoke, BindingFlags.Default | BindingFlags.InvokeMethod, null, build, null); });
-                    build.AddTask(method, a);
-                }
-            }
-
-            build.InvokeNextTask();
-        }
-
-        public static bool DoAllMethodsExistInType(Type type, IList<string> methodsToRun)
-        {
-            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-            foreach (string methodToRun in methodsToRun)
-            {
-                bool found = false;
-                foreach (MethodInfo method in methods)
-                {
-                    if (method.Name == methodToRun)
-                        found = true;
-                }
-                if (found == false)
-                    return false;
-            }
-            return true;
-        }
+       
+       
     }
 }

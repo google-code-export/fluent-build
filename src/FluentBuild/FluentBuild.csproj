@@ -148,6 +148,8 @@
     <Compile Include="PropertiesTests.cs" />
     <Compile Include="Publishing\Publish.cs" />
     <Compile Include="Compilation\TargetType.cs" />
+    <Compile Include="UtilitySupport\CompilerService.cs" />
+    <Compile Include="UtilitySupport\CompileServiceTests.cs" />
     <Compile Include="VerbosityLevel.cs" />
     <Compile Include="Properties\CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />

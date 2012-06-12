@@ -30,6 +30,8 @@ namespace Build
         protected File assembly_BuildFileConverter_WithTests;
         protected Directory directory_src_converter;
         internal File thirdparty_sharpzip;
+        protected File assembly_FluentBuild_UI;
+        protected File file_src_UI;
 
 
         public Default()
@@ -41,8 +43,10 @@ namespace Build
             directory_src_core = directory_base.SubFolder("src").SubFolder("FluentBuild");
             directory_src_runner = directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe");
             directory_src_converter = directory_base.SubFolder("src").SubFolder("FluentBuild.BuildFileConverter");
+            file_src_UI = directory_base.SubFolder("src").SubFolder("FluentBuild.BuildUI").File("FluentBuild.BuildUI.csproj");
 
             assembly_BuildFileConverter_WithTests = directory_compile.File("BuildFileConverter.exe");
+            assembly_FluentBuild_UI = directory_compile.File("fb.ui.exe");
             assembly_FluentBuild_WithTests_Partial = directory_compile.File("FluentBuildWithTests_partial.dll");
             assembly_FluentBuild_WithTests_Merged = directory_compile.File("FluentBuild.dll");
             assembly_Functional_Tests = directory_compile.File("FluentBuild_Functional_Tests.dll");
@@ -68,6 +72,7 @@ namespace Build
             //AddTask(RunFunctionalTests);      
             AddTask(CompileBuildFileConverter);
             AddTask(TestBuildFileConverter);
+            AddTask(CompileBuildUi);
         }
 
         private void TestBuildFileConverter()
@@ -87,6 +92,12 @@ namespace Build
                         .OutputFileTo(assembly_BuildFileConverter_WithTests)
                         );
         }
+
+        private void CompileBuildUi()
+        {
+            Task.Build.MsBuild(x=>x.ProjectOrSolutionFilePath(file_src_UI.ToString()).OutputDirectory(directory_compile));
+        }
+
 
         private void CopyDependantAssembliesToCompileDir()
         {
