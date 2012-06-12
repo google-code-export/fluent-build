@@ -71,7 +71,6 @@
     <Compile Include="Controls\BuildTask.xaml.cs">
       <DependentUpon>BuildTask.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Code\Compiler.xaml.cs" />
     <Compile Include="Code\Runner.xaml.cs" />
     <Compile Include="Code\SettingHelper.xaml.cs" />
     <Compile Include="Code\TaskTypeDataSelector.cs" />

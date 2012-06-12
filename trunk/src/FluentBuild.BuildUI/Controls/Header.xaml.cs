@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FluentBuild.UtilitySupport;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace FluentBuild.BuildUI.Controls
@@ -23,6 +25,7 @@ namespace FluentBuild.BuildUI.Controls
     public partial class Header : UserControl, INotifyPropertyChanged
     {
         private string _buildAssembly;
+        private string _classToRun;
 
         public Header()
         {
@@ -30,6 +33,7 @@ namespace FluentBuild.BuildUI.Controls
             Path.Text = SettingHelper.LastPath;
             WorkingDirectory.Text = SettingHelper.LastWorkingDirectory;
             Compile(Path.Text);
+            Defaults.Logger.Verbosity = VerbosityLevel.Full;
         }
 
                 
@@ -58,6 +62,7 @@ namespace FluentBuild.BuildUI.Controls
                     WorkingDirectory.Text = dialog.SelectedPath;
                     InvokePropertyChanged("Path");
                     InvokePropertyChanged("WorkingDirectory");
+                    
                     Compile(dialog.SelectedPath);
                 }
             }
@@ -69,8 +74,8 @@ namespace FluentBuild.BuildUI.Controls
                 return;
 
             InvokeReset();
-
-            Defaults.Logger.Verbosity = VerbosityLevel.Full;
+            
+            
             Defaults.Logger.WriteHeader("Compile Build File");
             if (!Directory.Exists(selectedPath))
             {
@@ -80,8 +85,12 @@ namespace FluentBuild.BuildUI.Controls
 
             try
             {
-                _buildAssembly = Compiler.BuildAssemblyFromSources(selectedPath);
-                Targets.ItemsSource = Compiler.FindBuildClasses(_buildAssembly);
+                _buildAssembly = CompilerService.BuildAssemblyFromSources(selectedPath);
+                //if (output != string.Empty)
+                //    Defaults.Logger.WriteError("Compile", output);
+                //_buildAssembly = Compiler.BuildAssemblyFromSources(selectedPath);
+                Targets.ItemsSource = CompilerService.FindBuildClasses(_buildAssembly);
+//                Targets.ItemsSource = Compiler.FindBuildClasses(_buildAssembly);
                 Targets.SelectedIndex = 0;
                 InvokePropertyChanged("Targets");
             }
@@ -101,16 +110,28 @@ namespace FluentBuild.BuildUI.Controls
 
         private void RunCurrentBuild(object sender, RoutedEventArgs e)
         {
+            InvokeReset();
+
+            Defaults.Logger.WriteHeader("Start");
             SettingHelper.LastPath = Path.Text;
             SettingHelper.LastWorkingDirectory = WorkingDirectory.Text;
-
-            InvokeReset();
             
             Directory.SetCurrentDirectory(WorkingDirectory.Text);
             Environment.CurrentDirectory = WorkingDirectory.Text;
+            _classToRun = Targets.SelectedItem.ToString();
+            var th = new Thread(StartCompile);
+            th.Start();
+           
+        }
 
-            var runner = new Runner(Targets.SelectedItem.ToString(), _buildAssembly);
-            runner.Run();
+        private void StartCompile()
+        {
+            
+            var output = CompilerService.ExecuteBuildTask(_buildAssembly, _classToRun, null);
+            if (output != string.Empty)
+                Defaults.Logger.WriteError("", output);
+            //            var runner = new Runner(Targets.SelectedItem.ToString(), _buildAssembly);
+            //          runner.Run();
         }
 
         private void Refresh(object sender, RoutedEventArgs e)

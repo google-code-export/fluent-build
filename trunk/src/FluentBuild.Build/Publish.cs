@@ -27,9 +27,10 @@ namespace Build
             ZipFilePath = directory_release.File(_finalFileName);
 
             AddTask(Clean);
+            AddTask(CompileBuildUi);
             AddTask(CompileCoreWithOutTests);
             AddTask(CompileRunner);
-            AddTask(CompileBuildFileConverterWithoutTests);
+            //AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
             //AddTask(PublishToRepository);
@@ -53,6 +54,11 @@ namespace Build
                 .ProjectName("fluent-build")
                 .Summary("Alpha Release (v" + _version + ")")
                 .TargetFileName(_finalFileName));
+        }
+
+        private void CompileBuildUi()
+        {
+            Task.Build.MsBuild(x=>x.ProjectOrSolutionFilePath(file_src_UI.ToString()).OutputDirectory(directory_compile).Configuration("Release").SetProperty("ReferencePath", directory_compile.ToString()));
         }
 
         private void CompileBuildFileConverterWithoutTests()

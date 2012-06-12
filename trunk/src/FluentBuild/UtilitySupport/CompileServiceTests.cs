@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace FluentBuild.Tests.BuildExeTexts
+namespace FluentBuild.UtilitySupport
 {
     [TestFixture]
-    public class ProgramTests
+    public class CompileServiceTests
     {
         public class Sample
         {
@@ -22,14 +22,14 @@ namespace FluentBuild.Tests.BuildExeTexts
         [Test]
         public void ShouldFindAllMethods()
         {
-            Assert.That(BuildExe.Program.DoAllMethodsExistInType(typeof (Sample), new List<string>() {"DoStuff", "DoStuff2"}), Is.True);
+            Assert.That(CompilerService.DoAllMethodsExistInType(typeof (Sample), new List<string>() {"DoStuff", "DoStuff2"}), Is.True);
         }
 
 
         [Test]
         public void ShouldNotFindAllMethods()
         {
-            Assert.That(BuildExe.Program.DoAllMethodsExistInType(typeof(Sample), new List<string>() { "DoStuff", "DoStuff2", "NonexistantMethod" }), Is.False);
+            Assert.That(CompilerService.DoAllMethodsExistInType(typeof(Sample), new List<string>() { "DoStuff", "DoStuff2", "NonexistantMethod" }), Is.False);
         }
 
     }

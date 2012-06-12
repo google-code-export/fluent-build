@@ -6,7 +6,13 @@ namespace FluentBuild.MessageLoggers
     {
         internal IMessageLogger InternalLogger;
 
-        public VerbosityLevel Verbosity { get; set; }
+        private static VerbosityLevel _verbosity;
+        public VerbosityLevel Verbosity
+        {
+            get { return _verbosity; }
+            set { _verbosity = value; }
+        }
+
         public MessageLoggerProxy(IMessageLogger internalLogger)
         {
             InternalLogger = internalLogger;
