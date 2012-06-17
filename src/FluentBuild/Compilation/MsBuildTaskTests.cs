@@ -165,7 +165,7 @@ namespace FluentBuild.Compilation
         public void ShouldExecute()
         {
             _subject.InternalExecute();
-            _mockExecutor.AssertWasCalled(x=>x.Execute(Arg<Action<Executable>>.Is.Anything));
+            _mockExecutor.AssertWasCalled(x=>x.Execute(Arg<Func<Executable,object>>.Is.Anything));
         }
     }
 }

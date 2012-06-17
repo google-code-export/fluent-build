@@ -10,13 +10,13 @@ namespace FluentBuild.Runners
     public class ILMergeTests
     {
         private ILMerge _subject;
-        private IFileFinder _fileFinder;
+        private IFileSystemHelper _fileSystemHelper;
 
         [SetUp]
         public void Setup()
         {
-            _fileFinder = MockRepository.GenerateMock<IFileFinder>();
-            _subject = new ILMerge(_fileFinder);
+            _fileSystemHelper = MockRepository.GenerateMock<IFileSystemHelper>();
+            _subject = new ILMerge(_fileSystemHelper);
         }
 
         [Test]
@@ -30,15 +30,15 @@ namespace FluentBuild.Runners
         [Test]
         public void FindExecutable_ShouldAutoFindIfNotSet()
         {
-            _fileFinder.Stub(x => x.Find("ILMerge.exe")).Return("c:\\ilmerge.exe");
+            _fileSystemHelper.Stub(x => x.Find("ILMerge.exe")).Return("c:\\ilmerge.exe");
             _subject.FindExecutable();
-            _fileFinder.AssertWasCalled(x=>x.Find("ILMerge.exe"));
+            _fileSystemHelper.AssertWasCalled(x=>x.Find("ILMerge.exe"));
         }
 
         [Test, ExpectedException(typeof(FileNotFoundException))]
         public void FindExecutable_ShouldThrowExecptionIfItCantBeFound()
         {
-            _fileFinder.Stub(x => x.Find("ILMerge.exe")).Return(null);
+            _fileSystemHelper.Stub(x => x.Find("ILMerge.exe")).Return(null);
             _subject.FindExecutable();
 
         }

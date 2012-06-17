@@ -6,11 +6,12 @@ namespace FluentBuild.Runners.Zip
     ///<summary>
     /// Choice class that determines to compress or decompress
     ///</summary>
-    [Obsolete("",true)]
+    [Obsolete("Replaced with Task.Run.Zip",true)]
     public class Zip
     {
         internal Zip()
         {
+            
         }
 
         ///<summary>
@@ -24,7 +25,7 @@ namespace FluentBuild.Runners.Zip
         ///<param name="pathToArchive">Path to the zip file to decompress</param>
         public ZipDecompress Decompress(string pathToArchive)
         {
-            return new ZipDecompress(pathToArchive);
+            return new ZipDecompress().Path(pathToArchive);
         }
     }
 }

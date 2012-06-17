@@ -187,6 +187,7 @@ namespace FluentBuild.AssemblyInfoBuilding
     internal class AssemblyInfoDetails : InternalExecuatable, IAssemblyInfoDetails
     {
         internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
+        private readonly IFileSystemHelper _fileSystemHelper;
         private readonly List<String> _imports = new List<string>();
         private IList<AssemblyInfoItem> _lineItems = new List<AssemblyInfoItem>();
         internal string _outputPath;
@@ -223,15 +224,16 @@ namespace FluentBuild.AssemblyInfoBuilding
 //        private string AssemblyTrademark;
 
 
-        internal AssemblyInfoDetails(IAssemblyInfoBuilder assemblyInfoBuilder)
+        internal AssemblyInfoDetails(IAssemblyInfoBuilder assemblyInfoBuilder, IFileSystemHelper fileSystemHelper)
         {
             AssemblyInfoBuilder = assemblyInfoBuilder;
+            _fileSystemHelper = fileSystemHelper;
         }
 
-        public AssemblyInfoDetails()
-        {
-            
-        }
+        internal AssemblyInfoDetails(IAssemblyInfoBuilder assemblyInfoBuilder) : this(assemblyInfoBuilder, new FileSystemHelper())
+                {
+                    
+                }
 
         /// <summary>
         /// Import a namespace. Will generate a using namespace; in C# and imports namespace in VB
@@ -505,7 +507,7 @@ namespace FluentBuild.AssemblyInfoBuilding
 
         internal override void InternalExecute()
         {
-            using (var fs = new FileStream(_outputPath, FileMode.Create, FileAccess.Write))
+            using (var fs = _fileSystemHelper.CreateFile(_outputPath))
             using (var sw = new StreamWriter(fs))
             {
                 sw.Write(AssemblyInfoBuilder.Build(this));

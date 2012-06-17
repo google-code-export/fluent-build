@@ -5,10 +5,7 @@
     ///</summary>
     public class OneThroughNine
     {
-        internal OneThroughNine()
-        {
-        }
-
+   
         private readonly ZipCompress _zipCompress;
 
         internal OneThroughNine(ZipCompress zipCompress)

@@ -16,7 +16,7 @@ namespace FluentBuild.Utilities
         public void Find_ShouldSearchFileSystem()
         {
             var mockFilesystem = MockRepository.GenerateStub<IFileSystemWrapper>();
-            var finder = new FileFinder(mockFilesystem);
+            var finder = new FileSystemHelper(mockFilesystem);
 
             string fileToSearchFor = "searchForMe.exe";
             mockFilesystem.Stub(x => x.GetFilesIn(Properties.CurrentDirectory)).Return(new[]
@@ -31,7 +31,7 @@ namespace FluentBuild.Utilities
         public void Find_ShouldSearchFileSystemRecursively()
         {
             var mockFilesystem = MockRepository.GenerateStub<IFileSystemWrapper>();
-            var finder = new FileFinder(mockFilesystem);
+            var finder = new FileSystemHelper(mockFilesystem);
 
             string fileToSearchFor = "searchForMe.exe";
             mockFilesystem.Stub(x => x.GetFilesIn(Properties.CurrentDirectory)).Return(new[]

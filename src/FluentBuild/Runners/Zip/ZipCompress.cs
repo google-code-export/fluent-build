@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using FluentBuild.Core;
+using FluentBuild.Utilities;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace FluentBuild.Runners.Zip
@@ -55,20 +56,27 @@ namespace FluentBuild.Runners.Zip
         /// The location to place the output
         ///</summary>
         ///<param name="zipFilePath">path to the output file</param>
-        void To(string zipFilePath);
+        ZipCompress To(string zipFilePath);
     }
 
     ///<summary>
     /// Compresses a file or folder
     ///</summary>
-    public class ZipCompress : IZipCompress
+    public class ZipCompress : InternalExecuatable, IZipCompress
     {
+        private readonly IFileSystemHelper _fileSystemHelper;
         internal int CompressionLevel;
-        private string _password;
-        private string _file;
-        private string _path;
+        internal string _password;
+        internal string _file;
+        internal string _path;
+        private string _outputPath;
 
-        internal ZipCompress()
+        internal ZipCompress(IFileSystemHelper fileSystemHelper)
+        {
+            _fileSystemHelper = fileSystemHelper;
+        }
+
+        public ZipCompress() : this(new FileSystemHelper())
         {
         }
 
@@ -126,7 +134,7 @@ namespace FluentBuild.Runners.Zip
             return this;
         }
 
-        private IList<String> GetFiles()
+        internal IList<String> GetFiles()
         {
             //only one should be set
             if (String.IsNullOrEmpty(_file) && (String.IsNullOrEmpty(_path)))
@@ -138,7 +146,7 @@ namespace FluentBuild.Runners.Zip
             if (!string.IsNullOrEmpty(_file))
                 return new List<String> {_file};
 
-            return System.IO.Directory.GetFiles(_path, "*.*", SearchOption.AllDirectories).ToList();
+            return _fileSystemHelper.FindInFoldersRecursively(_path, "*.*");
         }
 
 
@@ -155,16 +163,22 @@ namespace FluentBuild.Runners.Zip
         /// The location to place the output
         ///</summary>
         ///<param name="zipFilePath">path to the output file</param>
-        public void To(string zipFilePath)
+        public ZipCompress To(string zipFilePath)
         {
-            using (var zipOut = new ZipOutputStream(System.IO.File.Create(zipFilePath)))
+            _outputPath = zipFilePath;
+            return this;
+        }
+
+        internal override void InternalExecute()
+        {
+            using (var zipOut = new ZipOutputStream(_fileSystemHelper.CreateFile(_outputPath)))
             {
                 zipOut.SetLevel(CompressionLevel);
                 zipOut.Password = _password;
 
                 foreach (string fileName in GetFiles())
                 {
-                    var fileInfo = new FileInfo(fileName);
+
                     //strip of the base folder 
                     //this will keep folders preserved
                     string path;
@@ -172,14 +186,16 @@ namespace FluentBuild.Runners.Zip
                         path = fileName;
                     else
                         path = fileName.Replace(_path, "");
-                    
+
                     if (path.StartsWith("\\"))
                         path = path.Substring(1); //removes the leading \
 
                     var entry = new ZipEntry(path);
-                    FileStream sReader = System.IO.File.OpenRead(fileName);
+                    Stream sReader = _fileSystemHelper.ReadFile(fileName);
                     var buff = new byte[Convert.ToInt32(sReader.Length)];
-                    sReader.Read(buff, 0, (int) sReader.Length);
+                    sReader.Read(buff, 0, (int)sReader.Length);
+
+                    var fileInfo = new FileInfo(fileName);
                     entry.DateTime = fileInfo.LastWriteTime;
                     entry.Size = sReader.Length;
                     sReader.Close();
@@ -190,6 +206,5 @@ namespace FluentBuild.Runners.Zip
                 zipOut.Close();
             }
         }
-
     }
 }

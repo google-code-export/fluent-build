@@ -1,4 +1,6 @@
-﻿namespace FluentBuild.Compilation
+﻿using NUnit.Framework;
+
+namespace FluentBuild.Compilation
 {
     ///<summary>
     /// Picks the Target Type
@@ -23,6 +25,17 @@
                 _target = new Target(_compiler);
                 return _target;
             }
+        }
+    }
+
+    [TestFixture]
+    public class TargetTypeTests
+    {
+        [Test]
+        public void Target()
+        {
+            var subject = new TargetType("CSC");
+            Assert.That(subject.Target, Is.TypeOf<Target>());
         }
     }
 }

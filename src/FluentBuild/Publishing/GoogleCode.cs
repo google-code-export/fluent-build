@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.Publishing
 {
@@ -11,7 +12,7 @@ namespace FluentBuild.Publishing
     ///<summary>
     /// Publishes a file to GoogleCode
     ///</summary>
-    public class GoogleCode
+    public class GoogleCode : InternalExecuatable
     {
         private static readonly byte[] NewLineAsciiBytes = Encoding.ASCII.GetBytes("\r\n");
         private static readonly string Boundary = Guid.NewGuid().ToString();
@@ -22,7 +23,7 @@ namespace FluentBuild.Publishing
         private string _targetFileName;
         private string _username;
 
-        internal GoogleCode()
+        public GoogleCode()
         {
         }
 
@@ -105,10 +106,10 @@ namespace FluentBuild.Publishing
         [Obsolete("Replaced with Task.Publish", true)]
         public void Upload()
         {
-            Execute();
+            InternalExecute();
         }
 
-        internal void Execute()
+        internal override void InternalExecute()
         {
             Validate();
             var request= CreateRequest();

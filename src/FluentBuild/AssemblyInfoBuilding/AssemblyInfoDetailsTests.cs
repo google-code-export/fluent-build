@@ -1,5 +1,8 @@
-﻿using FluentFs.Core;
+﻿using System.IO;
+using FluentBuild.Utilities;
 using NUnit.Framework;
+using Rhino.Mocks;
+using File = FluentFs.Core.File;
 
 namespace FluentBuild.AssemblyInfoBuilding
 {
@@ -48,5 +51,19 @@ namespace FluentBuild.AssemblyInfoBuilding
             subject.OutputPath(new File("temp"));
             Assert.That(subject._outputPath,Is.EqualTo("temp"));
         }
+
+        [Test]
+        public void ShouldWriteToMemory()
+        {
+            var mock = MockRepository.GenerateStub<IFileSystemHelper>();
+            var subject = new AssemblyInfoDetails(new CSharpAssemblyInfoBuilder(), mock);
+            var outputpath = "IDONTEXIST";
+            var inMemoryFile = new MemoryStream();
+            mock.Stub(x => x.CreateFile(outputpath)).Return(inMemoryFile);
+            ((AssemblyInfoDetails)subject.Copyright("TEST").OutputPath(outputpath)).InternalExecute();
+            Assert.That(inMemoryFile.GetBuffer().Length, Is.GreaterThan(0));
+            
+        }
+
     }
 }

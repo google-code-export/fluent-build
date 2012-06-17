@@ -5,7 +5,12 @@ namespace FluentBuild.Utilities
 {
     public interface IActionExcecutor
     {
+
         void Execute<T>(Action<T> args) where T : InternalExecuatable, new();
+        void Execute<T>(Func<T, object> args) where T : InternalExecuatable, new();
+        
+        void ExecuteFailable<T>(Func<T, object> args) where T : FailableInternalExecutable<T>, new();
+
         void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecuatable;
         void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecuatable;
     }
@@ -13,6 +18,21 @@ namespace FluentBuild.Utilities
     internal class ActionExcecutor : IActionExcecutor
     {
         public void Execute<T>(Action<T> args) where T : InternalExecuatable, new()
+        {
+            var concrete = new T();
+            args(concrete);
+            concrete.InternalExecute();
+        }
+        
+        //allows running a property getter e.g. ContinueOnError so that we don't need a ContinueOnError() method
+        public void Execute<T>(Func<T, object> args) where T : InternalExecuatable, new()
+        {
+            var concrete = new T();
+            args(concrete);
+            concrete.InternalExecute();
+        }
+
+        public void ExecuteFailable<T>(Func<T, object> args) where T : FailableInternalExecutable<T>, new()
         {
             var concrete = new T();
             args(concrete);

@@ -1,7 +1,6 @@
 Build
   This release    
 	-ability to specify (or detect) compiler to use for build files (current default is c#)
-	-References!
 	-Token replacement should allow you to specify the delimiter around the token.
 
   Future Releases
@@ -14,7 +13,6 @@ Build
     -multiple targets. i.e. -C:MainBuild[Clean,Compile,Deploy]
 	-Multithreaded builds
 	-Plugin for VS to do builds
-	-ability to reference (or detect) other assemblies in the build file
     -One time tasks (only run the first time the script is run on that computer)
 	-SFTP lib: http://sourceforge.net/projects/dotnetssh/files/
     -Start VS web server C:\Program Files (x86)\Common Files\microsoft shared\DevServer\9.0

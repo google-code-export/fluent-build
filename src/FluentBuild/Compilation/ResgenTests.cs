@@ -42,7 +42,7 @@ namespace FluentBuild.Compilation
 
             Resgen subject = new Resgen(mock).GenerateFrom(fileset).OutputTo(@"c:\temp\");
             subject.Execute();
-            mock.AssertWasCalled(x=>x.Execute(Arg<Action<Executable>>.Is.Anything));
+            mock.AssertWasCalled(x=>x.Execute(Arg<Func<Executable, object>>.Is.Anything));
         }
 
         ///<summary />

@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using FluentBuild.Compilation;
-using FluentBuild.Core;
 using FluentBuild.UtilitySupport;
-using FluentFs.Core;
-using Directory = System.IO.Directory;
-using File = System.IO.File;
 
 namespace FluentBuild.BuildExe
 {
@@ -21,8 +13,7 @@ namespace FluentBuild.BuildExe
             {
                 Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-m:Method] [-p:property=value] [-p:property] -v:Verbosity");
                 Console.WriteLine();
-                Console.WriteLine(
-                    "BuildFileOrSource: the dll that contains the precompiled build file OR the path to the source folder than contains build files (fb.exe will compile the build file for you)");
+                Console.WriteLine("BuildFileOrSource: the dll that contains the precompiled build file OR the path to the source folder than contains build files (fb.exe will compile the build file for you)");
                 Console.WriteLine("c: The class to run. If none is specified then \"Default\" is assumed");
                 Console.WriteLine("p: properties to pass to the build script. These can be accessed via Properties.CommandLine in your build script. ");
                 Console.WriteLine("v: verbosity of output. Can be None, TaskNamesOnly, TaskDetails, Full");
@@ -54,7 +45,7 @@ namespace FluentBuild.BuildExe
                     Defaults.Logger.WriteError("ERROR", "Could not find sources at: " + parser.PathToBuildSources);
                     Environment.Exit(1);
                 }
-                pathToAssembly = CompilerService.BuildAssemblyFromSources(parser.PathToBuildSources);
+                pathToAssembly = CompilerService.BuildAssemblyFromSources(parser.PathToBuildSources, Environment.CurrentDirectory);
             }
             else
             {
@@ -68,7 +59,7 @@ namespace FluentBuild.BuildExe
             }
 
 
-            var output = CompilerService.ExecuteBuildTask(pathToAssembly, parser.ClassToRun, parser.MethodsToRun);
+            string output = CompilerService.ExecuteBuildTask(pathToAssembly, parser.ClassToRun, parser.MethodsToRun);
             if (output != string.Empty)
             {
                 Console.WriteLine(output);
@@ -84,10 +75,5 @@ namespace FluentBuild.BuildExe
             Defaults.Logger.WriteError("ERROR", "An unexpected error has occurred. Details:" + exceptionObject);
             Environment.Exit(1);
         }
-
-       
-
-       
-       
     }
 }
