@@ -49,7 +49,7 @@ namespace FluentBuild.Runners
         internal string Destination;
         internal IList<String> Sources;
         private string _exePath;
-        private readonly IFileFinder _fileFinder;
+        private readonly IFileSystemHelper _fileSystemHelper;
         private string _framework;
 
         internal string[] BuildArgs()
@@ -86,7 +86,7 @@ namespace FluentBuild.Runners
             if (!string.IsNullOrEmpty(_exePath))
                 return _exePath;
 
-            var tmp =_fileFinder.Find("ILMerge.exe");
+            var tmp =_fileSystemHelper.Find("ILMerge.exe");
 
             if (tmp == null)
                 throw new FileNotFoundException("Could not automatically find ILMerge.exe. Please specify it manually using ILMerge.ExecutableLocatedAt");
@@ -104,13 +104,13 @@ namespace FluentBuild.Runners
             return this;
         }
 
-        internal ILMerge(IFileFinder fileFinder)
+        internal ILMerge(IFileSystemHelper fileSystemHelper)
         {
-            _fileFinder = fileFinder;
+            _fileSystemHelper = fileSystemHelper;
             Sources = new List<string>();
         }
 
-        public ILMerge() : this(new FileFinder())
+        public ILMerge() : this(new FileSystemHelper())
         {
             
         }

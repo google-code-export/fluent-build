@@ -83,6 +83,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Publishing\PublishTests.cs" />
+    <Compile Include="Runners\UnitTesting\UnitTestFrameworkArgsTests.cs" />
+    <Compile Include="Runners\Zip\OneThroughNineTests.cs" />
+    <Compile Include="Runners\Zip\ZipDecompressTests.cs" />
+    <Compile Include="Runners\Zip\ZipOptionsTests.cs" />
     <Compile Include="Utilities\ActionExecutorTests.cs" />
     <Compile Include="ApplicationProperties\CommandLinePropertiesTests.cs" />
     <Compile Include="ApplicationProperties\CruiseControlPropertiesTests.cs" />
@@ -105,6 +110,8 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="BuildFileTests.cs" />
     <Compile Include="Compilation\TargetTests.cs" />
+    <Compile Include="Utilities\EnvironmentVariableWrapperTests.cs" />
+    <Compile Include="Utilities\FailableInternalExecutable.cs" />
     <Compile Include="Utilities\InternalExecuatable.cs" />
     <Compile Include="MessageLoggers\DebugMessages.cs" />
     <Compile Include="MessageLoggers\MessageLoggerProxy.cs" />
@@ -124,13 +131,13 @@
     <Compile Include="Publishing\Ftp.cs" />
     <Compile Include="Publishing\FtpTests.cs" />
     <Compile Include="Publishing\GoogleCodeTests.cs" />
-    <Compile Include="Runners\RunArgs.cs" />
+    <Compile Include="Runners\RunOptions.cs" />
     <Compile Include="Runners\ExecutableFailedExceptionTests.cs" />
     <Compile Include="Runners\ILMergeTests.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="Runners\UnitTestFrameworkArgs.cs" />
+    <Compile Include="Runners\UnitTesting\UnitTestFrameworkArgs.cs" />
     <Compile Include="Compilation\Compilers.cs" />
-    <Compile Include="Utilities\FileFinder.cs" />
+    <Compile Include="Utilities\FileSystemHelper.cs" />
     <Compile Include="Utilities\FileFinderTests.cs" />
     <Compile Include="Utilities\SdkNotFoundExceptionTests.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
@@ -150,6 +157,7 @@
     <Compile Include="Compilation\TargetType.cs" />
     <Compile Include="UtilitySupport\CompilerService.cs" />
     <Compile Include="UtilitySupport\CompileServiceTests.cs" />
+    <Compile Include="UtilitySupport\ProjectParser.cs" />
     <Compile Include="VerbosityLevel.cs" />
     <Compile Include="Properties\CustomAssemblyInfo.cs" />
     <Compile Include="Database\MsSqlCreateTests.cs" />
@@ -189,7 +197,6 @@
     <Compile Include="Runners\Zip\ZipCompress.cs" />
     <Compile Include="Runners\Zip\ZipCompressTests.cs" />
     <Compile Include="Runners\Zip\ZipDecompress.cs" />
-    <Compile Include="Runners\Zip\ZipTests.cs" />
     <Compile Include="Utilities\CustomFrameworkVersion.cs" />
     <Compile Include="Utilities\DesktopFrameworkType.cs" />
     <Compile Include="Utilities\EnvironmentVariableWrapper.cs" />
@@ -217,7 +224,7 @@
     <Compile Include="Compilation\Target.cs" />
     <Compile Include="Core\Obsolete\MessageLogger.cs" />
     <Compile Include="Utilities\SdkNotFoundException.cs" />
-    <Compile Include="Runners\ZipOptions.cs" />
+    <Compile Include="Runners\Zip\ZipOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

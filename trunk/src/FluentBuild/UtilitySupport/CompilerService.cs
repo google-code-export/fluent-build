@@ -12,7 +12,7 @@ namespace FluentBuild.UtilitySupport
 {
     public class CompilerService
     {
-        public static string BuildAssemblyFromSources(string path)
+        public static string BuildAssemblyFromSources(string path, string baseDirectory)
         {
             //TODO: once FluentFs is merged it can be removed here
             //but look at what is done so that we can have external DLLs referenced from the command line?
@@ -20,13 +20,14 @@ namespace FluentBuild.UtilitySupport
             var fileset = new FileSet();
             fileset.Include(path + "\\**\\*.cs");
 
-            string startPath =
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
+            string startPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
 
             string fluentBuilddll = Path.Combine(startPath, "FluentBuild.dll");
-            var fluentFs = new FluentFs.Core.File(Path.Combine(startPath, "FluentFs.dll"));
+            
             Defaults.Logger.WriteDebugMessage("Adding in reference to the FluentBuild DLL from: " + fluentBuilddll);
+            
             string tempPath = Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\" + DateTime.Now.Ticks;
+            //System.IO.Directory.Delete(Environment.GetEnvironmentVariable("TEMP") + "\\FluentBuild\\", true);
             System.IO.Directory.CreateDirectory(tempPath);
             string outputAssembly = Path.Combine(tempPath, "build.dll");
 
@@ -34,10 +35,26 @@ namespace FluentBuild.UtilitySupport
             Defaults.Logger.WriteDebugMessage("Output Assembly: " + outputAssembly);
 
             var references = new List<String>() { fluentBuilddll };
+          
+            /*
+            var fluentFs = new FluentFs.Core.File(Path.Combine(startPath, "FluentFs.dll"));
             if (File.Exists(fluentFs.ToString()))
             {
                 fluentFs.Copy.To(tempPath);
                 references.Add(fluentFs.ToString());
+            }
+             */
+
+            //add in third party references
+            var projectParser = new ProjectParser(path, baseDirectory);
+            if (projectParser.HasProjectFile())
+            {
+                var referencesFromProjectFile = projectParser.GetReferences();
+                foreach (var referenceFromProjectFile in referencesFromProjectFile)
+                {
+                    Defaults.Logger.WriteDebugMessage("Adding in third party reference " + referenceFromProjectFile);
+                }
+                references.AddRange(referencesFromProjectFile);
             }
 
             Task.Build.Csc.Target.Library(x => x.AddSources(fileset).AddRefences(references.ToArray()).IncludeDebugSymbols.OutputFileTo(outputAssembly));

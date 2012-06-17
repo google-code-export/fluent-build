@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -21,49 +22,66 @@ namespace FluentBuild.BuildUI
         }
 
 
-        public AutoResetEvent Lock;
+        //public AutoResetEvent Lock;
+        //public object Lock;
+
         public BuildProgress()
         {
             InitializeComponent();
             BuildNotices = new ObservableCollection<BuildData>();
             DataContext = this;
-            Lock = new AutoResetEvent(false);
-
+            //Lock = new AutoResetEvent(false);
+            MessageActions=new Queue<Action>();
+         //   Lock = new object();
         }
 
         public ObservableCollection<BuildData> BuildNotices { get; set; }
 
         #region IMessageLogger Members
 
+        private Queue<Action> MessageActions { get; set; }
+ 
         public void WriteHeader(string header)
         {
-            Lock.Reset();
             Dispatcher.BeginInvoke(new Action(delegate
-                                                      {
+                                           {
+                                               if (BuildNotices.Count > 0)
+                                               {
+                                                   BuildNotices.Last().Completed = true;
+                                               }
+                                               BuildNotices.Add(new BuildData(header));
+                                           }));
+                
+        }
 
-                                                          if (BuildNotices.Count > 0)
-                                                          {
-                                                              BuildNotices.Last().Completed = true;
-                                                          }
-                                                          BuildNotices.Add(new BuildData(header));
-                                                          Lock.Set();
-                                                      }));
+        private void ProcessMessageQueue()
+        {
+            Dispatcher.BeginInvoke(new Action(delegate
+                                                  {
+                                                      while (MessageActions.Count == 0)
+                                                      {
+                                                          var action = MessageActions.Dequeue();
+                                                          action.Invoke();
+                                                      }
+                                                  }));
             
         }
 
         private void RunOnDispatcherThread(Action x)
         {
-            Lock.WaitOne(); //wait for previous writes to complete
 
-            if (BuildNotices.Count == 0)
-            {
-                return;
-            }
+     if (BuildNotices.Count == 0)
+                {
+                    return;
+                }
 
-            //create a lock so that events happen in the proper order
-            Lock.Reset();
-            var dispatcherOperation = Dispatcher.BeginInvoke(x);
-            dispatcherOperation.Completed += delegate { Lock.Set(); };
+                //MessageActions.Enqueue(x);
+                //create a lock so that events happen in the proper order
+                //Lock.Reset();
+                var dispatcherOperation = Dispatcher.BeginInvoke(x);
+                //dispatcherOperation.Completed += delegate { Lock.Set(); };
+           // }
+           // ProcessMessageQueue();
         }
 
         public void WriteDebugMessage(string message)

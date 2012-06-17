@@ -20,6 +20,17 @@ namespace FluentBuild
         }
 
         [Test]
+        public void ShouldWorkOnProperty()
+        {
+            //just a syntax test here to make sure properties can be passed to Execute()
+            InternalExecutableTester.OutputValue = "";
+            var subject = new ActionExcecutor();
+            subject.Execute<InternalExecutableTester>(x => x.TestValue);
+        }
+
+
+
+        [Test]
         public void ShouldApplyValuesToItemWithConstructorAndExecute()
         {
             //verifies that actions are applied

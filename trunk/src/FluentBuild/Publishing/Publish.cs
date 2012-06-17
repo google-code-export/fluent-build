@@ -1,21 +1,29 @@
 ﻿using System;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.Publishing
 {
     public class Publish
     {
+        internal readonly IActionExcecutor _excecutor;
+
+        public Publish(IActionExcecutor excecutor)
+        {
+            _excecutor = excecutor;
+        }
+
+        public Publish() : this(new ActionExcecutor())
+        {
+        }
+
         public void ToGoogleCode(Action<GoogleCode> args)
         {
-            var concrete = new GoogleCode();
-            args(concrete);
-            concrete.Execute();
+            _excecutor.Execute(args);
         }
 
         public void Ftp(Action<Ftp> args)
         {
-            var concrete = new Ftp();
-            args(concrete);
-            concrete.Execute();
+            _excecutor.Execute(args);
         }
     }
 }

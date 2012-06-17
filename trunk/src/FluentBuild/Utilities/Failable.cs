@@ -18,8 +18,6 @@ namespace FluentBuild.Utilities
         /// Swallow exceptions and continue
         ///</summary>
         T ContinueOnError { get; }
-
-        T ContinueOnError2();
     }
 
     public abstract class InternalFailable<T>: InternalExecuatable, IFailable<T>
@@ -47,14 +45,7 @@ namespace FluentBuild.Utilities
                 OnError = OnError.Continue;
                 return (T)(object)this;
             }
-        }
-
-        public T ContinueOnError2()
-        {
-            OnError = OnError.Continue;
-            return (T)(object)this;
-        }
-        
+        }        
     }
 
     ///<summary>
@@ -86,12 +77,6 @@ namespace FluentBuild.Utilities
                 OnError = OnError.Continue;
                 return (T)(object)this;
             }
-        }
-
-        public T ContinueOnError2()
-        {
-            OnError = OnError.Continue;
-            return (T)(object)this;
         }
     }
 }

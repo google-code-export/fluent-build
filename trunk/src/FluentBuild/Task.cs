@@ -19,9 +19,9 @@ namespace FluentBuild
             get { return new Compilers(); }
         }
 
-        public static RunArgs Run
+        public static RunOptions Run
         {
-            get { return new RunArgs();  }
+            get { return new RunOptions();  }
         }
 
         public static Publish Publish

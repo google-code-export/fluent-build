@@ -13,7 +13,7 @@ namespace FluentBuild.Tests
         [Test]
         public void FindFile()
         {
-            var finder = new FluentBuild.Utilities.FileFinder();
+            var finder = new FluentBuild.Utilities.FileSystemHelper();
             string find = finder.Find("MSBuild.exe", @"C:\Windows\Microsoft.NET\");
             Assert.That(find, Is.Not.Null);
         }

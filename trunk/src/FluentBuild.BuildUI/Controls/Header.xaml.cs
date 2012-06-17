@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FluentBuild.UtilitySupport;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -36,7 +26,12 @@ namespace FluentBuild.BuildUI.Controls
             Defaults.Logger.Verbosity = VerbosityLevel.Full;
         }
 
-                
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
         public event EventHandler Reset;
 
         public void InvokeReset()
@@ -45,61 +40,66 @@ namespace FluentBuild.BuildUI.Controls
             if (handler != null) handler(this, new EventArgs());
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
         private void BrowseClick(object sender, RoutedEventArgs e)
         {
             using (var dialog = new FolderBrowserDialog())
             {
+                
                 dialog.SelectedPath = Path.Text;
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     Path.Text = dialog.SelectedPath;
                     WorkingDirectory.Text = dialog.SelectedPath;
                     InvokePropertyChanged("Path");
                     InvokePropertyChanged("WorkingDirectory");
-                    
+
                     Compile(dialog.SelectedPath);
                 }
             }
         }
+
 
         private void Compile(string selectedPath)
         {
             if (string.IsNullOrEmpty(selectedPath))
                 return;
 
+            SettingHelper.LastPath = Path.Text;
+            SettingHelper.LastWorkingDirectory = WorkingDirectory.Text;
+
             InvokeReset();
-            
-            
+
             Defaults.Logger.WriteHeader("Compile Build File");
-            if (!Directory.Exists(selectedPath))
-            {
-                Defaults.Logger.WriteError("Folder Not Found", "Could not find the build folder at " + selectedPath);
-                return;
-            }
 
-            try
-            {
-                _buildAssembly = CompilerService.BuildAssemblyFromSources(selectedPath);
-                //if (output != string.Empty)
-                //    Defaults.Logger.WriteError("Compile", output);
-                //_buildAssembly = Compiler.BuildAssemblyFromSources(selectedPath);
-                Targets.ItemsSource = CompilerService.FindBuildClasses(_buildAssembly);
-//                Targets.ItemsSource = Compiler.FindBuildClasses(_buildAssembly);
-                Targets.SelectedIndex = 0;
-                InvokePropertyChanged("Targets");
-            }
-            catch (Exception e)
-            {
-                Defaults.Logger.WriteError("Compile Build File", e.ToString());
-            }
+            string workingDir = WorkingDirectory.Text;
+            //run on another thread to not block the message thread
+            var d = new Action(delegate
+                                   {
+                                       if (!Directory.Exists(selectedPath))
+                                       {
+                                           Defaults.Logger.WriteError("Folder Not Found", "Could not find the build folder at " + selectedPath);
+                                           return;
+                                       }
 
-            Defaults.Logger.WriteHeader("Done");
+                                       try
+                                       {
+                                           _buildAssembly = CompilerService.BuildAssemblyFromSources(selectedPath, workingDir);
+                                           Dispatcher.BeginInvoke(new Action(delegate
+                                                                                 {
+                                                                                     Targets.ItemsSource = CompilerService.FindBuildClasses(_buildAssembly);
+                                                                                     Targets.SelectedIndex = 0;
+                                                                                     InvokePropertyChanged("Targets");
+                                                                                 }));
+                                       }
+                                       catch (Exception e)
+                                       {
+                                           Defaults.Logger.WriteError("Compile Build File", e.ToString());
+                                       }
+
+                                       Defaults.Logger.WriteHeader("Done");
+                                   });
+
+            d.BeginInvoke(null, null);
         }
 
         public void InvokePropertyChanged(string name)
@@ -113,21 +113,18 @@ namespace FluentBuild.BuildUI.Controls
             InvokeReset();
 
             Defaults.Logger.WriteHeader("Start");
-            SettingHelper.LastPath = Path.Text;
-            SettingHelper.LastWorkingDirectory = WorkingDirectory.Text;
-            
+
+
             Directory.SetCurrentDirectory(WorkingDirectory.Text);
             Environment.CurrentDirectory = WorkingDirectory.Text;
             _classToRun = Targets.SelectedItem.ToString();
             var th = new Thread(StartCompile);
             th.Start();
-           
         }
 
         private void StartCompile()
         {
-            
-            var output = CompilerService.ExecuteBuildTask(_buildAssembly, _classToRun, null);
+            string output = CompilerService.ExecuteBuildTask(_buildAssembly, _classToRun, null);
             if (output != string.Empty)
                 Defaults.Logger.WriteError("", output);
             //            var runner = new Runner(Targets.SelectedItem.ToString(), _buildAssembly);
@@ -144,13 +141,12 @@ namespace FluentBuild.BuildUI.Controls
             using (var dialog = new FolderBrowserDialog())
             {
                 dialog.SelectedPath = WorkingDirectory.Text;
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     WorkingDirectory.Text = dialog.SelectedPath;
                     InvokePropertyChanged("WorkingDirectory");
                 }
             }
         }
-
     }
 }

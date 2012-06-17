@@ -51,8 +51,7 @@ namespace Build
 
         private void Package()
         {
-              Task.Run.Zip(x=>x.Compress
-                               .SourceFolder(directory_compile)
+              Task.Run.Zip.Compress(x=>x.SourceFolder(directory_compile)
                                .UsingCompressionLevel.Nine
                                .To(directory_release.File("release.zip")));
         }

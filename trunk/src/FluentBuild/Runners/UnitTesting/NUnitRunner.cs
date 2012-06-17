@@ -67,23 +67,23 @@ namespace FluentBuild.Runners.UnitTesting
     ///<summary>
     /// Runs nunit against an assembly
     ///</summary>
-    public class NUnitRunner : Failable<NUnitRunner>, INUnitRunner
+    public class NUnitRunner : FailableInternalExecutable<NUnitRunner>, INUnitRunner
     {
         internal string _fileToTest;
         internal NameValueCollection _parameters;
         internal string _pathToConsoleRunner;
         internal string _workingDirectory;
         private IExecutable _executable;
-        private readonly IFileFinder _fileFinder;
+        private readonly IFileSystemHelper _fileSystemHelper;
 
-        internal NUnitRunner(IExecutable executable, IFileFinder fileFinder)
+        internal NUnitRunner(IExecutable executable, IFileSystemHelper fileSystemHelper)
         {
             _executable = executable;
-            _fileFinder = fileFinder;
+            _fileSystemHelper = fileSystemHelper;
             _parameters = new NameValueCollection();
         }
 
-        public NUnitRunner() : this (new Executable(), new FileFinder())
+        public NUnitRunner() : this (new Executable(), new FileSystemHelper())
         {
 
         }
@@ -194,11 +194,11 @@ namespace FluentBuild.Runners.UnitTesting
             InternalExecute();    
         }
 
-        internal void InternalExecute()
+        internal override void InternalExecute()
         {
             if (String.IsNullOrEmpty(_pathToConsoleRunner))
             {
-              _pathToConsoleRunner = _fileFinder.Find("nunit-console.exe");
+              _pathToConsoleRunner = _fileSystemHelper.Find("nunit-console.exe");
                 if (_pathToConsoleRunner == null)
                     throw new FileNotFoundException("Could not automatically find nunit-console.exe. Please specify it manually using NunitRunner.PathToNunitConsoleRunner");
             }
@@ -218,9 +218,8 @@ namespace FluentBuild.Runners.UnitTesting
             
             //don't throw an errors
             var returnCode = executable.WithMessageProcessor(new NunitMessageProcessor()).Execute();
-
             //if it returned non-zero then just exit (as a test failed)
-            if (returnCode != 0 && OnError == OnError.Fail)
+            if (returnCode != 0 && base.OnError == OnError.Fail)
             {
                 BuildFile.SetErrorState();
                 Defaults.Logger.WriteError("ERROR", "Nunit returned non-zero error code");

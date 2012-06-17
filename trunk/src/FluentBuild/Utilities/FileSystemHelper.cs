@@ -1,33 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FluentBuild.Core;
 using FluentFs.Support;
 
 
 namespace FluentBuild.Utilities
 {
-    internal interface IFileFinder
+    internal interface IFileSystemHelper
     {
         string Find(string fileName, string directory);
         string Find(string fileName);
+        List<String> FindInFoldersRecursively(string directory, string filter);
+        Stream CreateFile(string path);
+        Stream ReadFile(string path);
     }
 
     ///<summary>
     /// Finds files recursevely in a directory
     ///</summary>
-    public class FileFinder : IFileFinder
+    public class FileSystemHelper : IFileSystemHelper
     {
         private readonly IFileSystemWrapper _fileSystem;
 
-        internal FileFinder(IFileSystemWrapper fileSystem)
+        internal FileSystemHelper(IFileSystemWrapper fileSystem)
         {
             _fileSystem = fileSystem;
         }
 
         ///<summary>
-        /// Instantiates a new FileFinder
+        /// Instantiates a new FileSystemHelper
         ///</summary>
-        public FileFinder() : this(new FileSystemWrapper())
+        public FileSystemHelper() : this(new FileSystemWrapper())
         {
         }
 
@@ -73,6 +78,21 @@ namespace FluentBuild.Utilities
         public string Find(string fileName)
         {
             return Find(fileName, Properties.CurrentDirectory);
+        }
+
+        public List<string> FindInFoldersRecursively(string directory, string filter)
+        {
+            return System.IO.Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories).ToList();
+        }
+
+        public Stream CreateFile(string path)
+        {
+            return System.IO.File.Create(path);
+        }
+
+        public Stream ReadFile(string path)
+        {
+            return System.IO.File.OpenRead(path);
         }
     }
 }

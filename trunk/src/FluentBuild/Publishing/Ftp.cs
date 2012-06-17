@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using FluentBuild.Utilities;
 
 namespace FluentBuild.Publishing
 {
-    public class Ftp
+    public class Ftp : InternalExecuatable
     {
         private string _serverName;
         private string _username;
@@ -52,7 +53,9 @@ namespace FluentBuild.Publishing
             return this;
         }
 
-        internal void Execute()
+
+
+        internal override void InternalExecute()
         {
             Defaults.Logger.Write("FTP", String.Format("Uploading {0} to ftp://{1}/{2}/{3}", _localFilePath, _serverName, _remoteFilePath, Path.GetFileName(_localFilePath)));
             var request = (FtpWebRequest)WebRequest.Create(String.Format("ftp://{0}/{1}/{2}", _serverName, _remoteFilePath, Path.GetFileName(_localFilePath)));
@@ -78,12 +81,6 @@ namespace FluentBuild.Publishing
             s.Read(fileContents, 0, (int) s.Length);
         }
 
-//            using (var sourceStream = new StreamReader(_localFilePath))
-//            {
-//                fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-//                request.ContentLength = fileContents.Length;
-//                sourceStream.Close();
-//            }
 
             using (var requestStream = request.GetRequestStream())
             {
@@ -93,12 +90,6 @@ namespace FluentBuild.Publishing
 
             using (var response = (FtpWebResponse)request.GetResponse())
             {
-                if (response == null)
-                {
-                    BuildFile.SetErrorState();
-                    return;
-                }
-
                 if (response.StatusCode != FtpStatusCode.ClosingData)
                     BuildFile.SetErrorState();
 

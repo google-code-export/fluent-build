@@ -115,7 +115,7 @@ namespace FluentBuild.Runners.UnitTesting
         {
             string pathToExe = "c:\\test.exe";
             var mockExecutable = MockRepository.GenerateStub<IExecutable>();
-            var mockFileFinder = MockRepository.GenerateStub<IFileFinder>();
+            var mockFileFinder = MockRepository.GenerateStub<IFileSystemHelper>();
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
             
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
@@ -138,7 +138,7 @@ namespace FluentBuild.Runners.UnitTesting
         {
             string pathToExe = "c:\\test.exe";
             var mockExecutable = MockRepository.GenerateStub<IExecutable>();
-            var mockFileFinder = MockRepository.GenerateStub<IFileFinder>();
+            var mockFileFinder = MockRepository.GenerateStub<IFileSystemHelper>();
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
@@ -161,7 +161,7 @@ namespace FluentBuild.Runners.UnitTesting
         {
             string pathToExe = "c:\\test.exe";
             var mockExecutable = MockRepository.GenerateStub<IExecutable>();
-            var mockFileFinder = MockRepository.GenerateStub<IFileFinder>();
+            var mockFileFinder = MockRepository.GenerateStub<IFileSystemHelper>();
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
@@ -186,7 +186,7 @@ namespace FluentBuild.Runners.UnitTesting
             string workingDirectory = "c:\\temp";
             string pathToExe = "c:\\test.exe";
             var mockExecutable = MockRepository.GenerateStub<IExecutable>();
-            var mockFileFinder = MockRepository.GenerateStub<IFileFinder>();
+            var mockFileFinder = MockRepository.GenerateStub<IFileSystemHelper>();
             var subject = new NUnitRunner(mockExecutable,mockFileFinder);
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
@@ -210,7 +210,7 @@ namespace FluentBuild.Runners.UnitTesting
             string workingDirectory = "c:\\temp";
             string pathToExe = "c:\\test.exe";
             var mockExecutable = MockRepository.GenerateStub<IExecutable>();
-            var mockFileFinder = MockRepository.GenerateStub<IFileFinder>();
+            var mockFileFinder = MockRepository.GenerateStub<IFileSystemHelper>();
             
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
 
@@ -231,7 +231,7 @@ namespace FluentBuild.Runners.UnitTesting
         public void Execute_ShouldThrowExceptionIfPathToExeNotSetAndCanNotBeFound()
         {
             var mockExecutable = MockRepository.GenerateStub<IExecutable>();
-            var mockFileFinder = MockRepository.GenerateStub<IFileFinder>();
+            var mockFileFinder = MockRepository.GenerateStub<IFileSystemHelper>();
 
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
 

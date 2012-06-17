@@ -21,9 +21,9 @@ namespace FluentBuild.Tests
                 writer.Close();
             }
             
-            Task.Run.Zip(x=>x.Compress.SourceFile(fileToCompress).UsingCompressionLevel.Five.UsingPassword(password).To(zipFilePath));
+            Task.Run.Zip.Compress(x=>x.SourceFile(fileToCompress).UsingCompressionLevel.Five.UsingPassword(password).To(zipFilePath));
             File.Delete(fileToCompress);
-            Task.Run.Zip(x=>x.Decompress(zipFilePath).UsingPassword(password).To(rootFolder));
+            Task.Run.Zip.Decompress(x=>x.Path(zipFilePath).UsingPassword(password).To(rootFolder));
 
             Assert.That(File.Exists(fileToCompress), "File did not exist");
             Assert.That(File.ReadAllText(fileToCompress), Is.EqualTo(fileContent));
@@ -43,9 +43,9 @@ namespace FluentBuild.Tests
                 fileStream.Close();
             }
 
-            Task.Run.Zip(x=>x.Compress.SourceFolder(folderToCompress).UsingCompressionLevel.Five.UsingPassword(password).To(zipFilePath));
+            Task.Run.Zip.Compress(x=>x.SourceFolder(folderToCompress).UsingCompressionLevel.Five.UsingPassword(password).To(zipFilePath));
             Directory.Delete(folderToCompress, true);
-            Task.Run.Zip(x=>x.Decompress(zipFilePath).UsingPassword(password).To(rootFolder));
+            Task.Run.Zip.Decompress(x=>x.Path(zipFilePath).UsingPassword(password).To(rootFolder));
 
 //            Assert.That(Directory.Exists(folderToCompress), "Directory did not exist");
 

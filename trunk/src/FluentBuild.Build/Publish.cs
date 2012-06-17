@@ -94,7 +94,7 @@ namespace Build
 
         private void Compress()
         {
-            Task.Run.Zip(x=>x.Compress.SourceFolder(directory_compile).To(ZipFilePath));
+            Task.Run.Zip.Compress(x=>x.SourceFolder(directory_compile).To(ZipFilePath));
         }
     }
 }
