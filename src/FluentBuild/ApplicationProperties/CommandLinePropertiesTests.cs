@@ -1,5 +1,4 @@
-﻿using FluentBuild.Core;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace FluentBuild.ApplicationProperties
 {

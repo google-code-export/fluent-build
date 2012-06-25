@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentBuild.Core;
+
 using FluentBuild.MessageLoggers;
 using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
 using FluentBuild.Utilities;

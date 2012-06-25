@@ -1,5 +1,5 @@
 ﻿using FluentBuild.BuildExe;
-using FluentBuild.Core;
+
 using NUnit.Framework;
 
 namespace FluentBuild.Tests.BuildExeTexts

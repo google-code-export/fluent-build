@@ -1,5 +1,5 @@
 using System;
-using FluentBuild.Core;
+
 using FluentBuild.Runners;
 using NUnit.Framework;
 

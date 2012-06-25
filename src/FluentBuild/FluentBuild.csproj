@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compilation\TargetTypeTests.cs" />
     <Compile Include="Publishing\PublishTests.cs" />
     <Compile Include="Runners\UnitTesting\UnitTestFrameworkArgsTests.cs" />
     <Compile Include="Runners\Zip\OneThroughNineTests.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="MessageLoggers\ConsoleMessageLoggers\ConsoleMessageLogger.cs" />
     <Compile Include="MessageLoggers\IMessageLogger.cs" />
     <Compile Include="MessageLoggers\TeamCityMessageLoggers\MessageLogger.cs" />
-    <Compile Include="Core\Obsolete\Build.cs" />
+    <None Include="Core\Obsolete\Build.cs" />
     <Compile Include="Compilation\MsBuildTask.cs" />
     <Compile Include="Compilation\Resgen.cs" />
     <Compile Include="Compilation\ResgenTests.cs" />
@@ -219,10 +220,10 @@
     <Compile Include="Utilities\RegistryKeyValueFinderTests.cs" />
     <Compile Include="Utilities\RegistryWrapper.cs" />
     <Compile Include="Utilities\RegistryKeyWrapper.cs" />
-    <Compile Include="Core\Obsolete\Run.cs" />
+    <None Include="Core\Obsolete\Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Compilation\Target.cs" />
-    <Compile Include="Core\Obsolete\MessageLogger.cs" />
+    <None Include="Core\Obsolete\MessageLogger.cs" />
     <Compile Include="Utilities\SdkNotFoundException.cs" />
     <Compile Include="Runners\Zip\ZipOptions.cs" />
   </ItemGroup>

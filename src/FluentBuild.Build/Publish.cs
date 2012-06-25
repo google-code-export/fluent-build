@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Text;
 using FluentBuild;
-using FluentBuild.Compilation;
-using FluentBuild.Core;
-using FluentBuild.Runners;
 using FluentFs.Core;
-
+using Directory = FluentFs.Core.Directory;
+using File = FluentFs.Core.File;
 
 namespace Build
 {
@@ -26,6 +26,8 @@ namespace Build
             _finalFileName = "FluentBuild-Beta-" + _version + ".zip";
             ZipFilePath = directory_release.File(_finalFileName);
 
+            ClearTasks();
+            /*
             AddTask(Clean);
             AddTask(CompileBuildUi);
             AddTask(CompileCoreWithOutTests);
@@ -34,6 +36,58 @@ namespace Build
             AddTask(Compress);
             //move to tools folder here?
             //AddTask(PublishToRepository);
+             */
+            AddTask(PublishToNuGet);
+        }
+
+        private void PublishToNuGet()
+        {
+            //create a lib\net40\ folder
+            Directory nuGetBaseFolder = directory_compile.SubFolder("nuget");
+            Directory nuGetFolder = nuGetBaseFolder.Create().SubFolder("lib").Create().SubFolder("net40").Create();
+
+            //copy the assemblies to it
+            AssemblyFluentBuildRunnerRelease.Copy.To(nuGetFolder);
+            //assembly_FluentBuild_UI.Copy.To(nuGetFolder);
+            AssemblyFluentBuildRelease_Merged.Copy.To(nuGetFolder);
+
+            //create the manifest file
+            var sb = new StringBuilder();
+            sb.AppendLine("<?xml version=\"1.0\"?>");
+            sb.AppendLine("<package xmlns=\"http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd\">");
+            sb.AppendLine("<metadata>");
+            sb.AppendLine("<id>FluentBuild</id>");
+            sb.AppendLine("<version>" + this._version + "</version>");
+            sb.AppendLine("<authors>GotWoods</authors>");
+            sb.AppendLine("<owners>GotWoods</owners>");
+            sb.AppendLine("<projectUrl>http://code.google.com/p/fluent-build</projectUrl>");
+            //sb.AppendLine("<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>");
+            sb.AppendLine("<requireLicenseAcceptance>false</requireLicenseAcceptance>");
+            sb.AppendLine("<description>A build tool that allows you to write build scripts in a .NET language</description>");
+            sb.AppendLine("<tags>build </tags>");
+            sb.AppendLine("</metadata>");
+            sb.AppendLine("</package>");
+
+
+            using (var fs = new StreamWriter(nuGetBaseFolder.File("fluentBuild.nuspec").ToString()))
+            {
+                fs.Write(sb.ToString());
+            }
+            
+
+            var pathToNuget = directory_tools.SubFolder("NuGet").File("NuGet.exe");
+            
+            //ensure latest version of nuget
+            Task.Run.Executable(x => x.ExecutablePath(pathToNuget).WithArguments("Update -self"));
+
+            //configure the API key
+            Task.Run.Executable(x => x.ExecutablePath(pathToNuget).WithArguments("setApiKey " + Properties.CommandLineProperties.GetProperty("NuGetApiKey")));
+
+            //package it
+            Task.Run.Executable(x => x.ExecutablePath(pathToNuget).WithArguments("Pack fluentBuild.nuspec").InWorkingDirectory(nuGetBaseFolder));
+
+            //NuGet Push YourPackage.nupkg
+            Task.Run.Executable(x => x.ExecutablePath(pathToNuget).WithArguments("Push fluentBuild." + _version + ".nupkg").InWorkingDirectory(nuGetBaseFolder));
         }
 
         private void CompileRunner()
@@ -41,31 +95,32 @@ namespace Build
             FileSet sourceFiles = new FileSet()
                 .Include(directory_base.SubFolder("src").SubFolder("FluentBuild.BuildExe"))
                 .RecurseAllSubDirectories.Filter("*.cs");
-            Task.Build.Csc.Target.Executable(x=>x.AddSources(sourceFiles)
-                .AddRefences(AssemblyFluentBuildRelease_Merged)
-                .OutputFileTo(AssemblyFluentBuildRunnerRelease));
+            Task.Build.Csc.Target.Executable(x => x.AddSources(sourceFiles)
+                                                      .AddRefences(AssemblyFluentBuildRelease_Merged)
+                                                      .OutputFileTo(AssemblyFluentBuildRunnerRelease));
         }
 
         private void PublishToRepository()
         {
-            Task.Publish.ToGoogleCode(x=>x.LocalFileName(ZipFilePath.ToString())
-                .UserName(Properties.CommandLineProperties.GetProperty("GoogleCodeUsername"))
-                .Password(Properties.CommandLineProperties.GetProperty("GoogleCodePassword"))
-                .ProjectName("fluent-build")
-                .Summary("Alpha Release (v" + _version + ")")
-                .TargetFileName(_finalFileName));
+            Task.Publish.ToGoogleCode(x => x.LocalFileName(ZipFilePath.ToString())
+                                               .UserName(Properties.CommandLineProperties.GetProperty("GoogleCodeUsername"))
+                                               .Password(Properties.CommandLineProperties.GetProperty("GoogleCodePassword"))
+                                               .ProjectName("fluent-build")
+                                               .Summary("Alpha Release (v" + _version + ")")
+                                               .TargetFileName(_finalFileName));
         }
 
         private void CompileBuildUi()
         {
-            Task.Build.MsBuild(x=>x.ProjectOrSolutionFilePath(file_src_UI.ToString()).OutputDirectory(directory_compile).Configuration("Release").SetProperty("ReferencePath", directory_compile.ToString()));
+            Task.Build.MsBuild(x => x.ProjectOrSolutionFilePath(file_src_UI.ToString()).OutputDirectory(directory_compile).Configuration("Release").SetProperty("ReferencePath", directory_compile.ToString()));
         }
 
         private void CompileBuildFileConverterWithoutTests()
         {
             var sourceFiles = new FileSet();
             sourceFiles.Include(directory_src_converter).RecurseAllSubDirectories.Filter("*.cs")
-                .Exclude(directory_src_converter).RecurseAllSubDirectories.Filter("*Tests.cs"); ;
+                .Exclude(directory_src_converter).RecurseAllSubDirectories.Filter("*Tests.cs");
+            ;
 
             Task.Build.Csc.Target.Executable(x => x.AddSources(sourceFiles).OutputFileTo(assembly_BuildFileConverter_WithTests));
         }
@@ -79,14 +134,14 @@ namespace Build
                 .RecurseAllSubDirectories.Filter("*Tests.cs");
 
             Task.Build.Csc.Target.Library(x => x.AddSources(sourceFiles)
-                                                .AddRefences(thirdparty_sharpzip, thirdparty_fluentFs)
-                                                .OutputFileTo(AssemblyFluentBuildRelease_Partial));
+                                                   .AddRefences(thirdparty_sharpzip, thirdparty_fluentFs)
+                                                   .OutputFileTo(AssemblyFluentBuildRelease_Partial));
 
-           Task.Run.ILMerge(x=>x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
-                .AddSource(AssemblyFluentBuildRelease_Partial)
-                .AddSource(thirdparty_sharpzip)
-                .AddSource(thirdparty_fluentFs)
-                .OutputTo(AssemblyFluentBuildRelease_Merged));
+            Task.Run.ILMerge(x => x.ExecutableLocatedAt(@"tools\ilmerge\ilmerge.exe")
+                                      .AddSource(AssemblyFluentBuildRelease_Partial)
+                                      .AddSource(thirdparty_sharpzip)
+                                      .AddSource(thirdparty_fluentFs)
+                                      .OutputTo(AssemblyFluentBuildRelease_Merged));
 
             //now that it is merged delete the partial file
             AssemblyFluentBuildRelease_Partial.Delete();
@@ -94,7 +149,7 @@ namespace Build
 
         private void Compress()
         {
-            Task.Run.Zip.Compress(x=>x.SourceFolder(directory_compile).To(ZipFilePath));
+            Task.Run.Zip.Compress(x => x.SourceFolder(directory_compile).To(ZipFilePath));
         }
     }
 }

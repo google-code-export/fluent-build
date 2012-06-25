@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentBuild.Core;
+
 
 namespace FluentBuild.MessageLoggers.TeamCityMessageLoggers
 {

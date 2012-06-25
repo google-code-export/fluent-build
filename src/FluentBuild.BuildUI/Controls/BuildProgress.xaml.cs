@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
-using FluentBuild.Core;
+
 using FluentBuild.MessageLoggers;
 
 namespace FluentBuild.BuildUI

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentBuild.Core;
+
 using NUnit.Framework;
 using Rhino.Mocks;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FluentBuild.Core;
+
 using FluentBuild.FrameworkFinders;
 using NUnit.Framework;
 using Rhino.Mocks;

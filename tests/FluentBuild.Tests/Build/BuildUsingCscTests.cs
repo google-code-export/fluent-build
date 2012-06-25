@@ -1,6 +1,6 @@
 ﻿using System;
 using FluentBuild.Compilation;
-using FluentBuild.Core;
+
 using FluentFs.Core;
 using NUnit.Framework;
 
@@ -65,9 +65,16 @@ namespace FluentBuild.Tests.Build
             Actual_ShouldCompileWithReference();
         }
 
+        [Test]
         public override void ShouldCompileWithResource()
         {
             Actual_ShouldCompileWithResource();
+        }
+
+        [Test]
+        public override void ShouldCompileWithNamedResource()
+        {
+            Actual_ShouldCompileWithNamedResource();
         }
     }
 }
