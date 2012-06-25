@@ -70,7 +70,7 @@ namespace FluentBuild.BuildFileConverter
         {
             var sb = new StringBuilder();
             sb.AppendLine("using System;");
-            sb.AppendLine("using FluentBuild.Core;");
+            sb.AppendLine("");
             sb.AppendLine();
             sb.AppendLine("namespace Build");
             sb.AppendLine("{");

@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Diagnostics.CodeAnalysis;
-using FluentBuild.Core;
+
 using NUnit.Framework;
 
 namespace FluentBuild.ApplicationProperties
@@ -10,7 +10,8 @@ namespace FluentBuild.ApplicationProperties
 	[TestFixture]
     public class CruiseControlPropertiesTests
     {
-        ///<summary />    	[Test]
+        ///<summary />
+    	[Test]
         public void AllPropertiesShouldMap()
         {
             var subject = new CruiseControlProperties();

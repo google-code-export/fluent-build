@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
-using FluentBuild.Core;
+
 using FluentBuild.MessageLoggers.MessageProcessing;
 using FluentBuild.Utilities;
 

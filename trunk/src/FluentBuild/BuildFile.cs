@@ -20,7 +20,7 @@ namespace FluentBuild
             Tasks = new Queue<NamedTask>();
         }
 
-        internal static void SetErrorState()
+        protected internal static void SetErrorState()
         {
                 IsInErrorState = true;
                 Environment.ExitCode = 1;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentBuild.Compilation;
-using FluentBuild.Core;
+
 using FluentBuild.Utilities;
 using FluentFs.Core;
 using NUnit.Framework;

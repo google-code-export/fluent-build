@@ -20,7 +20,7 @@ namespace Build
 
         private readonly Directory directory_src_core;
         private readonly Directory directory_src_runner;
-        private readonly Directory directory_tools;
+        internal readonly Directory directory_tools;
 
         private readonly File thirdparty_nunit;
         private readonly File thirdparty_rhino;

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Reflection;
 using FluentBuild.Compilation;
-using FluentBuild.Core;
+
 using FluentFs.Core;
 using NUnit.Framework;
 using File = System.IO.File;
+using System.Linq;
 
 namespace FluentBuild.Tests.Build
 {
@@ -74,10 +76,36 @@ namespace FluentBuild.Tests.Build
         internal void Actual_ShouldCompileWithResource()
         {
             var outputFileLocation = rootFolder + "\\temp.exe";
+            string resourceDirectory = rootFolder + "\\WithReference\\CSharp";
+            string resourceFile = resourceDirectory + "\\test.resource";
+            System.IO.Directory.CreateDirectory(resourceDirectory);
+            File.Create(resourceFile).Dispose();
+
             Task.Build.Csc.Target.Library(x => x.AddSources(GetBasicSources())
-                .AddResource(Settings.PathToRootFolder + "\\WithReference\\C#\\test.resource")
+                .AddResource(resourceFile)
                 .OutputFileTo(outputFileLocation));
             Assert.That(File.Exists(outputFileLocation));
+
+            Assembly assembly = Assembly.Load(File.ReadAllBytes(outputFileLocation));
+            Assert.That(assembly.GetManifestResourceNames().Contains("test.resource"), Is.True);
+        }
+
+        public abstract void ShouldCompileWithNamedResource();
+        internal void Actual_ShouldCompileWithNamedResource()
+        {
+            var outputFileLocation = rootFolder + "\\temp.exe";
+            string resourceDirectory = rootFolder + "\\WithReference\\CSharp";
+            string resourceFile = resourceDirectory + "\\test.resource";
+            System.IO.Directory.CreateDirectory(resourceDirectory);
+            File.Create(resourceFile).Dispose();
+
+            Task.Build.Csc.Target.Library(x => x.AddSources(GetBasicSources())
+                .AddResource(resourceFile, "TestIdentifier")
+                .OutputFileTo(outputFileLocation));
+            Assert.That(File.Exists(outputFileLocation));
+
+            Assembly assembly = Assembly.Load(File.ReadAllBytes(outputFileLocation));
+            Assert.That(assembly.GetManifestResourceNames().Contains("TestIdentifier"), Is.True);
         }
     }
 }

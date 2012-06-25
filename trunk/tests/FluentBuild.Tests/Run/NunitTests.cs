@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using FluentBuild.Core;
+
 using FluentBuild.Runners;
 using NUnit.Framework;
 

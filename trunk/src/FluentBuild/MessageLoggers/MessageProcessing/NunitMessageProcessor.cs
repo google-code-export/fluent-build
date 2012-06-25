@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
-using FluentBuild.Core;
+
 
 namespace FluentBuild.MessageLoggers.MessageProcessing
 {
@@ -30,10 +30,7 @@ namespace FluentBuild.MessageLoggers.MessageProcessing
                 return;
             }
             output = output.Substring(startIndex);
-            XDocument xmlDoc = XDocument.Parse(output);
-            if (xmlDoc.Root == null)
-                return;
-
+            var xmlDoc = XDocument.Parse(output);
             foreach (XElement testSuite in xmlDoc.Root.Elements("test-suite"))
             {
                 ProcessTestSuite(testSuite);

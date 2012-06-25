@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentBuild.Core;
+
 using NUnit.Framework;
 
 namespace FluentBuild.MessageLoggers.ConsoleMessageLoggers

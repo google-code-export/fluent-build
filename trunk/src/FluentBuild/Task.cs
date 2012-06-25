@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using FluentBuild.AssemblyInfoBuilding;
 using FluentBuild.Compilation;
-using FluentBuild.Core;
+
 using FluentBuild.Publishing;
 using FluentBuild.Runners;
 using FluentBuild.Runners.Zip;

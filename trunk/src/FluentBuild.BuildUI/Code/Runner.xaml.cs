@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading;
-using FluentBuild.Core;
+
 using FluentBuild.MessageLoggers;
 
 namespace FluentBuild.BuildUI

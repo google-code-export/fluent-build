@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using FluentBuild.Compilation;
-using FluentBuild.Core;
+
 using FluentBuild.Tests.Samples.Run.StdOutStdError;
 using FluentFs.Core;
 using NUnit.Framework;
