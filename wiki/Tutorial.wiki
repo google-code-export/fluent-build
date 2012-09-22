@@ -100,10 +100,10 @@ FileSet sourceFiles = new FileSet().Include("c:\\projects\\mysample\\**\*.cs")
 Once source files are established compiling is the next step:
 
 {{{
-Build.UsingCsc.AddSources(sourceFiles).Target.Library.OutputFileTo("c:\\temp\\mysample.dll").Execute();
+Task.Build.Csc.Target.Library(compiler=>compiler.AddSources(sourceFiles).Target.Library.OutputFileTo("c:\\temp\\mysample.dll"));
 }}}
 
-Currently Build supports three build engines "UsingCsc" for the C# compiler and "UsingVbc" for the VB Compiler. If you need to run a different executable to compile your application then look at using Run.Executable() to perform those actions.
+Currently Build supports three build engines "UsingCsc" for the C# compiler and "UsingVbc" for the VB Compiler. If you need to run a different executable to compile your application then use Task.Run.Executable() to perform those actions.
 
 Once a build engine is selected you can do many build tasks. The common ones are to AddSources (which takes a fileset), specify an output file, and select the type
 of project you want to build. The targets are Executable (i.e. a console application), Library (i.e. a dll), Module (not commonly used), and WindowsExecutable. 
@@ -111,29 +111,28 @@ of project you want to build. The targets are Executable (i.e. a console applica
 If your project references a DLL then they will need to be included via the AddReferences method:
 
 {{{
-Build.UsingCsc.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo("c:\\temp\\mysample.dll").Execute();
+Task.Build.UsingCsc.Target.Library(compiler=>compiler.AddSources(sourceFiles).AddRefences(thirdparty_rhino, thirdparty_nunit).OutputFileTo("c:\\temp\\mysample.dll"));
 }}}
 
-The key thing to remember is that nothing will happen unless you call Execute() to actually run the compile!
 
 = Doing More =
 FluentBuild has some extra syntax that enables you to do common build tasks. The most common of these is running a unit test framework. 
 At the time of running the only currently supported framework is Nunit and can be invoked like so:
 
 {{{
-Run.UnitTestFramework.NUnit.FileToTest(assembly_FluentBuild.ToString()).Execute();
+Task.Run.UnitTestFramework.NUnit(nunit=>nunit.FileToTest(assembly_FluentBuild.ToString()));
 }}}
 
 Zip support has also been added:
 
 {{{
-Run.Zip.Compress.SourceFolder("c:\\temp").UsingCompressionLevel.Six.To("myproject.zip");
+Task.Run.Zip.Compress(zip=>zip.SourceFolder("c:\\temp").UsingCompressionLevel.Six.To("myproject.zip"));
 }}}
 
 You can run any external file if need be as well:
 
 {{{
-Run.Executeable("c:\\sample.exe").WithArguments("/c:test").Execute();
+Task.Run.Executeable(exe=>exe.ExecutablePath("c:\\sample.exe").WithArguments("/c:test"));
 }}}
 
 = Changing Defaults =
