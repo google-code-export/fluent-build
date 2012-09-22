@@ -9,7 +9,7 @@
   # Write TeamCity plugin <--Done
   # Release <--Done
   # Adding language around more third party tools.
-  # Updating and improving the database management code.
+  # Adding in support/detection for other .NET languages
   # Look at implementing some conventions to make writing builds more repeatable
 
 = Possible Third Party Tools =
