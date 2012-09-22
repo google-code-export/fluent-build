@@ -16,7 +16,7 @@ Fluent build allows you to write a build script right in your favorite IDE using
 Any application will need to setup are the folders, files, and tasks for the build to succeed. Typically you will want to create variables representing the directories involved. This is best accomplished using the BuildFolder class which simplifies dealing with folders (although you can use plain old strings if you want).
 
 {{{
-directory_base = new BuildFolder(Properties.CurrentDirectory);
+directory_base = new Directory(Properties.CurrentDirectory);
 directory_compile = directory_base.SubFolder("compile");
 directory_release = directory_base.SubFolder("release");
 directory_tools = directory_base.SubFolder("tools");
@@ -32,7 +32,7 @@ thirdparty_rhino = directory_compile.File("rhino.mocks.dll");
 Alternatively a BuildArtifact can be created manually:
 
 {{{
-var output = new BuildArtifact("c:\\temp\\output.dll");
+var output = new File("c:\\temp\\output.dll");
 }}}
 
 The next thing we need to do is write methods that we want to run and then let the build runner know to run them.
@@ -75,7 +75,7 @@ By default if FluentBuild can not perform a task it will throw an error and stop
 NOTE: The default failure behavior can be changed by setting the Defaults.OnError property.
 
 = FileSets & Compilation = 
-NOTE: Most methods will take a string path or else a BuildFolder/BuildArtifact object. Use whichever works best for you.
+NOTE: Most methods will take a string path or else a Directory/File object. Use whichever works best for you.
 
 At a minimum compliation requires a compiler, source files, a target type and an output file name.
 
