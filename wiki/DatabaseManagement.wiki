@@ -1,5 +1,6 @@
 #summary using Fluent-Build to create and manage your database
 
+*PLEASE NOTE:* This is a beta feature. There are lots of database migration tools and we recommend using them instead of this. It remains only for backwards compatibility and may be removed (or replaced) in future versions. 
 
 Managing databases and database versioning can be a pain to do manually. In fluent-build there is some rudimentary support for automating a lot of this work.
 
