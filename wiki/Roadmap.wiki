@@ -5,9 +5,9 @@
   # File Tokenization <-- Done
   # Assembly Info Generation <-- Done
   # Look at other tools and add some nice helpers (unit test runners, zip support, etc.) <-- Done
-  # Improving language, code base, and fixing bugs <--In Progress
+  # Improving language, code base, and fixing bugs <--Done
   # Write TeamCity plugin <--Done
-  # Release
+  # Release <--Done
   # Adding language around more third party tools.
   # Updating and improving the database management code.
   # Look at implementing some conventions to make writing builds more repeatable
