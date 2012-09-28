@@ -19,7 +19,7 @@
             PossibleSdkInstallKeys.Add(@"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.0A\WinSDKNetFxTools\InstallationFolder");
         }
 
-        protected override string FrameworkFolderVersionName
+        protected internal override string FrameworkFolderVersionName
         {
             get { return "v3.5"; }
         }

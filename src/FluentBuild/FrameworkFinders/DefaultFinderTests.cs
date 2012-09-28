@@ -10,7 +10,7 @@ namespace FluentBuild.FrameworkFinders
 {
     public class TestFinder : DefaultFinder
     {
-        protected override string FrameworkFolderVersionName
+        protected internal override string FrameworkFolderVersionName
         {
             get { return "TEST"; }
         }

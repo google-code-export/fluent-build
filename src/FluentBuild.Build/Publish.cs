@@ -22,12 +22,12 @@ namespace Build
             AssemblyFluentBuildRelease_Merged = directory_compile.File("FluentBuild.dll");
             AssemblyFluentBuildRunnerRelease = directory_compile.File("fb.exe");
 
-            _version = "1.1.0.0";
-            _finalFileName = "FluentBuild-Beta-" + _version + ".zip";
+            _version = "1.2.0.0";
+            _finalFileName = "FluentBuild-" + _version + ".zip";
             ZipFilePath = directory_release.File(_finalFileName);
 
             ClearTasks();
-            /*
+            
             AddTask(Clean);
             AddTask(CompileBuildUi);
             AddTask(CompileCoreWithOutTests);
@@ -35,8 +35,8 @@ namespace Build
             //AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
-            //AddTask(PublishToRepository);
-             */
+            AddTask(PublishToRepository);
+             
             AddTask(PublishToNuGet);
         }
 
@@ -106,7 +106,7 @@ namespace Build
                                                .UserName(Properties.CommandLineProperties.GetProperty("GoogleCodeUsername"))
                                                .Password(Properties.CommandLineProperties.GetProperty("GoogleCodePassword"))
                                                .ProjectName("fluent-build")
-                                               .Summary("Alpha Release (v" + _version + ")")
+                                               .Summary("Release (v" + _version + ")")
                                                .TargetFileName(_finalFileName));
         }
 

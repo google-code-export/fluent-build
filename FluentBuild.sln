@@ -3,7 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFF3F75D-66EA-46E7-9BCC-F2AC3875BFAE}"
 	ProjectSection(SolutionItems) = preProject
+		FluentBuild.vsmdi = FluentBuild.vsmdi
+		Local.testsettings = Local.testsettings
 		ToDo.txt = ToDo.txt
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild", "src\FluentBuild\FluentBuild.csproj", "{71965190-338E-42CD-9D48-47955DB750E2}"
@@ -20,7 +23,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.BuildUI", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prototypes", "Prototypes", "{03DC0B1C-310F-4E5E-BE8F-878114AA9B1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuild.MSTests", "FluentBuild.MSTests\FluentBuild.MSTests.csproj", "{AB6A957A-FD8C-4FA5-8816-F0768F81F537}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FluentBuild.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -90,6 +98,16 @@ Global
 		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|x86.ActiveCfg = Release|x86
 		{793C4DCC-067E-4511-8ACE-6CB53DDF7E4A}.Release|x86.Build.0 = Release|x86
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AB6A957A-FD8C-4FA5-8816-F0768F81F537}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

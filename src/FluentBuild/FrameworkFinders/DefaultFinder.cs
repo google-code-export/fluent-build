@@ -47,7 +47,7 @@ namespace FluentBuild.FrameworkFinders
 
         protected IList<string> PossibleSdkInstallKeys { get; set; }
 
-        protected abstract string FrameworkFolderVersionName { get; }
+        protected internal abstract string FrameworkFolderVersionName { get; }
         protected IList<string> PossibleFrameworkInstallKeys { get; set; }
 
         #region IFrameworkFinder Members
@@ -64,7 +64,7 @@ namespace FluentBuild.FrameworkFinders
         /// accurate physical path to the SDK
         ///</summary>
         ///<returns>Path to SDK if found. Null if not found</returns>
-        public string PathToSdk()
+        public virtual string PathToSdk()
         {
             KeyValuePair<string, string> foundValue = _finder.FindFirstValue(PossibleSdkInstallKeys.ToArray());
             if (string.IsNullOrEmpty(foundValue.Key))

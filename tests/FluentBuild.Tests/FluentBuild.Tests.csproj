@@ -89,6 +89,7 @@
     <Compile Include="Build\FrameworkVersionTests.cs" />
     <Compile Include="Build\SampleBuildFile.cs" />
     <Compile Include="ProjectParser.cs" />
+    <Compile Include="Run\MSTests.cs" />
     <Compile Include="Run\ProcessOutputTests.cs" />
     <Compile Include="Samples\Build\Simple\C#\basic.cs" />
     <Compile Include="Samples\Build\Simple\C#\Propgram.cs" />

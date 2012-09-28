@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentBuild;
 using FluentBuild.Compilation;
+using FluentBuild.FrameworkFinders;
 using FluentBuild.Utilities;
 using FluentFs.Core;
 using OnError = FluentFs.Core.OnError;
@@ -184,6 +185,7 @@ namespace Build
             thirdparty_fluentFs.Copy.To(directory_compile);
             Task.Run.UnitTestFramework.Nunit(x => x.FileToTest(assembly_FluentBuild_WithTests_Merged));
         }
+
 
         private void RunFunctionalTests()
         {
