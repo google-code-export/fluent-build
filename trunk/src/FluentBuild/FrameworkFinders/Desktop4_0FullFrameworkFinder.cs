@@ -20,7 +20,7 @@ namespace FluentBuild.FrameworkFinders
             
         }
 
-        protected override string FrameworkFolderVersionName
+        protected internal override string FrameworkFolderVersionName
         {
             get { return "v4.0.30319"; }
         }

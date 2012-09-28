@@ -61,6 +61,7 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib-net2.0\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\nunit\nunit.framework.dll</HintPath>
@@ -84,7 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compilation\TargetTypeTests.cs" />
+    <Compile Include="FrameworkFinders\Desktop4_5Finder.cs" />
     <Compile Include="Publishing\PublishTests.cs" />
+    <Compile Include="Runners\UnitTesting\MSTestRunner.cs" />
+    <Compile Include="Runners\UnitTesting\MSTestRunnerTests.cs" />
     <Compile Include="Runners\UnitTesting\UnitTestFrameworkArgsTests.cs" />
     <Compile Include="Runners\Zip\OneThroughNineTests.cs" />
     <Compile Include="Runners\Zip\ZipDecompressTests.cs" />

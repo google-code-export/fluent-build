@@ -16,7 +16,7 @@ namespace FluentBuild.FrameworkFinders
             PossibleSdkInstallKeys.Add(@"SOFTWARE\Microsoft\.NETFramework\sdkInstallRootv2.0");
         }
 
-        protected override string FrameworkFolderVersionName
+        protected internal override string FrameworkFolderVersionName
         {
             get { return "v2.0.50727"; }
         }

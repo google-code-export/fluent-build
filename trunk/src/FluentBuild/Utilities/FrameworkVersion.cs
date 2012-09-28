@@ -58,6 +58,8 @@ namespace FluentBuild.Utilities
     {
 
         public string FriendlyName { get; private set; }
+        public static IFrameworkVersion NET4_5 = new FrameworkVersion(".NET 4.5", new Desktop4_5Finder());
+
         public static DesktopFrameworkType NET4_0 = new DesktopFrameworkType(new Desktop4_0ClientFrameworkFinder(),
                                                                              new Desktop4_0FullFrameworkFinder());
 

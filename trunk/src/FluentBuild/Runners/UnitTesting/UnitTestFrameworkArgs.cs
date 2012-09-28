@@ -16,6 +16,11 @@ namespace FluentBuild.Runners.UnitTesting
         {
         }
 
+        public void MSTest(Func<MSTestRunner,object> args)
+        {
+            _actionExcecutor.ExecuteFailable(args);
+        }
+
         public void Nunit(Func<NUnitRunner,object> args)
         {
             _actionExcecutor.ExecuteFailable(args);

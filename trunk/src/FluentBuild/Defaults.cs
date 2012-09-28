@@ -25,6 +25,7 @@ namespace FluentBuild
         static Defaults()
         {
             var frameworkVersionsToCheck = new List<IFrameworkVersion>();
+            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_5);
             frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Full);
             frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Client);
             frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_5);
