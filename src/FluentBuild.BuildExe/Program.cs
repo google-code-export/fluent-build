@@ -9,9 +9,9 @@ namespace FluentBuild.BuildExe
     {
         private static void Main(string[] args)
         {
-            if (args.Length == 0)
+            if (args.Length == 0 || args[0] == "/?" || args[0] == "/h")
             {
-                Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-m:Method] [-p:property=value] [-p:property] -v:Verbosity");
+                Console.WriteLine("Usage: fb.exe BuildFileOrSource [-c:BuildClass] [-m:Method] [-p:property=value] [-p:property] [-v:Verbosity]");
                 Console.WriteLine();
                 Console.WriteLine("BuildFileOrSource: the dll that contains the precompiled build file OR the path to the source folder than contains build files (fb.exe will compile the build file for you)");
                 Console.WriteLine("c: The class to run. If none is specified then \"Default\" is assumed");

@@ -8,7 +8,7 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Publishing
 {
-    public class Ftp : InternalExecuatable
+    public class Ftp : InternalExecutable
     {
         private string _serverName;
         private string _username;

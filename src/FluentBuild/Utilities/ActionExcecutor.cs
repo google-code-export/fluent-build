@@ -6,18 +6,18 @@ namespace FluentBuild.Utilities
     public interface IActionExcecutor
     {
 
-        void Execute<T>(Action<T> args) where T : InternalExecuatable, new();
-        void Execute<T>(Func<T, object> args) where T : InternalExecuatable, new();
+        void Execute<T>(Action<T> args) where T : InternalExecutable, new();
+        void Execute<T>(Func<T, object> args) where T : InternalExecutable, new();
         
         void ExecuteFailable<T>(Func<T, object> args) where T : FailableInternalExecutable<T>, new();
 
-        void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecuatable;
-        void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecuatable;
+        void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecutable;
+        void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecutable;
     }
 
     internal class ActionExcecutor : IActionExcecutor
     {
-        public void Execute<T>(Action<T> args) where T : InternalExecuatable, new()
+        public void Execute<T>(Action<T> args) where T : InternalExecutable, new()
         {
             var concrete = new T();
             args(concrete);
@@ -25,7 +25,7 @@ namespace FluentBuild.Utilities
         }
         
         //allows running a property getter e.g. ContinueOnError so that we don't need a ContinueOnError() method
-        public void Execute<T>(Func<T, object> args) where T : InternalExecuatable, new()
+        public void Execute<T>(Func<T, object> args) where T : InternalExecutable, new()
         {
             var concrete = new T();
             args(concrete);
@@ -83,14 +83,14 @@ namespace FluentBuild.Utilities
             return constructor;
         }
 
-        public void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecuatable
+        public void Execute<T, TParams>(Action<T> args, TParams constructorParms) where T : InternalExecutable
         {
             var concrete = (T)FindConstructor<T,TParams>().Invoke(new object[] { constructorParms });
             args(concrete);
             concrete.InternalExecute();
         }
 
-        public void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecuatable
+        public void Execute<T, TParam, TParam2>(Action<T> args, TParam constructorParam1, TParam2 constructorParam2) where T : InternalExecutable
         {
             var concrete = (T)FindConstructor<T, TParam, TParam2>().Invoke(new object[] { constructorParam1, constructorParam2 });
             args(concrete);

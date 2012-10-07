@@ -62,7 +62,7 @@ namespace FluentBuild.Runners.Zip
     ///<summary>
     /// Compresses a file or folder
     ///</summary>
-    public class ZipCompress : InternalExecuatable, IZipCompress
+    public class ZipCompress : InternalExecutable, IZipCompress
     {
         private readonly IFileSystemHelper _fileSystemHelper;
         internal int CompressionLevel;

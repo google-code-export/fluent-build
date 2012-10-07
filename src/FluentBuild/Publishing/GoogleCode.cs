@@ -12,7 +12,7 @@ namespace FluentBuild.Publishing
     ///<summary>
     /// Publishes a file to GoogleCode
     ///</summary>
-    public class GoogleCode : InternalExecuatable
+    public class GoogleCode : InternalExecutable
     {
         private static readonly byte[] NewLineAsciiBytes = Encoding.ASCII.GetBytes("\r\n");
         private static readonly string Boundary = Guid.NewGuid().ToString();

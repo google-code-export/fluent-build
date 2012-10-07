@@ -7,7 +7,7 @@ namespace FluentBuild.Runners.Zip
     ///<summary>
     /// Zip decompresses an archive
     ///</summary>
-    public class ZipDecompress : InternalExecuatable
+    public class ZipDecompress : InternalExecutable
     {
         internal readonly IFileSystemHelper _fileSystemHelper;
         internal string _pathToArchive;

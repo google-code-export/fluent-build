@@ -44,7 +44,7 @@ namespace FluentBuild
             Assert.That(InternalExecutableTester.ConstructorValue, Is.EqualTo(constructorParms));
         }
 
-        internal class InternalExecutableTester : InternalExecuatable
+        internal class InternalExecutableTester : InternalExecutable
         {
             public string TestValue { get; set; }
             public static string OutputValue { get; set; }

@@ -39,6 +39,31 @@ namespace FluentBuild.Compilation
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}", outputAssembly, "library")));
         }
 
+        [Test]
+        public void Args_ShouldCreateProperArgsWithDefines()
+        {
+            string outputAssembly = "myapp.dll";
+            BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly).DefineSymbol("NET20").DefineSymbol("TEST");
+            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/define:NET20 /define:TEST /out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+        }
+
+        [Test]
+        public void Args_ShouldAddAdditionalArgs()
+        {
+            string outputAssembly = "myapp.dll";
+            BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly).AddArgument("simple");
+            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/simple /out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+        }
+
+        [Test]
+        public void Args_ShouldAddAdditionalArgsWithValue()
+        {
+            string outputAssembly = "myapp.dll";
+            BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly).AddArgument("key", "value");
+            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/key:value /out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+        }
+
+
         ///<summary>
         ///</summary>
         ///<summary />
@@ -64,6 +89,7 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddResource("Test", "ResName");
             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"Test\",ResName /target:{1}", outputAssembly, "library", reference, source)));
+            
         }
 
         ///<summary>
