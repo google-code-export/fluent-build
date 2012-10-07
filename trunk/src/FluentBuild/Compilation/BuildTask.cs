@@ -11,15 +11,17 @@ namespace FluentBuild.Compilation
     ///<summary>
     /// A task around builds that will execute a compiler to generate an assembly.
     ///</summary>
-    public class BuildTask :InternalExecuatable
+    public class BuildTask :InternalExecutable
     {
         private readonly List<string> _references = new List<string>();
         internal readonly List<Resource> Resources = new List<Resource>();
         private readonly List<string> _sources = new List<string>();
         private readonly IActionExcecutor _actionExcecutor;
+        private readonly Dictionary<string, string> _additionalArguments = new Dictionary<string, string>();  
         internal readonly string Compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
+        private IList<String> _defineSymbols = new List<string>();
 
         public BuildTask() : this(new ActionExcecutor(), "", "")
         {
@@ -45,6 +47,29 @@ namespace FluentBuild.Compilation
         protected internal string TargetType { get; set; }
 
         /// <summary>
+        /// Adds an aditional argument to be passed to the command line
+        /// </summary>
+        /// <param name="name">The name of the parameter (with no '/')</param>
+        /// <returns></returns>
+        public BuildTask AddArgument(string name)
+        {
+            _additionalArguments.Add(name, null);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds an aditional argument to be passed to the command line
+        /// </summary>
+        /// <param name="name">The name of the parameter (with no '/')</param>
+        /// <param name="value">The value of the parameter</param>
+        /// <returns></returns>
+        public BuildTask AddArgument(string name, string value)
+        {
+            _additionalArguments.Add(name, value);
+            return this;
+        }
+
+        /// <summary>
         /// Sets if Debug Symbols are generated. Defaults to False.
         /// </summary>
         public BuildTask IncludeDebugSymbols
@@ -54,6 +79,18 @@ namespace FluentBuild.Compilation
                 _includeDebugSymbols = true;
                 return this;
             }
+        }
+
+        /// <summary>
+        /// Adds a compilation symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to include</param>
+        /// <returns></returns>
+        public BuildTask DefineSymbol(string symbol)
+        {
+            _defineSymbols.Add(symbol);
+            return this;
+
         }
 
         internal string Args
@@ -80,10 +117,36 @@ namespace FluentBuild.Compilation
                     resources.AppendFormat(" /resource:{0}", res);
                 }
 
-                string args = String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources,
-                                            TargetType, references, sources);
+
+
+
+                string args = "";
+                foreach (var defineSymbol in _defineSymbols)
+                {
+                    args += " /define:" + defineSymbol;
+                }
+
+                foreach (var additionalArgument in _additionalArguments)
+                {
+                    if (additionalArgument.Value == null)
+                    {
+                        args += " /" + additionalArgument.Key;
+                    }
+                    else
+                    {
+                        args += " /" + additionalArgument.Key + ":" + additionalArgument.Value;
+                    }
+                }
+
+                if (args.Length > 0) //if we already set something we will need a space inbetween args
+                    args += " ";
+
+                args += String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources,
+                                             TargetType, references, sources);
                 if (_includeDebugSymbols)
                     args += " /debug";
+
+                
 
                 return args;
             }

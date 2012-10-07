@@ -36,8 +36,31 @@ namespace Build
             AddTask(Compress);
             //move to tools folder here?
             AddTask(PublishToRepository);
-             
-            AddTask(PublishToNuGet);
+
+            AddTask(PublishToNuGetUsingFb);
+        }
+
+        private void PublishToNuGetUsingFb()
+        {
+            //create a lib\net40\ folder
+            Directory nuGetBaseFolder = directory_compile.SubFolder("nuget");
+            Directory nuGetFolder = nuGetBaseFolder.Create().SubFolder("lib").Create().SubFolder("net40").Create();
+
+            //copy the assemblies to it
+            AssemblyFluentBuildRunnerRelease.Copy.To(nuGetFolder);
+            //assembly_FluentBuild_UI.Copy.To(nuGetFolder);
+            AssemblyFluentBuildRelease_Merged.Copy.To(nuGetFolder);
+
+            Task.Publish.ToNuGet(x => x.DeployFolder(nuGetBaseFolder)
+                .ProjectId("FluentBuild")
+                .Version(_version)
+                .Description("A build tool that allows you to write build scripts in a .NET language")
+                .Authors("GotWoods")
+                .ApiKey(Properties.CommandLineProperties.GetProperty("NuGetApiKey"))
+                .Owners("GotWoods")
+                .ProjectUrl("http://code.google.com/p/fluent-build")
+                .Tags("build")
+                );
         }
 
         private void PublishToNuGet()

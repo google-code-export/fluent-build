@@ -18,6 +18,7 @@ namespace Build
 
         public DefaultSample()
         {
+            
             directory_base = new Directory(Properties.CurrentDirectory);
             directory_compile = directory_base.SubFolder("compile");
             directory_release = directory_base.SubFolder("release");
@@ -76,6 +77,8 @@ namespace Build
            Task.Build.Csc.Target.Library(compiler => compiler.AddSources(sourceFiles)
                                                .AddRefences(thirdparty_rhino, thirdparty_nunit, assembly_FluentBuild)
                                                .OutputFileTo(assembly_FluentBuild_Tests));
+
+
         }
 
         private void RunTests()

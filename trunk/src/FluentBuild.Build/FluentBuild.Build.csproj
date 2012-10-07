@@ -77,6 +77,9 @@
     <Compile Include="Publish.cs" />
     <Compile Include="PublishNightly.cs" />
     <Compile Include="SampleBuildTask.cs" />
+    <Compile Include="Samples\BuildFileSample.cs" />
+    <Compile Include="Samples\MultiTargetingSample.cs" />
+    <Compile Include="Samples\DebugBuild.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

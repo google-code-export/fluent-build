@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentBuild.Publishing.NuGet;
 using FluentBuild.Utilities;
 
 namespace FluentBuild.Publishing
@@ -17,6 +18,11 @@ namespace FluentBuild.Publishing
         }
 
         public void ToGoogleCode(Action<GoogleCode> args)
+        {
+            _excecutor.Execute(args);
+        }
+
+        public void ToNuGet(Action<NuGetPublisher> args)
         {
             _excecutor.Execute(args);
         }

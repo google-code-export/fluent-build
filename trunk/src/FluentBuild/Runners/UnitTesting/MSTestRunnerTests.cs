@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using FluentBuild.MessageLoggers.MessageProcessing;
 using NUnit.Framework;
@@ -9,7 +8,7 @@ using File = FluentFs.Core.File;
 namespace FluentBuild.Runners.UnitTesting
 {
     [TestFixture]
-    internal class MSTestRunnerTests
+    internal class MSTestRunnerTests : TestBase
     {
         private MSTestRunner _subject;
         private string _dummyData;
@@ -217,12 +216,6 @@ namespace FluentBuild.Runners.UnitTesting
             TestMethodSetter(_subject, x => x.Unique(), x => x.unique, true);
         }
 
-        private void TestMethodSetter<T, T2>(T original, Func<T, T> action, Func<T, object> check, T2 arg)
-        {
-            var result = action.Invoke(original);
-            Assert.That(result, Is.SameAs(original));
-            Assert.AreEqual(check.Invoke(original), arg);
-        }
-
+  
     }
 }

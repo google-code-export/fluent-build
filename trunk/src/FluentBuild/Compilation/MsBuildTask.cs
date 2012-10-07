@@ -12,7 +12,7 @@ namespace FluentBuild.Compilation
     ///<summary>
     /// Executes MsBuild to create an assembly (or multiple assemblies)
     ///</summary>
-    public class MsBuildTask : InternalExecuatable
+    public class MsBuildTask : InternalExecutable
     {
         private readonly IActionExcecutor _actionExcecutor;
         internal string _projectOrSolutionFilePath;

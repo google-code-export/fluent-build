@@ -20,7 +20,7 @@ namespace FluentBuild.Utilities
         T ContinueOnError { get; }
     }
 
-    public abstract class InternalFailable<T>: InternalExecuatable, IFailable<T>
+    public abstract class InternalFailable<T>: InternalExecutable, IFailable<T>
     {
         protected internal OnError OnError;
 

@@ -184,7 +184,7 @@ namespace FluentBuild.AssemblyInfoBuilding
     /// <summary>
     /// Sets the lines for an assembly info file
     /// </summary>
-    internal class AssemblyInfoDetails : InternalExecuatable, IAssemblyInfoDetails
+    internal class AssemblyInfoDetails : InternalExecutable, IAssemblyInfoDetails
     {
         internal readonly IAssemblyInfoBuilder AssemblyInfoBuilder;
         private readonly IFileSystemHelper _fileSystemHelper;

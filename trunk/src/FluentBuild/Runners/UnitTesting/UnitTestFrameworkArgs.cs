@@ -10,6 +10,7 @@ namespace FluentBuild.Runners.UnitTesting
         public UnitTestFrameworkArgs(IActionExcecutor actionExcecutor)
         {
             _actionExcecutor = actionExcecutor;
+            
         }
 
         public UnitTestFrameworkArgs() : this(new ActionExcecutor())
