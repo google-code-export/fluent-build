@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using FluentBuild.Runners;
 using FluentBuild.Utilities;
 using Directory = FluentFs.Core.Directory;
 
@@ -12,6 +13,8 @@ namespace FluentBuild.Publishing.NuGet
 
     public class NuGetPublisher : InternalExecutable
     {
+        private readonly IFileSystemHelper _fileSystemHelper;
+        private readonly IExecutable _executable;
         internal string _projectId;
         internal string _version;
         internal string _authors;
@@ -35,8 +38,14 @@ namespace FluentBuild.Publishing.NuGet
         internal IList<FrameworkAssembly> _frameworkAssemblies;
         public IList<DependencyGroup> _depenencyGroups;
 
-        public NuGetPublisher()
+        public NuGetPublisher() : this(new FileSystemHelper(), new Executable())
         {
+        }
+
+        internal NuGetPublisher(IFileSystemHelper fileSystemHelper, IExecutable executable)
+        {
+            _fileSystemHelper = fileSystemHelper;
+            _executable = executable;
             _references = new List<string>();
             _frameworkAssemblies = new List<FrameworkAssembly>();
             _depenencyGroups = new List<DependencyGroup>();
@@ -79,7 +88,7 @@ namespace FluentBuild.Publishing.NuGet
             if (!string.IsNullOrEmpty(_licenseUrl))
                 sb.AppendLine("<licenseUrl>" + _licenseUrl + "</licenseUrl>");
             if (!string.IsNullOrEmpty(_copyright))
-                sb.AppendLine("<copyright>" + _licenseUrl + "</copyright>");
+                sb.AppendLine("<copyright>" + _copyright + "</copyright>");
 
             if (_references.Count > 0)
             {
@@ -125,28 +134,36 @@ namespace FluentBuild.Publishing.NuGet
 
         internal override void InternalExecute()
         {
-            using (var fs = new StreamWriter(_deployFolder.File(_projectId + ".nuspec").ToString()))
+            if (string.IsNullOrEmpty(_pathToNuGetExecutable))
+                _pathToNuGetExecutable = _fileSystemHelper.Find("nuget.exe");
+            
+            if (string.IsNullOrEmpty(_pathToNuGetExecutable))
+                throw new FileNotFoundException("Could not locate nuget.exe. Please specify it manually using PathToNuGetExecutable()");
+
+            var stream = _fileSystemHelper.CreateFile(_deployFolder.File(_projectId + ".nuspec").ToString());
+            using (var fs = new StreamWriter(stream))
             {
                 fs.Write(CreateSchema());
             }
 
             //ensure latest version of nuget
             Defaults.Logger.WriteDebugMessage("Updating NuGet to the latest version");
-            Task.Run.Executable(x => x.ExecutablePath(_pathToNuGetExecutable).WithArguments("Update -self"));
+            _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("Update -self").Execute();
 
             //configure the API key
             Defaults.Logger.WriteDebugMessage("Configuring the API Key");
-            Task.Run.Executable(x => x.ExecutablePath(_pathToNuGetExecutable).WithArguments("setApiKey " + _apiKey));
+            _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("setApiKey " + _apiKey).Execute();
 
             //package it
             Defaults.Logger.WriteDebugMessage("Creating the package");
-            Task.Run.Executable(x => x.ExecutablePath(_pathToNuGetExecutable).WithArguments("Pack " + _projectId + ".nuspec").InWorkingDirectory(_deployFolder));
+            var inWorkingDirectory = _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("Pack " + _projectId + ".nuspec").InWorkingDirectory(_deployFolder);
+            inWorkingDirectory.Execute();
 
             //NuGet Push YourPackage.nupkg
             Defaults.Logger.WriteDebugMessage("publishing the package");
-            Task.Run.Executable(x => x.ExecutablePath(_pathToNuGetExecutable).WithArguments("Push " + _projectId + "." + _version + ".nupkg").InWorkingDirectory(_deployFolder));
+            _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("Push " + _projectId + "." + _version + ".nupkg").InWorkingDirectory(_deployFolder).Execute();
 
-            
+
         }
     }
 }
