@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-
 using FluentBuild.Runners;
 using FluentBuild.Utilities;
 using FluentFs.Core;
@@ -12,7 +10,7 @@ namespace FluentBuild.Compilation
     ///<summary>
     /// Executes MsBuild to create an assembly (or multiple assemblies)
     ///</summary>
-    public class MsBuildTask : InternalExecutable
+    public class MsBuildTask : InternalExecutable, IAdditionalArguments<MsBuildTask>
     {
         private readonly IActionExcecutor _actionExcecutor;
         internal string _projectOrSolutionFilePath;
@@ -21,16 +19,17 @@ namespace FluentBuild.Compilation
         internal readonly IList<string> Targets;
         internal string ConfigurationToUse;
         internal string Outdir;
-        internal readonly List<String> _args;
-        
-        
+
+        internal ArgumentBuilder _argumentBuilder;
+
 
         internal MsBuildTask(IActionExcecutor actionExcecutor)
         {
             _actionExcecutor = actionExcecutor;
             Targets = new List<string>();
             Properties = new NameValueCollection();
-			_args = new List<string>();
+		
+            _argumentBuilder = new ArgumentBuilder("/", "=");
         }
 
         public MsBuildTask() : this(new ActionExcecutor())
@@ -97,9 +96,10 @@ namespace FluentBuild.Compilation
             return this;
         }
 
+        [Obsolete("Replaced by AddArgument")]
 		public MsBuildTask WithArguments(string arg)
 		{
-			_args.Add( arg );
+            _argumentBuilder.AddArgument(arg);
 			return this;
 		}        
         
@@ -117,9 +117,10 @@ namespace FluentBuild.Compilation
         }
 
 
-        internal string[] BuildArgs()
+        internal void AddSetFieldsToArgumentBuilder()
         {
-            var args = new List<String> {_projectOrSolutionFilePath};
+            _argumentBuilder.StartOfEntireArgumentString = _projectOrSolutionFilePath;
+
             if (!String.IsNullOrEmpty(Outdir))
             {
                 //output dir must have trailing slash. Might as well do it for the user
@@ -127,18 +128,21 @@ namespace FluentBuild.Compilation
                 if (!tempDir.Trim().EndsWith("\\"))
                     tempDir += "\\";
 
-                args.Add("/p:OutDir=" + tempDir);
+                _argumentBuilder.AddArgument("p:OutDir", tempDir);
             }
+
             if (!String.IsNullOrEmpty(ConfigurationToUse))
-                args.Add("/p:Configuration=" + ConfigurationToUse);
+                _argumentBuilder.AddArgument("p:Configuration", ConfigurationToUse);
 
             foreach (var propertyName in Properties.Keys)
             {
-                args.Add("/p:" + propertyName + "=" + Properties.GetValues(propertyName.ToString())[0]);
+                _argumentBuilder.AddArgument("p:" + propertyName, Properties.GetValues(propertyName.ToString())[0]);
             }
 
-            args.AddRange(Targets.Select(target => "/target:" + target));
-            return args.ToArray();
+            foreach (var target in Targets)
+            {
+                _argumentBuilder.AddArgument("target:", target);
+            }
         }
 
 
@@ -148,7 +152,8 @@ namespace FluentBuild.Compilation
                 throw new ArgumentException("ProjectOrSolutionFilePath was not set");
 
             string pathToMsBuild = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\MsBuild.exe";
-            _actionExcecutor.Execute<Executable>(x => x.ExecutablePath(pathToMsBuild).WithArguments(BuildArgs()).WithArguments(_args.ToArray()));
+            AddSetFieldsToArgumentBuilder(); //update the arg builder with all the fields
+            _actionExcecutor.Execute<Executable>(x => x.ExecutablePath(pathToMsBuild).UseArgumentBuilder(_argumentBuilder));
         }
 
         ///<summary>
@@ -158,6 +163,18 @@ namespace FluentBuild.Compilation
         public void Execute()
         {
             InternalExecute();
+        }
+
+        public MsBuildTask AddArgument(string name)
+        {
+            _argumentBuilder.AddArgument(name);
+            return this;
+        }
+
+        public MsBuildTask AddArgument(string name, string value)
+        {
+            _argumentBuilder.AddArgument(name,value);
+            return this;
         }
     }
 }

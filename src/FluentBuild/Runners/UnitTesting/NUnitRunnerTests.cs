@@ -51,7 +51,7 @@ namespace FluentBuild.Runners.UnitTesting
             string file = "c:\\temp\\out.xml";
             NUnitRunner nUnitRunner = subject.XmlOutputTo(file);
             Assert.That(nUnitRunner, Is.SameAs(subject));
-            Assert.That(nUnitRunner._parameters["xml"], Is.EqualTo(file));
+            Assert.That(nUnitRunner._argumentBuilder.FindByName("xml"), Is.EqualTo(file));
         }
 
         ///<summary />
@@ -61,8 +61,9 @@ namespace FluentBuild.Runners.UnitTesting
             var subject = new NUnitRunner();
             string singleparam = "singleParam";
             NUnitRunner nUnitRunner = subject.AddParameter(singleparam);
+            subject.BuildArgs();
             Assert.That(nUnitRunner, Is.SameAs(subject));
-            Assert.That(nUnitRunner._parameters[singleparam], Is.EqualTo(string.Empty));
+            Assert.That(nUnitRunner._argumentBuilder.FindByName(singleparam), Is.EqualTo(null));
         }
 
         ///<summary />
@@ -74,7 +75,7 @@ namespace FluentBuild.Runners.UnitTesting
             string value = "val";
             NUnitRunner nUnitRunner = subject.AddParameter(param,value);
             Assert.That(nUnitRunner, Is.SameAs(subject));
-            Assert.That(nUnitRunner._parameters[param], Is.EqualTo(value ));
+            Assert.That(nUnitRunner._argumentBuilder.FindByName(param), Is.EqualTo(value ));
         }
 
         ///<summary />
@@ -83,7 +84,8 @@ namespace FluentBuild.Runners.UnitTesting
         {
             string pathToFile = "c:\\test.dll";
             var subject = new NUnitRunner().FileToTest(pathToFile);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/nologo", "/nodots", "/xmlconsole" }));
+            subject.BuildArgs();
+            Assert.That(subject._argumentBuilder.Build(), Is.EqualTo(pathToFile +  " /nologo /nodots /xmlconsole" ));
         }
 
         ///<summary />
@@ -94,7 +96,8 @@ namespace FluentBuild.Runners.UnitTesting
             string pathToFile = "c:\\test.dll";
             string singleParam = "label";
             var subject = new NUnitRunner().FileToTest(pathToFile).AddParameter(singleParam);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + singleParam, "/nologo", "/nodots", "/xmlconsole" }));
+            subject.BuildArgs();
+            Assert.That(subject._argumentBuilder.Build(), Is.EqualTo(pathToFile +  " /" + singleParam +  " /nologo /nodots /xmlconsole" ));
         }
 
         ///<summary />
@@ -105,7 +108,8 @@ namespace FluentBuild.Runners.UnitTesting
             string name = "label";
             string value = "value";
             var subject = new NUnitRunner().FileToTest(pathToFile).AddParameter(name,value);
-            Assert.That(subject.BuildArgs(), Is.EqualTo(new[] { pathToFile, "/" + name + ":" + value, "/nologo", "/nodots", "/xmlconsole" }));
+            subject.BuildArgs();
+            Assert.That(subject._argumentBuilder.Build(), Is.EqualTo(pathToFile + " /" + name + ":" + value + " /nologo /nodots /xmlconsole"));
         }
 
 
@@ -119,7 +123,7 @@ namespace FluentBuild.Runners.UnitTesting
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
             
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
-            mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.UseArgumentBuilder(null)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
             
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
@@ -142,7 +146,7 @@ namespace FluentBuild.Runners.UnitTesting
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
-            mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.UseArgumentBuilder(null)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
@@ -165,7 +169,7 @@ namespace FluentBuild.Runners.UnitTesting
             var subject = new NUnitRunner(mockExecutable, mockFileFinder);
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
-            mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.UseArgumentBuilder(null)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
@@ -190,7 +194,7 @@ namespace FluentBuild.Runners.UnitTesting
             var subject = new NUnitRunner(mockExecutable,mockFileFinder);
 
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).Return(mockExecutable);
-            mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.UseArgumentBuilder(null)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.InWorkingDirectory(workingDirectory)).Return(mockExecutable);
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);
@@ -216,7 +220,7 @@ namespace FluentBuild.Runners.UnitTesting
 
             mockFileFinder.Stub(x => x.Find("nunit-console.exe")).Return("c:\\temp\nunit-console.exe");
             mockExecutable.Stub(x => x.ExecutablePath(pathToExe)).IgnoreArguments().Return(mockExecutable);
-            mockExecutable.Stub(x => x.WithArguments(null)).IgnoreArguments().Return(mockExecutable);
+            mockExecutable.Stub(x => x.UseArgumentBuilder(null)).IgnoreArguments().Return(mockExecutable);
             mockExecutable.Stub(x => x.SucceedOnNonZeroErrorCodes()).IgnoreArguments().Return(mockExecutable);
 
             mockExecutable.Stub(x => x.FailOnError).IgnoreArguments().Return(mockExecutable);

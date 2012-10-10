@@ -11,17 +11,18 @@ namespace FluentBuild.Compilation
     ///<summary>
     /// A task around builds that will execute a compiler to generate an assembly.
     ///</summary>
-    public class BuildTask :InternalExecutable
+    public class BuildTask :InternalExecutable, IAdditionalArguments<BuildTask>
     {
         private readonly List<string> _references = new List<string>();
         internal readonly List<Resource> Resources = new List<Resource>();
         private readonly List<string> _sources = new List<string>();
         private readonly IActionExcecutor _actionExcecutor;
-        private readonly Dictionary<string, string> _additionalArguments = new Dictionary<string, string>();  
+        //private readonly Dictionary<string, string> _additionalArguments = new Dictionary<string, string>();  
         internal readonly string Compiler;
         private bool _includeDebugSymbols;
         private string _outputFileLocation;
         private IList<String> _defineSymbols = new List<string>();
+        internal ArgumentBuilder _argumentBuilder;
 
         public BuildTask() : this(new ActionExcecutor(), "", "")
         {
@@ -33,6 +34,7 @@ namespace FluentBuild.Compilation
             _actionExcecutor = actionExcecutor;
             Compiler = compiler;
             TargetType = targetType;
+            _argumentBuilder = new ArgumentBuilder("/", ":");
         }
 
         public BuildTask(string compiler, string targetType) : this(new ActionExcecutor(), compiler, targetType)
@@ -53,7 +55,7 @@ namespace FluentBuild.Compilation
         /// <returns></returns>
         public BuildTask AddArgument(string name)
         {
-            _additionalArguments.Add(name, null);
+            _argumentBuilder.AddArgument(name);
             return this;
         }
 
@@ -65,7 +67,7 @@ namespace FluentBuild.Compilation
         /// <returns></returns>
         public BuildTask AddArgument(string name, string value)
         {
-            _additionalArguments.Add(name, value);
+            _argumentBuilder.AddArgument(name,value);
             return this;
         }
 
@@ -93,63 +95,48 @@ namespace FluentBuild.Compilation
 
         }
 
-        internal string Args
+        internal void BuildArgs()
         {
-            get
-            {
+
+                _argumentBuilder.AddQuotedArgument("out", _outputFileLocation);
+
+                foreach (Resource res in Resources)
+                {
+                    //res.ToString() does the work of converting the resource to a string
+                    _argumentBuilder.AddArgument("resource", res.ToString());
+                }
+
+                _argumentBuilder.AddArgument("target", TargetType);
+
+                foreach (string reference in _references)
+                {
+                    _argumentBuilder.AddQuotedArgument("reference", reference);
+                }
+
+                //var resources = new StringBuilder();
+
+                foreach (var defineSymbol in _defineSymbols)
+                {
+                    _argumentBuilder.AddArgument("define", defineSymbol);
+                }
+
+
+                
+
+                //args += String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources, TargetType, references, sources);
+                if (_includeDebugSymbols)
+                    _argumentBuilder.AddArgument("debug");
+
+
+
                 var sources = new StringBuilder();
                 foreach (string source in _sources)
                 {
                     sources.Append(" \"" + source + "\"");
                 }
 
-                var references = new StringBuilder();
-                foreach (string reference in _references)
-                {
-                    references.Append(" /reference:");
-                    references.Append("\"" + reference + "\"");
-                }
-
-                var resources = new StringBuilder();
-                foreach (Resource res in Resources)
-                {
-                    //res.ToString() does the work of converting the resource to a string
-                    resources.AppendFormat(" /resource:{0}", res);
-                }
-
-
-
-
-                string args = "";
-                foreach (var defineSymbol in _defineSymbols)
-                {
-                    args += " /define:" + defineSymbol;
-                }
-
-                foreach (var additionalArgument in _additionalArguments)
-                {
-                    if (additionalArgument.Value == null)
-                    {
-                        args += " /" + additionalArgument.Key;
-                    }
-                    else
-                    {
-                        args += " /" + additionalArgument.Key + ":" + additionalArgument.Value;
-                    }
-                }
-
-                if (args.Length > 0) //if we already set something we will need a space inbetween args
-                    args += " ";
-
-                args += String.Format("/out:\"{0}\" {1} /target:{2} {3} {4}", _outputFileLocation, resources,
-                                             TargetType, references, sources);
-                if (_includeDebugSymbols)
-                    args += " /debug";
-
-                
-
-                return args;
-            }
+                _argumentBuilder.EndOfEntireArgumentString = sources.ToString();
+         
         }
 
         /// <summary>
@@ -251,9 +238,9 @@ namespace FluentBuild.Compilation
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
             Defaults.Logger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
             var pathToCompiler = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler;
-            string compileMessage = "Compile Using: " + pathToCompiler+ " " + Args;
+            string compileMessage = "Compile Using: " + pathToCompiler+ " " + _argumentBuilder.ToString();
             Defaults.Logger.WriteDebugMessage(compileMessage);
-            _actionExcecutor.Execute((Action<Executable>) (x => x.ExecutablePath(pathToCompiler).WithArguments(Args)));
+            _actionExcecutor.Execute((Action<Executable>) (x => x.ExecutablePath(pathToCompiler).UseArgumentBuilder(_argumentBuilder)));
             Defaults.Logger.WriteDebugMessage("Done Compiling");
         }
 

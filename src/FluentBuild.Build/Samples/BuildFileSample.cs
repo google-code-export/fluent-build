@@ -146,6 +146,29 @@ namespace Build.Samples
         private void MBUnitSample()
         {
             Task.Run.UnitTestFramework.MSTest(x=>x.PathToConsoleRunner(@"c:\program file\Visual Studio\mstest.exe").TestContainer(@"c:\temp\mytests.dll"));
+
+        }
+
+        private void NuGetSample()
+        {
+            Task.Publish.ToNuGet(p => p.DeployFolder("c:\\temp")
+                .ProjectId("FluentBuild")
+                .Version("1.0.0.0")
+                .Description("My description")
+                .Author("Myself")
+                .ApiKey("0198BCB1-461D-4592-9A7B-E2AC94E07D22"));
+
+            Task.Publish.ToNuGet(p => p.DeployFolder("c:\\temp")
+                .ProjectId("FluentBuild")
+                .Version("1.0.0.0")
+                .Description("My description")
+                .Author("Myself")
+                .ApiKey("0198BCB1-461D-4592-9A7B-E2AC94E07D22")
+                .AddFrameworkAssembly("").PathToNuGetExecutable("").RequireLicenseAcceptance
+                .AdditionalManifestData("<newField>here is some data</newField>")
+                );
+
+
         }
 
         private void ExeSample()
