@@ -1,44 +1,35 @@
 Build
   This release    
-	-Token replacement should allow you to specify the delimiter around the token.
-	-MSTest support
-	-NuGet Deployments
+		-Token replacement should allow you to specify the delimiter around the token.
+		-MSTest support
+		-NuGet Deployments
 
 	-Ensure runners have an additionalArgs parameter (maybe base classs this)
 	-Review the wording around AddArguments on most of the runners. It seems inconsistent
 	-Also review how arg building is done. It seems like each runner is doing it in its own way and that may be able to be centralized.
 	-Expand .NET framework versions by the user in an easy fashion
 
+VBC				AddArgument(name,vale) or AddArgument(name)
+CSC				AddArgument(name,vale) or AddArgument(name)
+MSBuild			WithArguments(string arg) //adds to collection
+
+NuGet				NOTHING!
+FTP					N/A done via internal library
+GoogleCode			N/A done via HTTP
+
+MSTest				NOTHING!
+Nunit				NOTHING!
+Zip					N/A (internal zip library)
+Executable			WithArguments(param string[] args)
+ILMerge				NOTHING!	
+
+
   Future Releases
-	-ability to specify (or detect) compiler to use for build files (current default is c#)
-	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository).
-		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
-		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
+	-CruiseControl Support (http://www.cruisecontrolnet.org/projects/ccnet/wiki/DevInfo_MakingPlugins)
 	-Add Directory.Copy / .Move
-	-Expand .NET framework versions by the user in an easy fashion
-    -Persistant variable storage. I.e. be able to store a variable in a build then have it accessable on the next run. Usefull for counters for local build scripts
     -multiple targets. i.e. -C:MainBuild[Clean,Compile,Deploy]
-	-Multithreaded builds
-	-Plugin for VS to do builds
-    -One time tasks (only run the first time the script is run on that computer)
-	-SFTP lib: http://sourceforge.net/projects/dotnetssh/files/
     -Start VS web server C:\Program Files (x86)\Common Files\microsoft shared\DevServer\9.0
-    -Allow message verbosity to be changed from TeamCity
-    -If tests are marked as Ignore() for too long then fail the build?
-	-Xml MessageLogger
-    -Sandcastle generator
-    -Ability to change default console colors
-	-Add in architecture detection
-	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
-	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
-	-Add in support for publishing to CodePlex/SourceForge/Etc.
-	-It would be nice to have zip be able to output to the folder containing source. I.e. zip("c:\\temp\\).OutputTo("c:\\temp\\out.zip"). 
-	-For MSBuild might want to have Configuration.Debug .Release .Custom("myconfig")
-	-CopyBuildArtifact may want to have it return a new BuildArtifact with the folder.
-	-BuildFile.InvokeNextTask: maybe this should be private and then invoked via reflection from fb.exe (or else internalVisibleTo) to prevent users from running it
 	-Click once deployment manifest writing
-    -MessageLogger: see if it can be detected by checking the standard handle (apparently 7) vs the current handle
-	-Gather usage data of functions used/success rates/ etc. Maybe have fb.exe and fb-nousagestats.exe
 	-SVCUtil: Run.Executable(Defaults.FrameworkVersion.GetPathToSdk() + @"\bin\svcutil.exe")
                     .WithArguments
                     (
@@ -50,6 +41,34 @@ Build
                     , "/collectionType:System.Collections.Generic.List`1"
                     )
                     .Execute();
+	-Add in support for publishing to CodePlex/SourceForge/Etc.
+
+
+	-ability to specify (or detect) compiler to use for build files (current default is c#)
+	-Script to convert nant files to the start of a fluent build file (there is a really rough one in the source repository).
+		IDEA: use the nant code base to parse the nant file and then inspect the objects to generate the FluentBuild file.
+		looks like project.cs has an (internal)InitializeProjectDocument() that calls CreateTask() method that builds the task objects.
+    -Persistant variable storage. I.e. be able to store a variable in a build then have it accessable on the next run. Usefull for counters for local build scripts
+	-Multithreaded builds
+	-Plugin for VS to do builds
+    -One time tasks (only run the first time the script is run on that computer)
+	-SFTP lib: http://sourceforge.net/projects/dotnetssh/files/
+    -Allow message verbosity to be changed from TeamCity
+    -If tests are marked as Ignore() for too long then fail the build?
+	-Xml MessageLogger
+    -Sandcastle generator
+    -Ability to change default console colors
+	-Add in architecture detection
+	-Security Audit functionality build in. Check release build, custom errors, compilation debug=false, trace off, identity element containing password, connection strings (in any element including sessionState) should not have a password, warn on trust level not being set?
+	-May want to hide classes outside of core namespace from intellisense to help make things clearer. [Browsable(false)] & [EditorBrowsable(EditorBrowsableState.Never)]
+	-It would be nice to have zip be able to output to the folder containing source. I.e. zip("c:\\temp\\).OutputTo("c:\\temp\\out.zip"). 
+	-For MSBuild might want to have Configuration.Debug .Release .Custom("myconfig")
+	-CopyBuildArtifact may want to have it return a new BuildArtifact with the folder.
+	-BuildFile.InvokeNextTask: maybe this should be private and then invoked via reflection from fb.exe (or else internalVisibleTo) to prevent users from running it
+
+    -MessageLogger: see if it can be detected by checking the standard handle (apparently 7) vs the current handle
+	-Gather usage data of functions used/success rates/ etc. Maybe have fb.exe and fb-nousagestats.exe
+	
 Database
 -Ability to force minimum SQL server version (prevent compat issues)
 -Have a local sql file folder that merges the changes in so you don't run your own SQL scripts on your own DB.

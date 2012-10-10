@@ -36,7 +36,8 @@ namespace FluentBuild.Compilation
         {
             string outputAssembly = "myapp.dll";
             BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly);
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /target:{1}", outputAssembly, "library")));
         }
 
         [Test]
@@ -44,7 +45,8 @@ namespace FluentBuild.Compilation
         {
             string outputAssembly = "myapp.dll";
             BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly).DefineSymbol("NET20").DefineSymbol("TEST");
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/define:NET20 /define:TEST /out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /target:{1} /define:NET20 /define:TEST", outputAssembly, "library")));
         }
 
         [Test]
@@ -52,7 +54,8 @@ namespace FluentBuild.Compilation
         {
             string outputAssembly = "myapp.dll";
             BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly).AddArgument("simple");
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/simple /out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/simple /out:\"{0}\" /target:{1}", outputAssembly, "library")));
         }
 
         [Test]
@@ -60,7 +63,8 @@ namespace FluentBuild.Compilation
         {
             string outputAssembly = "myapp.dll";
             BuildTask build = new BuildTask("csc.exe", "library").OutputFileTo(outputAssembly).AddArgument("key", "value");
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/key:value /out:\"{0}\"  /target:{1}", outputAssembly, "library")));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/key:value /out:\"{0}\" /target:{1}", outputAssembly, "library")));
         }
 
 
@@ -75,7 +79,8 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
             BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddResources(sources);
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"myfile.cs\" /target:{1}", outputAssembly, "library")));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /resource:\"myfile.cs\" /target:{1}", outputAssembly, "library")));
         }
 
         ///<summary>
@@ -88,7 +93,8 @@ namespace FluentBuild.Compilation
             string outputAssembly = "myapp.dll";
             string source = "myfile.cs";
             BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddResource("Test", "ResName");
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /resource:\"Test\",ResName /target:{1}", outputAssembly, "library", reference, source)));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /resource:\"Test\",ResName /target:{1}", outputAssembly, "library", reference, source)));
             
         }
 
@@ -103,7 +109,8 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
              BuildTask build =  new BuildTask("","library").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources);
-             Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\"", outputAssembly, "library", reference, source)));
+             build.BuildArgs();
+             Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /target:{1} /reference:\"{2}\" \"{3}\"", outputAssembly, "library", reference, source)));
         }
 
         ///<summary>
@@ -117,7 +124,8 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
             BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /target:{1} /reference:\"{2}\" /debug \"{3}\"", outputAssembly, "library", reference, source)));
         }
 
         ///<summary>
@@ -134,7 +142,8 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
             BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddRefences(references.ToArray()).AddSources(sources);
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\" /reference:\"{3}\"  \"{4}\"", outputAssembly, "library", references[0], references[1], source)));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /target:{1} /reference:\"{2}\" /reference:\"{3}\" \"{4}\"", outputAssembly, "library", references[0], references[1], source)));
         }
 
         ///<summary>
@@ -148,7 +157,8 @@ namespace FluentBuild.Compilation
             string source = "myfile.cs";
             FileSet sources = new FileSet().Include(source);
             BuildTask build = new BuildTask("", "library").OutputFileTo(outputAssembly).AddRefences(reference).AddSources(sources).IncludeDebugSymbols;
-            Assert.That(build.Args.Trim(), Is.EqualTo(String.Format("/out:\"{0}\"  /target:{1}  /reference:\"{2}\"  \"{3}\" /debug", outputAssembly, "library", reference, source)));
+            build.BuildArgs();
+            Assert.That(build._argumentBuilder.Build().Trim(), Is.EqualTo(String.Format("/out:\"{0}\" /target:{1} /reference:\"{2}\" /debug \"{3}\"", outputAssembly, "library", reference, source)));
         }
 
         ///<summary>

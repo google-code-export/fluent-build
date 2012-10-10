@@ -8,7 +8,7 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners.UnitTesting
 {
-    public interface INUnitRunner
+    public interface INUnitRunner : IAdditionalArguments<INUnitRunner>
     {
         ///<summary>
         /// Sets the working directory
@@ -70,17 +70,17 @@ namespace FluentBuild.Runners.UnitTesting
     public class NUnitRunner : FailableInternalExecutable<NUnitRunner>, INUnitRunner
     {
         internal string _fileToTest;
-        internal NameValueCollection _parameters;
         internal string _pathToConsoleRunner;
         internal string _workingDirectory;
         private IExecutable _executable;
         private readonly IFileSystemHelper _fileSystemHelper;
+        internal ArgumentBuilder _argumentBuilder;
 
         internal NUnitRunner(IExecutable executable, IFileSystemHelper fileSystemHelper)
         {
             _executable = executable;
             _fileSystemHelper = fileSystemHelper;
-            _parameters = new NameValueCollection();
+            _argumentBuilder = new ArgumentBuilder("/", ":");
         }
 
         public NUnitRunner() : this (new Executable(), new FileSystemHelper())
@@ -150,7 +150,7 @@ namespace FluentBuild.Runners.UnitTesting
         ///<returns></returns>
         public NUnitRunner AddParameter(string name, string value)
         {
-            _parameters.Add(name, value);
+            _argumentBuilder.AddArgument(name,value);
             return this;
         }
 
@@ -161,27 +161,17 @@ namespace FluentBuild.Runners.UnitTesting
         ///<returns></returns>
         public NUnitRunner AddParameter(string name)
         {
-            _parameters.Add(name, string.Empty);
+            _argumentBuilder.AddArgument(name);
             return this;
         }
 
 
-        internal string[] BuildArgs()
+        internal void BuildArgs()
         {
-            var args = new List<string> {_fileToTest};
-            foreach (string key in _parameters.Keys)
-            {
-                if (_parameters[key]==string.Empty)
-                    args.Add(string.Format("/{0}", key));
-                else
-                    args.Add(string.Format("/{0}:{1}", key, _parameters[key]));
-                
-            }
-            args.Add("/nologo");
-            args.Add("/nodots");
-            args.Add("/xmlconsole");
-            //args.Add("/labels"););
-            return args.ToArray();
+            _argumentBuilder.StartOfEntireArgumentString = _fileToTest;
+            _argumentBuilder.AddArgument("nologo");
+            _argumentBuilder.AddArgument("nodots");
+            _argumentBuilder.AddArgument("xmlconsole");
         }
 
         ///<summary>
@@ -204,7 +194,8 @@ namespace FluentBuild.Runners.UnitTesting
             }
 
             var executable = _executable.ExecutablePath(_pathToConsoleRunner);
-            executable = executable.WithArguments(BuildArgs());
+            BuildArgs();
+            executable = executable.UseArgumentBuilder(_argumentBuilder);
             executable = executable.SucceedOnNonZeroErrorCodes();
 
             //var executable = executablePath.SucceedOnNonZeroErrorCodes();
@@ -226,5 +217,16 @@ namespace FluentBuild.Runners.UnitTesting
             }
         }
 
+        public INUnitRunner AddArgument(string name)
+        {
+            _argumentBuilder.AddArgument(name);
+            return this;
+        }
+
+        public INUnitRunner AddArgument(string name, string value)
+        {
+            _argumentBuilder.AddArgument(name,value);
+            return this;
+        }
     }
 }

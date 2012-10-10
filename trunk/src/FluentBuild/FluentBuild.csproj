@@ -137,6 +137,8 @@
     <Compile Include="Compilation\BuildTaskTests.cs" />
     <Compile Include="BuildFileTests.cs" />
     <Compile Include="Compilation\TargetTests.cs" />
+    <Compile Include="Utilities\ArgumentBuilder.cs" />
+    <Compile Include="Utilities\ArgumentBuilderTests.cs" />
     <Compile Include="Utilities\EnvironmentVariableWrapperTests.cs" />
     <Compile Include="Utilities\FailableInternalExecutable.cs" />
     <Compile Include="Utilities\InternalExecutable.cs" />

@@ -51,6 +51,11 @@ namespace FluentBuild.Publishing.NuGet
             _depenencyGroups = new List<DependencyGroup>();
         }
 
+        public ProjectIdMandatory DeployFolder(string path)
+        {
+            return DeployFolder(new Directory(path));
+        }
+
         public ProjectIdMandatory DeployFolder(Directory path)
         {
             _deployFolder = path;

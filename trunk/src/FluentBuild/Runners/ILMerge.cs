@@ -8,7 +8,7 @@ using FluentBuild.Utilities;
 
 namespace FluentBuild.Runners
 {
-    public interface IILMerge
+    public interface IILMerge : IAdditionalArguments<ILMerge>
     {
         ///<summary>
         /// Sets the path to the ILMerge.exe executable
@@ -51,6 +51,8 @@ namespace FluentBuild.Runners
         private string _exePath;
         private readonly IFileSystemHelper _fileSystemHelper;
         private string _framework;
+        private ArgumentBuilder _argumentBuilder;
+
 
         internal string[] BuildArgs()
         {
@@ -78,7 +80,7 @@ namespace FluentBuild.Runners
 
         internal void InternalExecute()
         {
-            Task.Run.Executable(x=>x.ExecutablePath(FindExecutable()).WithArguments(BuildArgs()));
+            Task.Run.Executable(x=>x.ExecutablePath(FindExecutable()).WithArguments(BuildArgs()).WithArguments(BuildArgs()));
         }
 
         internal string FindExecutable()
@@ -108,6 +110,7 @@ namespace FluentBuild.Runners
         {
             _fileSystemHelper = fileSystemHelper;
             Sources = new List<string>();
+            _argumentBuilder = new ArgumentBuilder();
         }
 
         public ILMerge() : this(new FileSystemHelper())
@@ -167,5 +170,16 @@ namespace FluentBuild.Runners
             return this;
         }
        */
+        public ILMerge AddArgument(string name)
+        {
+            _argumentBuilder.AddArgument(name);
+            return this;
+        }
+
+        public ILMerge AddArgument(string name, string value)
+        {
+            _argumentBuilder.AddArgument(name,value);
+            return this;
+        }
     }
 }

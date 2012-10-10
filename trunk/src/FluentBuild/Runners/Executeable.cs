@@ -15,12 +15,13 @@ namespace FluentBuild.Runners
     ///<summary>
     /// Represents an executable to be run
     ///</summary>
-    public interface IExecutable : IFailable<IExecutable>
+    public interface IExecutable : IFailable<IExecutable>, IAdditionalArguments<IExecutable>
     {
         ///<summary>
         /// Sets the arguments to pass to the executable
         ///</summary>
         ///<param name="arguments">The arguments to pass</param>
+        [Obsolete("Replaced with AddArgument")]
         IExecutable WithArguments(params string[] arguments);
 
         ///<summary>
@@ -74,6 +75,15 @@ namespace FluentBuild.Runners
         /// a success.
         ///</summary>
         IExecutable SucceedOnNonZeroErrorCodes();
+
+
+        /// <summary>
+        /// Allows the consumer to inject the argumentBuild if it was used by a calling runner
+        /// This allows the consumer to have it's own internal argumentBuilder and not have to 
+        /// loop over the arguments when calling an Executable
+        /// </summary>
+        /// <param name="argumentBuilder">The builder to inject</param>
+        IExecutable UseArgumentBuilder(ArgumentBuilder argumentBuilder);
     }
 
     ///<summary>
@@ -85,7 +95,6 @@ namespace FluentBuild.Runners
         private IMessageProcessor _messageProcessor;
         private readonly object _errorLock;
         private readonly object _outputLock;
-        private readonly List<String> _args;
         private readonly StringBuilder _error;
         private readonly StringBuilder _output;
         internal string Path;
@@ -94,6 +103,7 @@ namespace FluentBuild.Runners
         internal string WorkingDirectory;
 
         private bool _succeedOnNonZeroErrorCodes;
+        private ArgumentBuilder _argumentBuilder;
 
         ///<summary>
         /// Instantiates a new executable
@@ -108,10 +118,10 @@ namespace FluentBuild.Runners
             _messageProcessor = messageProcessor;
             _errorLock = new object();
             _outputLock = new object();
-            _args = new List<string>();
             _error = new StringBuilder();
             _output = new StringBuilder();
             _actionExcecutor = actionExcecutor;
+            _argumentBuilder = new ArgumentBuilder("/", " ");
         }
 
         ///<summary>
@@ -142,9 +152,19 @@ namespace FluentBuild.Runners
             return this;
         }
 
+        public IExecutable UseArgumentBuilder(ArgumentBuilder argumentBuilder)
+        {
+            _argumentBuilder = argumentBuilder;
+            return this;
+        }
+
+        [Obsolete("Replaced with AddArgument")]
         public IExecutable WithArguments(params string[] arguments)
         {
-            _args.AddRange(arguments);
+            foreach (var argument in arguments)
+            {
+                _argumentBuilder.AddArgument(argument);
+            }
             return this;
         }
 
@@ -186,21 +206,11 @@ namespace FluentBuild.Runners
 
         #endregion
 
-        internal string CreateArgumentString()
-        {
-            var sb = new StringBuilder();
-            foreach (string argument in _args)
-            {
-                sb.AppendFormat(" {0}", argument);
-            }
-            return sb.ToString();
-        }
-
-        internal IProcessWrapper CreateProcess()
+         internal IProcessWrapper CreateProcess()
         {
             var process = new Process();
             process.StartInfo.FileName = Path;
-            process.StartInfo.Arguments = CreateArgumentString();
+            process.StartInfo.Arguments = _argumentBuilder.Build();
 
             //redirect to a stream so we can parse it and display it
             process.StartInfo.UseShellExecute = false;
@@ -221,7 +231,7 @@ namespace FluentBuild.Runners
 
         internal int Execute(string prefix)
         {
-            Defaults.Logger.Write(prefix, Path + CreateArgumentString());
+            Defaults.Logger.Write(prefix, Path + _argumentBuilder.Build());
             int exitCode = 0;
             using (IProcessWrapper process = CreateProcess())
             {
@@ -292,6 +302,18 @@ namespace FluentBuild.Runners
         {
             lock (_errorLock)
                 _error.AppendLine(e.Data);
+        }
+
+        public IExecutable AddArgument(string name)
+        {
+            _argumentBuilder.AddArgument(name);
+            return this;
+        }
+
+        public IExecutable AddArgument(string name, string value)
+        {
+            _argumentBuilder.AddArgument(name,value);
+            return this;
         }
     }
 }

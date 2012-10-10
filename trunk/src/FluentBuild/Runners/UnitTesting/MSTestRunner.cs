@@ -1,33 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using FluentBuild.Utilities;
+using File = FluentFs.Core.File;
 
 namespace FluentBuild.Runners.UnitTesting
 {
-    public class MSTestRunner: FailableInternalExecutable<MSTestRunner>
+    public class MSTestRunner : FailableInternalExecutable<MSTestRunner>, IAdditionalArguments<MSTestRunner>
     {
-        protected internal string testContainer;
-        protected internal string testMetadata;
-        protected internal string runConfig;
-        protected internal string resultsFile;
-        protected internal bool unique;
-        protected internal string[] test;
-        protected internal string[] testList;
+        internal readonly ArgumentBuilder _argumentBuilder;
+        private readonly IExecutable _executable;
         protected internal string pathToConsoleRunner;
+        protected internal string resultsFile;
+        protected internal string runConfig;
+        protected internal string[] test;
+        protected internal string testContainer;
+        protected internal string[] testList;
+        protected internal string testMetadata;
+        protected internal bool unique;
         protected internal string workingDirectory;
-        private IExecutable _executable;
 
         public MSTestRunner(IExecutable executable)
         {
             _executable = executable;
+            _argumentBuilder = new ArgumentBuilder("/", ":");
         }
 
         public MSTestRunner() : this(new Executable())
         {
         }
+
+        #region IAdditionalArguments<MSTestRunner> Members
+
+        public MSTestRunner AddArgument(string name)
+        {
+            _argumentBuilder.AddArgument(name);
+            return this;
+        }
+
+        public MSTestRunner AddArgument(string name, string value)
+        {
+            _argumentBuilder.AddArgument(name, value);
+            return this;
+        }
+
+        #endregion
 
         public MSTestRunner WorkingDirectory(string path)
         {
@@ -35,122 +52,118 @@ namespace FluentBuild.Runners.UnitTesting
             return this;
         }
 
-        public MSTestRunner WorkingDirectory(FluentFs.Core.File path)
+        public MSTestRunner WorkingDirectory(File path)
         {
             return WorkingDirectory(path.ToString());
         }
 
         public MSTestRunner TestContainer(string path)
         {
-            this.testContainer = path;
+            testContainer = path;
             return this;
         }
 
-        public MSTestRunner TestContainer(FluentFs.Core.File path)
+        public MSTestRunner TestContainer(File path)
         {
             return TestContainer(path.ToString());
         }
 
         public MSTestRunner TestMetadata(string path)
         {
-            this.testMetadata = path;
+            testMetadata = path;
             return this;
         }
 
-        public MSTestRunner TestMetadata(FluentFs.Core.File path)
+        public MSTestRunner TestMetadata(File path)
         {
             return TestMetadata(path.ToString());
         }
 
         public MSTestRunner Test(params string[] testNames)
         {
-            this.test = testNames;
+            test = testNames;
             return this;
         }
 
         public MSTestRunner TestList(params string[] testLists)
         {
-            this.testList = testLists;
+            testList = testLists;
             return this;
         }
 
         public MSTestRunner RunConfig(string path)
         {
-            this.runConfig = path;
+            runConfig = path;
             return this;
         }
 
-        public MSTestRunner RunConfig(FluentFs.Core.File path)
+        public MSTestRunner RunConfig(File path)
         {
             return RunConfig(path.ToString());
         }
 
         public MSTestRunner ResultsFile(string path)
         {
-            this.resultsFile = path;
+            resultsFile = path;
             return this;
         }
 
-        public MSTestRunner ResultsFile(FluentFs.Core.File path)
+        public MSTestRunner ResultsFile(File path)
         {
             return ResultsFile(path.ToString());
         }
 
         public MSTestRunner Unique()
         {
-            this.unique = true;
+            unique = true;
             return this;
         }
 
         public MSTestRunner PathToConsoleRunner(string path)
         {
-            this.pathToConsoleRunner = path;
+            pathToConsoleRunner = path;
             return this;
         }
 
-        public MSTestRunner PathToConsoleRunner(FluentFs.Core.File path)
+        public MSTestRunner PathToConsoleRunner(File path)
         {
-            this.pathToConsoleRunner = path.ToString();
+            pathToConsoleRunner = path.ToString();
             return this;
         }
 
-        internal void AddArgsFromArray(string[] items, string prefix, List<string> args)
+        internal void AddArgsFromArray(string[] items, string prefix)
         {
-            if (items == null || items.Count() == 0)
+            if (items == null || !items.Any())
                 return;
-                
-            foreach (var arg in items)
-                {
-                    args.Add("/"+prefix+":" + arg);
-                }
-            
+
+            foreach (string arg in items)
+            {
+                _argumentBuilder.AddArgument(prefix, arg);
+            }
         }
 
-        internal string[] BuildArgs()
+        internal void BuildArgs()
         {
-            var args = new List<string>();
-            if (!string.IsNullOrEmpty(this.testContainer))
-                args.Add("/testcontainer:" + testContainer);
+            if (!string.IsNullOrEmpty(testContainer))
+                _argumentBuilder.AddArgument("testcontainer", testContainer);
 
             if (!string.IsNullOrEmpty(testMetadata))
-            {
-                    args.Add("/testmetadata:" + testMetadata);
-            }
+                _argumentBuilder.AddArgument("testmetadata", testMetadata);
 
-            AddArgsFromArray(testList, "testList", args);
-            AddArgsFromArray(test, "test", args);
 
-            if (!string.IsNullOrEmpty(this.runConfig))
-                args.Add("/runconfig:" + runConfig);
+            AddArgsFromArray(testList, "testList");
+            AddArgsFromArray(test, "test");
 
-            if (!string.IsNullOrEmpty(this.resultsFile))
-                args.Add("/resultsfile:" + resultsFile);
+            if (!string.IsNullOrEmpty(runConfig))
+                _argumentBuilder.AddArgument("runconfig", runConfig);
 
-            if (this.unique)
-                args.Add("/unique");
+            if (!string.IsNullOrEmpty(resultsFile))
+                _argumentBuilder.AddArgument("resultsfile", resultsFile);
 
-            args.Add("/nologo");
-            return args.ToArray();
+            if (unique)
+                _argumentBuilder.AddArgument("unique");
+
+            _argumentBuilder.AddArgument("nologo");
         }
 
 
@@ -159,13 +172,14 @@ namespace FluentBuild.Runners.UnitTesting
             if (String.IsNullOrEmpty(pathToConsoleRunner))
                 throw new FileNotFoundException("Could not automatically find mstest.exe. Please specify it manually using PathToConsoleRunner");
 
-            var executable = _executable.ExecutablePath(pathToConsoleRunner).WithArguments(BuildArgs());
+            BuildArgs();
+            IExecutable executable = _executable.ExecutablePath(pathToConsoleRunner).UseArgumentBuilder(_argumentBuilder);
             if (!String.IsNullOrEmpty(workingDirectory))
                 executable = executable.InWorkingDirectory(workingDirectory);
-            
+
             //don't throw any errors
             //.WithMessageProcessor()
-            var returnCode = executable.Execute();
+            int returnCode = executable.Execute();
             //if it returned non-zero then just exit (as a test failed)
             if (returnCode != 0 && base.OnError == OnError.Fail)
             {
