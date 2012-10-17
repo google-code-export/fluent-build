@@ -235,11 +235,11 @@ namespace FluentBuild.Compilation
 
         internal override void InternalExecute()
         {
+            BuildArgs();
             string compilerWithoutExtentions = Compiler.Substring(0, Compiler.IndexOf("."));
             Defaults.Logger.Write(compilerWithoutExtentions, String.Format("Compiling {0} files to '{1}'", _sources.Count, _outputFileLocation));
             var pathToCompiler = Defaults.FrameworkVersion.GetPathToFrameworkInstall() + "\\" + Compiler;
-            string compileMessage = "Compile Using: " + pathToCompiler+ " " + _argumentBuilder.ToString();
-            Defaults.Logger.WriteDebugMessage(compileMessage);
+            Defaults.Logger.WriteDebugMessage("Compile Using: " + pathToCompiler+ " " + _argumentBuilder.Build());
             _actionExcecutor.Execute((Action<Executable>) (x => x.ExecutablePath(pathToCompiler).UseArgumentBuilder(_argumentBuilder)));
             Defaults.Logger.WriteDebugMessage("Done Compiling");
         }

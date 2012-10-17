@@ -77,7 +77,7 @@ namespace Build.Samples
                     .Version("1.2.0.0")
                     .AddCustomAttribute("namespace.for.attribute", "AttributeName", true, "attributeValue"));
 
-            var returnCode = Task.Run.Executable(exe => exe.ExecutablePath(@"c:\temp\myapp.exe").InWorkingDirectory(@"c:\temp\").WithArguments("/c:action1", "/s"));
+            var returnCode = Task.Run.Executable(exe => exe.ExecutablePath(@"c:\temp\myapp.exe").InWorkingDirectory(@"c:\temp\").AddArgument("c", "action1").AddArgument("s"));
             Task.Run.Executable(exe => exe.ExecutablePath(@"c:\temp\myapp.exe").ContinueOnError.SetTimeout(200));
             
 

@@ -21,7 +21,7 @@ namespace FluentBuild.Runners
         /// Sets the arguments to pass to the executable
         ///</summary>
         ///<param name="arguments">The arguments to pass</param>
-        [Obsolete("Replaced with AddArgument")]
+        [Obsolete("Replaced with AddArgument", true)]
         IExecutable WithArguments(params string[] arguments);
 
         ///<summary>

@@ -57,7 +57,9 @@ namespace FluentBuild.Compilation
                 string outputFileName = Prefix + Path.GetFileNameWithoutExtension(resourceFileName) + ".resources";
                 outputFileName = Path.Combine(OutputFolder, outputFileName);
                 outputFiles.Include(outputFileName);
-                _actionExcecutor.Execute<Executable>(x=>x.ExecutablePath(resGenExecutable).WithArguments("\"" + resourceFileName + "\"").WithArguments("\"" + outputFileName + "\""));
+                var builder = new ArgumentBuilder();
+                builder.StartOfEntireArgumentString = "\"" + resourceFileName + "\" \"" + outputFileName + "\"";
+                _actionExcecutor.Execute<Executable>(x=>x.ExecutablePath(resGenExecutable).UseArgumentBuilder(builder));
             }
             return outputFiles;
         }

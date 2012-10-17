@@ -24,6 +24,12 @@ namespace FluentBuild.Compilation
             get { return new TargetType("vbc.exe"); }
         }
 
+
+        public TargetType Mono
+        {
+            get { return new TargetType("mcs"); }
+        }
+
         internal Compilers() : this(new ActionExcecutor())
         {
         }

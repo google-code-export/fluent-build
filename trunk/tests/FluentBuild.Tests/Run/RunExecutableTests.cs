@@ -38,7 +38,7 @@ namespace FluentBuild.Tests.Run
         {
             Console.WriteLine("ShouldFailOnNonZeroErrorCode");
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
-            Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt"));
+            Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).AddArgument("c","copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt"));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace FluentBuild.Tests.Run
         {
             Console.WriteLine("ShouldSucceedOnNonZeroErrorCodeWhenSet");
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
-            var errorCode = Task.Run.Executable(x => x.ExecutablePath(pathtocmd).WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").SucceedOnNonZeroErrorCodes());
+            var errorCode = Task.Run.Executable(x => x.ExecutablePath(pathtocmd).AddArgument("c", "copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").SucceedOnNonZeroErrorCodes());
             Assert.That(errorCode, Is.Not.EqualTo(0));
         }
 
@@ -55,7 +55,7 @@ namespace FluentBuild.Tests.Run
         {
             Console.WriteLine("ShouldContinueOnNonZeroErrorCode");
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
-            var errorCode = Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).ContinueOnError.WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt"));
+            var errorCode = Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).ContinueOnError.AddArgument("c", "copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt"));
             Assert.That(errorCode,Is.Not.EqualTo(0));
         }
 
@@ -64,7 +64,7 @@ namespace FluentBuild.Tests.Run
         {
             Console.WriteLine("ShouldContinueOnErrorCodeOne");
             string pathtocmd = Environment.GetEnvironmentVariable("windir") + @"\system32\cmd.exe";
-            Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).WithArguments("/c copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").SucceedOnNonZeroErrorCodes());
+            Task.Run.Executable(x=>x.ExecutablePath(pathtocmd).AddArgument("c", "copy c:\\temp\\nothing.txt c:\\temp\\nothing2.txt").SucceedOnNonZeroErrorCodes());
         }
     }
 }
