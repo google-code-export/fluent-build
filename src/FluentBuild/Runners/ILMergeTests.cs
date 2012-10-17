@@ -49,9 +49,9 @@ namespace FluentBuild.Runners
             Defaults.FrameworkVersion = FrameworkVersion.NET2_0;
             
             var args = _subject.AddSource("input.dll").OutputTo("c:\\test.dll").BuildArgs();
-            Assert.That(args[0], Is.EqualTo("input.dll"));
-            Assert.That(args[1], Is.EqualTo("/OUT:c:\\test.dll"));
-            Assert.That(args[2], Is.EqualTo("/ndebug"));
+            Assert.That(args.StartOfEntireArgumentString, Is.EqualTo("input.dll"));
+            Assert.That(args.FindByName("OUT"), Is.EqualTo("c:\\test.dll"));
+            //Assert.That(args.FindByName(), Is.EqualTo("/ndebug"));
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace FluentBuild.Runners
         {
             Defaults.FrameworkVersion = FrameworkVersion.NET4_0.Full;
             var args = _subject.AddSource("input.dll").OutputTo("c:\\test.dll").BuildArgs();
-            Assert.That(args[2], Is.StringStarting("/targetplatform:v4,"));
+            Assert.That(args.FindByName("targetplatform"), Is.StringStarting("v4,"));
         }
 
         [Test]

@@ -62,7 +62,7 @@ namespace Build
                 .Tags("build")
                 );
         }
-
+        /*
         private void PublishToNuGet()
         {
             //create a lib\net40\ folder
@@ -112,6 +112,7 @@ namespace Build
             //NuGet Push YourPackage.nupkg
             Task.Run.Executable(x => x.ExecutablePath(pathToNuget).WithArguments("Push fluentBuild." + _version + ".nupkg").InWorkingDirectory(nuGetBaseFolder));
         }
+         */
 
         private void CompileRunner()
         {

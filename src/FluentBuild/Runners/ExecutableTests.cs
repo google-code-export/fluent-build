@@ -26,7 +26,7 @@ namespace FluentBuild.Utilities
         public void ShouldConstructProperly()
         {
             const string workingDirectory = @"c:\";
-            var executable = (Executable)new Executable(_executablePath).InWorkingDirectory(workingDirectory).WithArguments(new[] { "one", "two", "three" });
+            var executable = (Executable)new Executable(_executablePath).InWorkingDirectory(workingDirectory).AddArgument("one");
             //Assert.That(executable.CreateArgumentString(), Is.EqualTo(" one two three"));
             Assert.That(executable.Path, Is.EqualTo(_executablePath));
             Assert.That(executable.WorkingDirectory, Is.EqualTo(workingDirectory));

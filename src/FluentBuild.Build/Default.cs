@@ -191,7 +191,11 @@ namespace Build
         {
             //Copy sample folder to compile directory
             var sampleData = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").SubFolder("Samples");
-            Task.Run.Executable(x=>x.ExecutablePath(@"C:\Windows\System32\xcopy.exe").WithArguments(sampleData.ToString(), directory_compile.SubFolder("Samples").ToString(), "/E /I"));
+            var builder = new ArgumentBuilder("/", ":");
+            builder.StartOfEntireArgumentString = sampleData.ToString() + " " + directory_compile.SubFolder("Samples");
+            builder.AddArgument("E");
+            builder.AddArgument("I");
+            Task.Run.Executable(x=>x.ExecutablePath(@"C:\Windows\System32\xcopy.exe").UseArgumentBuilder(builder));
             var configSource = directory_base.SubFolder("tests").SubFolder("FluentBuild.Tests").File("app.config.template");
             var configDestination = directory_compile.File("FluentBuild_Functional_Tests.dll.config");
             configSource.Copy

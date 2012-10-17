@@ -153,22 +153,24 @@ namespace FluentBuild.Publishing.NuGet
 
             //ensure latest version of nuget
             Defaults.Logger.WriteDebugMessage("Updating NuGet to the latest version");
-            _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("Update -self").Execute();
+            var ab = new ArgumentBuilder {StartOfEntireArgumentString = "Update -self"};
+            _executable.ExecutablePath(_pathToNuGetExecutable).UseArgumentBuilder(ab).Execute();
 
             //configure the API key
             Defaults.Logger.WriteDebugMessage("Configuring the API Key");
-            _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("setApiKey " + _apiKey).Execute();
+            ab.StartOfEntireArgumentString = "setApiKey " + _apiKey;
+            _executable.ExecutablePath(_pathToNuGetExecutable).UseArgumentBuilder(ab).Execute();
 
             //package it
             Defaults.Logger.WriteDebugMessage("Creating the package");
-            var inWorkingDirectory = _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("Pack " + _projectId + ".nuspec").InWorkingDirectory(_deployFolder);
+            ab.StartOfEntireArgumentString = "Pack " + _projectId + ".nuspec";
+            var inWorkingDirectory = _executable.ExecutablePath(_pathToNuGetExecutable).UseArgumentBuilder(ab).InWorkingDirectory(_deployFolder);
             inWorkingDirectory.Execute();
 
             //NuGet Push YourPackage.nupkg
             Defaults.Logger.WriteDebugMessage("publishing the package");
-            _executable.ExecutablePath(_pathToNuGetExecutable).WithArguments("Push " + _projectId + "." + _version + ".nupkg").InWorkingDirectory(_deployFolder).Execute();
-
-
+            ab.StartOfEntireArgumentString = "Push " + _projectId + "." + _version + ".nupkg";
+            _executable.ExecutablePath(_pathToNuGetExecutable).UseArgumentBuilder(ab).InWorkingDirectory(_deployFolder).Execute();
         }
     }
 }

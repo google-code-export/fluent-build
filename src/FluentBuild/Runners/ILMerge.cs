@@ -54,18 +54,28 @@ namespace FluentBuild.Runners
         private ArgumentBuilder _argumentBuilder;
 
 
-        internal string[] BuildArgs()
+        internal ArgumentBuilder BuildArgs()
         {
-            var args = new List<String>();
-            args.AddRange(Sources);
-            args.Add("/OUT:" + Destination);
+            var argBuilder = new ArgumentBuilder("/", ":");
+            
+            //var args = new List<String>();
+            
+            foreach (var source in Sources)
+            {
+                argBuilder.StartOfEntireArgumentString += source + " ";
+            }
+            argBuilder.StartOfEntireArgumentString = argBuilder.StartOfEntireArgumentString.Trim();
+            //args.AddRange(Sources);
+            argBuilder.AddArgument("OUT", Destination);
+            //args.Add("/OUT:" + Destination);
 
             //for some reson ILMerge does not work properly with 4.0 
             //so forcing the version and path to assemlies fixes this
             if (Defaults.FrameworkVersion.FriendlyName == FrameworkVersion.NET4_0.Full.FriendlyName)
-                args.Add("/targetplatform:v4," + Defaults.FrameworkVersion.GetPathToFrameworkInstall());
-            args.Add("/ndebug"); //no pdb generated
-            return args.ToArray();
+                argBuilder.AddArgument("targetplatform", "v4," + Defaults.FrameworkVersion.GetPathToFrameworkInstall());
+            argBuilder.AddArgument("ndebug"); //no pdb generated
+            //return args.ToArray();
+            return argBuilder;
         }
 
         ///<summary>
@@ -80,7 +90,7 @@ namespace FluentBuild.Runners
 
         internal void InternalExecute()
         {
-            Task.Run.Executable(x=>x.ExecutablePath(FindExecutable()).WithArguments(BuildArgs()).WithArguments(BuildArgs()));
+            Task.Run.Executable(x=>x.ExecutablePath(FindExecutable()).UseArgumentBuilder(BuildArgs()));
         }
 
         internal string FindExecutable()
