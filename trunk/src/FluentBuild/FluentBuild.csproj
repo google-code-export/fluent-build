@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Compilation\TargetTypeTests.cs" />
     <Compile Include="FrameworkFinders\Desktop4_5Finder.cs" />
+    <Compile Include="MessageLoggers\ConsoleMessageLoggers\SimpleMessageLogger.cs" />
     <Compile Include="Publishing\NuGet\ApiKeyMandatoryTests.cs" />
     <Compile Include="Publishing\NuGet\AuthorsMandatory.cs" />
     <Compile Include="Publishing\NuGet\AuthorsMandatoryTests.cs" />

@@ -1,5 +1,3 @@
-using Microsoft.Build.Utilities;
-
 namespace FluentBuild.FrameworkFinders
 {
     public class Desktop4_5Finder : DefaultFinder
