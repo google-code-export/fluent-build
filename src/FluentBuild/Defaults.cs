@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using FluentBuild.MessageLoggers;
 using FluentBuild.MessageLoggers.ConsoleMessageLoggers;
+using FluentBuild.MessageLoggers.TeamCityMessageLoggers;
 using FluentBuild.Utilities;
 
 namespace FluentBuild
@@ -22,38 +22,69 @@ namespace FluentBuild
         ///</summary>
         public static IFrameworkVersion FrameworkVersion;
 
+        private static IMessageLogger _logger;
+
         static Defaults()
         {
-            var frameworkVersionsToCheck = new List<IFrameworkVersion>();
-            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_5);
-            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Full);
-            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Client);
-            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_5);
-            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_0);
-            frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET2_0);
-
-            foreach (var frameworkVersion in frameworkVersionsToCheck)
+            //use the simple logger if on unix as the color setting relies on p/invoke
+            if (IsRunningOnMono())
+                _logger = new MessageLoggerProxy(new SimpleMessageLogger());
+            else
             {
-                if (frameworkVersion.IsFrameworkInstalled())
+                _logger = new MessageLoggerProxy(new ConsoleMessageLogger());
+                var frameworkVersionsToCheck = new List<IFrameworkVersion>();
+                frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_5);
+                frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Full);
+                frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET4_0.Client);
+                frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_5);
+                frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET3_0);
+                frameworkVersionsToCheck.Add(Utilities.FrameworkVersion.NET2_0);
+
+                foreach (IFrameworkVersion frameworkVersion in frameworkVersionsToCheck)
                 {
-                    Defaults.FrameworkVersion = frameworkVersion;
-                    return;
+                    if (frameworkVersion.IsFrameworkInstalled())
+                    {
+                        FrameworkVersion = frameworkVersion;
+                        return;
+                    }
                 }
             }
         }
 
-        private static IMessageLogger _logger = new MessageLoggerProxy(new ConsoleMessageLogger());
-        public static IMessageLogger Logger { get { return _logger;  } }
+        public static IMessageLogger Logger
+        {
+            get { return _logger; }
+        }
+
+        private static bool IsRunningOnMono()
+        {
+            //http://www.mono-project.com/FAQ:_Technical
+            //var p = (int) Environment.OSVersion.Platform;
+            //if ((p == 4) || (p == 6) || (p == 128)) //runnin
+//            {
+//                return true;
+//            }
+//
+//            return false;
+            Type t = Type.GetType("Mono.Runtime");
+            if (t != null)
+                return true;
+            else
+                return false;
+        }
 
         public static void SetLogger(string logger)
         {
             switch (logger.ToUpper())
             {
+                case "SIMPLE":
+                    _logger = new MessageLoggerProxy(new SimpleMessageLogger());
+                    break;
                 case "CONSOLE":
                     _logger = new MessageLoggerProxy(new ConsoleMessageLogger());
                     break;
                 case "TEAMCITY":
-                    _logger = new MessageLoggerProxy(new MessageLoggers.TeamCityMessageLoggers.MessageLogger());
+                    _logger = new MessageLoggerProxy(new MessageLogger());
                     break;
                 default:
                     throw new ArgumentException("logger type " + logger + " unkown.");

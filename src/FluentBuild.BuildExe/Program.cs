@@ -23,6 +23,7 @@ namespace FluentBuild.BuildExe
 
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
+            
             Defaults.Logger.Verbosity = VerbosityLevel.TaskDetails;
 
             //creates a new parser and parses args

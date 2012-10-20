@@ -35,9 +35,8 @@ namespace Build
             //AddTask(CompileBuildFileConverterWithoutTests);
             AddTask(Compress);
             //move to tools folder here?
-            AddTask(PublishToRepository);
-
-            AddTask(PublishToNuGetUsingFb);
+            //AddTask(PublishToRepository);
+            //AddTask(PublishToNuGetUsingFb);
         }
 
         private void PublishToNuGetUsingFb()
@@ -155,7 +154,8 @@ namespace Build
                 .Include(directory_base.SubFolder("src").SubFolder("FluentBuild"))
                 .RecurseAllSubDirectories.Filter("*.cs")
                 .Exclude(directory_base.SubFolder("src").SubFolder("FluentBuild"))
-                .RecurseAllSubDirectories.Filter("*Tests.cs");
+                .RecurseAllSubDirectories.Filter("*Tests.cs")
+                .Exclude(directory_base.SubFolder("src").SubFolder("FluentBuild").File("TestBase.cs").ToString());
 
             Task.Build.Csc.Target.Library(x => x.AddSources(sourceFiles)
                                                    .AddRefences(thirdparty_sharpzip, thirdparty_fluentFs)
