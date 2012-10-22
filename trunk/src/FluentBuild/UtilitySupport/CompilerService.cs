@@ -14,11 +14,12 @@ namespace FluentBuild.UtilitySupport
     {
         public static string BuildAssemblyFromSources(string path, string baseDirectory)
         {
-            //TODO: once FluentFs is merged it can be removed here
-            //but look at what is done so that we can have external DLLs referenced from the command line?
+            if (!System.IO.Directory.Exists(path))
+                throw new DirectoryNotFoundException("Could not find the directory to build of " + path);
+
             Defaults.Logger.WriteDebugMessage("Sources found in: " + path);
             var fileset = new FileSet();
-            fileset.Include(path + "\\**\\*.cs");
+            fileset = fileset.Include(new Directory(path)).RecurseAllSubDirectories.Filter("*.cs");
 
             string startPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "");
 
