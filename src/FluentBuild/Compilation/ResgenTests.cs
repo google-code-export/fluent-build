@@ -38,7 +38,7 @@ namespace FluentBuild.Compilation
         {
             var mock = MockRepository.GenerateStub<IActionExcecutor>();
             var fileset = new FileSet();
-            fileset.Include(@"c:\temp\nonexistant.txt");
+            fileset.Include(new File(@"c:\temp\nonexistant.txt"));
 
             Resgen subject = new Resgen(mock).GenerateFrom(fileset).OutputTo(@"c:\temp\");
             subject.Execute();
@@ -50,7 +50,7 @@ namespace FluentBuild.Compilation
         public void GenerateFrom_ShouldPopulateFiles()
         {
             var fileset = new FileSet();
-            fileset.Include("c:\temp\nonexistant.txt");
+            fileset.Include(new File("c:\temp\nonexistant.txt"));
 
             Resgen subject = new Resgen().GenerateFrom(fileset);
 

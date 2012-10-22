@@ -24,11 +24,13 @@ namespace FluentBuild
 
         private static IMessageLogger _logger;
 
-        static Defaults()
-        {
-            //use the simple logger if on unix as the color setting relies on p/invoke
-            if (IsRunningOnMono())
-                _logger = new MessageLoggerProxy(new SimpleMessageLogger());
+        static Defaults ()
+		{
+			//use the simple logger if on unix as the color setting relies on p/invoke
+			if (IsRunningOnMono ()) {
+				_logger = new MessageLoggerProxy (new SimpleMessageLogger ());
+				FrameworkVersion=Utilities.FrameworkVersion.NET4_5;
+			}
             else
             {
                 _logger = new MessageLoggerProxy(new ConsoleMessageLogger());
